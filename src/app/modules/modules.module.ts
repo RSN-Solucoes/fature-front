@@ -7,16 +7,18 @@ import { LoginComponent } from './login/login.component';
 
 // Prime NG
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     CommonModule,
-    ButtonModule,
     SharedModule,
+    ButtonModule,
+    InputTextModule,
   ]
 })
 export class ModulesModule { }

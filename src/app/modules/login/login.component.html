@@ -1,9 +1,26 @@
 <div class="container grid">
-    <div class="col-12">
-        a
+    <div class="md:col-6 container_image-grid">
     </div>
-    <div class="col-6">
-        a
-        <!-- <button pButton type="button" label="Click">AAA</button> -->
+    <div class="md:col-6 container_login-grid">
+
+        <div class="container_login-content">
+            <form class="login-form">
+                <div class="login_header">
+                    <img src="../../../assets/img/fature-logo.png" alt="Logotipo">
+                </div>
+                <div class="field col">
+                    <label for="email">E-mail</label>
+                    <input class="input-txt" type="email" pInputText placeholder="Digite seu e-mail"/>
+                </div>
+                <div class="field col">
+                    <label for="email">Senha</label>
+                    <input type="password" pInputText placeholder="Digite sua senha"/>
+                </div>
+                <div class="login_footer">
+                    <button pButton type="button" label="Entrar" ></button>
+                    <a href="#">Problemas com login?</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

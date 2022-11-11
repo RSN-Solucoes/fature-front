@@ -5,11 +5,11 @@ import { LoginComponent } from './modules/login/login.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'control-panel/login',
+    redirectTo: 'painel/login',
     pathMatch: 'full',
   },
   {
-    path: 'control-panel/login',
+    path: 'painel/login',
     component: LoginComponent,
   },
 ];

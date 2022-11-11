@@ -1,3 +1,84 @@
-.container div {
-    border: solid 10px red;
+.container {
+    height: 100vh;
+    width: 100%;
+    .container_image-grid {
+        background-color: var(--primary);
+    }
+    .container_login-content {
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            margin: 20% 15rem 0 15rem;
+            width: 350px;
+            
+            .login_header {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                margin-bottom: 3rem;
+                img {
+                    width: 250px;
+                }
+            }
+            .field {
+                display: flex;
+                flex-direction: column;
+                label {
+                    font-size: 1.2rem;
+                    font-weight: 400;
+                    margin: 0 0 10px 4px;
+                }
+            }
+            .login_footer {
+                display: flex;
+                flex-direction: column;
+                button {
+                    margin: 10px 5px 20px 5px;
+                }
+                a {
+                    text-decoration: none;
+                    cursor: pointer;
+                    color: #000;
+                    font-weight: 300;
+                    font-size: 1.2rem;
+                    align-self: center;
+                }
+            }
+        }
+    }
+}
+
+// Insert on global scss
+::ng-deep {
+    .p-inputtext {
+        border-radius: 3px;
+        border: solid 1px #c8c8c8;
+        font-size: 1.2rem;
+        padding: 10px 10px;
+    }
+    .p-inputtext:focus {
+        border: solid 1px #c8c8c8 !important; 
+    }
+    .p-inputtext:hover {
+        border: solid 1px #c8c8c8 !important;
+    }
+}
+
+::ng-deep {
+    .p-button {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        border-radius: 3px;
+        border: solid 1px var(--primary);
+        background-color: var(--primary);
+        .p-button-label {
+            font-size: 1.2rem;
+            font-weight: 200;
+        }
+    }
+    .p-button:hover {
+        border: solid 1px var(--primary) !important;
+        background-color: darken($color: #02b69c, $amount: 5) !important; //color: var(--primary)
+    }
 }
