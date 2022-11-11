@@ -8,8 +8,8 @@
         .login-form {
             display: flex;
             flex-direction: column;
-            margin: 20% 15rem 0 15rem;
-            width: 350px;
+            margin-top: 20%;
+            //width: 350px;
             
             .login_header {
                 display: flex;
@@ -26,7 +26,7 @@
                 flex-direction: column;
                 label {
                     font-size: 1.2rem;
-                    font-weight: 400;
+                    font-weight: 600;
                     margin: 0 0 10px 4px;
                 }
             }
@@ -34,13 +34,13 @@
                 display: flex;
                 flex-direction: column;
                 button {
-                    margin: 10px 5px 20px 5px;
+                    margin: 10px 0px 20px 0px;
                 }
                 a {
                     text-decoration: none;
                     cursor: pointer;
                     color: #000;
-                    font-weight: 300;
+                    font-weight: 600;
                     font-size: 1.2rem;
                     align-self: center;
                 }
@@ -53,15 +53,16 @@
 ::ng-deep {
     .p-inputtext {
         border-radius: 3px;
-        border: solid 1px #c8c8c8;
+        border: solid 1px #e2e2e2;
         font-size: 1.2rem;
+        font-family: 'Poppins', sans-serif;
         padding: 10px 10px;
     }
     .p-inputtext:focus {
-        border: solid 1px #c8c8c8 !important; 
+        border: solid 1px #e2e2e2 !important; 
     }
     .p-inputtext:hover {
-        border: solid 1px #c8c8c8 !important;
+        border: solid 1px #e2e2e2 !important;
     }
 }
 
