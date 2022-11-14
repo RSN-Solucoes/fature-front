@@ -1,10 +1,10 @@
 .container {
     height: 100vh;
     width: 100%;
-    .container_image-grid {
+    .container-image_grid {
         background-color: var(--primary);
     }
-    .container_login-content {
+    .container-login_content {
         .login-form {
             display: flex;
             flex-direction: column;
@@ -12,20 +12,16 @@
             //width: 350px;
             
             .login_header {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 100%;
+                width: auto;
                 margin-bottom: 3rem;
                 img {
-                    width: 250px;
+                    width: 308px;
                 }
             }
             .field {
-                display: flex;
-                flex-direction: column;
+                width: auto;
                 label {
-                    font-size: 1.2rem;
+                    font-size: 1.4rem;
                     font-weight: 600;
                     margin: 0 0 10px 4px;
                 }
@@ -33,6 +29,7 @@
             .login_footer {
                 display: flex;
                 flex-direction: column;
+                width: 388px;
                 button {
                     margin: 10px 0px 20px 0px;
                 }
@@ -40,7 +37,7 @@
                     text-decoration: none;
                     cursor: pointer;
                     color: #000;
-                    font-weight: 600;
+                    font-weight: bold;
                     font-size: 1.2rem;
                     align-self: center;
                 }
@@ -52,29 +49,34 @@
 // Insert on global scss
 ::ng-deep {
     .p-inputtext {
+        width: 368px;
+        height: 48px;
+        padding: 10px 15px;
+        border: solid 1px #D2D2D2;
+        font-size: 1.4rem;
         border-radius: 3px;
-        border: solid 1px #e2e2e2;
-        font-size: 1.2rem;
         font-family: 'Poppins', sans-serif;
-        padding: 10px 10px;
     }
     .p-inputtext:focus {
-        border: solid 1px #e2e2e2 !important; 
+        border: solid 1px #D2D2D2 !important; 
     }
     .p-inputtext:hover {
-        border: solid 1px #e2e2e2 !important;
+        border: solid 1px #D2D2D2 !important;
+    }
+    .p-inputtext::placeholder {
+        color: #A5A5A5;
     }
 }
 
 ::ng-deep {
     .p-button {
-        padding-top: 12px;
-        padding-bottom: 12px;
+        width: 368px;
+        height: 48px;
         border-radius: 3px;
         border: solid 1px var(--primary);
         background-color: var(--primary);
         .p-button-label {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: 200;
         }
     }
