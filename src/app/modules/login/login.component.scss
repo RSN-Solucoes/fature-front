@@ -1,19 +1,18 @@
-.container {
+.login {
     height: 100vh;
     width: 100%;
-    .container-image_grid {
+    .login-image {
         background-color: var(--primary);
     }
-    .container-login_content {
-        .login-form {
+    .login-form {
+        display: flex;
+        align-items: center;
+        form {
             display: flex;
             flex-direction: column;
-            margin-top: 20%;
-            //width: 350px;
-            
             .login_header {
                 width: auto;
-                margin-bottom: 3rem;
+                margin-bottom: 2rem;
                 img {
                     width: 308px;
                 }
