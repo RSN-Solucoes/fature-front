@@ -1,0 +1,31 @@
+.panel {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    grid-template-rows: 1fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "aside header"
+      "aside content";
+  }
+  
+  .aside {
+    grid-area: aside;
+    position: relative;
+    height: 100%;
+  }
+  
+  .header {
+    width: 100%;
+    height: 8rem;
+    position: relative;
+    grid-area: header;
+  }
+  
+  .content {
+    height: calc(100vh - 8rem);
+    padding: 2rem 4rem;
+    overflow-y: hidden;
+    grid-area: content;
+}

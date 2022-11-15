@@ -1,0 +1,63 @@
+.aside {
+    height: 100%;
+    width: 100%;
+    background: #fff;
+    border-right: solid 1px #f1f1f1;
+    .aside-list {
+        padding-top: 2rem;
+        li {
+            padding: 0;
+            list-style: none;
+        }
+        a {
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .aside-items {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .aside-modules {
+            margin-top: 1rem;
+            .aside-modules_items {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 3rem;
+                img {
+                    width: 15px;
+                }
+                .image-new {
+                    width: 28px;
+                }
+                img:hover {
+                    fill: var(--primary);
+                }
+            }
+        }
+        .aside-modules.active {
+            fill: var(--primary);
+        }
+        .aside-footer {
+            border-top: 1px solid #cccc;
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 3rem;
+            img {
+                width: 20px;
+                margin-top: 3rem;
+            }
+            .profile-photo {
+                margin-top: 1rem;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                padding: 1px;
+                border: solid 1px #cccc;
+            }
+        }
+    }
+}
