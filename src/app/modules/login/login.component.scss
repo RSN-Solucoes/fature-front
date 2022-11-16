@@ -1,16 +1,22 @@
 .login {
     height: 100vh;
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
     .login-image {
         background-color: var(--primary);
     }
     .login-form {
         display: flex;
         align-items: center;
+        justify-content: center;
+        padding-bottom: 8rem;
         form {
             display: flex;
             flex-direction: column;
             .login_header {
+                display: flex;
+                justify-content: center;
                 width: auto;
                 margin-bottom: 2rem;
                 img {
@@ -25,23 +31,19 @@
                     margin: 0 0 10px 4px;
                 }
                 .p-inputtext {
-                    width: 368px;
+                    font-weight: bold;
                 }
             }
             .login_footer {
                 display: flex;
                 flex-direction: column;
                 width: 388px;
-                button {
-                    width: 368px;
-                    margin: 10px 0px 20px 0px;
-                }
                 a {
                     text-decoration: none;
-                    cursor: pointer;
                     color: #000;
                     font-weight: bold;
-                    font-size: 1.2rem;
+                    margin-top: 2rem;
+                    font-size: 1.4rem;
                     align-self: center;
                 }
             }
