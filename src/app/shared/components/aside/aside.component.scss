@@ -3,52 +3,50 @@
     width: 100%;
     background: #fff;
     border-right: solid 1px #f1f1f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    a {
+        text-decoration: none;
+        cursor: pointer;
+    }
+    li {
+        padding: 0;
+        list-style: none;
+    }
+    .aside_logo-image {
+        margin-top: 2rem;
+    }
     .aside-list {
-        padding-top: 2rem;
-        li {
-            padding: 0;
-            list-style: none;
-        }
-        a {
-            text-decoration: none;
-            cursor: pointer;
-        }
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 3rem 0;
         .aside-items {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .aside-modules {
-            margin-top: 1rem;
-            .aside-modules_items {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                margin-top: 3rem;
-                img {
-                    width: 15px;
-                }
-                .image-new {
-                    width: 28px;
-                }
-                img:hover {
-                    fill: var(--primary);
-                }
+            margin: 1rem 0;
+            img {
+                width: 20px;
+            }
+            .image-new {
+                width: 32px;
+            }
+            img:hover {
+                fill: var(--primary);
             }
         }
-        .aside-modules.active {
+        .aside-items.active {
             fill: var(--primary);
         }
-        .aside-footer {
-            border-top: 1px solid #cccc;
-            width: 60%;
+    }
+    .aside-footer {
+        border-top: 1px solid #cccc;
+        .aside-footer_items {
             display: flex;
             flex-direction: column;
             align-items: center;
             margin-top: 3rem;
             img {
-                width: 20px;
-                margin-top: 3rem;
+                width: 22px;
             }
             .profile-photo {
                 margin-top: 1rem;
@@ -57,6 +55,7 @@
                 border-radius: 50%;
                 padding: 1px;
                 border: solid 1px #cccc;
+                object-fit: cover;
             }
         }
     }
