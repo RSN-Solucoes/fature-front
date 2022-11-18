@@ -1,0 +1,31 @@
+<aside class="aside">
+    <a href="#">
+        <img src="assets/img/fature-logo.svg" alt="logo" 
+            class="aside_logo-image">
+    </a>
+    <ul class="aside-list">
+        <li class="aside-items"
+            *ngFor="let item of menuItems"
+            [ngClass]="{ active: item.active }"
+            >
+            <a href="#">
+                <img [src]="item.iconPath" [alt]="item.alt" 
+                    [class]="item.classes">
+            </a>
+        </li>
+    </ul>
+    <ul class="aside-footer">
+        <li>
+            <a href="#">
+                <img src="assets/img/configuracoes.svg" 
+                    alt="logo" class="settings-image"
+                ></a>
+        </li>
+        <li>
+            <a href="#">
+                <img src="assets/img/profile_photo.png" 
+                    alt="Profile Photo" class="profile-photo"
+                ></a>
+        </li>
+    </ul>
+</aside>
