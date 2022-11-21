@@ -1,22 +1,21 @@
 .clients {
-    height: 100%;
     width: 100%;
-    padding: 4rem 12rem;
+    padding: 6rem;
     background-color: #fff;
     border-radius: 10px;
-    .clients-header {
+    .clients--header {
         p {
             font-size: 1.6rem;
             font-weight: bold;
         }
     }
-    .clients-form {
+    .clients--form {
         label {
-            font-weight: 700;
+            font-weight: 400;
             margin-bottom: 1rem;
         }
     }
-    .clients-footer {
+    .clients--footer {
         display: flex;
         justify-content: end;
     }
