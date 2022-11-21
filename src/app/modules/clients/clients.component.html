@@ -2,12 +2,13 @@
     <div class="clients--header">
         <p>Dados do cliente</p>
     </div>
-    <form class="clients--form my-6 grid">
+    <form class="clients--form my-6 grid"  [formGroup]="clientsForm">
         <div class="field col-12 md:col-6">
             <label for="clientName">Nome do cliente</label>
             <input 
                 type="text"
                 id="clientName"
+                formControlName="clientName"
                 pInputText
                 placeholder="Nome completo do cliente"
             />
@@ -17,6 +18,7 @@
             <input 
                 type="text"
                 id="cpf-cnpj"
+                formControlName="document"
                 pInputText
                 placeholder="Documento do cliente ou empresa"
                 mask="000.000.000-00|| 00.000.000/0000-00"
@@ -28,6 +30,7 @@
             <input 
                 type="email"
                 id="email"
+                formControlName="email"
                 pInputText
                 placeholder="Email para envio"
             />
@@ -37,6 +40,7 @@
             <input 
                 type="text"
                 id="contact"
+                formControlName="contactNumber"
                 pInputText
                 placeholder="Telefone ou celular"
                 mask="(00) 0 0000-0000||(00) 0000-0000"
@@ -47,6 +51,7 @@
             <input 
                 type="text"
                 id="cep"
+                formControlName="cep"
                 pInputText
                 placeholder="Digite o CEP de envio"
                 mask="00000-000"
@@ -58,6 +63,7 @@
             <input 
                 type="text"
                 id="address"
+                formControlName="address"
                 pInputText
                 placeholder="Rua, avenida..."
             />
@@ -67,6 +73,7 @@
             <p-inputNumber
                 placeholder="Número"
                 id="addressNumber"
+                formControlName="addressNumber"
                 [useGrouping]="false"
             >                
             </p-inputNumber>
@@ -76,6 +83,7 @@
             <input 
                 type="text"
                 id="addressComplement"
+                formControlName="addressComplement"
                 pInputText
                 placeholder="Apartamento, bloco..."
             />
@@ -86,6 +94,7 @@
             <input 
                 type="text"
                 id="district"
+                formControlName="district"
                 pInputText
                 placeholder="Bairro"
             />
@@ -95,6 +104,7 @@
             <input 
                 type="text"
                 id="state"
+                formControlName="state"
                 pInputText
                 placeholder="Estado"
             />
@@ -104,6 +114,7 @@
             <input 
                 type="text"
                 id="city"
+                formControlName="city"
                 pInputText
                 placeholder="Cidade"
             />

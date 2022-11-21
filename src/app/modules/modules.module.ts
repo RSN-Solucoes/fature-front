@@ -1,5 +1,6 @@
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 // Components
@@ -23,6 +24,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     ButtonModule,
     InputTextModule,
     InputNumberModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class ModulesModule { }
