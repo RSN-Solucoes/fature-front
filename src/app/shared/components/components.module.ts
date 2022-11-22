@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 // Components
 import { AsideComponent } from './aside/aside.component';
 import { HeaderComponent } from './header/header.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // PrimeNG
 
@@ -15,6 +16,7 @@ import { HeaderComponent } from './header/header.component';
   ],
   imports: [
     CommonModule,
+    BrowserAnimationsModule,
   ],
   exports: [
     AsideComponent,

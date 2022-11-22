@@ -6,7 +6,6 @@
         font-weight: 500;
     }
 }
-
 .primary-form-button {
     width: auto;
     height: 48px;
@@ -14,8 +13,8 @@
     font-size: 1.4rem;
     font-weight: 300;
     padding: 10px 20px;
-    background-color: #1b1b1b;
-    border: solid 1px #1b1b1b;
+    background-color: var(--black);
+    border: solid 1px var(--black);
     color: #fff;
     cursor: pointer;
 }
@@ -52,13 +51,47 @@
     border-radius: 3px;
 }
 .p-inputtext:focus {
-    border: solid 1px #D2D2D2 !important; 
+    border: solid 1px var(--black) !important; 
 }
 .p-inputtext:hover {
     border: solid 1px #D2D2D2 !important;
 }
 .p-inputtext::placeholder {
     color: #A5A5A5;
+}
+
+.p-dropdown {
+    width: 100%;
+    height: 48px;
+    padding: 10px 15px;
+    border: solid 1px #D2D2D2;
+    font-size: 1.4rem;
+    border-radius: 3px;
+}
+.p-dropdown:hover {
+    border: solid 1px #D2D2D2 !important;
+}
+.p-focus {
+    box-shadow: none !important;
+    border-color: var(--black) !important;
+}
+
+.p-dropdown .p-dropdown-label:hover {
+    border: none !important;
+}
+.p-dropdown .p-dropdown-label {
+    padding: 0;
+}
+.p-dropdown .p-dropdown-items-wrapper {
+    .p-dropdown-items {
+        p-dropdownitem {
+            li {
+                span {
+                    font-size: 1.4rem;
+                }
+            }
+        }
+    }
 }
 
 .p-button {

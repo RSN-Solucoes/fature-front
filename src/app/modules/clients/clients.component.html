@@ -8,7 +8,7 @@
             <input 
                 type="text"
                 id="clientName"
-                formControlName="clientName"
+                formControlName="name"
                 pInputText
                 placeholder="Nome completo do cliente"
             />
@@ -40,7 +40,7 @@
             <input 
                 type="text"
                 id="contact"
-                formControlName="contactNumber"
+                formControlName="tel"
                 pInputText
                 placeholder="Telefone ou celular"
                 mask="(00) 0 0000-0000||(00) 0000-0000"
@@ -101,13 +101,14 @@
         </div>
         <div class="field col-12 md:col-4">
             <label for="state">Estado</label>
-            <input 
-                type="text"
-                id="state"
-                formControlName="state"
-                pInputText
+            <p-dropdown 
+                [options]="uf"
+                optionLabel="name"
+                optionValue="uf"
+                formControlName="uf"
                 placeholder="Estado"
-            />
+            >
+            </p-dropdown>
         </div>
         <div class="field col-12 md:col-4">
             <label for="city">Cidade</label>
@@ -120,7 +121,7 @@
             />
         </div>
     </form>
-    <div class="clients--footer mb-7">
+    <div class="clients--footer">
         <button  
             type="button" 
             class="secondary-form-button"

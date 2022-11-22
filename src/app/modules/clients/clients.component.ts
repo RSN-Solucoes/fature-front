@@ -9,8 +9,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ClientsComponent implements OnInit {
 
-  clientsForm!: FormGroup;
-  formSubmited: boolean = false;
+  public clientsForm!: FormGroup;
+  public formSubmited: boolean = false;
+
+  public uf!: any;
 
   constructor(
     private fb: FormBuilder,
@@ -20,20 +22,50 @@ export class ClientsComponent implements OnInit {
 
   ngOnInit(): void {
     this.createClientsForm();
+
+    this.uf = [
+      {name: "Acre", uf: "AC"},
+      {name: "Alagoas", uf: "AL"},
+      {name: "Amapá", uf: "AP"},
+      {name: "Amazonas", uf: "AM"},
+      {name: "Bahia", uf: "BA"},
+      {name: "Ceará", uf: "CE"},
+      {name: "Distrito Federal", uf: "DF"},
+      {name: "Espírito Santo", uf: "ES"},
+      {name: "Goiás", uf: "GO"},
+      {name: "Maranhão", uf: "MA"},
+      {name: "Mato Grosso", uf: "MT"},
+      {name: "Mato Grosso do Sul", uf: "MS"},
+      {name: "Minas Gerais", uf: "MG"},
+      {name: "Pará", uf: "PA"},
+      {name: "Paraíba", uf: "PB"},
+      {name: "Paraná", uf: "PR"},
+      {name: "Pernambuco", uf: "PE"},
+      {name: "Piauí", uf: "PI"},
+      {name: "Rio de Janeiro", uf: "RJ"},
+      {name: "Rio Grande do Norte", uf: "RN"},
+      {name: "Rio Grande do Sul", uf: "RS"},
+      {name: "Rondônia", uf: "RO"},
+      {name: "Roraima", uf: "RR"},
+      {name: "Santa Catarina", uf: "SC"},
+      {name: "São Paulo", uf: "SP"},
+      {name: "Sergipe", uf: "SE"},
+      {name: "Tocantins", uf: "TO"}
+  ];
   }
 
   createClientsForm() {
     this.clientsForm = this.fb.group({
-      clientName: [null],
+      name: [null],
       document: [null],
       email: [null],
-      contactNumber: [null],
+      tel: [null],
       cep: [null],
       address: [null],
       addressNumber: [null],
       addressComplement: [null],
       district: [null],
-      state: [null],
+      uf: [null],
       city: [null],
     });
   }
