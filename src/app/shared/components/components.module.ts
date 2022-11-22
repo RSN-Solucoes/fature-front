@@ -5,20 +5,11 @@ import { CommonModule } from '@angular/common';
 import { AsideComponent } from './aside/aside.component';
 import { HeaderComponent } from './header/header.component';
 
-// PrimeNG
-
+import { TableModule } from './table/table.module';
 
 @NgModule({
-  declarations: [
-    AsideComponent,
-    HeaderComponent,
-  ],
-  imports: [
-    CommonModule,
-  ],
-  exports: [
-    AsideComponent,
-    HeaderComponent,
-  ],
+  declarations: [AsideComponent, HeaderComponent],
+  imports: [CommonModule, TableModule],
+  exports: [AsideComponent, HeaderComponent, TableModule],
 })
-export class ComponentsModule { }
+export class ComponentsModule {}
