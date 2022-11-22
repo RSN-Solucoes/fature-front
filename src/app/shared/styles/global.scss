@@ -87,6 +87,9 @@
 }
 .p-dropdown .p-dropdown-items-wrapper {
     .p-dropdown-items {
+        .p-dropdown-item {
+            padding: 1.5rem 1.25rem
+        }
         p-dropdownitem {
             li {
                 span {
@@ -114,7 +117,7 @@
 }
 .p-button:hover {
     border: solid 1px var(--primary) !important;
-    background-color: darken($color: #02b69c, $amount: 5) !important; //color: var(--primary)
+    background-color: darken($color: #02b69c, $amount: 5) !important;
 }
 
 .p-dropdown-filter {

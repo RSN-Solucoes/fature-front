@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UF_SELECT_LIST } from 'src/app/shared/constants/ufs.const';
 
 @Component({
   selector: 'app-clients',
@@ -12,7 +13,7 @@ export class ClientsComponent implements OnInit {
   public clientsForm!: FormGroup;
   public formSubmited: boolean = false;
 
-  public uf!: any;
+  public ufSelectItems: any = UF_SELECT_LIST;
 
   constructor(
     private fb: FormBuilder,
@@ -23,35 +24,6 @@ export class ClientsComponent implements OnInit {
   ngOnInit(): void {
     this.createClientsForm();
 
-    this.uf = [
-      {name: "Acre", uf: "AC"},
-      {name: "Alagoas", uf: "AL"},
-      {name: "Amapá", uf: "AP"},
-      {name: "Amazonas", uf: "AM"},
-      {name: "Bahia", uf: "BA"},
-      {name: "Ceará", uf: "CE"},
-      {name: "Distrito Federal", uf: "DF"},
-      {name: "Espírito Santo", uf: "ES"},
-      {name: "Goiás", uf: "GO"},
-      {name: "Maranhão", uf: "MA"},
-      {name: "Mato Grosso", uf: "MT"},
-      {name: "Mato Grosso do Sul", uf: "MS"},
-      {name: "Minas Gerais", uf: "MG"},
-      {name: "Pará", uf: "PA"},
-      {name: "Paraíba", uf: "PB"},
-      {name: "Paraná", uf: "PR"},
-      {name: "Pernambuco", uf: "PE"},
-      {name: "Piauí", uf: "PI"},
-      {name: "Rio de Janeiro", uf: "RJ"},
-      {name: "Rio Grande do Norte", uf: "RN"},
-      {name: "Rio Grande do Sul", uf: "RS"},
-      {name: "Rondônia", uf: "RO"},
-      {name: "Roraima", uf: "RR"},
-      {name: "Santa Catarina", uf: "SC"},
-      {name: "São Paulo", uf: "SP"},
-      {name: "Sergipe", uf: "SE"},
-      {name: "Tocantins", uf: "TO"}
-  ];
   }
 
   createClientsForm() {
