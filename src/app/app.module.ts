@@ -9,15 +9,14 @@ import { NgModule } from '@angular/core';
 import { ModulesModule } from './modules/modules.module';
 import { SharedModule } from './shared/shared.module';
 
-
 // Routing
 import { AppRoutingModule } from './app-routing.module';
 
 // Components
 import { AppComponent } from './app.component';
+import { DynamicPipe } from './shared/pipes/dynamic.pipe';
 
 registerLocaleData(localePt);
-
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +33,6 @@ registerLocaleData(localePt);
       useValue: 'pt-BR',
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
