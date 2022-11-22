@@ -80,7 +80,10 @@
     border: none !important;
 }
 .p-dropdown .p-dropdown-label {
+    display: flex;
+    align-items: center;
     padding: 0;
+    height: 100%;
 }
 .p-dropdown .p-dropdown-items-wrapper {
     .p-dropdown-items {
@@ -89,6 +92,10 @@
                 span {
                     font-size: 1.4rem;
                 }
+            }
+            .p-highlight {
+                color: var(--black);
+                background-color: #E9ECEF;
             }
         }
     }
@@ -110,6 +117,9 @@
     background-color: darken($color: #02b69c, $amount: 5) !important; //color: var(--primary)
 }
 
+.p-dropdown-filter {
+    height: 38px;
+}
 .p-dropdown-filter-container {
 }
 .p-dropdown-filter:focus {
