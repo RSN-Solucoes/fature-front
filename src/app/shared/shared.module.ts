@@ -17,4 +17,4 @@ export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
     NgxMaskModule,
   ],
 })
-export class SharedModule { }
+export class SharedModule {}

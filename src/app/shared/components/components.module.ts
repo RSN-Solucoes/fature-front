@@ -6,8 +6,7 @@ import { AsideComponent } from './aside/aside.component';
 import { HeaderComponent } from './header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-// PrimeNG
-
+import { TableModule } from './table/table.module';
 
 @NgModule({
   declarations: [
@@ -23,4 +22,4 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
   ],
 })
-export class ComponentsModule { }
+export class ComponentsModule {}
