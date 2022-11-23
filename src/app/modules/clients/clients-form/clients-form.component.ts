@@ -4,12 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UFS_SELECT_LIST } from 'src/app/shared/constants/ufs.const';
 
 @Component({
-  selector: 'app-clients',
-  templateUrl: './clients.component.html',
-  styleUrls: ['./clients.component.scss']
+  selector: 'app-clients-form',
+  templateUrl: './clients-form.component.html',
+  styleUrls: ['./clients-form.component.scss']
 })
-export class ClientsComponent implements OnInit {
-
+export class ClientsFormComponent implements OnInit {
   public clientsForm!: FormGroup;
   public formSubmited: boolean = false;
 

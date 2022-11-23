@@ -19,7 +19,7 @@ import { DynamicPipe } from './shared/pipes/dynamic.pipe';
 registerLocaleData(localePt);
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, DynamicPipe],
   imports: [
     BrowserModule,
     AppRoutingModule,

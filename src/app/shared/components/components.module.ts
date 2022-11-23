@@ -12,6 +12,7 @@ import { TableModule } from './table/table.module';
   declarations: [
     AsideComponent,
     HeaderComponent,
+    TableModule,
   ],
   imports: [
     CommonModule,
@@ -20,6 +21,7 @@ import { TableModule } from './table/table.module';
   exports: [
     AsideComponent,
     HeaderComponent,
+    TableModule,
   ],
 })
 export class ComponentsModule {}
