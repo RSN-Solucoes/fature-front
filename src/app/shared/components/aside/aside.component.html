@@ -8,7 +8,7 @@
             *ngFor="let item of menuItems"
             [ngClass]="{ active: item.active }"
             >
-            <a href="#">
+            <a (click)="navigateToModule(item.route)">
                 <img [src]="item.iconPath" [alt]="item.alt" 
                     [class]="item.classes">
             </a>

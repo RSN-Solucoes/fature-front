@@ -1,0 +1,22 @@
+.clients {
+    width: 100%;
+    padding: 6rem;
+    background-color: #fff;
+    border-radius: 10px;
+    .clients--header {
+        p {
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+    }
+    .clients--form {
+        label {
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+    }
+    .clients--footer {
+        display: flex;
+        justify-content: flex-end;
+    }
+}

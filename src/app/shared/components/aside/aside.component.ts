@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { title } from 'process';
 
 @Component({
@@ -10,7 +11,9 @@ export class AsideComponent implements OnInit {
 
   menuItems!: any[];
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.createMenuItems();
@@ -75,6 +78,10 @@ export class AsideComponent implements OnInit {
         active: String(location.href).includes('painel/transferencias'),
       },
     ];
+  }
+
+  navigateToModule(route: string) {
+    this.router.navigate([route]);
   }
 
 }
