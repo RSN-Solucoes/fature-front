@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UF_SELECT_LIST } from 'src/app/shared/constants/ufs.const';
+import { UFS_SELECT_LIST } from 'src/app/shared/constants/ufs.const';
 
 @Component({
   selector: 'app-clients',
@@ -13,7 +13,7 @@ export class ClientsComponent implements OnInit {
   public clientsForm!: FormGroup;
   public formSubmited: boolean = false;
 
-  public ufSelectItems: any = UF_SELECT_LIST;
+  public ufSelectItems: any = UFS_SELECT_LIST;
 
   constructor(
     private fb: FormBuilder,

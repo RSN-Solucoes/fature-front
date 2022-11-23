@@ -1,4 +1,4 @@
-export const UF_SELECT_LIST = [
+export const UFS_SELECT_LIST = [
     {name: "Acre", uf: "AC"},
     {name: "Alagoas", uf: "AL"},
     {name: "Amapá", uf: "AP"},
