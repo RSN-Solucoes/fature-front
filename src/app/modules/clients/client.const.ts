@@ -29,16 +29,17 @@ export const CLIENT_VALUE_SELECT_LIST = [
 
 export const CLIENT_ACTIONS_SELECT_LIST = [
     {
-        delete: {
-            show: true,
-            route: '',
-        },
-        edit: {
-            show: true,
-            route: '',
-        }
-    }
-];
+        label: 'Visualizar',
+        icon: "pi eye",
+        route: "painel/clientes/visualizar"
+    },
+    {
+        label: 'Deletar',
+        icon: "pi delete",
+        route: "painel/clientes/delete"
+    },
+]
+
 
 export const CLIENT_PIPES_SELECT_LIST = [
     '', '', '', 'tel'

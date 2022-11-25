@@ -6,13 +6,20 @@
           [binary]="true"
         ></p-checkbox>
       </th>
-      <th *ngFor="let column of columns">{{ column }}</th>
+      <th *ngFor="let column of columns"
+        pSortableColumn="{{ column }}"
+        (click)="sortTable(column)"
+      >
+        {{ column }}
+        <p-sortIcon field="{{ column }}"></p-sortIcon>
+      </th>
+
       <th *ngIf="actions"></th>
     </tr>
   </ng-template>
 
   <ng-template pTemplate="body">
-    <tr *ngFor="let row of value">
+    <tr *ngFor="let row of value ; let j = index">
       <td>
         <p-checkbox
           [binary]="true"
@@ -22,7 +29,11 @@
         {{ row[item] | dynamic: pipes[i]}}
       </td>
 
-      <td *ngIf="actions"></td>
+      <td *ngIf="actions" >
+        <a *ngFor="let button of actions" (click)="navigate(actions)">
+          <i class="{{ button.icon }}"></i>
+        </a>
+      </td>
     </tr>
   </ng-template>
 </p-table>

@@ -8,16 +8,29 @@
             padding: 2rem;
         }
         .p-datatable-tbody>tr {
-            border-radius: 10px;
+            border-radius: 50px !important;
             td {
                 font-size: 1.4rem;
                 font-weight: 500;
                 padding: 2rem;
             }
         .p-datatable-table {
-            border-collapse: separate;
+            border-collapse: collapse;
             border-spacing: 0 40px;
         }
+      }
+      .p-datatable-thead>tr>th.p-sortable-column:focus {
+            background: none;
+            color: var(--primary);
+      }
+      .p-datatable-thead>tr>th.p-sortable-column:hover {
+            background: none;
+            color: var(--primary);
+            transition: .2s;
+      }
+      .p-sortable-column.p-highlight {
+        color: darken($color: #02b69c, $amount: 5);
+        background: none;
       }
     }
 }
