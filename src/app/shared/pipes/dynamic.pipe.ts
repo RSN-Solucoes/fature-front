@@ -11,6 +11,6 @@ export class DynamicPipe implements PipeTransform {
   }
 
   tel(value: string) {
-    return 'abc'
+    return value
   }
 }

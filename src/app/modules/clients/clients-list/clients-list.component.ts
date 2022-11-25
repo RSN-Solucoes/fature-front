@@ -1,6 +1,10 @@
-import { CLIENT_VALUE_SELECT_LIST, CLIENT_ACTIONS_SELECT_LIST, CLIENT_PIPES_SELECT_LIST } from './../../../shared/constants/ufs.const';
+import { 
+  CLIENT_COLUMNS_TABLE_SELECT_LIST, 
+  CLIENT_VALUE_SELECT_LIST, 
+  CLIENT_ACTIONS_SELECT_LIST, 
+  CLIENT_PIPES_SELECT_LIST 
+} from '../client.const';
 import { Component, OnInit } from '@angular/core';
-import { CLIENT_COLUMNS_TABLE_SELECT_LIST } from 'src/app/shared/constants/ufs.const';
 
 @Component({
   selector: 'app-clients-list',
