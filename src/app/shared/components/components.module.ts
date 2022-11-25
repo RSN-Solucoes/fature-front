@@ -1,3 +1,4 @@
+import { TableComponent } from './table/table.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -12,11 +13,11 @@ import { TableModule } from './table/table.module';
   declarations: [
     AsideComponent,
     HeaderComponent,
-    TableModule,
   ],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
+    TableModule,
   ],
   exports: [
     AsideComponent,

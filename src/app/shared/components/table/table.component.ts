@@ -7,11 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TableComponent implements OnInit {
   @Input() columns: string[] = [];
-
+  @Input() fields: string[] = [];
   @Input() value: any[] = [];
-
   @Input() pipes: string[] = [];
-
   @Input() actions!: any[];
 
   constructor() {}

@@ -1,6 +1,11 @@
 <p-table [value]="value" responsiveLayout="scroll">
   <ng-template pTemplate="header">
     <tr>
+      <th>
+        <p-checkbox
+          [binary]="true"
+        ></p-checkbox>
+      </th>
       <th *ngFor="let column of columns">{{ column }}</th>
       <th *ngIf="actions"></th>
     </tr>
@@ -8,8 +13,13 @@
 
   <ng-template pTemplate="body">
     <tr *ngFor="let row of value">
-      <td *ngFor="let item of row | keyvalue; let i = index">
-        {{ getValue(item.value) | dynamic: pipes[i] }}
+      <td>
+        <p-checkbox
+          [binary]="true"
+        ></p-checkbox>
+      </td>
+      <td *ngFor="let item of fields ; let i = index">
+        {{ row[item] | dynamic: pipes[i]}}
       </td>
 
       <td *ngIf="actions"></td>

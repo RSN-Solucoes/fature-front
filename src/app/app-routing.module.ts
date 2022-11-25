@@ -17,7 +17,6 @@ const routes: Routes = [
     path: 'painel/clientes/novo',
     component: ClientsFormComponent,
   },
-
 ];
 
 @NgModule({

@@ -14,12 +14,11 @@ import { AppRoutingModule } from './app-routing.module';
 
 // Components
 import { AppComponent } from './app.component';
-import { DynamicPipe } from './shared/pipes/dynamic.pipe';
 
 registerLocaleData(localePt);
 
 @NgModule({
-  declarations: [AppComponent, DynamicPipe],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -1,4 +1,8 @@
-<p>clients-list works!</p>
-<app-table>
-    
-</app-table>
+
+<app-table
+    [columns]="clientColumnSelectItems"
+    [value]="clientValueSelectItems"
+    [pipes]="clientPipesSelectItems"
+    [actions]="clientActionsSelectItems"
+    [fields]="clientFields"
+></app-table>

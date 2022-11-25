@@ -1,0 +1,23 @@
+::ng-deep {
+    .p-datatable {
+        .p-datatable-thead>tr>th {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: none;
+            border: none;
+            padding: 2rem;
+        }
+        .p-datatable-tbody>tr {
+            border-radius: 10px;
+            td {
+                font-size: 1.4rem;
+                font-weight: 500;
+                padding: 2rem;
+            }
+        .p-datatable-table {
+            border-collapse: separate;
+            border-spacing: 0 40px;
+        }
+      }
+    }
+}

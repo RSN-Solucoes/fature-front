@@ -23,9 +23,9 @@ import { DropdownModule } from 'primeng/dropdown';
   ],
   imports: [
     CommonModule,
-    SharedModule,
     ButtonModule,
     InputTextModule,
+    SharedModule,
     InputNumberModule,
     ReactiveFormsModule,
     DropdownModule,

@@ -1,4 +1,6 @@
+import { CLIENT_VALUE_SELECT_LIST, CLIENT_ACTIONS_SELECT_LIST, CLIENT_PIPES_SELECT_LIST } from './../../../shared/constants/ufs.const';
 import { Component, OnInit } from '@angular/core';
+import { CLIENT_COLUMNS_TABLE_SELECT_LIST } from 'src/app/shared/constants/ufs.const';
 
 @Component({
   selector: 'app-clients-list',
@@ -6,6 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./clients-list.component.scss']
 })
 export class ClientsListComponent implements OnInit {
+
+  public clientColumnSelectItems = CLIENT_COLUMNS_TABLE_SELECT_LIST;
+  public clientValueSelectItems = CLIENT_VALUE_SELECT_LIST;
+  public clientActionsSelectItems = CLIENT_ACTIONS_SELECT_LIST;
+  public clientPipesSelectItems = CLIENT_PIPES_SELECT_LIST;
+  public clientFields = [
+      'nome',
+      'email',
+      'telefone',
+      'cep',
+      'cidade',
+      'uf'
+  ];
 
   constructor() { }
 
