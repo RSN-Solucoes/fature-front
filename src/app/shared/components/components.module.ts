@@ -3,23 +3,14 @@ import { CommonModule } from '@angular/common';
 
 // Components
 import { AsideComponent } from './aside/aside.component';
-import { HeaderComponent } from './header/header.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { TableModule } from './table/table.module';
 
 @NgModule({
-  declarations: [
-    AsideComponent,
-    HeaderComponent,
-  ],
-  imports: [
-    CommonModule,
-    BrowserAnimationsModule,
-  ],
-  exports: [
-    AsideComponent,
-    HeaderComponent,
-  ],
+  declarations: [AsideComponent, NavbarComponent],
+  imports: [CommonModule, BrowserAnimationsModule],
+  exports: [AsideComponent, NavbarComponent],
 })
 export class ComponentsModule {}
