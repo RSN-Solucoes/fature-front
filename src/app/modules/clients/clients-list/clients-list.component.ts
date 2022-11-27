@@ -1,34 +1,42 @@
-import { 
-  CLIENT_COLUMNS_TABLE_SELECT_LIST, 
-  CLIENT_VALUE_SELECT_LIST, 
-  CLIENT_ACTIONS_SELECT_LIST, 
-  CLIENT_PIPES_SELECT_LIST 
-} from '../client.const';
+import {
+  CLIENT_TABLE_COLUMNS,
+  CLIENT_TABLE_FIELDS,
+  CLIENT_TABLE_PIPES,
+  CLIENT_VALUE_SELECT_LIST,
+} from './clients-list.const';
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-clients-list',
   templateUrl: './clients-list.component.html',
-  styleUrls: ['./clients-list.component.scss']
+  styleUrls: ['./clients-list.component.scss'],
 })
 export class ClientsListComponent implements OnInit {
+  public clientTableColumns = CLIENT_TABLE_COLUMNS;
+  public clientTableFields = CLIENT_TABLE_FIELDS;
+  public clientTablePipes = CLIENT_TABLE_PIPES;
 
-  public clientColumnSelectItems = CLIENT_COLUMNS_TABLE_SELECT_LIST;
-  public clientValueSelectItems = CLIENT_VALUE_SELECT_LIST;
-  public clientActionsSelectItems = CLIENT_ACTIONS_SELECT_LIST;
-  public clientPipesSelectItems = CLIENT_PIPES_SELECT_LIST;
-  public clientFields = [
-      'nome',
-      'email',
-      'telefone',
-      'cep',
-      'cidade',
-      'uf'
+  public clients = CLIENT_VALUE_SELECT_LIST;
+
+  public clientTableActions = [
+    {
+      label: 'Visualizar',
+      icon: 'pi-eye',
+      action: () => {
+        alert('Visualizar');
+      },
+    },
+    {
+      label: 'Deletar',
+      icon: 'pi-trash',
+      action: () => {
+        alert('Deletar');
+      },
+    },
   ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

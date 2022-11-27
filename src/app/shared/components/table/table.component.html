@@ -2,36 +2,34 @@
   <ng-template pTemplate="header">
     <tr>
       <th>
-        <p-checkbox
-          [binary]="true"
-        ></p-checkbox>
+        <p-checkbox [binary]="true"></p-checkbox>
       </th>
-      <th *ngFor="let column of columns"
-        pSortableColumn="{{ column }}"
-        (click)="sortTable(column)"
+
+      <th
+        *ngFor="let column of columns; let i = index"
+        [pSortableColumn]="fields[i]"
       >
         {{ column }}
-        <p-sortIcon field="{{ column }}"></p-sortIcon>
+        <p-sortIcon [field]="fields[i]"></p-sortIcon>
       </th>
 
       <th *ngIf="actions"></th>
     </tr>
   </ng-template>
 
-  <ng-template pTemplate="body">
-    <tr *ngFor="let row of value ; let j = index">
+  <ng-template pTemplate="body" let-row>
+    <tr>
       <td>
-        <p-checkbox
-          [binary]="true"
-        ></p-checkbox>
-      </td>
-      <td *ngFor="let item of fields ; let i = index">
-        {{ row[item] | dynamic: pipes[i]}}
+        <p-checkbox [binary]="true"></p-checkbox>
       </td>
 
-      <td *ngIf="actions" >
-        <a *ngFor="let button of actions" (click)="navigate(actions)">
-          <i class="{{ button.icon }}"></i>
+      <td *ngFor="let item of fields; let i = index">
+        {{ row[item] | dynamic: pipes[i] }}
+      </td>
+
+      <td *ngIf="actions">
+        <a *ngFor="let action of actions">
+          <i class="pi {{ action.icon }}" (click)="action.action()"></i>
         </a>
       </td>
     </tr>

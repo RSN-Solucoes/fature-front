@@ -1,36 +1,51 @@
 ::ng-deep {
-    .p-datatable {
-        .p-datatable-thead>tr>th {
-            font-size: 1.4rem;
-            font-weight: 700;
-            background: none;
-            border: none;
-            padding: 2rem;
-        }
-        .p-datatable-tbody>tr {
-            border-radius: 50px !important;
-            td {
-                font-size: 1.4rem;
-                font-weight: 500;
-                padding: 2rem;
-            }
-        .p-datatable-table {
-            border-collapse: collapse;
-            border-spacing: 0 40px;
-        }
+  .p-datatable {
+    .p-datatable-table {
+      border-collapse: separate;
+      border-spacing: 0px 8px;
+    }
+
+    .p-datatable-thead > tr > th {
+      font-size: 1.4rem;
+      font-weight: 700;
+      background: none;
+      border: none;
+      padding: 2rem;
+    }
+
+    .p-datatable-tbody > tr {
+      background-color: transparent;
+
+      td {
+        font-size: 1.4rem;
+        font-weight: 500;
+        padding: 2rem;
+        background: #ffffff;
       }
-      .p-datatable-thead>tr>th.p-sortable-column:focus {
-            background: none;
-            color: var(--primary);
+
+      td:first-of-type {
+        border-radius: 10px 0px 0px 10px;
       }
-      .p-datatable-thead>tr>th.p-sortable-column:hover {
-            background: none;
-            color: var(--primary);
-            transition: .2s;
-      }
-      .p-sortable-column.p-highlight {
-        color: darken($color: #02b69c, $amount: 5);
-        background: none;
+
+      td:last-of-type {
+        border-radius: 0px 10px 10px 0px;
       }
     }
+
+    .p-datatable-thead > tr > th.p-sortable-column:focus {
+      background: none;
+      color: var(--primary);
+    }
+
+    .p-datatable-thead > tr > th.p-sortable-column:hover {
+      background: none;
+      color: var(--primary);
+      transition: 0.2s;
+    }
+
+    .p-sortable-column.p-highlight {
+      color: darken($color: #02b69c, $amount: 5);
+      background: none;
+    }
+  }
 }
