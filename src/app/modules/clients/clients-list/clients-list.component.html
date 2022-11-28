@@ -1,7 +1,23 @@
-<app-table
-  [columns]="clientTableColumns"
-  [fields]="clientTableFields"
-  [pipes]="clientTablePipes"
-  [actions]="clientTableActions"
-  [value]="clients"
-></app-table>
+<app-navbar>
+  <header class="header">
+    <span class="header--title">
+      Clientes
+    </span>
+
+    <div class="header--buttons">
+      <a (click)="navigateToClientForm()"><i class="pi pi-plus"></i></a>
+
+      <a><i class="pi pi-sliders-h"></i></a>
+    </div>
+  </header>
+</app-navbar>
+
+<div class="content">
+  <app-table
+    [columns]="clientTableColumns"
+    [fields]="clientTableFields"
+    [pipes]="clientTablePipes"
+    [actions]="clientTableActions"
+    [value]="clients"
+  ></app-table>
+</div>

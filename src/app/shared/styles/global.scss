@@ -144,3 +144,20 @@
 .p-dropdown-filter:focus {
   border-color: var(--black);
 }
+
+.p-checkbox .p-checkbox-box {
+  background: none;
+  border-radius: 0;
+  border: solid 3px gray;
+}
+.p-checkbox .p-checkbox-box:hover {
+  border-color: var(--black) !important;
+}
+.p-checkbox .p-checkbox-box.p-highlight {
+  border-color: var(--black);
+  background: var(--black);
+  color: #fff;
+}
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+  background: var(--black);
+}

@@ -41,4 +41,8 @@ export class ClientsFormComponent implements OnInit {
     });
   }
 
+  cancel() {
+    this.router.navigate(['painel/clientes']);
+  }
+
 }

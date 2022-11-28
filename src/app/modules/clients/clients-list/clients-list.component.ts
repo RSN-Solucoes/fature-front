@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import {
   CLIENT_TABLE_COLUMNS,
   CLIENT_TABLE_FIELDS,
@@ -36,7 +37,13 @@ export class ClientsListComponent implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor(
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {}
+
+  navigateToClientForm() {
+    this.router.navigate(['painel/clientes/novo'])
+  }
 }
