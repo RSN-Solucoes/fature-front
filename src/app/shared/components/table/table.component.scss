@@ -44,8 +44,19 @@
     }
 
     .p-sortable-column.p-highlight {
-      color: darken($color: #02b69c, $amount: 5);
-      background: none;
+      color: var(--primary);
+      background: transparent;
+    }
+
+    .p-sortable-column.p-highlight .p-sortable-column-icon:not(:hover) {
+      color: var(--primary);
+    }
+    
+    .action-buttons>a {
+      margin-left: 2rem;
+      i {
+        font-size: 1.7rem;
+      }
     }
   }
 }

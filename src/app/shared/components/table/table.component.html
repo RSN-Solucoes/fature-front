@@ -2,7 +2,11 @@
   <ng-template pTemplate="header">
     <tr>
       <th>
-        <p-checkbox [binary]="true"></p-checkbox>
+        <p-checkbox 
+          [binary]="true"
+          [(ngModel)]="allSelected"
+          (onChange)="checkAll()"
+        ></p-checkbox>
       </th>
 
       <th
@@ -20,15 +24,21 @@
   <ng-template pTemplate="body" let-row>
     <tr>
       <td>
-        <p-checkbox [binary]="true"></p-checkbox>
+        <p-checkbox 
+          [binary]="true"
+          [(ngModel)]="row.checked"
+          (onChange)="selectRow(row)"
+        ></p-checkbox>
       </td>
 
       <td *ngFor="let item of fields; let i = index">
         {{ row[item] | dynamic: pipes[i] }}
       </td>
 
-      <td *ngIf="actions">
-        <a *ngFor="let action of actions">
+      <td 
+        *ngIf="actions"
+        class="action-buttons"
+        ><a *ngFor="let action of actions">
           <i class="pi {{ action.icon }}" (click)="action.action()"></i>
         </a>
       </td>
