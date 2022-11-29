@@ -51,6 +51,10 @@
     .p-sortable-column.p-highlight .p-sortable-column-icon:not(:hover) {
       color: var(--primary);
     }
+
+    .p-sortable-column.p-highlight .p-sortable-column-icon:hover {
+      color: var(--primary);
+    }
     
     .action-buttons>a {
       margin-left: 2rem;
