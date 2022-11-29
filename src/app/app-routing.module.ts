@@ -1,3 +1,4 @@
+import { ProductsServicesListComponent } from './modules/products-services/products-services-list/products-services-list.component';
 import { ClientsFormComponent } from './modules/clients/clients-form/clients-form.component';
 import { ClientsListComponent } from './modules/clients/clients-list/clients-list.component';
 import { NgModule } from '@angular/core';
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'painel/clientes/novo',
     component: ClientsFormComponent,
+  },
+  {
+    path: 'painel/produtos-e-servicos',
+    component: ProductsServicesListComponent,
   },
 ];
 
