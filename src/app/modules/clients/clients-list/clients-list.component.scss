@@ -1,13 +1,13 @@
-.header {
+.client-navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 100%;
-    .header--title {
+    .client-navbar--title {
         font-size: 2rem;
         font-weight: 700;
     }
-    .header--buttons {
+    .client-navbar--buttons {
         display: flex;
         align-items: center;
         height: 100%;

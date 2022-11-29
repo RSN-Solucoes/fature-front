@@ -9,8 +9,4 @@ export class DynamicPipe implements PipeTransform {
 
     return eval('this.' + modifier + "('" + value + "')");
   }
-
-  tel(value: string) {
-    return value
-  }
 }
