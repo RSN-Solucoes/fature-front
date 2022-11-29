@@ -1,0 +1,66 @@
+::ng-deep {
+  .p-datatable {
+    .p-datatable-table {
+      border-collapse: separate;
+      border-spacing: 0px 8px;
+    }
+
+    .p-datatable-thead > tr > th {
+      font-size: 1.4rem;
+      font-weight: 700;
+      background: none;
+      border: none;
+      padding: 2rem;
+    }
+
+    .p-datatable-tbody > tr {
+      background-color: transparent;
+
+      td {
+        font-size: 1.4rem;
+        font-weight: 500;
+        padding: 2rem;
+        background: #ffffff;
+      }
+
+      td:first-of-type {
+        border-radius: 10px 0px 0px 10px;
+      }
+
+      td:last-of-type {
+        border-radius: 0px 10px 10px 0px;
+      }
+    }
+
+    .p-datatable-thead > tr > th.p-sortable-column:focus {
+      background: none;
+      color: var(--primary);
+    }
+
+    .p-datatable-thead > tr > th.p-sortable-column:hover {
+      background: none;
+      color: var(--primary);
+      transition: 0.2s;
+    }
+
+    .p-sortable-column.p-highlight {
+      color: var(--primary);
+      background: transparent;
+    }
+
+    .p-sortable-column.p-highlight .p-sortable-column-icon:not(:hover) {
+      color: var(--primary);
+    }
+
+    .p-sortable-column.p-highlight .p-sortable-column-icon:hover {
+      color: var(--primary);
+    }
+    
+    .action-buttons>a {
+      margin-left: 2rem;
+      i {
+        font-size: 1.7rem;
+      }
+    }
+  }
+}

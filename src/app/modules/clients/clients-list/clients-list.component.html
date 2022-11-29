@@ -1,0 +1,23 @@
+<app-navbar>
+  <div class="client-navbar">
+    <span class="client-navbar--title">
+      Clientes
+    </span>
+
+    <div class="client-navbar--buttons">
+      <a (click)="navigateToClientForm()"><i class="pi pi-plus"></i></a>
+
+      <a><i class="pi pi-sliders-h"></i></a>
+    </div>
+  </div>
+</app-navbar>
+
+<div class="content">
+  <app-table
+    [columns]="clientTableColumns"
+    [fields]="clientTableFields"
+    [pipes]="clientTablePipes"
+    [actions]="clientTableActions"
+    [value]="clients"
+  ></app-table>
+</div>

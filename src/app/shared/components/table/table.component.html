@@ -1,18 +1,47 @@
 <p-table [value]="value" responsiveLayout="scroll">
   <ng-template pTemplate="header">
     <tr>
-      <th *ngFor="let column of columns">{{ column }}</th>
+      <th>
+        <p-checkbox 
+          [binary]="true"
+          [(ngModel)]="allSelected"
+          (onChange)="checkAll()"
+        ></p-checkbox>
+      </th>
+
+      <th
+        *ngFor="let column of columns; let i = index"
+        [pSortableColumn]="fields[i]"
+      >
+        {{ column }}
+        <p-sortIcon [field]="fields[i]"></p-sortIcon>
+      </th>
+
       <th *ngIf="actions"></th>
     </tr>
   </ng-template>
 
-  <ng-template pTemplate="body">
-    <tr *ngFor="let row of value">
-      <td *ngFor="let item of row | keyvalue; let i = index">
-        {{ getValue(item.value) | dynamic: pipes[i] }}
+  <ng-template pTemplate="body" let-row>
+    <tr>
+      <td>
+        <p-checkbox 
+          [binary]="true"
+          [(ngModel)]="row.checked"
+          (onChange)="selectRow(row)"
+        ></p-checkbox>
       </td>
 
-      <td *ngIf="actions"></td>
+      <td *ngFor="let item of fields; let i = index">
+        {{ row[item] | dynamic: pipes[i] }}
+      </td>
+
+      <td 
+        *ngIf="actions"
+        class="action-buttons"
+        ><a *ngFor="let action of actions">
+          <i class="pi {{ action.icon }}" (click)="action.action()"></i>
+        </a>
+      </td>
     </tr>
   </ng-template>
 </p-table>

@@ -5,13 +5,14 @@ import { TableComponent } from './table.component';
 
 // PrimeNG
 import { TableModule as PrimeTableModule } from 'primeng/table';
+import { CheckboxModule } from 'primeng/checkbox';
 
-// Pipes
 import { DynamicPipe } from '../../pipes/dynamic.pipe';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [DynamicPipe, TableComponent],
-  imports: [CommonModule, PrimeTableModule],
+  declarations: [TableComponent, DynamicPipe],
+  imports: [CommonModule, PrimeTableModule, CheckboxModule, FormsModule],
   exports: [TableComponent],
 })
 export class TableModule {}

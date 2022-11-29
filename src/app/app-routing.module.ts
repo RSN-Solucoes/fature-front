@@ -1,4 +1,5 @@
-import { ClientsComponent } from './modules/clients/clients.component';
+import { ClientsFormComponent } from './modules/clients/clients-form/clients-form.component';
+import { ClientsListComponent } from './modules/clients/clients-list/clients-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -10,7 +11,11 @@ const routes: Routes = [
   },
   {
     path: 'painel/clientes',
-    component: ClientsComponent,
+    component: ClientsListComponent,
+  },
+  {
+    path: 'painel/clientes/novo',
+    component: ClientsFormComponent,
   },
 ];
 
