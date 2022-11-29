@@ -10,6 +10,7 @@ import { SharedModule } from './../shared/shared.module';
 
 import { ClientsFormModule } from './clients/clients-form/clients-form.module';
 import { ClientsListModule } from './clients/clients-list/clients-list.module';
+import { RecurrenceListModule } from './recurrence/recurrence-list/recurrence-list.module';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { ClientsListModule } from './clients/clients-list/clients-list.module';
     SharedModule,
     ClientsListModule,
     ClientsFormModule,
+    RecurrenceListModule,
   ]
 })
 export class ModulesModule { }

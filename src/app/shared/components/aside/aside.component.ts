@@ -46,12 +46,12 @@ export class AsideComponent implements OnInit {
         active: String(location.href).includes('painel/dashboard'),
       },
       {
-        title: 'Recorrência',
+        title: 'Recorrências',
         iconPath: 'assets/img/recorrencia.svg',
         alt: 'Recorrência',
         classes: '',
-        route: 'painel/recorrencia',
-        active: String(location.href).includes('painel/recorrencia'),
+        route: 'painel/recorrencias',
+        active: String(location.href).includes('painel/recorrencias'),
       },
       {
         title: 'Clientes',

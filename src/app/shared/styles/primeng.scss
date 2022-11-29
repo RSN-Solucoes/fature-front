@@ -89,27 +89,61 @@
     background-color: darken($color: #02b69c, $amount: 5) !important;
   }
   
-  .p-dropdown-filter {
-    height: 38px;
+.p-dropdown-filter {
+  height: 38px;
+  }
+
+.p-dropdown-filter:focus {
+  border-color: var(--black);
+  }
+
+.p-checkbox .p-checkbox-box {
+  background: none;
+  border-radius: 0;
+  border: solid 3px gray;
+  }
+.p-checkbox .p-checkbox-box:hover {
+  border-color: var(--black) !important;
+  }
+.p-checkbox .p-checkbox-box.p-highlight {
+  border-color: var(--black);
+  background: var(--black);
+  color: #fff;
+  }
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+  background: var(--black);
   }
   
-  .p-dropdown-filter:focus {
-    border-color: var(--black);
-  }
-  
-  .p-checkbox .p-checkbox-box {
-    background: none;
-    border-radius: 0;
-    border: solid 3px gray;
-  }
-  .p-checkbox .p-checkbox-box:hover {
-    border-color: var(--black) !important;
-  }
-  .p-checkbox .p-checkbox-box.p-highlight {
-    border-color: var(--black);
-    background: var(--black);
-    color: #fff;
-  }
-  .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
-    background: var(--black);
-  }
+
+.p-tabview .p-tabview-nav li:not(.p-highlight) .p-tabview-nav-link:hover {
+  background: none !important;
+  border-color: var(--black) !important;
+  color: var(--black) !important;
+}
+.p-tabview {
+  .p-tabview-nav-content {
+      .p-tabview-nav {
+        background: none;
+        li {
+            a{
+              background: none;
+              span {
+                  font-size: 1.6rem;
+              }
+            }
+        }
+
+        .p-highlight>a {
+          background: none;
+          border-color: var(--black);
+          color: var(--black);
+        }
+      }
+    }
+    .p-tabview-panels {
+      background: none;
+      .p-tabview-panel {
+        font-size: 1.4rem;
+      }
+    }
+}
