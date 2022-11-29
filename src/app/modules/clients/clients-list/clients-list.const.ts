@@ -35,4 +35,4 @@ export const CLIENT_VALUE_SELECT_LIST = [
   },
 ];
 
-export const CLIENT_TABLE_PIPES = ['', '', '', 'tel'];
+export const CLIENT_TABLE_PIPES = ['', '', '', ''];
