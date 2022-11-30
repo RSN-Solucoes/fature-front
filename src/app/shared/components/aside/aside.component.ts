@@ -66,7 +66,7 @@ export class AsideComponent implements OnInit {
         iconPath: 'assets/img/produtos.svg',
         alt: 'Produtos',
         classes: '',
-        route: 'painel/produtos',
+        route: 'painel/produtos-e-servicos',
         active: String(location.href).includes('painel/produtos'),
       },
       {
