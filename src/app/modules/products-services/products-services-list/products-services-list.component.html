@@ -1,0 +1,23 @@
+<app-navbar>
+  <div class="products-services-navbar">
+    <span class="products-services-navbar--title">
+      Produtos e serviços
+    </span>
+
+    <div class="products-services-navbar--buttons">
+      <a><i class="pi pi-plus"></i></a>
+
+      <a><i class="pi pi-sliders-h"></i></a>
+    </div>
+  </div>
+</app-navbar>
+  
+<div class="content">
+  <app-table
+    [columns]="productsServicesColumns"
+    [fields]="productsServicesFields"
+    [pipes]="productsServicesPipes"
+    [actions]="productsServicesActions"
+    [value]="productsServices"
+  ></app-table>
+</div>
