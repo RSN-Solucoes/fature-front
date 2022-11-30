@@ -1,0 +1,30 @@
+<app-navbar>
+    <div class="recurrence-navbar">
+        <span class="recurrence-navbar--title">
+        Recorrências
+        </span>
+
+        <div class="recurrence-navbar--buttons">
+        <a><i class="pi pi-plus"></i></a>
+
+        <a><i class="pi pi-sliders-h"></i></a>
+        </div>
+    </div>
+</app-navbar>
+
+<div class="content">
+    <p-tabView>
+        <p-tabPanel header="Planos">
+            <app-table
+                [columns]="recurrenceColumns"
+                [fields]="recurrenceFields"
+                [pipes]="recurrencePipes"
+                [actions]="recurrenceActions"
+                [value]="recurrence"
+            ></app-table>
+        </p-tabPanel>
+        <p-tabPanel header="Assinaturas" [disabled]="true">
+            Assinaturas
+        </p-tabPanel>
+    </p-tabView>
+</div>
