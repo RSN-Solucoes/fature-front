@@ -12,13 +12,13 @@ import {
   styleUrls: ['./invoices-list.component.scss']
 })
 export class InvoicesListComponent implements OnInit {
-  public clientTableColumns = INVOICES_COLUMNS;
-  public clientTableFields = INVOICES_FIELDS;
-  public clientTablePipes = INVOICES_PIPES;
+  public invoicesColumns = INVOICES_COLUMNS;
+  public invoicesFields = INVOICES_FIELDS;
+  public invoicesPipes = INVOICES_PIPES;
 
-  public clients = INVOICES_VALUE_SELECT_LIST;
+  public invoices = INVOICES_VALUE_SELECT_LIST;
 
-  public clientTableActions = [
+  public invoicesActions = [
     {
       label: 'Visualizar',
       icon: 'pi-eye',
