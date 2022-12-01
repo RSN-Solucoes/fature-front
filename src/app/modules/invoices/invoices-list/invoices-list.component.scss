@@ -1,0 +1,24 @@
+.invoices-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    .invoices-navbar--title {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+    .invoices-navbar--buttons {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        a {
+            margin-left: 2rem;
+            cursor: pointer;
+        }
+
+        i {
+            font-size: 2rem;
+            font-weight: 500;
+        }   
+    }
+}

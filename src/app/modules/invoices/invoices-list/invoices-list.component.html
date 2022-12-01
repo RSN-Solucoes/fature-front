@@ -1,0 +1,21 @@
+<app-navbar>
+    <div class="invoices-navbar">
+      <span class="invoices-navbar--title">
+        Faturas
+      </span>
+  
+      <div class="invoices-navbar--buttons">
+        <a><i class="pi pi-sliders-h"></i></a>
+      </div>
+    </div>
+  </app-navbar>
+  
+  <div class="content">
+    <app-table
+      [columns]="invoicesColumns"
+      [fields]="invoicesFields"
+      [pipes]="invoicesPipes"
+      [actions]="invoicesActions"
+      [value]="invoices"
+    ></app-table>
+  </div>
