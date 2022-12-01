@@ -1,0 +1,16 @@
+<app-navbar>
+    <div class="transfers-navbar">
+        <span class="transfers-navbar--title">
+        Transferências
+        </span>
+
+        <div class="transfers-navbar--buttons">
+
+        <a><i class="pi pi-sliders-h"></i></a>
+        </div>
+    </div>
+</app-navbar>
+
+<div class="content">
+    <full-calendar *ngIf="this.events.length != 0" [options]="calendarOptions" #calendar></full-calendar>
+</div>

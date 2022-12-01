@@ -1,3 +1,4 @@
+import { TransfersModule } from './transfers/transfers.module';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -23,6 +24,7 @@ import { ProductsServicesListModule } from './products-services/products-service
     ClientsFormModule,
     ProductsServicesListModule,
     RecurrenceListModule,
+    TransfersModule,
   ]
 })
 export class ModulesModule { }

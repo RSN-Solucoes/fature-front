@@ -1,3 +1,4 @@
+import { TransfersComponent } from './modules/transfers/transfers.component';
 import { ClientsFormComponent } from './modules/clients/clients-form/clients-form.component';
 import { ClientsListComponent } from './modules/clients/clients-list/clients-list.component';
 import { ProductsServicesListComponent } from './modules/products-services/products-services-list/products-services-list.component';
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'painel/recorrencias',
     component: RecurrenceListComponent,
+  },
+  {
+    path: 'painel/transferencias',
+    component: TransfersComponent,
   },
 ];
 
