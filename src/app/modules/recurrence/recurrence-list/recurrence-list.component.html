@@ -16,15 +16,21 @@
     <p-tabView>
         <p-tabPanel header="Planos">
             <app-table
-                [columns]="recurrenceColumns"
-                [fields]="recurrenceFields"
-                [pipes]="recurrencePipes"
-                [actions]="recurrenceActions"
-                [value]="recurrence"
+                [columns]="plansColumns"
+                [fields]="plansFields"
+                [pipes]="plansPipes"
+                [actions]="plansActions"
+                [value]="plans"
             ></app-table>
         </p-tabPanel>
-        <p-tabPanel header="Assinaturas" [disabled]="true">
-            Assinaturas
+        <p-tabPanel header="Assinaturas">
+            <app-table
+                [columns]="subscriptionsColumns"
+                [fields]="subscriptionsFields"
+                [pipes]="subscriptionsPipes"
+                [actions]="subscriptionsActions"
+                [value]="subscriptions"
+            ></app-table>
         </p-tabPanel>
     </p-tabView>
 </div>
