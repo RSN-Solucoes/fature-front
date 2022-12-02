@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  RECURRENCE_TABLE_COLUMNS,
-  RECURRENCE_TABLE_FIELDS,
-  RECURRENCE_TABLE_PIPES,
-  RECURRENCE_VALUE_SELECT_LIST,
+  PLANS_COLUMNS,
+  PLANS_FIELDS,
+  PLANS_PIPES,
+  PLANS_VALUE_SELECT_LIST,
+  SUBSCRIPTIONS_COLUMNS,
+  SUBSCRIPTIONS_FIELDS,
+  SUBSCRIPTIONS_VALUE_SELECT_LIST,
+  SUBSCRIPTIONS_PIPES,
 } from './recurrence-list.const';
 
 @Component({
@@ -12,13 +16,36 @@ import {
   styleUrls: ['./recurrence-list.component.scss']
 })
 export class RecurrenceListComponent implements OnInit {
-  public recurrenceColumns = RECURRENCE_TABLE_COLUMNS;
-  public recurrenceFields = RECURRENCE_TABLE_FIELDS;
-  public recurrencePipes = RECURRENCE_TABLE_PIPES;
+  public plansColumns = PLANS_COLUMNS;
+  public plansFields = PLANS_FIELDS;
+  public plansPipes = PLANS_PIPES;
 
-  public recurrence = RECURRENCE_VALUE_SELECT_LIST;
+  public plans = PLANS_VALUE_SELECT_LIST;
 
-  public recurrenceActions = [
+  public plansActions = [
+    {
+      label: 'Visualizar',
+      icon: 'pi-eye',
+      action: () => {
+        alert('Visualizar');
+      },
+    },
+    {
+      label: 'Deletar',
+      icon: 'pi-trash',
+      action: () => {
+        alert('Deletar');
+      },
+    },
+  ];
+
+  public subscriptionsColumns = SUBSCRIPTIONS_COLUMNS;
+  public subscriptionsFields = SUBSCRIPTIONS_FIELDS;
+  public subscriptionsPipes = SUBSCRIPTIONS_PIPES;
+
+  public subscriptions = SUBSCRIPTIONS_VALUE_SELECT_LIST;
+
+  public subscriptionsActions = [
     {
       label: 'Visualizar',
       icon: 'pi-eye',
