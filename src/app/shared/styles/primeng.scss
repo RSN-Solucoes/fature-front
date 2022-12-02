@@ -159,12 +159,12 @@
           }
       }
       .fc-daygrid-day-events {
-          margin-top: 3rem;
+          
           .fc-daygrid-event-harness {
               a {
-                  margin: 0 3rem;
+                  margin: 1rem 3rem 0 3rem;
+                  padding: .5rem;
                   border-radius: 20px;
-                  background-color: var(--primary) !important;
                   border: none;
                   .fc-event-title {
                       display: flex;
@@ -207,6 +207,9 @@
       td {
           border-right: none;
           border: solid 3px var(--line);
+      }
+      .fc-day-today {
+        background: lighten($color: #02b69c, $amount: 55);
       }
       .fc-scrollgrid {
           border: none;

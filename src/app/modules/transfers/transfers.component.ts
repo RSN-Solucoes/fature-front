@@ -17,6 +17,11 @@ export class TransfersComponent implements OnInit {
       date: '2022-12-12',
     },
     {
+      title: 'Pago',
+      date: '2022-12-12',
+      color: '#5f3',
+    },
+    {
       title: 'Event 2',
       date: '2022-12-01',
     },
