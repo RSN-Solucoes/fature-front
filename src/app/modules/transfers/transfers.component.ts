@@ -8,22 +8,24 @@ import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular';
 })
 export class TransfersComponent implements OnInit {
   public title!: string;
+  public actualDate = new Date();
+  public calendarDate: any = this.actualDate.toISOString().substring(0,10);
 
   public events: any[] = [
     {
       title: 'Event 1',
-      date: '2022-04-01'
+      date: '2022-12-12',
     },
     {
       title: 'Event 2',
-      date: '2022-12-01'
+      date: '2022-12-01',
     },
   ];
 
   
   calendarOptions: CalendarOptions = {
     headerToolbar: false,
-    initialDate: new Date(),
+    initialDate: this.calendarDate,
     initialView: 'dayGridMonth',
     dateClick: this.handleDateClick.bind(this),
     events: this.events,
@@ -38,6 +40,7 @@ export class TransfersComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.setDateTitle(this.actualDate);
   }
 
   handleDateClick(arg: any) {
@@ -53,17 +56,13 @@ export class TransfersComponent implements OnInit {
       'Novembro', 'Dezembro'
     ];
     
-    this.title = `${months[month]} ${currentDate.getFullYear()}`;
+    this.title = `${months[month]}`;
   }
 
   nextMonth() {
     const calendarApi = this.calendarComponent.getApi();
 
     calendarApi.next();
-
-    if(this.events.length != 0) {
-      this.events = [];
-    };
     
     const currentDate = calendarApi.getDate();
     this.setDateTitle(currentDate);
@@ -73,10 +72,6 @@ export class TransfersComponent implements OnInit {
     const calendarApi = this.calendarComponent.getApi();
     
     calendarApi.prev();
-
-    if(this.events.length != 0) {
-      this.events = [];
-    };
 
     const currentDate = calendarApi.getDate();
     this.setDateTitle(currentDate);
