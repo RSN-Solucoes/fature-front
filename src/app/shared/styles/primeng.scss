@@ -203,10 +203,18 @@
           border: solid 3px var(--line);
           background: var(--content-background);
           border-bottom: 0;
+          overflow: hidden;
+          .fc-scroller {
+            
+            overflow: hidden !important;
+          }
       }
       td {
           border-right: none;
           border: solid 3px var(--line);
+          .fc-scroller-liquid-absolute {
+            overflow: hidden !important;
+          }
       }
       .fc-day-today {
         background: none;
