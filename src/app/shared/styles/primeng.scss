@@ -209,10 +209,13 @@
           border: solid 3px var(--line);
       }
       .fc-day-today {
-        background: lighten($color: #02b69c, $amount: 55);
+        background: none;
       }
       .fc-scrollgrid {
           border: none;
+      }
+      .fc-event.fc-daygrid-block-event {
+        background-color: var(--primary);
       }
   }
   a {
