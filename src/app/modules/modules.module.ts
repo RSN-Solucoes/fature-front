@@ -12,11 +12,10 @@ import { ClientsFormModule } from './clients/clients-form/clients-form.module';
 import { ClientsListModule } from './clients/clients-list/clients-list.module';
 import { RecurrenceListModule } from './recurrence/recurrence-list/recurrence-list.module';
 import { ProductsServicesListModule } from './products-services/products-services-list/products-services-list.module';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     SharedModule,
@@ -25,6 +24,7 @@ import { ProductsServicesListModule } from './products-services/products-service
     ProductsServicesListModule,
     RecurrenceListModule,
     InvoicesListModule,
+    LoginModule,
   ]
 })
 export class ModulesModule { }
