@@ -1,12 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular';
+
+import ptbrLocale from '@fullcalendar/core/locales/pt-br';
 
 @Component({
   selector: 'app-transfers',
   templateUrl: './transfers.component.html',
   styleUrls: ['./transfers.component.scss']
 })
-export class TransfersComponent implements OnInit {
+export class TransfersComponent implements OnInit, AfterViewInit {
   public title!: string;
   public actualDate = new Date();
   public calendarDate: any = this.actualDate.toISOString().substring(0,10);
@@ -50,6 +52,10 @@ export class TransfersComponent implements OnInit {
     this.setDateTitle(this.actualDate);
   }
 
+  ngAfterViewInit() {
+    this.setCalendarLocale();
+  }
+
   handleDateClick(arg: any) {
     alert('date click! ' + arg.dateStr);
   }
@@ -66,9 +72,15 @@ export class TransfersComponent implements OnInit {
     this.title = `${months[month]}`;
   }
 
-  nextMonth() {
+  setCalendarLocale() {
     const calendarApi = this.calendarComponent.getApi();
 
+    calendarApi.setOption('locale', ptbrLocale);
+  }
+
+  nextMonth() {
+    const calendarApi = this.calendarComponent.getApi();
+    
     calendarApi.next();
     
     const currentDate = calendarApi.getDate();
