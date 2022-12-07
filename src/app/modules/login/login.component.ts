@@ -20,12 +20,16 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+
+    if(this.loginService._token) {
+      this.router.navigate(['painel/dashboard']);
+    };
   }
 
   createForm() {
     this.form = this.fb.group({
-      email: ['contato.rsn@hotmail.com', [Validators.required, Validators.email]],
-      password: ['123456789', Validators.required],
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, Validators.required],
     });
   }
 

@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, UrlTree } from '@angular/router';
 import { LoginService } from './core/services/login.service';
 import { Component, OnInit } from '@angular/core';
 
