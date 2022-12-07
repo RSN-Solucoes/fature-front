@@ -1,3 +1,4 @@
+import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { LoginComponent } from './modules/login/login.component';
 import { InvoicesListComponent } from './modules/invoices/invoices-list/invoices-list.component';
 import { ClientsFormComponent } from './modules/clients/clients-form/clients-form.component';
@@ -11,12 +12,17 @@ import { AuthGuardService } from './core/guards/auth-guard.service';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'painel/dashboard',
     pathMatch: 'full',
   },
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'painel/dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'painel/clientes',
