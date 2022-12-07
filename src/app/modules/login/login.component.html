@@ -2,17 +2,30 @@
     <div class="md:col-7 login-image">
     </div>
     <div class="md:col-5 login-form">
-        <form>
+        <form [formGroup]="form">
             <div class="login_header">
                 <img src="../../../assets/img/fature-logo.png" alt="Logotipo">
             </div>
             <div class="field my-5">
-                <label for="email">E-mail</label>
-                <input class="input-txt" type="email" pInputText placeholder="Digite seu e-mail"/>
+                <label for="emailInput">E-mail</label>
+                <input 
+                    class="input-txt"
+                    type="email" 
+                    formControlName="email"
+                    id="emailInput"
+                    pInputText 
+                    placeholder="Digite seu e-mail"
+                />
             </div>
             <div class="field mb-5">
-                <label for="email">Senha</label>
-                <input type="password" pInputText placeholder="Digite sua senha"/>
+                <label for="passwordInput">Senha</label>
+                <input 
+                    type="password"
+                    formControlName="password"
+                    id="passwordInput"
+                    pInputText 
+                    placeholder="Digite sua senha"
+                />
             </div>
             <div class="login_footer">
                 <button pButton type="button" label="Entrar" (click)="submitForm()"></button>

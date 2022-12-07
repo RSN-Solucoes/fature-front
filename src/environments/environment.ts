@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  API_BASE: 'https://fature-api.herokuapp.com',
 };
 
 

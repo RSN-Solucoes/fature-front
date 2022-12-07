@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.loginService.token$.subscribe((token) => {
       this.token = token;
-    })
-
+    });
   }
 }

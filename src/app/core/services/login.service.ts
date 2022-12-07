@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  private loginEndpoint = 'https://fature-api.herokuapp.com/auth/login';
+  private API_BASE = environment.API_BASE;
 
   public _token = localStorage.getItem('token') || '';
   public token$: BehaviorSubject<string> = new BehaviorSubject(this._token);
@@ -15,7 +16,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(data: any): Observable<any> {
-    return this.http.post(this.loginEndpoint, data);
+    return this.http.post(`${this.API_BASE}/auth/login`, data);
   }
 
   getToken() {
