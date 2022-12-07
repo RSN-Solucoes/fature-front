@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { LoginService } from './../../core/services/login.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -23,9 +25,13 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.loginData).subscribe({
       next: (res) => {
         console.log(res);
-      },
-      error: () => {
 
+        this.loginService.createToken(res.data);
+
+        this.router.navigate(['painel/clientes']);
+      },
+      error: (err) => {
+        console.log(err);
       },
     })
   }
