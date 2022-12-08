@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
       next: (res) => {
         this.loginService.createToken(res.data);
 
-        this.router.navigate(['painel/clientes']);
+        this.router.navigate(['painel/dashboard']);
       },
       error: (err) => {
         alert(err);

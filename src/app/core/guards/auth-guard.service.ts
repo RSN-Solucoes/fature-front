@@ -15,7 +15,7 @@ export class AuthGuardService implements CanActivate{
     if (token) this.isAuthenticated = true;
     else this.isAuthenticated = false;
 
-    if (!this.isAuthenticated) this.router.navigate(['/painel/login']);
+    if (!this.isAuthenticated) this.router.navigate(['login']);
 
     return this.isAuthenticated;
   }
