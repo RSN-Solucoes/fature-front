@@ -7,6 +7,7 @@ import {
 } from './clients-list.const';
 
 import { Component, OnInit } from '@angular/core';
+import { ClientsService } from 'src/app/services/clients.service';
 
 @Component({
   selector: 'app-clients-list',
@@ -39,11 +40,25 @@ export class ClientsListComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private clientsService: ClientsService,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getClients();
+  }
 
   navigateToClientForm() {
     this.router.navigate(['painel/clientes/novo'])
+  }
+
+  getClients() {
+    this.clientsService.getClients().subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: () => {
+
+      }
+    });
   }
 }
