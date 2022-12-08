@@ -1,13 +1,16 @@
-import { DashboardComponent } from './modules/dashboard/dashboard.component';
-import { LoginComponent } from './modules/login/login.component';
 import { InvoicesListComponent } from './modules/invoices/invoices-list/invoices-list.component';
 import { ClientsFormComponent } from './modules/clients/clients-form/clients-form.component';
 import { ClientsListComponent } from './modules/clients/clients-list/clients-list.component';
 import { ProductsServicesListComponent } from './modules/products-services/products-services-list/products-services-list.component';
 import { RecurrenceListComponent } from './modules/recurrence/recurrence-list/recurrence-list.component';
+import { DashboardComponent } from './modules/dashboard/dashboard.component';
+import { LoginComponent } from './modules/login/login.component';
+import { TransfersComponent } from './modules/transfers/transfers.component';
+
+import { AuthGuardService } from './core/guards/auth-guard.service';
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuardService } from './core/guards/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -48,6 +51,10 @@ const routes: Routes = [
     path: 'painel/faturas',
     component: InvoicesListComponent,
     canActivate: [AuthGuardService],
+  },
+  {
+    path: 'painel/transferencias',
+    component: TransfersComponent,
   },
 ];
 

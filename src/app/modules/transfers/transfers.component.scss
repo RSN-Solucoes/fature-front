@@ -1,0 +1,39 @@
+.transfers-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    .transfers-navbar--title {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+    .transfers-navbar--buttons {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        .buttons--calendar-item {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            margin-right: 2rem;
+            span {
+                font-size: 1.6rem;
+                margin-right: 2rem;
+                font-weight: 500;
+                text-transform: uppercase;
+            }
+            button:last-of-type {
+                margin-left: .5rem;
+            }
+        }
+        a {
+            margin-left: 2rem;
+            cursor: pointer;
+        }
+
+        i {
+            font-size: 2rem;
+            font-weight: 500;
+        }   
+    }
+}

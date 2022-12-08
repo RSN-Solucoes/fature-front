@@ -147,3 +147,95 @@
       }
     }
 }
+
+// FullCalendar
+.fc {
+  background: none;
+  height: calc(100vh - 80px);
+
+  .fc-daygrid-day-frame {
+      .fc-daygrid-day-top {
+          a {
+              color: #e7e7e7;
+              padding-right: 1rem;
+          }
+      }
+      .fc-daygrid-day-events {        
+          .fc-daygrid-event-harness {
+              a {
+                  margin: 1rem 3rem 0 3rem;
+                  padding: .5rem;
+                  border-radius: 20px;
+                  border: none;
+                  .fc-event-title {
+                      display: flex;
+                      justify-content: center;
+                      font-size: 1.6rem;
+                      text-transform: none;
+                      font-weight: 300;
+                  }
+              }
+          }
+      }
+      .fc-daygrid-day-bg {
+          background-color: red;
+          .fc-highlight {
+              background: none;
+              border: solid 1px var(--black);
+          }
+      }
+  }
+}
+.fc.fc-theme-standard {
+  background: none;
+  .fc-view-harness {
+      .fc-col-header-cell {
+          background-color: #fff;
+      }
+      .fc-col-header-cell:first-of-type {
+          border-top-left-radius: 10px;
+      }
+      .fc-col-header-cell:last-of-type {
+          border-top-right-radius: 10px;
+      }
+
+      th {
+          border-right: solid 3px var(--line);
+          background: var(--content-background);
+          border-bottom: 0;
+          overflow: hidden;
+          .fc-scroller {
+            overflow: hidden !important;
+          }
+      }
+      th:last-of-type {
+        border-right: none;
+      }
+      td {
+          border: solid 3px var(--line);
+          border-left: none;
+          border-bottom: none;
+          .fc-scroller-liquid-absolute {
+            overflow: hidden !important;
+          }
+      }
+      td:last-of-type {
+        border-right: none;
+      }
+      .fc-day-today {
+        background: none;
+      }
+      .fc-scrollgrid {
+          border: none;
+      }
+      .fc-event.fc-daygrid-block-event {
+        background-color: var(--primary);
+      }
+  }
+  a {
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: .8rem 0;
+  }
+}
