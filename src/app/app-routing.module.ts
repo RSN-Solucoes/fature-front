@@ -1,10 +1,12 @@
-import { InvoicesListComponent } from './modules/invoices/invoices-list/invoices-list.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
 import { ClientsFormComponent } from './modules/clients/clients-form/clients-form.component';
 import { ClientsListComponent } from './modules/clients/clients-list/clients-list.component';
 import { ProductsServicesListComponent } from './modules/products-services/products-services-list/products-services-list.component';
 import { RecurrenceListComponent } from './modules/recurrence/recurrence-list/recurrence-list.component';
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { TransfersComponent } from './modules/transfers/transfers.component';
+import { InvoicesListComponent } from './modules/invoices/invoices-list/invoices-list.component';
 
 const routes: Routes = [
   {
@@ -31,6 +33,10 @@ const routes: Routes = [
   {
     path: 'painel/faturas',
     component: InvoicesListComponent,
+  },
+  {
+    path: 'painel/transferencias',
+    component: TransfersComponent,
   },
 ];
 

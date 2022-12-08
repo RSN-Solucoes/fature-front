@@ -1,0 +1,30 @@
+<app-navbar>
+    <div class="transfers-navbar">
+        <span class="transfers-navbar--title">
+            Transferências
+        </span>
+
+        <div class="transfers-navbar--buttons">
+            <div class="buttons--calendar-item">
+                <span>{{ title }}</span>
+                <button 
+                    pButton 
+                    icon="pi pi-chevron-left" 
+                    class="button-icon"
+                    (click)="previousMonth()"
+                ></button>
+                <button 
+                    pButton 
+                    icon="pi pi-chevron-right" 
+                    class="button-icon"
+                    (click)="nextMonth()"
+                ></button>
+            </div>
+            <a><i class="pi pi-bell"></i></a>
+        </div>
+    </div>
+</app-navbar>
+
+<div class="content">
+    <full-calendar *ngIf="events.length != 0" [options]="calendarOptions" #calendar></full-calendar>
+</div>

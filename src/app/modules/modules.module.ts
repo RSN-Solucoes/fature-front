@@ -1,4 +1,3 @@
-import { InvoicesListModule } from './invoices/invoices-list/invoices-list.module';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -12,6 +11,8 @@ import { ClientsFormModule } from './clients/clients-form/clients-form.module';
 import { ClientsListModule } from './clients/clients-list/clients-list.module';
 import { RecurrenceListModule } from './recurrence/recurrence-list/recurrence-list.module';
 import { ProductsServicesListModule } from './products-services/products-services-list/products-services-list.module';
+import { TransfersModule } from './transfers/transfers.module';
+import { InvoicesListModule } from './invoices/invoices-list/invoices-list.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ProductsServicesListModule } from './products-services/products-service
     ProductsServicesListModule,
     RecurrenceListModule,
     InvoicesListModule,
+    TransfersModule,
   ]
 })
 export class ModulesModule { }
