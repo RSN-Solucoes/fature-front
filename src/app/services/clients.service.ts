@@ -1,5 +1,5 @@
 import { environment } from './../../environments/environment';
-import { Injectable } from '@angular/core';
+import { Injectable, LOCALE_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -11,7 +11,15 @@ export class ClientsService {
 
   constructor(private http: HttpClient) { }
 
+  getClient(id: string) {
+    return this.http.get(`${this.API_BASE}/users/${id}`);
+  }
+
   getClients() {
     return this.http.get(`${this.API_BASE}/users`);
+  }
+
+  createClient(body: any) {
+    return this.http.post(`${this.API_BASE}/users`, body);
   }
 }

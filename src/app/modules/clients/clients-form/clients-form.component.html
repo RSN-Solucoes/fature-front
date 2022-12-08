@@ -29,7 +29,7 @@
           formControlName="document"
           pInputText
           placeholder="Documento do cliente ou empresa"
-          mask="000.000.000-00|| 00.000.000/0000-00"
+          mask="000.000.000-00 || 00.000.000/0000-00"
         />
       </div>
 
@@ -132,8 +132,20 @@
       </div>
     </form>
     <div class="clients--footer">
-      <button type="button" class="secondary-form-button">Limpar</button>
-      <button type="button" class="primary-form-button ml-5">Salvar</button>
+      <button 
+        type="button" 
+        class="secondary-form-button"
+        (click)="clearForm()"
+        >
+        Limpar
+      </button>
+      <button 
+        type="button" 
+        class="primary-form-button ml-5"
+        (click)="submitForm()"
+        >
+        Salvar
+      </button>
     </div>
   </div>
 </div>

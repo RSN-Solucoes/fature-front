@@ -19,7 +19,7 @@ export class ClientsListComponent implements OnInit {
   public clientTableFields = CLIENT_TABLE_FIELDS;
   public clientTablePipes = CLIENT_TABLE_PIPES;
 
-  public clients = CLIENT_VALUE_SELECT_LIST;
+  public clients!: any;
 
   public clientTableActions = [
     {
