@@ -1,22 +1,20 @@
-import { InvoicesListModule } from './invoices/invoices-list/invoices-list.module';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-// Components
-import { LoginComponent } from './login/login.component';
 
 // Modules
 import { SharedModule } from './../shared/shared.module';
 import { ClientsFormModule } from './clients/clients-form/clients-form.module';
 import { ClientsListModule } from './clients/clients-list/clients-list.module';
 import { RecurrenceListModule } from './recurrence/recurrence-list/recurrence-list.module';
+import { InvoicesListModule } from './invoices/invoices-list/invoices-list.module';
 import { ProductsServicesListModule } from './products-services/products-services-list/products-services-list.module';
+import { TransfersModule } from './transfers/transfers.module';
+import { LoginModule } from './login/login.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     SharedModule,
@@ -25,6 +23,9 @@ import { ProductsServicesListModule } from './products-services/products-service
     ProductsServicesListModule,
     RecurrenceListModule,
     InvoicesListModule,
+    TransfersModule,
+    LoginModule,
+    DashboardModule,
   ]
 })
 export class ModulesModule { }

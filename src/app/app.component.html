@@ -1,9 +1,14 @@
-<div class="panel">
-  <aside class="aside">
-    <app-aside></app-aside>
-  </aside>
+<ng-container *ngIf="!token; else loggedContainer">
+  <router-outlet></router-outlet>
+</ng-container>
 
-  <main>
-    <router-outlet></router-outlet>
-  </main>
-</div>
+<ng-template #loggedContainer>
+  <div class="panel">
+    <aside class="aside">
+      <app-aside></app-aside>
+    </aside>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</ng-template>
