@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientsService } from 'src/app/services/clients.service';
 import { UFS_SELECT_LIST } from 'src/app/shared/constants/ufs.const';
@@ -33,13 +33,35 @@ export class ClientsFormComponent implements OnInit {
       email: [null],
       tel: [null],
       document: [null],
-      address: [null],
+      address: [{value: null, disabled: true}, Validators.required],
       addressNumber: [null],
       addressComplement: [null],
       cep: [null],
-      district: [null],
-      city: [null],
-      uf: [null],
+      district: [{value: null, disabled: true}, Validators.required],
+      city: [{value: null, disabled: true}, Validators.required],
+      uf: [{value: null, disabled: true}, Validators.required],
+      codeIbge: [null],
+    });
+  }
+
+  getClientAddressData() {
+    const CEP = this.clientsForm.get('cep')?.value;
+
+    if (CEP.length < 8) return;
+
+    this.clientsService.getUserCEP(CEP).subscribe({
+      next: (res) => {
+        this.clientsForm.patchValue({
+          address: res.logradouro,
+          district: res.bairro,
+          city: res.localidade,
+          uf: res.uf,
+          codeIbge: res.ibge,
+        })
+      },
+      error: (err) => {
+        console.log(err);
+      }
     });
   }
   
@@ -61,7 +83,6 @@ export class ClientsFormComponent implements OnInit {
         }, 1500);
       }
     });
-
   }
 
 
