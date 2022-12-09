@@ -39,7 +39,12 @@
         *ngIf="actions"
         class="action-buttons"
         ><a *ngFor="let action of actions">
-          <i class="pi {{ action.icon }}" (click)="action.action()"></i>
+          <i 
+            class="pi {{ action.icon }}" 
+            (click)="action.action(row.id)"
+            [pTooltip]="action.label" 
+            tooltipPosition="top"
+          ></i>
         </a>
       </td>
     </tr>

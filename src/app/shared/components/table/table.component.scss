@@ -57,9 +57,13 @@
     }
     
     .action-buttons>a {
+      cursor: pointer;
       margin-left: 2rem;
       i {
         font-size: 1.7rem;
+      }
+      .pi-trash:hover {
+        color:#ff0000;
       }
     }
   }

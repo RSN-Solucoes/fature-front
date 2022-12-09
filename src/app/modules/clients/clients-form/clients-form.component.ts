@@ -15,6 +15,8 @@ export class ClientsFormComponent implements OnInit {
 
   public ufSelectItems: any = UFS_SELECT_LIST;
 
+  public clientId = this.activatedRoute.snapshot.paramMap.get('id') || '';
+
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -24,6 +26,10 @@ export class ClientsFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.createClientsForm();
+
+    if(this.clientId) {
+      this.getClient();
+    }
 
   }
 
@@ -41,6 +47,19 @@ export class ClientsFormComponent implements OnInit {
       city: [{value: null, disabled: true}, Validators.required],
       uf: [{value: null, disabled: true}, Validators.required],
       codeIbge: [null],
+    });
+  }
+
+  getClient() {
+    this.clientsService.getClient(this.clientId).subscribe({
+      next: (res) => {
+        this.clientsForm.patchValue({
+          ...res.data,
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      }
     });
   }
 
@@ -74,9 +93,13 @@ export class ClientsFormComponent implements OnInit {
 
     if(!this.clientsForm.valid) return;
 
-    this.clientsService.createClient(this.clientsForm.getRawValue()).subscribe({
+    const request = !this.clientId
+      ? this.clientsService.createClient(this.clientsForm.getRawValue())
+      : this.clientsService.updateClient(this.clientId, this.clientsForm.getRawValue());
+
+    request.subscribe({
       next: (res) => {
-        console.log(res);
+        alert('Cliente criado/atualizado');
 
         setTimeout(() => {
           this.cancel();
@@ -85,9 +108,7 @@ export class ClientsFormComponent implements OnInit {
     });
   }
 
-
   cancel() {
     this.router.navigate(['painel/clientes']);
   }
-
 }

@@ -3,7 +3,6 @@ import {
   CLIENT_TABLE_COLUMNS,
   CLIENT_TABLE_FIELDS,
   CLIENT_TABLE_PIPES,
-  CLIENT_VALUE_SELECT_LIST,
 } from './clients-list.const';
 
 import { Component, OnInit } from '@angular/core';
@@ -23,17 +22,24 @@ export class ClientsListComponent implements OnInit {
 
   public clientTableActions = [
     {
-      label: 'Visualizar',
-      icon: 'pi-eye',
-      action: () => {
-        alert('Visualizar');
+      label: 'Editar',
+      icon: 'pi-pencil',
+      action: (id: string) => {
+        this.router.navigate(['painel/clientes/editar/', id]);
       },
     },
     {
       label: 'Deletar',
       icon: 'pi-trash',
-      action: () => {
-        alert('Deletar');
+      action: (id: string) => {
+        this.clientsService.deleteClient(id).subscribe({
+          next: (res) => {
+            alert('Cliente excluído com sucesso!');
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        })
       },
     },
   ];
@@ -54,7 +60,7 @@ export class ClientsListComponent implements OnInit {
   getClients() {
     this.clientsService.getClients().subscribe({
       next: (res) => {
-        console.log(res);
+        this.clients = res.data;
       },
       error: () => {
 
