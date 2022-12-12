@@ -35,14 +35,14 @@ export class ClientsFormComponent implements OnInit {
 
   createClientsForm() {
     this.clientsForm = this.fb.group({
-      name: [null],
-      email: [null],
-      tel: [null],
-      document: [null],
+      name: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]],
+      tel: [null, Validators.required],
+      document: [null, Validators.required],
       address: [{value: null, disabled: true}, Validators.required],
-      addressNumber: [null],
+      addressNumber: [null, Validators.required],
       addressComplement: [null],
-      cep: [null],
+      cep: [null, Validators.required],
       district: [{value: null, disabled: true}, Validators.required],
       city: [{value: null, disabled: true}, Validators.required],
       uf: [{value: null, disabled: true}, Validators.required],
