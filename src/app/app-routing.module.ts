@@ -1,3 +1,5 @@
+import { ServicesFormComponent } from './modules/products-services/services-form/services-form.component';
+import { ProductsFormComponent } from './modules/products-services/products-form/products-form.component';
 import { InvoicesListComponent } from './modules/invoices/invoices-list/invoices-list.component';
 import { ClientsFormComponent } from './modules/clients/clients-form/clients-form.component';
 import { ClientsListComponent } from './modules/clients/clients-list/clients-list.component';
@@ -40,6 +42,16 @@ const routes: Routes = [
   {
     path: 'painel/produtos-e-servicos',
     component: ProductsServicesListComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'painel/produtos-e-servicos/novo-produto',
+    component: ProductsFormComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'painel/produtos-e-servicos/novo-servico',
+    component: ServicesFormComponent,
     canActivate: [AuthGuardService],
   },
   {

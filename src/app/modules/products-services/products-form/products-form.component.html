@@ -1,0 +1,73 @@
+<app-navbar>
+    <div class="product-navbar">
+        <a (click)="cancel()"><i class="pi pi-angle-left"></i></a>
+        <span>Novo produto</span>
+    </div>
+</app-navbar>
+
+<div class="content">
+    <div class="products">
+        <div class="products--header">
+            <p>Dados do produto</p>
+        </div>
+        <form class="products--form my-6 grid" [formGroup]="productsForm">
+            <div class="field col-12 md:col-6">
+                <label for="productName">Nome do produto <span>*</span></label>
+                <input
+                  type="text"
+                  id="productName"
+                  formControlName="productName"
+                  pInputText
+                  placeholder="Nome do produto"
+                />
+            </div>
+            <div class="field col-12 md:col-3">
+                <label for="value">Valor <span>*</span></label>
+                <p-inputNumber 
+                    mode="currency" 
+                    currency="BRL"
+                    id="value"
+                    formControlName="value"
+                    placeholder="Qual valor do produto"
+                ></p-inputNumber>
+            </div>
+            <div class="field col-12 md:col-3">
+                <label for="quantity">Quantidade no estoque <span>*</span></label>
+                <p-inputNumber 
+                    [min]="1"
+                    [max]="100"
+                    id="quantity"
+                    formControlName="quantity"
+                    placeholder="Unidades disponíveis"
+                    [useGrouping]="false"
+                ></p-inputNumber>
+            </div>
+            <div class="field col-12">
+                <label for="productDescription">Descrição do produto</label>
+                <textarea
+                    [rows]="5" 
+                    [cols]="30" 
+                    pInputTextarea 
+                    [autoResize]="true"
+                    id="productDescription"
+                    formControlName="description"
+                    placeholder="Descreva as caracteristicas do seu produto"
+                ></textarea>
+            </div>
+        </form>
+        <div class="products--footer">
+            <button 
+                type="button" 
+                class="secondary-form-button"
+                (click)="clearForm()"
+                >Limpar
+            </button>
+            <button 
+                type="button" 
+                class="primary-form-button ml-5"
+                (click)="submitForm()"
+                >Criar produto
+            </button>
+        </div>
+    </div>
+</div>
