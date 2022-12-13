@@ -14,6 +14,7 @@
 
 <div class="content">
   <app-table
+    *ngIf="clients"
     [columns]="clientTableColumns"
     [fields]="clientTableFields"
     [pipes]="clientTablePipes"

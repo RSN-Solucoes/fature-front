@@ -8,11 +8,11 @@ export const CLIENT_TABLE_COLUMNS = [
 ];
 
 export const CLIENT_TABLE_FIELDS = [
-  'nome',
+  'name',
   'email',
-  'telefone',
+  'tel',
   'cep',
-  'cidade',
+  'city',
   'uf',
 ];
 
@@ -35,4 +35,4 @@ export const CLIENT_VALUE_SELECT_LIST = [
   },
 ];
 
-export const CLIENT_TABLE_PIPES = ['', '', '', ''];
+export const CLIENT_TABLE_PIPES = ['', '', 'tel', 'cep', '', ''];

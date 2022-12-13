@@ -22,8 +22,8 @@ export class InvoicesListComponent implements OnInit {
     {
       label: 'Visualizar',
       icon: 'pi-eye',
-      action: () => {
-        alert('Visualizar');
+      action: (id: string) => {
+        console.log(id);
       },
     },
     {
