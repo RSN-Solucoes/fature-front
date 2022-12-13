@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   PRODUCTS_SERVICES_TABLE_COLUMNS,
   PRODUCTS_SERVICES_TABLE_FIELDS,
@@ -18,6 +19,8 @@ export class ProductsServicesListComponent implements OnInit {
 
   public productsServices = PRODUCTS_SERVICES_VALUE_SELECT_LIST;
 
+  public dialogDisplay: boolean = false;
+
   public productsServicesActions = [
     {
       label: 'Visualizar',
@@ -35,9 +38,19 @@ export class ProductsServicesListComponent implements OnInit {
     },
   ];
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  navigateToProductForm() {
+    this.router.navigate(['painel/produtos-e-servicos/novo-produto']);
+  }
+
+  navigateToServiceForm() {
+    this.router.navigate(['painel/produtos-e-servicos/novo-servico']);
   }
 
 }
