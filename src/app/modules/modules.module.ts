@@ -2,6 +2,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+// Interceptors
+import { HeaderInterceptor } from '../core/interceptors/header.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 // Modules
 import { SharedModule } from './../shared/shared.module';
 import { ClientsFormModule } from './clients/clients-form/clients-form.module';
@@ -26,6 +30,10 @@ import { DashboardModule } from './dashboard/dashboard.module';
     TransfersModule,
     LoginModule,
     DashboardModule,
+  ],
+  exports: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true },
   ]
 })
 export class ModulesModule { }

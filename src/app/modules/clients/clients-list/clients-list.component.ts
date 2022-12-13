@@ -3,10 +3,10 @@ import {
   CLIENT_TABLE_COLUMNS,
   CLIENT_TABLE_FIELDS,
   CLIENT_TABLE_PIPES,
-  CLIENT_VALUE_SELECT_LIST,
 } from './clients-list.const';
 
 import { Component, OnInit } from '@angular/core';
+import { ClientsService } from 'src/app/services/clients.service';
 
 @Component({
   selector: 'app-clients-list',
@@ -18,32 +18,61 @@ export class ClientsListComponent implements OnInit {
   public clientTableFields = CLIENT_TABLE_FIELDS;
   public clientTablePipes = CLIENT_TABLE_PIPES;
 
-  public clients = CLIENT_VALUE_SELECT_LIST;
+  public clients!: any;
 
   public clientTableActions = [
     {
-      label: 'Visualizar',
-      icon: 'pi-eye',
-      action: () => {
-        alert('Visualizar');
+      label: 'Editar',
+      icon: 'pi-pencil',
+      action: (row: any) => {
+        this.editClient(row);
       },
     },
     {
       label: 'Deletar',
       icon: 'pi-trash',
-      action: () => {
-        alert('Deletar');
+      action: (row: any) => {
+        this.deleteClient(row);
       },
     },
   ];
 
   constructor(
     private router: Router,
+    private clientsService: ClientsService,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getClients();
+  }
 
   navigateToClientForm() {
     this.router.navigate(['painel/clientes/novo'])
+  }
+
+  getClients() {
+    this.clientsService.getClients().subscribe({
+      next: (res) => {
+        this.clients = res.data;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  editClient(row: any) {
+    this.router.navigate(['painel/clientes/editar/', row.id]);
+  }
+  
+  deleteClient(row: any) {
+    this.clientsService.deleteClient(row.id).subscribe({
+      next: (res) => {
+        alert('Cliente excluído com sucesso!');
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 }
