@@ -41,7 +41,7 @@
         ><a *ngFor="let action of actions">
           <i 
             class="pi {{ action.icon }}" 
-            (click)="action.action(row.id)"
+            (click)="action.action(row)"
             [pTooltip]="action.label" 
             tooltipPosition="top"
           ></i>

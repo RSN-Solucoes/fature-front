@@ -24,22 +24,15 @@ export class ClientsListComponent implements OnInit {
     {
       label: 'Editar',
       icon: 'pi-pencil',
-      action: (id: string) => {
-        this.router.navigate(['painel/clientes/editar/', id]);
+      action: (row: any) => {
+        this.editClient(row);
       },
     },
     {
       label: 'Deletar',
       icon: 'pi-trash',
-      action: (id: string) => {
-        this.clientsService.deleteClient(id).subscribe({
-          next: (res) => {
-            alert('Cliente excluído com sucesso!');
-          },
-          error: (err) => {
-            console.log(err);
-          }
-        })
+      action: (row: any) => {
+        this.deleteClient(row);
       },
     },
   ];
@@ -62,8 +55,23 @@ export class ClientsListComponent implements OnInit {
       next: (res) => {
         this.clients = res.data;
       },
-      error: () => {
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
 
+  editClient(row: any) {
+    this.router.navigate(['painel/clientes/editar/', row.id]);
+  }
+  
+  deleteClient(row: any) {
+    this.clientsService.deleteClient(row.id).subscribe({
+      next: (res) => {
+        alert('Cliente excluído com sucesso!');
+      },
+      error: (err) => {
+        console.log(err);
       }
     });
   }
