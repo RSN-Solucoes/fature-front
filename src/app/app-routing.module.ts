@@ -49,7 +49,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
-    path: 'painel/produtos-e-servicos/novo',
+    path: 'painel/produtos-e-servicos/:type/novo',
     component: ProductsServicesFormComponent,
     canActivate: [AuthGuardService],
   },

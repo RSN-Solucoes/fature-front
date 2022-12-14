@@ -1,3 +1,4 @@
+import { I_User } from './../../../core/interfaces/user.interface';
 import { Router } from '@angular/router';
 import {
   CLIENT_TABLE_COLUMNS,
@@ -18,7 +19,7 @@ export class ClientsListComponent implements OnInit {
   public clientTableFields = CLIENT_TABLE_FIELDS;
   public clientTablePipes = CLIENT_TABLE_PIPES;
 
-  public clients!: any;
+  public clients!: I_User[];
 
   public clientTableActions = [
     {

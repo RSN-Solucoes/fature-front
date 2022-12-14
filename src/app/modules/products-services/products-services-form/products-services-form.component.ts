@@ -12,7 +12,6 @@ export class ProductsServicesFormComponent implements OnInit {
   public formSubmited: boolean = false;
 
   public productForm!: boolean;
-  public serviceForm!: boolean;
 
   constructor(
     private router: Router,
@@ -22,12 +21,20 @@ export class ProductsServicesFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+
+    this.activatedRoute.params.subscribe({
+      next: (res) => {
+        res['type'] === 'produto' ? this.productForm = true
+        : this.productForm = false;
+      },
+    });
+
   }
 
   createForm() {
     this.productsServicesForm = this.fb.group({
-      productName: [null],
-      value: [null],
+      name: [null, Validators.required],
+      price: [null, Validators.required],
       quantity: [null],
       description: [null],
     })
@@ -38,7 +45,12 @@ export class ProductsServicesFormComponent implements OnInit {
 
     if(!this.productsServicesForm.valid) return;
 
-    alert('Criar produto');
+    let body = this.productsServicesForm.getRawValue();
+
+    this.productForm ? body = { ...body, type: 'product' }
+      : body = { ...body, type: 'service' };
+
+    
   }
 
   clearForm() {
