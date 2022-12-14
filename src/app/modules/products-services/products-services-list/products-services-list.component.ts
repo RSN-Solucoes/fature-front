@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   PRODUCTS_SERVICES_TABLE_COLUMNS,
@@ -45,12 +45,8 @@ export class ProductsServicesListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  navigateToProductForm() {
-    this.router.navigate(['painel/produtos-e-servicos/novo-produto']);
-  }
-
-  navigateToServiceForm() {
-    this.router.navigate(['painel/produtos-e-servicos/novo-servico']);
+  navigateToForm() {
+    this.router.navigate(['painel/produtos-e-servicos/novo']);
   }
 
 }

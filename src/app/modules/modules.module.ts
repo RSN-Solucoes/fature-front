@@ -1,3 +1,4 @@
+import { ProductsServicesFormModule } from './products-services/products-services-form/products-services-form.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -15,8 +16,6 @@ import { ProductsServicesListModule } from './products-services/products-service
 import { TransfersModule } from './transfers/transfers.module';
 import { LoginModule } from './login/login.module';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { ServicesFormModule } from './products-services/services-form/services-form.module';
-import { ProductsFormModule } from './products-services/products-form/products-form.module';
 
 @NgModule({
   declarations: [],
@@ -31,8 +30,7 @@ import { ProductsFormModule } from './products-services/products-form/products-f
     TransfersModule,
     LoginModule,
     DashboardModule,
-    ServicesFormModule,
-    ProductsFormModule,
+    ProductsServicesFormModule,
   ],
   exports: [],
   providers: [

@@ -1,16 +1,16 @@
 <app-navbar>
-    <div class="product-navbar">
+    <div class="products-services-navbar">
         <a (click)="cancel()"><i class="pi pi-angle-left"></i></a>
         <span>Novo produto</span>
     </div>
 </app-navbar>
 
 <div class="content">
-    <div class="products">
-        <div class="products--header">
+    <div class="products-services">
+        <div class="products-services--header">
             <p>Dados do produto</p>
         </div>
-        <form class="products--form my-6 grid" [formGroup]="productsForm">
+        <form class="products-services--form my-6 grid" [formGroup]="productsServicesForm">
             <div class="field col-12 md:col-6">
                 <label for="productName">Nome do produto <span>*</span></label>
                 <input
@@ -55,7 +55,7 @@
                 ></textarea>
             </div>
         </form>
-        <div class="products--footer">
+        <div class="products-services--footer">
             <button 
                 type="button" 
                 class="secondary-form-button"

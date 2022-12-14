@@ -27,11 +27,11 @@
     }
 }
 p-dialog {
-    .dialog---header {
+    .dialog--header {
         display: flex;
         justify-content: center;
         p {
-            font-size: 1.4rem;
+            font-size: 1.8rem;
             font-weight: 500;
         }
     }
@@ -43,14 +43,15 @@ p-dialog {
             align-items: center;
             border: solid 1px var(--line);
             border-radius: 8px;
-            height: 100px;
-            justify-content: space-around;
+            height: 150px;
+            justify-content: space-between;
+            padding: 1rem;
             cursor: pointer;
-            i {
-                font-size: 4rem;
+            img {
+                height: 200;
             }
             span {
-                font-size: 1.2rem;
+                font-size: 1.4rem;
                 font-weight: 600;
             }
         }

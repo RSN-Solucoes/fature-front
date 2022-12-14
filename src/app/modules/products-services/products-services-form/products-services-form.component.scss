@@ -1,4 +1,4 @@
-.product-navbar {
+.products-services-navbar {
     display: flex;
     align-items: center;
     height: 100%;
@@ -17,24 +17,24 @@
         margin-left: 1.5rem;
     }
 }
-.products {
+.products-services {
     width: 100%;
     padding: 6rem;
     background-color: #fff;
     border-radius: 10px;
-    .products--header {
+    .products-services--header {
         p {
             font-size: 1.6rem;
             font-weight: bold;
         }
     }
-    .products--form {
+    .products-services--form {
         label {
             font-weight: 400;
             margin-bottom: 1rem;
         }
     }
-    .products--footer {
+    .products-services--footer {
         display: flex;
         justify-content: flex-end;
     }

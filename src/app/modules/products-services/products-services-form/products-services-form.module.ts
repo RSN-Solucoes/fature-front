@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductsFormComponent } from './products-form.component';
+import { ProductsServicesFormComponent } from './products-services-form.component';
 import { NavbarModule } from 'src/app/shared/components/navbar/navbar.module';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ButtonModule } from 'primeng/button';
@@ -11,18 +11,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [ProductsFormComponent],
+  declarations: [ProductsServicesFormComponent],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     NavbarModule,
-    InputTextareaModule,
     ButtonModule,
     InputTextModule,
     InputNumberModule,
+    InputTextareaModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
+    ReactiveFormsModule,
   ],
-  exports: [ProductsFormComponent]
+  exports: [ProductsServicesFormComponent]
 })
-export class ProductsFormModule { }
+export class ProductsServicesFormModule { }
