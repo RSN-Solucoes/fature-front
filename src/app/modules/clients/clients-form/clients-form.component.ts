@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientsService } from 'src/app/services/clients.service';
+import { RequestMessageService } from 'src/app/shared/components/request-message/request-message.service';
 import { UFS_SELECT_LIST } from 'src/app/shared/constants/ufs.const';
 
 @Component({
   selector: 'app-clients-form',
   templateUrl: './clients-form.component.html',
-  styleUrls: ['./clients-form.component.scss']
+  styleUrls: ['./clients-form.component.scss'],
 })
 export class ClientsFormComponent implements OnInit {
   public clientsForm!: FormGroup;
@@ -22,15 +23,15 @@ export class ClientsFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private clientsService: ClientsService,
-  ) { }
+    private requestMessageService: RequestMessageService
+  ) {}
 
   ngOnInit(): void {
     this.createClientsForm();
 
-    if(this.clientId) {
+    if (this.clientId) {
       this.getClient();
     }
-
   }
 
   createClientsForm() {
@@ -39,13 +40,13 @@ export class ClientsFormComponent implements OnInit {
       email: [null, [Validators.required, Validators.email]],
       tel: [null, Validators.required],
       document: [null, Validators.required],
-      address: [{value: null, disabled: true}, Validators.required],
+      address: [{ value: null, disabled: true }, Validators.required],
       addressNumber: [null, Validators.required],
       addressComplement: [null],
       cep: [null, Validators.required],
-      district: [{value: null, disabled: true}, Validators.required],
-      city: [{value: null, disabled: true}, Validators.required],
-      uf: [{value: null, disabled: true}, Validators.required],
+      district: [{ value: null, disabled: true }, Validators.required],
+      city: [{ value: null, disabled: true }, Validators.required],
+      uf: [{ value: null, disabled: true }, Validators.required],
       codeIbge: [null],
     });
   }
@@ -59,7 +60,7 @@ export class ClientsFormComponent implements OnInit {
       },
       error: (err) => {
         console.log(err);
-      }
+      },
     });
   }
 
@@ -76,14 +77,14 @@ export class ClientsFormComponent implements OnInit {
           city: res.localidade,
           uf: res.uf,
           codeIbge: res.ibge,
-        })
+        });
       },
       error: (err) => {
         console.log(err);
-      }
+      },
     });
   }
-  
+
   clearForm() {
     this.clientsForm.reset();
   }
@@ -91,20 +92,26 @@ export class ClientsFormComponent implements OnInit {
   submitForm() {
     this.formSubmited = !this.clientsForm.valid;
 
-    if(!this.clientsForm.valid) return;
+    if (!this.clientsForm.valid) return;
 
     const request = !this.clientId
       ? this.clientsService.createClient(this.clientsForm.getRawValue())
-      : this.clientsService.updateClient(this.clientId, this.clientsForm.getRawValue());
+      : this.clientsService.updateClient(
+          this.clientId,
+          this.clientsForm.getRawValue()
+        );
 
     request.subscribe({
       next: (res) => {
-        alert('Cliente criado/atualizado');
+        this.requestMessageService.show(
+          `Cliente ${this.clientId ? 'atualizado' : 'criado'} com sucesso.`,
+          'success'
+        );
 
         setTimeout(() => {
           this.cancel();
         }, 1500);
-      }
+      },
     });
   }
 
