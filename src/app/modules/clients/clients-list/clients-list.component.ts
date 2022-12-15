@@ -1,4 +1,4 @@
-import { I_Client } from './../../../core/interfaces/user.interface';
+import { I_Client } from '../../../core/interfaces/client.interface';
 import { Router } from '@angular/router';
 import {
   CLIENT_TABLE_COLUMNS,

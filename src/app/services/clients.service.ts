@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BaseHttpService } from './base-http.service';
-import { I_Client } from '../core/interfaces/user.interface';
+import { I_Client } from '../core/interfaces/client.interface';
 
 @Injectable({
   providedIn: 'root',

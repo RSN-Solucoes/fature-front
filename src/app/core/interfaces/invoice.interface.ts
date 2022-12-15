@@ -1,7 +1,7 @@
 import { I_Billing } from "./billing.interface";
 import { I_Payment } from "./payment.interface";
 import { I_InvoiceProduct } from "./product.interface";
-import { I_InvoiceClient } from "./user.interface";
+import { I_InvoiceClient } from "./client.interface";
 
 export interface I_Invoice {
   id?: string;
