@@ -1,5 +1,5 @@
 export interface I_Product {
-  _id?: string;
+  id?: string;
   clientId: string;
   name: string;
   description: string;

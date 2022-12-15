@@ -1,4 +1,4 @@
-import { I_User } from './../core/interfaces/user.interface';
+import { I_Client } from './../core/interfaces/user.interface';
 import { environment } from './../../environments/environment';
 import { Injectable, LOCALE_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -21,11 +21,11 @@ export class ClientsService {
     return this.http.get(`${this.API_BASE}/users`);
   }
 
-  createClient(body: I_User): Observable<any> {
+  createClient(body: I_Client): Observable<any> {
     return this.http.post(`${this.API_BASE}/users`, body);
   }
 
-  updateClient(id: string, body: I_User): Observable<any> {
+  updateClient(id: string, body: I_Client): Observable<any> {
     return this.http.patch(`${this.API_BASE}/users/${id}`, body);
   }
 

@@ -1,6 +1,5 @@
-export interface I_User {
-  _id?: string;
-  clientId: string;
+export interface I_Client {
+  id?: string;
   name: string;
   email: string;
   tel: string;
@@ -15,7 +14,7 @@ export interface I_User {
   codeIbge: string;
 }
 
-export interface I_InvoiceUser {
+export interface I_InvoiceClient {
   id: string;
   name?: string;
   document?: string;
