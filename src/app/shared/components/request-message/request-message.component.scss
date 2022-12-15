@@ -1,0 +1,57 @@
+.request-message {
+  width: 100%;
+  padding: 20px;
+  height: 65px;
+  text-align: center;
+  margin-top: -65px;
+  animation-name: show;
+  animation-duration: 3s;
+
+  span {
+    font-size: 16px;
+    color: #fff;
+  }
+}
+
+.request-message.success {
+  background-color: var(--primary);
+}
+
+.request-message.info {
+  background-color: var(--info);
+}
+
+.request-message.warning {
+  background-color: var(--warning);
+}
+
+.request-message.error {
+  background-color: var(--error);
+}
+
+@keyframes show {
+  0% {
+    margin-top: -65px;
+  }
+  10% {
+    margin-top: 0;
+  }
+  20% {
+    margin-top: 0;
+  }
+  30% {
+    margin-top: 0;
+  }
+  40% {
+    margin-top: 0;
+  }
+  50% {
+    margin-top: 0;
+  }
+  60% {
+    margin-top: 0;
+  }
+  100% {
+    margin-top: -65px;
+  }
+}

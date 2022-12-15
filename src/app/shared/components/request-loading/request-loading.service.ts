@@ -15,6 +15,6 @@ export class RequestLoadingService {
   }
 
   hide() {
-    this.show$.next(false);
+    this.hide$.next(true);
   }
 }

@@ -18,13 +18,13 @@ export class RequestLoadingComponent implements OnInit {
     this.requestLoadingService.show$.subscribe((bool) => {
       this.show.emit(bool);
 
-      this.showProgressBar = bool;
+      this.showProgressBar = true;
     });
 
     this.requestLoadingService.hide$.subscribe((bool) => {
       this.hide.emit(bool);
 
-      this.showProgressBar = bool;
+      this.showProgressBar = false;
     });
   }
 }
