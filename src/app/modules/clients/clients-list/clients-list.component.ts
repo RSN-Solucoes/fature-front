@@ -47,19 +47,18 @@ export class ClientsListComponent implements OnInit {
     this.getClients();
   }
 
-  navigateToClientForm() {
-    this.router.navigate(['painel/clientes/novo'])
-  }
-
   getClients() {
     this.clientsService.getClients().subscribe({
       next: (res) => {
         this.clients = res.data;
       },
       error: (err) => {
-        console.log(err);
       }
     });
+  }
+
+  navigateToClientForm() {
+    this.router.navigate(['painel/clientes/novo'])
   }
 
   editClient(row: any) {
@@ -72,7 +71,6 @@ export class ClientsListComponent implements OnInit {
         alert('Cliente excluído com sucesso!');
       },
       error: (err) => {
-        console.log(err);
       }
     });
   }

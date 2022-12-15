@@ -1,7 +1,7 @@
 <app-navbar>
     <div class="products-services-navbar">
         <a (click)="cancel()"><i class="pi pi-angle-left"></i></a>
-        <span>Novo {{ productForm ? 'produto' : 'serviço' }}</span>
+        <span>{{ !productServiceId ? 'Novo' : 'Atualizar'}} {{ productForm ? 'produto' : 'serviço' }}</span>
     </div>
 </app-navbar>
 
@@ -70,7 +70,7 @@
                 type="button" 
                 class="primary-form-button ml-5"
                 (click)="submitForm()"
-                >Criar {{ productForm ? 'produto' : 'serviço' }}
+                >{{ !productServiceId ? 'Criar' : 'Atualizar'}} {{ productForm ? 'produto' : 'serviço' }}
             </button>
         </div>
     </div>

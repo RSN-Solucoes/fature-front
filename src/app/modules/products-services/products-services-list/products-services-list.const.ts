@@ -11,9 +11,9 @@ export const PRODUCTS_SERVICES_TABLE_COLUMNS = [
     'name',
     'type',
     'description',
-    'value',
+    'price',
     'created_at',
-    'lastChange',
+    'update_at',
   ];
   
   export const PRODUCTS_SERVICES_VALUE_SELECT_LIST = [
@@ -35,5 +35,5 @@ export const PRODUCTS_SERVICES_TABLE_COLUMNS = [
     },
   ];
   
-  export const PRODUCTS_SERVICES_TABLE_PIPES = ['', '', '', ''];
+  export const PRODUCTS_SERVICES_TABLE_PIPES = ['', 'type', '', 'price', 'date', 'date'];
   

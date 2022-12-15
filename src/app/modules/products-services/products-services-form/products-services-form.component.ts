@@ -1,3 +1,4 @@
+import { ProductsServicesService } from './../../../services/products-services.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,10 +14,13 @@ export class ProductsServicesFormComponent implements OnInit {
 
   public productForm!: boolean;
 
+  public productServiceId = this.activatedRoute.snapshot.paramMap.get('id') || '';
+
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
+    private productsServicesService: ProductsServicesService,
   ) { }
 
   ngOnInit(): void {
@@ -29,6 +33,10 @@ export class ProductsServicesFormComponent implements OnInit {
       },
     });
 
+    if(this.productServiceId) {
+      this.getProductService(this.productServiceId);
+    }
+
   }
 
   createForm() {
@@ -38,6 +46,28 @@ export class ProductsServicesFormComponent implements OnInit {
       quantity: [null],
       description: [null],
     })
+  }
+
+  getProductService(id: string) {
+    this.productsServicesService.getProductService(id).subscribe({
+      next: (res) => {
+        this.productForm
+          ? this.productsServicesForm.patchValue({
+            name: res.data.name,
+            price: res.data.price,
+            quantity: res.data.quantity,
+            description: res.data.description,
+          })
+          : this.productsServicesForm.patchValue({
+            name: res.data.name,
+            price: res.data.price,
+            description: res.data.description,
+          })
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 
   submitForm() {
@@ -50,7 +80,21 @@ export class ProductsServicesFormComponent implements OnInit {
     this.productForm ? body = { ...body, type: 'product' }
       : body = { ...body, type: 'service' };
 
-    
+    const request = !this.productServiceId
+      ? this.productsServicesService.createProductService(body)
+      : this.productsServicesService.updateProductService(this.productServiceId, body);
+
+    request.subscribe({
+      next: (res) => {
+        alert('Produto ou serviço criado/atualizado');
+
+        setTimeout(() => {
+          this.cancel();
+        }, 1500);
+      },
+      error: (err) => {
+      }
+    });
   }
 
   clearForm() {

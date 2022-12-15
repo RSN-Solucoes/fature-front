@@ -10,7 +10,7 @@ export class DynamicPipe implements PipeTransform {
     return eval('this.' + modifier + "('" + value + "')");
   }
 
-  tel(value: any) {
+  tel(value: string) {
     const data = value;
     let finalValue = ''
 
@@ -21,10 +21,30 @@ export class DynamicPipe implements PipeTransform {
     return finalValue;
   }
 
-  cep(value: any) {
+  cep(value: string) {
     const data = value;
-    let finalCep = `${data.slice(0,5)}-${data.slice(5,8)}`
+    let finalCep = `${data.slice(0,5)}-${data.slice(5,8)}`;
 
     return finalCep;
+  }
+
+  type(value: string) {
+    let valueTransform = '';
+
+    value === 'product'
+      ? valueTransform = 'Produto'
+      : valueTransform = 'Serviço';
+
+    return valueTransform;
+  }
+
+  price(value: string) {
+    const price = Number(value);
+
+    return price.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'});
+  }
+
+  date(value: string) {
+    return new Date(value).toLocaleDateString();
   }
 }

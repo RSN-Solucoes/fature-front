@@ -54,6 +54,11 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
+    path: 'painel/produtos-e-servicos/:type/editar/:id',
+    component: ProductsServicesFormComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
     path: 'painel/recorrencias',
     component: RecurrenceListComponent,
     canActivate: [AuthGuardService],
