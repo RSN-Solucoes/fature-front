@@ -1,38 +1,40 @@
 import { environment } from './../../environments/environment';
-import { Injectable, LOCALE_ID } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { BaseHttpService } from './base-http.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class ClientsService {
-
+export class ClientsService extends BaseHttpService {
   private API_BASE = environment.API_BASE;
 
-  constructor(private http: HttpClient) { }
+  constructor(http: HttpClient) {
+    super(http);
+  }
 
   getClient(id: string): Observable<any> {
-    return this.http.get(`${this.API_BASE}/users/${id}`);
+    return this.get(`${this.API_BASE}/users/${id}`);
   }
 
   getClients(): Observable<any> {
-    return this.http.get(`${this.API_BASE}/users`);
+    return this.get(`${this.API_BASE}/users`);
   }
 
   createClient(body: any): Observable<any> {
-    return this.http.post(`${this.API_BASE}/users`, body);
+    return this.post(`${this.API_BASE}/users`, body);
   }
 
   updateClient(id: string, body: any): Observable<any> {
-    return this.http.patch(`${this.API_BASE}/users/${id}`, body);
+    return this.patch(`${this.API_BASE}/users/${id}`, body);
   }
 
   deleteClient(id: string): Observable<any> {
-    return this.http.delete(`${this.API_BASE}/users/${id}`);
+    return this.delete(`${this.API_BASE}/users/${id}`);
   }
 
   getUserCEP(cep: string): Observable<any> {
-    return this.http.get(`https://viacep.com.br/ws/${cep}/json/`);
+    return this.get(`https://viacep.com.br/ws/${cep}/json/`);
   }
 }
