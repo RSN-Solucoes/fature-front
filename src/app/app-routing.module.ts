@@ -38,6 +38,11 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
+    path: 'painel/clientes/editar/:id',
+    component: ClientsFormComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
     path: 'painel/produtos-e-servicos',
     component: ProductsServicesListComponent,
     canActivate: [AuthGuardService],

@@ -1,3 +1,4 @@
+import { NgxMaskModule } from 'ngx-mask';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ClientsFormComponent } from './clients-form.component';
@@ -23,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     NoopAnimationsModule,
     NavbarModule,
+    NgxMaskModule,
   ],
   exports: [
     ClientsFormComponent,

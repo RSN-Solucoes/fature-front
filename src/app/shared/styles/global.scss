@@ -62,3 +62,10 @@
     color: darken($color: #1b1b1b, $amount: 5);
   }
 }
+
+label {
+  span {
+    color: #ff0000;
+    font-size: 1.4rem;
+  }  
+}
