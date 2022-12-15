@@ -1,0 +1,77 @@
+<app-navbar>
+    <div class="products-services-navbar">
+        <a (click)="cancel()"><i class="pi pi-angle-left"></i></a>
+        <span>{{ !productServiceId ? 'Novo' : 'Atualizar'}} {{ productForm ? 'produto' : 'serviço' }}</span>
+    </div>
+</app-navbar>
+
+<div class="content">
+    <div class="products-services">
+        <div class="products-services--header">
+            <p>Dados do {{ productForm ? 'produto' : 'serviço' }}</p>
+        </div>
+        <form class="products-services--form my-6 grid" [formGroup]="productsServicesForm">
+            <div class="field col-12 md:col-6">
+                <label for="name">
+                    Nome do
+                    {{ productForm ? 'produto' : 'serviço' }}
+                    <span>*</span>
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  formControlName="name"
+                  pInputText
+                  placeholder="Nome do {{ productForm ? 'produto' : 'serviço' }}"
+                />
+            </div>
+            <div class="field col-12 md:col-3">
+                <label for="price">Valor <span>*</span></label>
+                <p-inputNumber 
+                    mode="currency" 
+                    currency="BRL"
+                    id="price"
+                    formControlName="price"
+                    placeholder="Qual valor do {{ productForm ? 'produto' : 'serviço' }}"
+                ></p-inputNumber>
+            </div>
+            <div *ngIf="productForm" class="field col-12 md:col-3">
+                <label for="quantity">Quantidade no estoque</label>
+                <p-inputNumber 
+                    [min]="1"
+                    [max]="100"
+                    id="quantity"
+                    formControlName="quantity"
+                    placeholder="Unidades disponíveis"
+                    [useGrouping]="false"
+                ></p-inputNumber>
+            </div>
+            <div class="field col-12">
+                <label for="description">Descrição do produto</label>
+                <textarea
+                    [rows]="5" 
+                    [cols]="30" 
+                    pInputTextarea 
+                    [autoResize]="true"
+                    id="description"
+                    formControlName="description"
+                    placeholder="Descreva as caracteristicas do {{ productForm ? 'produto' : 'serviço' }}"
+                ></textarea>
+            </div>
+        </form>
+        <div class="products-services--footer">
+            <button 
+                type="button" 
+                class="secondary-form-button"
+                (click)="clearForm()"
+                >Limpar
+            </button>
+            <button 
+                type="button" 
+                class="primary-form-button ml-5"
+                (click)="submitForm()"
+                >{{ !productServiceId ? 'Criar' : 'Atualizar'}} {{ productForm ? 'produto' : 'serviço' }}
+            </button>
+        </div>
+    </div>
+</div>

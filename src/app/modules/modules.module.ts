@@ -1,4 +1,4 @@
-
+import { ProductsServicesFormModule } from './products-services/products-services-form/products-services-form.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -30,6 +30,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     TransfersModule,
     LoginModule,
     DashboardModule,
+    ProductsServicesFormModule,
   ],
   exports: [],
   providers: [

@@ -1,8 +1,10 @@
+
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BaseHttpService } from './base-http.service';
+import { I_Client } from '../core/interfaces/client.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -22,11 +24,11 @@ export class ClientsService extends BaseHttpService {
     return this.get(`${this.API_BASE}/users`);
   }
 
-  createClient(body: any): Observable<any> {
+  createClient(body: I_Client): Observable<any> {
     return this.post(`${this.API_BASE}/users`, body);
   }
 
-  updateClient(id: string, body: any): Observable<any> {
+  updateClient(id: string, body: I_Client): Observable<any> {
     return this.patch(`${this.API_BASE}/users/${id}`, body);
   }
 

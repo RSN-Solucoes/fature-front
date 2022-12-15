@@ -5,7 +5,9 @@
     </span>
 
     <div class="products-services-navbar--buttons">
-      <a><i class="pi pi-plus"></i></a>
+      <a (click)="dialogDisplay = true">
+        <i class="pi pi-plus"></i>
+      </a>
 
       <a><i class="pi pi-sliders-h"></i></a>
     </div>
@@ -20,4 +22,30 @@
     [actions]="productsServicesActions"
     [value]="productsServices"
   ></app-table>
+
+  <p-dialog 
+    [(visible)]="dialogDisplay" 
+    [modal]="true" 
+    [style]="{width: '450px'}"
+    [draggable]="false"
+    class="dialog">
+    <div class="dialog--header">
+      <p>O que você deseja criar</p>
+    </div>
+
+    <div class="dialog--content grid">
+      <div class="col-12 md:col-6">
+        <a class="dialog--button" (click)="navigateToForm('produto')">
+          <img src="../../../../assets/img/create-product-icon.png" alt="Criar produto">
+          <span>Produto</span> 
+        </a>
+      </div>
+      <div class="col-12 md:col-6">
+        <a class="dialog--button" (click)="navigateToForm('servico')">
+          <img src="../../../../assets/img/create-service-icon.png" alt="Criar serviço">
+          <span>Serviço</span>
+        </a>
+      </div>
+    </div>
+  </p-dialog>
 </div>

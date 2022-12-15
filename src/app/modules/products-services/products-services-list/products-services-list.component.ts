@@ -1,9 +1,11 @@
+import { ProductsServicesService } from './../../../services/products-services.service';
+import { I_Product } from './../../../core/interfaces/product.interface';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   PRODUCTS_SERVICES_TABLE_COLUMNS,
   PRODUCTS_SERVICES_TABLE_FIELDS,
   PRODUCTS_SERVICES_TABLE_PIPES,
-  PRODUCTS_SERVICES_VALUE_SELECT_LIST,
 } from './products-services-list.const';
 
 @Component({
@@ -16,28 +18,66 @@ export class ProductsServicesListComponent implements OnInit {
   public productsServicesFields = PRODUCTS_SERVICES_TABLE_FIELDS;
   public productsServicesPipes = PRODUCTS_SERVICES_TABLE_PIPES;
 
-  public productsServices = PRODUCTS_SERVICES_VALUE_SELECT_LIST;
+  public dialogDisplay: boolean = false;
+
+  public productsServices!: I_Product[];
 
   public productsServicesActions = [
     {
-      label: 'Visualizar',
-      icon: 'pi-eye',
-      action: () => {
-        alert('Visualizar');
+      label: 'Editar',
+      icon: 'pi-pencil',
+      action: (row: any) => {
+        this.editProductService(row);
       },
     },
     {
       label: 'Deletar',
       icon: 'pi-trash',
-      action: () => {
-        alert('Deletar');
+      action: (row: any) => {
+        this.deleteProductService(row);
       },
     },
   ];
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private productsServicesService: ProductsServicesService,
+  ) { }
 
   ngOnInit(): void {
+    this.getProductsServices();
   }
 
+  getProductsServices() {
+    this.productsServicesService.getProductsServices().subscribe({
+      next: (res) => {
+        this.productsServices = res.data;
+        console.log(this.productsServices)
+      },
+      error: (err) => {
+      }
+    });
+  }
+
+  navigateToForm(type: string) {
+    this.router.navigate([`painel/produtos-e-servicos/${type}/novo`]);
+  }
+
+  editProductService(row: any) {
+    this.router.navigate([
+      `painel/produtos-e-servicos/${row.type === 'product'
+        ? 'produto'
+        : 'servico'}/editar/`, row.id
+      ]);
+  }
+
+  deleteProductService(row: any) {
+    this.productsServicesService.deleteProductService(row.id).subscribe({
+      next: (res) => {
+        alert('Produto ou serviço excluído com sucesso!');
+      },
+      error: (err) => {
+      }
+    });
+  }
 }

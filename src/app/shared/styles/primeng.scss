@@ -239,3 +239,15 @@
       padding: .8rem 0;
   }
 }
+
+// Dialog
+
+p-dialog {
+  .p-dialog-header {
+    padding: 1rem !important;
+    .p-dialog-header-close-icon {
+      font-size: 1.4rem;
+      color: var(--black);
+    }
+  }
+}
