@@ -15,7 +15,8 @@ import { AppRoutingModule } from './app-routing.module';
 // Components
 import { AppComponent } from './app.component';
 import { AsideComponent } from './shared/components/aside/aside.component';
-
+import { RequestMessageModule } from './shared/components/request-message/request-message.module';
+import { RequestLoadingModule } from './shared/components/request-loading/request-loading.module';
 
 registerLocaleData(localePt);
 
@@ -27,6 +28,8 @@ registerLocaleData(localePt);
     HttpClientModule,
     SharedModule,
     ModulesModule,
+    RequestMessageModule,
+    RequestLoadingModule,
   ],
   providers: [
     {
