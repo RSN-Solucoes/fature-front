@@ -20,6 +20,6 @@ FullCalendarModule.registerPlugins([
 @NgModule({
   declarations: [TransfersComponent],
   imports: [CommonModule, NavbarModule, ButtonModule, FullCalendarModule],
-  exports: [TransfersComponent],
+  exports: [TransfersComponent, FullCalendarModule],
 })
 export class TransfersModule {}
