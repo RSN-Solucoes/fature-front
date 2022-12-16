@@ -20,6 +20,15 @@ import { RequestLoadingModule } from './shared/components/request-loading/reques
 
 // Full Calendar
 import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import timeGridPlugin from '@fullcalendar/timegrid';
+
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  interactionPlugin,
+  timeGridPlugin,
+]);
 
 registerLocaleData(localePt);
 
@@ -27,13 +36,13 @@ registerLocaleData(localePt);
   declarations: [AppComponent, AsideComponent],
   imports: [
     BrowserModule,
+    FullCalendarModule,
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
     ModulesModule,
     RequestMessageModule,
     RequestLoadingModule,
-    FullCalendarModule,
   ],
   providers: [
     {
