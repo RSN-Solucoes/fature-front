@@ -12,20 +12,14 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
 FullCalendarModule.registerPlugins([
-dayGridPlugin,
-interactionPlugin,
-timeGridPlugin,
+  dayGridPlugin,
+  interactionPlugin,
+  timeGridPlugin,
 ]);
-
 
 @NgModule({
   declarations: [TransfersComponent],
-  imports: [
-    CommonModule,
-    NavbarModule,
-    FullCalendarModule,
-    ButtonModule,
-  ],
-  exports: [TransfersComponent]
+  imports: [CommonModule, NavbarModule, ButtonModule, FullCalendarModule],
+  exports: [TransfersComponent],
 })
-export class TransfersModule { }
+export class TransfersModule {}

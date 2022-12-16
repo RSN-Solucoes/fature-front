@@ -19,16 +19,7 @@ import { RequestMessageModule } from './shared/components/request-message/reques
 import { RequestLoadingModule } from './shared/components/request-loading/request-loading.module';
 
 // Full Calendar
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
-import timeGridPlugin from '@fullcalendar/timegrid';
 import { FullCalendarModule } from '@fullcalendar/angular';
-
-FullCalendarModule.registerPlugins([
-  dayGridPlugin,
-  interactionPlugin,
-  timeGridPlugin,
-]);
 
 registerLocaleData(localePt);
 
