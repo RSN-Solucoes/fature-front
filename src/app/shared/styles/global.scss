@@ -63,6 +63,31 @@
   }
 }
 
+.line-button {
+  width: auto;
+  height: auto;
+  border-radius: 3px;
+  font-size: 1.4rem;
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  color: #000;
+  cursor: pointer;
+}
+
+.line-button:hover {
+  width: auto;
+  height: auto;
+  border-radius: 3px;
+  font-size: 1.4rem;
+  padding: 10px 20px;
+  background-color: var(--line);
+  border: none;
+  color: #000;
+  cursor: pointer;
+  transition: .3s;
+}
+
 label {
   span {
     color: #ff0000;

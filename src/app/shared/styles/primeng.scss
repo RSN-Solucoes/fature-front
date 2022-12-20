@@ -251,3 +251,83 @@ p-dialog {
     }
   }
 }
+
+// Calendar Input
+
+p-calendar {
+  .p-calendar {
+      width: 100%;
+      .p-datepicker-group {
+        .p-datepicker-header {
+          button {
+            span {
+              font-size: 1.4rem;
+            }
+          }
+          .p-datepicker-title {
+            button {
+              font-size: 1.4rem;
+            }
+            button:hover {
+              color: var(--primary) !important;
+            }
+          }
+
+        }
+        .p-datepicker-calendar-container {
+          table {
+            thead {
+              tr>th>span {
+                font-size: 1.2rem;
+              }
+            }
+            tbody {
+              tr>td>span {
+                font-size: 1.2rem;
+              }
+            }
+          }
+        }
+      }
+  }
+}
+
+// Accordion
+
+p-accordion {
+  .p-accordion-tab {
+    padding: 0;
+    border: solid 2px #c2c2c2;
+    margin-bottom: 2rem !important;
+    .p-accordion-header {
+      .p-accordion-header-link {
+        border: none;
+        background: none;
+        height: 48px;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        padding: 4rem;
+        .p-accordion-toggle-icon {
+          font-size: 1.4rem;
+        }
+        .p-accordion-header-text {
+          font-size: 1.6rem;
+          font-weight: bold;
+          color: var(--black);
+        }
+      }
+      .p-accordion-header-link:hover {
+        background: none !important;
+      }
+      .p-accordion-header-link:not(:hover) {
+        background: none !important;
+      }
+    }
+    .p-accordion-content {
+      padding: 2rem 4rem;
+      border: none;
+      display: flex;
+    }
+  }
+}

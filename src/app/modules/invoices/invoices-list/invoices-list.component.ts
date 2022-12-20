@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {
   INVOICES_COLUMNS,
@@ -35,9 +36,15 @@ export class InvoicesListComponent implements OnInit {
     },
   ];
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  navigateToForm() {
+    this.router.navigate(['painel/faturas/novo']);
   }
 
 }

@@ -1,0 +1,431 @@
+<app-navbar>
+    <div class="invoice-navbar">
+      <a (click)="cancel()"><i class="pi pi-angle-left"></i></a>
+      <span>Nova fatura</span>
+    </div>
+</app-navbar>
+
+<div class="content">
+    <div class="invoices client-data">
+        <div class="invoices--header header-title">
+            <p>Dados do cliente</p>
+        </div>
+        <form class="invoices--form my-6 grid" [formGroup]="clientDataForm">
+            <div class="field col-12 md:col-6">
+                <label for="client">Cliente <span>*</span></label>
+                <p-dropdown
+                    [(ngModel)]="selectedClient"
+                    placeholder="Busque pelo nome, CPF ou CNPJ"
+                    [options]="clients"
+                    optionLabel="name"
+                    formControlName="name"
+                    name="client"
+                    filterBy="label"
+                    [filter]="true"
+                    (onChange)="selectClient(userDropdown.value)"
+                    #userDropdown
+                ></p-dropdown>
+            </div>
+            <div class="field col-12 md:col-6">
+                <label for="corporateReason">Razão social</label>
+                <input
+                    type="text"
+                    id="corporateReason"
+                    formControlName="corporateReason"
+                    pInputText
+                    placeholder="Razão social do cliente"
+                />
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="email">E-mail</label>
+                <input
+                    type="email"
+                    id="email"
+                    formControlName="email"
+                    pInputText
+                    placeholder="E-mail para envio"
+                />
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="tel">Contato</label>
+                <input
+                    type="text"
+                    id="tel"
+                    formControlName="tel"
+                    pInputText
+                    placeholder="Telefone ou celular"
+                    mask="(00) 0 0000-0000||(00) 0000-0000"
+                />
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="cep">CEP</label>
+                <input
+                    type="text"
+                    id="cep"
+                    formControlName="cep"
+                    pInputText
+                    placeholder="Digite o CEP de envio"
+                    mask="00000-000"
+                />
+            </div>
+            <div class="field col-8 md:col-6">
+                <label for="address">Logradouro</label>
+                <input
+                    type="text"
+                    id="address"
+                    formControlName="address"
+                    pInputText
+                    placeholder="Rua, avenida..."
+                />
+            </div>
+            <div class="field col-4 md:col-2">
+                <label for="addressNumber">Número</label>
+                <p-inputNumber
+                    placeholder="Número"
+                    id="addressNumber"
+                    formControlName="addressNumber"
+                    [useGrouping]="false"
+                >
+                </p-inputNumber>
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="addressComplement">Complemento</label>
+                <input
+                    type="text"
+                    id="addressComplement"
+                    formControlName="addressComplement"
+                    pInputText
+                    placeholder="Apartamento, bloco..."
+                />
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="district">Bairro</label>
+                <input
+                    type="text"
+                    id="district"
+                    formControlName="district"
+                    pInputText
+                    placeholder="Bairro"
+                />
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="state">Estado</label>
+                <p-dropdown
+                    [options]="ufSelectItems"
+                    optionLabel="name"
+                    optionValue="uf"
+                    placeholder="Estado"
+                    formControlName="uf"
+                    filterBy="name"
+                    [filter]="true"
+                >
+                </p-dropdown>
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="city">Cidade</label>
+                <input
+                    type="text"
+                    id="city"
+                    formControlName="city"
+                    pInputText
+                    placeholder="Cidade"
+                />
+            </div>
+        </form>
+    </div>
+
+    <div class="invoices invoice-product">
+        <div class="invoices--header">
+            <p>Produto da cobrança</p>
+        </div>
+        <form class="invoices--form my-6 grid" [formGroup]="clientDataForm">
+            <div class="field col-6 md:col-8">
+                <label for="client">Produtos <span>*</span></label>
+                <p-dropdown
+                    [(ngModel)]="selectedClient"
+                    [options]="productsServices"
+                    optionLabel="name"
+                    name="client"
+                    formControlName="product"
+                    filterBy="label"
+                    [filter]="true"
+                    placeholder="Busque o produto"
+                    (onChange)="selectClient(userDropdown.value)"
+                    #userDropdown
+                ></p-dropdown>
+            </div>
+            <div class="field col-3 md:col-2">
+                <label for="quantity">Quantidade</label>
+                <p-inputNumber 
+                    [min]="1"
+                    [max]="100"
+                    id="quantity"
+                    placeholder="Quantidade"
+                    [useGrouping]="false"
+                ></p-inputNumber>
+            </div>
+            <div class="field col-3 md:col-2">
+                <label for="price">Valor final</label>
+                <p-inputNumber 
+                    mode="currency" 
+                    currency="BRL"
+                    id="price"
+                    placeholder="R$ 0,00"
+                ></p-inputNumber>
+            </div>
+            <div class="field col-12 invoice-product__new-button mt-4">
+                <button 
+                    type="button" 
+                    class="line-button"
+                    ><i class="pi pi-plus">
+                    </i>Novo Produto
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="invoices invoice-info">
+        <div class="invoices--header">
+            <p>Informações da cobrança</p>
+        </div>
+        <form class="invoices--form my-6 grid">
+            <div class="field col-12 md:col-3">
+                <label for="referringDate">Data referente</label>
+                <p-calendar 
+                    id="referringDate"
+                    formControlName="referringDate"
+                    dateFormat="dd/mm/yy"
+                    placeholder="Escolha a data"
+                ></p-calendar>
+            </div>
+            <div class="field col-12 md:col-3">
+                <label for="dueDate">Data de vencimento</label>
+                <p-calendar 
+                    id="dueDate"
+                    formControlName="dueDate"
+                    dateFormat="dd/mm/yy"
+                    placeholder="Escolha a data"
+                ></p-calendar>
+            </div>
+            <div class="field col-12 md:col-6">
+                <label for="description">Descrição</label>
+                <input
+                    type="description"
+                    id="description"
+                    formControlName="description"
+                    pInputText
+                    placeholder="Razão social do cliente"
+                />
+            </div>
+        </form>
+    </div>
+
+    <div class="invoices payment-method">
+        <div class="invoices--header">
+            <p>Métodos de pagamento</p>
+        </div>
+        <div class="payment-method__buttons my-6 pb-6">
+            <a>
+                <img src="../../../../assets/img/bankslip.png" alt="Boleto">
+                <span>Boleto</span>
+            </a>
+            <a>
+                <img src="../../../../assets/img/credit-card.png" alt="Crédito">
+                <span>Crédito</span>
+            </a>
+            <a>
+                <img src="../../../../assets/img/debit-card.png" alt="Crédito">
+                <span>Débito</span>
+            </a>
+            <a>
+                <img src="../../../../assets/img/pix.png" alt="Crédito">
+                <span>Pix</span>
+            </a>
+            <a>
+                <img src="../../../../assets/img/carnet.png" alt="Crédito">
+                <span>Carnê</span>
+            </a>
+        </div>
+
+        <form class="invoices--form payment-method--carnet-form grid">
+            <div class="carnet-form--header col-12">
+                <span>Configurações do carnê</span>
+                <div class="carnet-form--header__buttons">
+                    <button 
+                        type="button" 
+                        class="line-button"
+                    >
+                        Limpar
+                    </button>
+                    <span>|</span>
+                    <button 
+                        type="button" 
+                        class="line-button"
+                    >
+                        Remover pagamento
+                    </button>
+                </div>
+            </div>
+
+            <div class="field col-12 md:col-6 py-6">
+                <label>Parcelas</label>
+                <p-dropdown
+                    placeholder="Selecione parcelas"
+                    [options]="clients"
+                    optionLabel="name"
+                    filterBy="label"
+                    [filter]="true"
+                ></p-dropdown>
+            </div>
+
+            <div class="carnet-form--discount-fees col-12 grid">
+                <div class="discount col-6">
+                    <div class="header-title">
+                        <p>Descontos</p>
+                    </div>
+                    <div class="discount--fields grid py-6">
+                        <div class="field col-12 md:col-6">
+                            <label for="client">Desconto</label>
+                            <p-dropdown
+                                placeholder="Dia do vencimento"
+                                [options]="clients"
+                                filterBy="label"
+                                [filter]="true"
+                            ></p-dropdown>
+                        </div>
+                        <div class="field col-12 md:col-6">
+                            <label for="price">Valor do desconto</label>
+                            <p-inputNumber 
+                                mode="currency" 
+                                currency="BRL"
+                                id="price"
+                                placeholder="R$ 0,00"
+                            ></p-inputNumber>
+                        </div>
+                    </div>
+                </div>
+                <div class="fees col-6">
+                    <div class="header-title">
+                        <p>Juros e multas</p>
+                    </div>
+                    <div class="fees--fields grid py-6">
+                        <div class="field col-12 md:col-6">
+                            <label for="price">Percentual de multa</label>
+                            <p-inputNumber 
+                                mode="currency" 
+                                currency="BRL"
+                                id="price"
+                                placeholder="R$ 0,00"
+                            ></p-inputNumber>
+                        </div>
+
+                        <div class="field col-12 md:col-6">
+                            <label for="price">Percentual juros (mês)</label>
+                            <p-inputNumber 
+                                mode="currency" 
+                                currency="BRL"
+                                id="price"
+                                placeholder="R$ 0,00"
+                            ></p-inputNumber>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="field col-11">
+                <label for="messages">Mensagens</label>
+                <input
+                    type="messages"
+                    id="messages"
+                    pInputText
+                    placeholder="Escreva uma mensagem no boleto"
+                    #mensagem
+                />
+            </div>
+            <div class="field col-1 message-button mt-6">
+                <a (click)="addMessage(mensagem)"><i class="pi pi-plus"></i></a>
+            </div>
+
+            <div class="field col-12 py-6" *ngIf="messages.length">
+                <table class="message-list">
+                    <thead>
+                    <th>Mensagem</th>
+                    <th style="width: 10%"></th>
+                    </thead>
+            
+                    <tbody>
+                    <tr *ngFor="let message of messages; let i = index">
+                        <td>
+                        {{ message }}
+                        </td>
+            
+                        <td>
+                        <button
+                            pTooltip="Remover"
+                            tooltipPosition="left"
+                            (click)="removeMessage(i)"
+                        >
+                            <i class="pi pi-trash"></i>
+                        </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="carnet-form--installments col-12">
+                <div class="header-title">
+                    <p>Parcelas</p>
+                </div>
+                <div class="installments mt-6">
+                    <!-- <div class="installments-field col-12 p-6">
+                        <div class="installments-field--header">
+                            <span>Parcela 1</span>
+                            <i class="pi pi-chevron-down"></i>
+                        </div>
+                    </div> -->
+                    <p-accordion [multiple]="true">
+                        <p-accordionTab header="Parcela 1">
+                            <div class="field col-6 md:col-3">
+                                <label for="installmentValue">Valor da parcela</label>
+                                <p-inputNumber 
+                                    mode="currency" 
+                                    currency="BRL"
+                                    id="installmentValue"
+                                    placeholder="R$ 0,00"
+                                ></p-inputNumber>
+                            </div>
+                            <div class="field col-6 md:col-3">
+                                <label for="dueDate">Data de vencimento</label>
+                                <p-calendar 
+                                    id="dueDate"
+                                    dateFormat="dd/mm/yy"
+                                    placeholder="Escolha a data"
+                                ></p-calendar>
+                            </div>
+                            <div class="field col-6 md:col-3">
+                                <label for="discountValue">Valor do desconto</label>
+                                <p-inputNumber 
+                                    mode="currency" 
+                                    currency="BRL"
+                                    id="discountValue"
+                                    placeholder="R$ "
+                                ></p-inputNumber>
+                            </div>
+                            <div class="field col-6 md:col-3">
+                                <label for="limitDueDate">Data limite do desconto</label>
+                                <p-calendar 
+                                    id="limitDueDate"
+                                    dateFormat="dd/mm/yy"
+                                    placeholder="Escolha a data"
+                                ></p-calendar>
+                            </div>
+                        </p-accordionTab>
+                    </p-accordion>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
