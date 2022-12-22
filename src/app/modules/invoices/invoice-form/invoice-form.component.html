@@ -1,7 +1,20 @@
 <app-navbar>
     <div class="invoice-navbar">
-      <a (click)="cancel()"><i class="pi pi-angle-left"></i></a>
-      <span>Nova fatura</span>
+        <div class="invoice-navbar__title">
+            <a (click)="cancel()"><i class="pi pi-angle-left"></i></a>
+            <span>Nova fatura</span>
+        </div>
+
+        <div class="invoice-navbar__submit">
+            <button
+                type="button"
+                class="primary-form-button"
+                >
+                <i class="pi pi-plus pr-2">
+                </i>
+                Criar fatura
+            </button>
+        </div>
     </div>
 </app-navbar>
 
@@ -10,7 +23,7 @@
         <div class="invoices--header header-title">
             <p>Dados do cliente</p>
         </div>
-        <form class="invoices--form my-6 grid" [formGroup]="clientDataForm">
+        <form class="invoices--form my-6 grid">
             <div class="field col-12 md:col-6">
                 <label for="client">Cliente <span>*</span></label>
                 <p-dropdown
@@ -18,25 +31,24 @@
                     placeholder="Busque pelo nome, CPF ou CNPJ"
                     [options]="clients"
                     optionLabel="name"
-                    formControlName="name"
                     name="client"
-                    filterBy="label"
+                    filterBy="name"
                     [filter]="true"
-                    (onChange)="selectClient(userDropdown.value)"
-                    #userDropdown
+                    (onChange)="selectClient(clientDropdown.value)"
+                    #clientDropdown
                 ></p-dropdown>
             </div>
-            <div class="field col-12 md:col-6">
+            <div class="field col-12 md:col-6" [formGroup]="clientDataForm">
                 <label for="corporateReason">Razão social</label>
                 <input
                     type="text"
                     id="corporateReason"
-                    formControlName="corporateReason"
+                    formControlName="name"
                     pInputText
                     placeholder="Razão social do cliente"
                 />
             </div>
-            <div class="field col-12 md:col-4">
+            <div class="field col-12 md:col-4" [formGroup]="clientDataForm">
                 <label for="email">E-mail</label>
                 <input
                     type="email"
@@ -46,7 +58,7 @@
                     placeholder="E-mail para envio"
                 />
             </div>
-            <div class="field col-12 md:col-4">
+            <div class="field col-12 md:col-4" [formGroup]="clientDataForm">
                 <label for="tel">Contato</label>
                 <input
                     type="text"
@@ -57,7 +69,7 @@
                     mask="(00) 0 0000-0000||(00) 0000-0000"
                 />
             </div>
-            <div class="field col-12 md:col-4">
+            <div class="field col-12 md:col-4" [formGroup]="clientDataForm">
                 <label for="cep">CEP</label>
                 <input
                     type="text"
@@ -68,7 +80,7 @@
                     mask="00000-000"
                 />
             </div>
-            <div class="field col-8 md:col-6">
+            <div class="field col-8 md:col-6" [formGroup]="clientDataForm">
                 <label for="address">Logradouro</label>
                 <input
                     type="text"
@@ -78,7 +90,7 @@
                     placeholder="Rua, avenida..."
                 />
             </div>
-            <div class="field col-4 md:col-2">
+            <div class="field col-4 md:col-2" [formGroup]="clientDataForm">
                 <label for="addressNumber">Número</label>
                 <p-inputNumber
                     placeholder="Número"
@@ -88,7 +100,7 @@
                 >
                 </p-inputNumber>
             </div>
-            <div class="field col-12 md:col-4">
+            <div class="field col-12 md:col-4" [formGroup]="clientDataForm">
                 <label for="addressComplement">Complemento</label>
                 <input
                     type="text"
@@ -98,7 +110,7 @@
                     placeholder="Apartamento, bloco..."
                 />
             </div>
-            <div class="field col-12 md:col-4">
+            <div class="field col-12 md:col-4" [formGroup]="clientDataForm">
                 <label for="district">Bairro</label>
                 <input
                     type="text"
@@ -108,7 +120,7 @@
                     placeholder="Bairro"
                 />
             </div>
-            <div class="field col-12 md:col-4">
+            <div class="field col-12 md:col-4" [formGroup]="clientDataForm">
                 <label for="state">Estado</label>
                 <p-dropdown
                     [options]="ufSelectItems"
@@ -121,7 +133,7 @@
                 >
                 </p-dropdown>
             </div>
-            <div class="field col-12 md:col-4">
+            <div class="field col-12 md:col-4" [formGroup]="clientDataForm">
                 <label for="city">Cidade</label>
                 <input
                     type="text"
@@ -138,7 +150,7 @@
         <div class="invoices--header">
             <p>Produto da cobrança</p>
         </div>
-        <form class="invoices--form my-6 grid" [formGroup]="clientDataForm">
+        <form class="invoices--form my-6 grid">
             <div class="field col-6 md:col-8">
                 <label for="client">Produtos <span>*</span></label>
                 <p-dropdown
@@ -146,12 +158,11 @@
                     [options]="productsServices"
                     optionLabel="name"
                     name="client"
-                    formControlName="product"
                     filterBy="label"
                     [filter]="true"
                     placeholder="Busque o produto"
-                    (onChange)="selectClient(userDropdown.value)"
-                    #userDropdown
+                    (onChange)="productQuantity.writeValue(undefined)"
+                    #productDropdown
                 ></p-dropdown>
             </div>
             <div class="field col-3 md:col-2">
@@ -162,6 +173,12 @@
                     id="quantity"
                     placeholder="Quantidade"
                     [useGrouping]="false"
+                    (onInput)="calculateProductValue(
+                        productDropdown, 
+                        productQuantity, 
+                        productValue
+                    )"
+                    #productQuantity
                 ></p-inputNumber>
             </div>
             <div class="field col-3 md:col-2">
@@ -171,15 +188,66 @@
                     currency="BRL"
                     id="price"
                     placeholder="R$ 0,00"
+                    [disabled]="true"
+                    #productValue
                 ></p-inputNumber>
             </div>
             <div class="field col-12 invoice-product__new-button mt-4">
                 <button 
                     type="button" 
                     class="line-button"
+                    (click)="addProduct(productDropdown, productQuantity, productValue)"
                     ><i class="pi pi-plus">
                     </i>Novo Produto
                 </button>
+            </div>
+            <div class="field col-12" *ngIf="selectedProducts.length">
+                <div class="products-list">
+                    <table class="item-list-table">
+                        <thead>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Valor</th>
+                        <th>Remover</th>
+                        </thead>
+                
+                        <tbody>
+                        <tr *ngFor="let product of selectedProducts; let i = index">
+                            <td>
+                                {{ product.name }}
+                            </td>
+    
+                            <td>
+                                {{ product.quantity }}
+                            </td>
+    
+                            <td>
+                                {{ product.totalValue }}
+                            </td>
+                
+                            <td>
+                                <button
+                                    pTooltip="Remover"
+                                    tooltipPosition="left"
+                                    (click)="removeProduct(i)"
+                                >
+                                    <i class="pi pi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>Valor total</span>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <span>R$ 250,10</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </form>
     </div>
@@ -188,8 +256,8 @@
         <div class="invoices--header">
             <p>Informações da cobrança</p>
         </div>
-        <form class="invoices--form my-6 grid">
-            <div class="field col-12 md:col-3">
+        <form class="invoices--form my-6 grid" [formGroup]="form">
+            <div class="field col-12 md:col-3" formGroupName="billing">
                 <label for="referringDate">Data referente</label>
                 <p-calendar 
                     id="referringDate"
@@ -198,7 +266,7 @@
                     placeholder="Escolha a data"
                 ></p-calendar>
             </div>
-            <div class="field col-12 md:col-3">
+            <div class="field col-12 md:col-3" formGroupName="billing">
                 <label for="dueDate">Data de vencimento</label>
                 <p-calendar 
                     id="dueDate"
@@ -207,14 +275,14 @@
                     placeholder="Escolha a data"
                 ></p-calendar>
             </div>
-            <div class="field col-12 md:col-6">
-                <label for="description">Descrição</label>
+            <div class="field col-12 md:col-6" formGroupName="billing">
+                <label for="reference">Descrição</label>
                 <input
-                    type="description"
-                    id="description"
-                    formControlName="description"
+                    type="reference"
+                    id="reference"
+                    formControlName="reference"
                     pInputText
-                    placeholder="Razão social do cliente"
+                    placeholder="Descrição"
                 />
             </div>
         </form>
@@ -241,14 +309,17 @@
                 <img src="../../../../assets/img/pix.png" alt="Crédito">
                 <span>Pix</span>
             </a>
-            <a>
+            <a (click)="showPaymentMethodForm('carnet')">
                 <img src="../../../../assets/img/carnet.png" alt="Crédito">
                 <span>Carnê</span>
             </a>
         </div>
 
-        <form class="invoices--form payment-method--carnet-form grid">
-            <div class="carnet-form--header col-12">
+        <form
+            *ngIf="displayForm == 'carnet'"
+            class="invoices--form payment-method--carnet-form grid"
+            [formGroup]="carnetForm"
+            ><div class="carnet-form--header col-12">
                 <span>Configurações do carnê</span>
                 <div class="carnet-form--header__buttons">
                     <button 
@@ -348,7 +419,7 @@
             </div>
 
             <div class="field col-12 py-6" *ngIf="messages.length">
-                <table class="message-list">
+                <table class="item-list-table">
                     <thead>
                     <th>Mensagem</th>
                     <th style="width: 10%"></th>

@@ -1,9 +1,14 @@
+import { ProductsServicesFormComponent } from './../../products-services/products-services-form/products-services-form.component';
+import { I_Client } from './../../../core/interfaces/client.interface';
+import { I_Product } from './../../../core/interfaces/product.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ClientsService } from 'src/app/services/clients.service';
 import { UFS_SELECT_LIST } from 'src/app/shared/constants/ufs.const';
 import { ProductsServicesService } from 'src/app/services/products-services.service';
+import { Dropdown } from 'primeng/dropdown';
+import { InputNumber } from 'primeng/inputnumber';
 
 @Component({
   selector: 'app-invoice-form',
@@ -11,20 +16,26 @@ import { ProductsServicesService } from 'src/app/services/products-services.serv
   styleUrls: ['./invoice-form.component.scss']
 })
 export class InvoiceFormComponent implements OnInit {
-  public clientDataForm!: FormGroup;
+  public form!: FormGroup;
   public formSubmited: boolean = false;
 
   public ufSelectItems: any = UFS_SELECT_LIST;
 
   // Users
-  public clients: any[] = [];
+  public clients: I_Client[] = [];
   public selectedClient!: any;
 
   // Products
-  public productsServices: any[] = [];
+  public productsServices: I_Product[] = [];
+
+  public selectedProducts: any[] = [];
 
   // Forms
+  public clientDataForm!: FormGroup;
+  public productForm!: FormGroup;
   public carnetForm!: FormGroup;
+
+  public displayForm!: string;
 
   // Carnet
   public messages: string[] = [];
@@ -38,16 +49,33 @@ export class InvoiceFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.createClientDataForm();
+    this.createForms();
 
     this.getClients();
     this.getProductsServices();
   }
 
-  createClientDataForm() {
+  createForms() {
+    this.form = this.fb.group({
+      user: this.fb.group({
+        id: [null],
+      }),
+      products: this.fb.array([]),
+      billing: this.fb.group({
+        dueDate: [null],
+        referringDate: [null],
+        reference: [null],
+        amount: [null],
+        bankSlip: [null],
+        creditCard: [null],
+        debitCard: [null],
+        pix: [null],
+        carnet: [null],
+      }),
+    });
+
     this.clientDataForm = this.fb.group({
       name: [null],
-      corporateReason: [null],
       email: [null],
       tel: [null],
       cep: [null],
@@ -57,8 +85,7 @@ export class InvoiceFormComponent implements OnInit {
       district: [null],
       uf: [null],
       city: [null],
-
-      product: [null],
+      id: [null],
     });
 
     this.carnetForm = this.fb.group({
@@ -69,20 +96,14 @@ export class InvoiceFormComponent implements OnInit {
   selectClient(user: any) {
     this.selectedClient = user;
 
-    console.log(this.selectedClient)
-
+    const invoiceForm = this.form.controls['user'] as FormGroup;
+    
     this.clientDataForm.patchValue({
-      name: user.name,
-      corporateReason: user.corporateReason,
-      email: user.email,
-      tel: user.tel,
-      cep: user.cep,
-      address: user.address,
-      addressNumber: user.addressNumber,
-      addressComplement: user.addressComplement,
-      district: user.district,
-      uf: user.uf,
-      city: user.city,
+      ...user,
+    });
+
+    invoiceForm.patchValue({
+      id: this.selectedClient.id,
     });
   }
 
@@ -106,6 +127,46 @@ export class InvoiceFormComponent implements OnInit {
     });
   }
 
+  addProduct(productDropdown: Dropdown, productQuantity: InputNumber, productValue: InputNumber) {
+    if (!productDropdown.value || !productQuantity.value) return;
+    const productsForm = this.form.controls['products'] as FormArray;
+
+    this.selectedProducts.push({
+      ...productDropdown.value,
+      quantity: productQuantity.value,
+      totalValue: productValue.value
+    });
+
+    productsForm.push(
+      this.fb.group({
+        id: productDropdown.value.id,
+        quantity: productQuantity.value,
+      })
+    );
+
+    productDropdown.writeValue(undefined);
+    productQuantity.writeValue(undefined);
+
+    console.log(this.form.getRawValue());
+  }
+
+  removeProduct(index: number) {
+    const product = this.selectedProducts[index];
+    const productsForm = this.form.controls['products'] as FormArray;
+
+    this.selectedProducts.splice(index, 1);
+
+    productsForm.removeAt(index);
+  }
+
+  calculateProductValue(productDropdown: Dropdown, productQuantity: InputNumber, productValue: InputNumber) {
+    if (!productDropdown.value) return;
+
+    let value = productDropdown.value.price * productQuantity.value;
+
+    productValue.writeValue(value)
+  }
+
   addMessage(message: HTMLInputElement) {
     if (!message.value) return;
     if (this.messages.length == 9) return;
@@ -124,6 +185,15 @@ export class InvoiceFormComponent implements OnInit {
     messagesForm.removeAt(index);
 
     this.messages.splice(index, 1);
+  }
+
+  showPaymentMethodForm(paymentMethod: string) {
+    if(this.displayForm == paymentMethod) {
+      this.displayForm = '';
+      return;
+    };
+
+    this.displayForm = paymentMethod;
   }
 
   cancel() {
