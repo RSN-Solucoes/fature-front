@@ -1,3 +1,4 @@
+import { InvoiceService } from './../../../services/invoice.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -17,7 +18,7 @@ export class InvoicesListComponent implements OnInit {
   public invoicesFields = INVOICES_FIELDS;
   public invoicesPipes = INVOICES_PIPES;
 
-  public invoices = INVOICES_VALUE_SELECT_LIST;
+  public invoices!: any[];
 
   public invoicesActions = [
     {
@@ -37,10 +38,23 @@ export class InvoicesListComponent implements OnInit {
   ];
 
   constructor(
-    private router: Router
+    private router: Router,
+    private invoiceService: InvoiceService,
   ) { }
 
   ngOnInit(): void {
+    this.getInvoices();
+  }
+
+  getInvoices() {
+    this.invoiceService.getInvoices().subscribe({
+      next: (res) => {
+        this.invoices = res.data;
+        console.log(this.invoices)
+      },
+      error: (err) => {
+      }
+    });
   }
 
   navigateToForm() {
