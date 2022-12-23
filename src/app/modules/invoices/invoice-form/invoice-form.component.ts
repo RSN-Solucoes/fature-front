@@ -108,7 +108,8 @@ export class InvoiceFormComponent implements OnInit {
   }
 
   getClients() {
-    this.clientsService.getClients().subscribe({
+    const pagination = `page=1&limit=10`;
+    this.clientsService.getClients(pagination).subscribe({
       next: (res) => {
         this.clients = res.data;
       },
@@ -118,7 +119,8 @@ export class InvoiceFormComponent implements OnInit {
   }
 
   getProductsServices() {
-    this.productsServicesService.getProductsServices().subscribe({
+    const pagination = `page=1&limit=10`;
+    this.productsServicesService.getProductsServices(pagination).subscribe({
       next: (res) => {
         this.productsServices = res.data;
       },

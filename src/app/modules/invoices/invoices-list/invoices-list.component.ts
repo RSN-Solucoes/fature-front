@@ -5,7 +5,6 @@ import {
   INVOICES_COLUMNS,
   INVOICES_FIELDS,
   INVOICES_PIPES,
-  INVOICES_VALUE_SELECT_LIST,
 } from './invoices-lis.const';
 
 @Component({
@@ -37,6 +36,9 @@ export class InvoicesListComponent implements OnInit {
     },
   ];
 
+  private pageIndex = 1;
+  private pageLimit = 10;
+
   constructor(
     private router: Router,
     private invoiceService: InvoiceService,
@@ -47,7 +49,8 @@ export class InvoicesListComponent implements OnInit {
   }
 
   getInvoices() {
-    this.invoiceService.getInvoices().subscribe({
+    const pagination = `page=${this.pageIndex}&limit=${this.pageLimit}`;
+    this.invoiceService.getInvoices(pagination).subscribe({
       next: (res) => {
         this.invoices = res.data;
         console.log(this.invoices)

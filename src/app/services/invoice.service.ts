@@ -18,8 +18,8 @@ export class InvoiceService extends BaseHttpService{
     return this.get(`${this.API_BASE}/invoices/${id}`);
   }
 
-  getInvoices(): Observable<any> {
-    return this.get(`${this.API_BASE}/invoices`);
+  getInvoices(pagination: string): Observable<any> {
+    return this.get(`${this.API_BASE}/invoices?${pagination}`);
   }
 
   createInvoice(body: any): Observable<any> {
