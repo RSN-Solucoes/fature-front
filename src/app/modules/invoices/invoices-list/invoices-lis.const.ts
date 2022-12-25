@@ -9,7 +9,7 @@ export const INVOICES_COLUMNS = [
     ];
 
 export const INVOICES_FIELDS = [
-    'user',
+    'user.name',
     'referringDate',
     'dueDate',
     'paymentMethod',

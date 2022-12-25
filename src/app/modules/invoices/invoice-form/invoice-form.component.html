@@ -293,19 +293,19 @@
             <p>Métodos de pagamento</p>
         </div>
         <div class="payment-method__buttons my-6 pb-6">
-            <a>
+            <a (click)="showPaymentMethodForm('bankSlip')">
                 <img src="../../../../assets/img/bankslip.png" alt="Boleto">
                 <span>Boleto</span>
             </a>
-            <a>
+            <a (click)="showPaymentMethodForm('creditCard')">
                 <img src="../../../../assets/img/credit-card.png" alt="Crédito">
                 <span>Crédito</span>
             </a>
-            <a>
+            <a (click)="showPaymentMethodForm('debitCard')">
                 <img src="../../../../assets/img/debit-card.png" alt="Crédito">
                 <span>Débito</span>
             </a>
-            <a>
+            <a (click)="showPaymentMethodForm('pix')">
                 <img src="../../../../assets/img/pix.png" alt="Crédito">
                 <span>Pix</span>
             </a>
@@ -316,12 +316,246 @@
         </div>
 
         <form
+            *ngIf="displayForm == 'bankSlip'"
+            class="invoices--form payment-methods--form bankSlip-form grid"
+            [formGroup]="bankSlipForm"
+            ><div class="form-header col-12">
+                <span>Configurações do boleto</span>
+                <div class="form-header__buttons">
+                    <button 
+                        type="button" 
+                        class="line-button"
+                    >
+                        Limpar
+                    </button>
+                    <span>|</span>
+                    <button 
+                        type="button" 
+                        class="line-button"
+                    >
+                        Remover pagamento
+                    </button>
+                </div>
+            </div>
+
+            <div class="discount col-12">
+                <div class="header-title py-6">
+                    <p>Descontos</p>
+                </div>
+                <div class="discount--fields grid">
+                    <div class="field col-12 md:col-4">
+                        <label>Tipo de valor</label>
+                        <p-dropdown
+                            placeholder="Selecione o tipo"
+                            [options]="clients"
+                            optionLabel="name"
+                            filterBy="label"
+                            [filter]="true"
+                        ></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="price">Valor do desconto</label>
+                        <p-inputNumber 
+                            mode="currency" 
+                            currency="BRL"
+                            id="price"
+                            placeholder="R$ 0,00"
+                        ></p-inputNumber>
+                    </div>
+                    <div class="field col-6 md:col-4">
+                        <label for="dueDate">Data limite do desconto</label>
+                        <p-calendar 
+                            id="dueDate"
+                            dateFormat="dd/mm/yy"
+                            placeholder="Escolha a data"
+                        ></p-calendar>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fees col-12">
+                <div class="header-title py-6">
+                    <p>Juros e multas</p>
+                </div>
+                <div class="fees--fields grid">
+                    <div class="field col-12 md:col-4">
+                        <label for="price">Percentual de multa</label>
+                        <p-inputNumber 
+                            mode="currency" 
+                            currency="BRL"
+                            id="price"
+                            placeholder="R$ 0,00"
+                        ></p-inputNumber>
+                    </div>
+
+                    <div class="field col-12 md:col-4">
+                        <label for="price">Percentual juros (mês)</label>
+                        <p-inputNumber 
+                            mode="currency" 
+                            currency="BRL"
+                            id="price"
+                            placeholder="R$ 0,00"
+                        ></p-inputNumber>
+                    </div>
+                </div>
+            </div>
+            <div class="field col-12">
+                <label for="messages">Mensagens</label>
+                <input
+                    type="messages"
+                    id="messages"
+                    pInputText
+                    placeholder="Escreva uma mensagem no boleto"
+                    #mensagem
+                />
+            </div>
+        </form>
+
+        <form
+            *ngIf="displayForm == 'creditCard'"
+            class="invoices--form payment-methods--form creditCard-form grid"
+            [formGroup]="creditCardForm"
+            ><div class="form-header col-12 pb-6">
+                <span>Configurações do cartão de crédito</span>
+                <div class="form-header__buttons">
+                    <button 
+                        type="button" 
+                        class="line-button"
+                    >
+                        Limpar
+                    </button>
+                    <span>|</span>
+                    <button 
+                        type="button" 
+                        class="line-button"
+                    >
+                        Remover pagamento
+                    </button>
+                </div>
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="invoiceDescription">Descrição da fatura</label>
+                <input
+                    type="text"
+                    id="invoiceDescription"
+                    pInputText
+                    placeholder="Escreva uma mensagem na fatura"
+                    #mensagem
+                />
+            </div>
+            <div class="field col-12 md:col-4">
+                <label>Parcelamento máximo</label>
+                <p-dropdown
+                    placeholder="Selecione o tipo"
+                    [options]="clients"
+                    optionLabel="name"
+                    filterBy="label"
+                    [filter]="true"
+                ></p-dropdown>
+            </div>
+
+            <div class="fees col-12">
+                <div class="header-title py-6">
+                    <p>Juros e multas</p>
+                </div>
+                <div class="fees--fields grid ">
+                    <div class="field col-12 md:col-4">
+                        <label for="price">Percentual juros (mês)</label>
+                        <p-inputNumber 
+                            mode="currency" 
+                            currency="BRL"
+                            id="price"
+                            placeholder="R$ 0,00"
+                        ></p-inputNumber>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <form
+            *ngIf="displayForm == 'debitCard'"
+            class="invoices--form payment-methods--form debitCard-form grid"
+            [formGroup]="debitCardForm"
+            ><div class="form-header col-12 pb-6">
+                <span>Configurações do cartão de débito</span>
+                <div class="form-header__buttons">
+                    <button 
+                        type="button" 
+                        class="line-button"
+                    >
+                        Limpar
+                    </button>
+                    <span>|</span>
+                    <button 
+                        type="button" 
+                        class="line-button"
+                    >
+                        Remover pagamento
+                    </button>
+                </div>
+            </div>
+            <div class="field col-12">
+                <label for="messages">Descrição na fatura</label>
+                <input
+                    type="messages"
+                    id="messages"
+                    pInputText
+                    placeholder="Escreva uma mensagem na fatura"
+                    #mensagem
+                />
+            </div>
+        </form>
+
+        <form
+            *ngIf="displayForm == 'pix'"
+            class="invoices--form payment-methods--form pix-form grid"
+            [formGroup]="pixForm"
+            ><div class="form-header col-12 pb-6">
+                <span>Configurações do pix</span>
+                <div class="form-header__buttons">
+                    <button 
+                        type="button" 
+                        class="line-button"
+                    >
+                        Limpar
+                    </button>
+                    <span>|</span>
+                    <button 
+                        type="button" 
+                        class="line-button"
+                    >
+                        Remover pagamento
+                    </button>
+                </div>
+            </div>
+
+            <div class="field col-6 md:col-3">
+                <label for="dueDate">Data de vencimento</label>
+                <p-calendar 
+                    id="dueDate"
+                    dateFormat="dd/mm/yy"
+                    placeholder="Escolha a data"
+                ></p-calendar>
+            </div>
+            <div class="field col-6 md:col-9">
+                <label for="messages">Descrição da fatura</label>
+                <input
+                    type="messages"
+                    id="messages"
+                    pInputText
+                    placeholder="Escreva uma mensagem na fatura"
+                    #mensagem
+                />
+            </div>
+        </form>
+
+        <form
             *ngIf="displayForm == 'carnet'"
-            class="invoices--form payment-method--carnet-form grid"
+            class="invoices--form payment-methods--form carnet-form grid"
             [formGroup]="carnetForm"
-            ><div class="carnet-form--header col-12">
+            ><div class="form-header col-12">
                 <span>Configurações do carnê</span>
-                <div class="carnet-form--header__buttons">
+                <div class="form-header__buttons">
                     <button 
                         type="button" 
                         class="line-button"
@@ -349,7 +583,7 @@
                 ></p-dropdown>
             </div>
 
-            <div class="carnet-form--discount-fees col-12 grid">
+            <div class="form--discount-fees col-12 grid">
                 <div class="discount col-6">
                     <div class="header-title">
                         <p>Descontos</p>
@@ -389,7 +623,6 @@
                                 placeholder="R$ 0,00"
                             ></p-inputNumber>
                         </div>
-
                         <div class="field col-12 md:col-6">
                             <label for="price">Percentual juros (mês)</label>
                             <p-inputNumber 
@@ -399,7 +632,6 @@
                                 placeholder="R$ 0,00"
                             ></p-inputNumber>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -445,17 +677,11 @@
                 </table>
             </div>
 
-            <div class="carnet-form--installments col-12">
+            <div class="form--installments col-12">
                 <div class="header-title">
                     <p>Parcelas</p>
                 </div>
                 <div class="installments mt-6">
-                    <!-- <div class="installments-field col-12 p-6">
-                        <div class="installments-field--header">
-                            <span>Parcela 1</span>
-                            <i class="pi pi-chevron-down"></i>
-                        </div>
-                    </div> -->
                     <p-accordion [multiple]="true">
                         <p-accordionTab header="Parcela 1">
                             <div class="field col-6 md:col-3">

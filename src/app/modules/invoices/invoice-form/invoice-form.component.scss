@@ -92,15 +92,15 @@
             }
         }
     }
-    .payment-method--carnet-form {
-        .carnet-form--header {
+    .payment-methods--form {
+        .form-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             span {
                 font-size: 1.5rem;
             }
-            .carnet-form--header__buttons {
+            .form-header__buttons {
                 span {
                     margin: 0 1rem;
                     font-size: 1.6rem;
@@ -125,7 +125,7 @@
             }
         }
     }
-    .carnet-form--installments {
+    .form--installments {
         .installments {
             .installments-field {
                 border: solid 2px var(--line);

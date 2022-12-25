@@ -33,6 +33,11 @@ export class InvoiceFormComponent implements OnInit {
   // Forms
   public clientDataForm!: FormGroup;
   public productForm!: FormGroup;
+
+  public bankSlipForm!: FormGroup;
+  public creditCardForm!: FormGroup;
+  public debitCardForm!: FormGroup;
+  public pixForm!: FormGroup;
   public carnetForm!: FormGroup;
 
   public displayForm!: string;
@@ -88,9 +93,25 @@ export class InvoiceFormComponent implements OnInit {
       id: [null],
     });
 
+    this.bankSlipForm = this.fb.group({
+      messages: this.fb.array([]),
+    });
+
+    this.creditCardForm = this.fb.group({
+      messages: this.fb.array([]),
+    });
+
+    this.debitCardForm = this.fb.group({
+      messages: this.fb.array([]),
+    });
+
+    this.pixForm = this.fb.group({
+      messages: this.fb.array([]),
+    });
+
     this.carnetForm = this.fb.group({
       messages: this.fb.array([]),
-    })
+    });
   }
 
   selectClient(user: any) {
