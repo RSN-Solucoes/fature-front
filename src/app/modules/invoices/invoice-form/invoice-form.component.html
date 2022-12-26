@@ -9,6 +9,7 @@
             <button
                 type="button"
                 class="primary-form-button"
+                (click)="submitForm()"
                 >
                 <i class="pi pi-plus pr-2">
                 </i>
@@ -325,6 +326,7 @@
                     <button 
                         type="button" 
                         class="line-button"
+                        (click)="resetForm(bankSlipForm)"
                     >
                         Limpar
                     </button>
@@ -332,69 +334,75 @@
                     <button 
                         type="button" 
                         class="line-button"
+                        
                     >
                         Remover pagamento
                     </button>
                 </div>
             </div>
 
-            <div class="discount col-12">
+            <div class="discount col-12" formGroupName="discount">
                 <div class="header-title py-6">
                     <p>Descontos</p>
                 </div>
                 <div class="discount--fields grid">
                     <div class="field col-12 md:col-4">
-                        <label>Tipo de valor</label>
+                        <label for="mode">Tipo de valor</label>
                         <p-dropdown
-                            placeholder="Selecione o tipo"
-                            [options]="clients"
+                            [options]="discountTypeSelectItems"
+                            id="mode"
                             optionLabel="name"
-                            filterBy="label"
-                            [filter]="true"
+                            optionValue="value"
+                            formControlName="mode"
+                            placeholder="Selecione o tipo"
                         ></p-dropdown>
                     </div>
                     <div class="field col-12 md:col-4">
-                        <label for="price">Valor do desconto</label>
+                        <label for="amount">Valor do desconto</label>
                         <p-inputNumber 
                             mode="currency" 
                             currency="BRL"
-                            id="price"
+                            id="amount"
                             placeholder="R$ 0,00"
+                            formControlName="amount"
                         ></p-inputNumber>
                     </div>
                     <div class="field col-6 md:col-4">
-                        <label for="dueDate">Data limite do desconto</label>
+                        <label for="limitDueDate">Data limite do desconto</label>
                         <p-calendar 
-                            id="dueDate"
+                            id="limitDueDate"
                             dateFormat="dd/mm/yy"
                             placeholder="Escolha a data"
+                            formControlName="dueDate"
                         ></p-calendar>
                     </div>
                 </div>
             </div>
 
-            <div class="fees col-12">
+            <div class="fees col-12" formGroupName="fees">
                 <div class="header-title py-6">
                     <p>Juros e multas</p>
                 </div>
                 <div class="fees--fields grid">
                     <div class="field col-12 md:col-4">
-                        <label for="price">Percentual de multa</label>
+                        <label for="penaltyRate">Percentual de multa</label>
                         <p-inputNumber 
                             mode="currency" 
                             currency="BRL"
-                            id="price"
+                            id="penaltyRate"
                             placeholder="R$ 0,00"
+                            formControlName="penaltyRate"
                         ></p-inputNumber>
                     </div>
 
                     <div class="field col-12 md:col-4">
-                        <label for="price">Percentual juros (mês)</label>
+                        <label for="interestRate">Percentual juros (mês)</label>
                         <p-inputNumber 
                             mode="currency" 
                             currency="BRL"
-                            id="price"
+                            id="interestRate"
                             placeholder="R$ 0,00"
+                            formControlName="interestRate"
                         ></p-inputNumber>
                     </div>
                 </div>
@@ -406,7 +414,7 @@
                     id="messages"
                     pInputText
                     placeholder="Escreva uma mensagem no boleto"
-                    #mensagem
+                    formControlName="messages"
                 />
             </div>
         </form>
@@ -421,6 +429,7 @@
                     <button 
                         type="button" 
                         class="line-button"
+                        (click)="resetForm(creditCardForm)"
                     >
                         Limpar
                     </button>
@@ -440,32 +449,33 @@
                     id="invoiceDescription"
                     pInputText
                     placeholder="Escreva uma mensagem na fatura"
-                    #mensagem
+                    formControlName="description"
                 />
             </div>
             <div class="field col-12 md:col-4">
-                <label>Parcelamento máximo</label>
+                <label for="maxInstallmentsQuantity">Parcelamento máximo</label>
                 <p-dropdown
                     placeholder="Selecione o tipo"
-                    [options]="clients"
+                    [options]="installmentsSelectItems"
+                    id="maxInstallmentsQuantity"
                     optionLabel="name"
-                    filterBy="label"
-                    [filter]="true"
+                    formControlName="maxInstallmentsQuantity"
                 ></p-dropdown>
             </div>
 
-            <div class="fees col-12">
+            <div class="fees col-12" formGroupName="fees">
                 <div class="header-title py-6">
                     <p>Juros e multas</p>
                 </div>
                 <div class="fees--fields grid ">
                     <div class="field col-12 md:col-4">
-                        <label for="price">Percentual juros (mês)</label>
+                        <label for="interestRate">Percentual juros (mês)</label>
                         <p-inputNumber 
                             mode="currency" 
                             currency="BRL"
-                            id="price"
+                            id="interestRate"
                             placeholder="R$ 0,00"
+                            formControlName="interestRate"
                         ></p-inputNumber>
                     </div>
                 </div>
@@ -482,6 +492,7 @@
                     <button 
                         type="button" 
                         class="line-button"
+                        (click)="resetForm(debitCardForm)"
                     >
                         Limpar
                     </button>
@@ -495,13 +506,13 @@
                 </div>
             </div>
             <div class="field col-12">
-                <label for="messages">Descrição na fatura</label>
+                <label for="description">Descrição na fatura</label>
                 <input
-                    type="messages"
-                    id="messages"
+                    type="text"
+                    id="description"
                     pInputText
                     placeholder="Escreva uma mensagem na fatura"
-                    #mensagem
+                    formControlName="description"
                 />
             </div>
         </form>
@@ -516,6 +527,7 @@
                     <button 
                         type="button" 
                         class="line-button"
+                        (click)="resetForm(pixForm)"
                     >
                         Limpar
                     </button>
@@ -530,21 +542,22 @@
             </div>
 
             <div class="field col-6 md:col-3">
-                <label for="dueDate">Data de vencimento</label>
+                <label for="expiration">Data de vencimento</label>
                 <p-calendar 
-                    id="dueDate"
+                    id="expiration"
                     dateFormat="dd/mm/yy"
                     placeholder="Escolha a data"
+                    formControlName="expiration"
                 ></p-calendar>
             </div>
             <div class="field col-6 md:col-9">
-                <label for="messages">Descrição da fatura</label>
+                <label for="description">Descrição da fatura</label>
                 <input
-                    type="messages"
-                    id="messages"
+                    type="text"
+                    id="description"
                     pInputText
                     placeholder="Escreva uma mensagem na fatura"
-                    #mensagem
+                    formControlName="description"
                 />
             </div>
         </form>
@@ -559,6 +572,7 @@
                     <button 
                         type="button" 
                         class="line-button"
+                        (click)="resetForm(carnetForm)"
                     >
                         Limpar
                     </button>
@@ -576,10 +590,8 @@
                 <label>Parcelas</label>
                 <p-dropdown
                     placeholder="Selecione parcelas"
-                    [options]="clients"
+                    [options]="installmentsSelectItems"
                     optionLabel="name"
-                    filterBy="label"
-                    [filter]="true"
                 ></p-dropdown>
             </div>
 
@@ -609,27 +621,29 @@
                         </div>
                     </div>
                 </div>
-                <div class="fees col-6">
+                <div class="fees col-6" formGroupName="fees">
                     <div class="header-title">
                         <p>Juros e multas</p>
                     </div>
                     <div class="fees--fields grid py-6">
                         <div class="field col-12 md:col-6">
-                            <label for="price">Percentual de multa</label>
+                            <label for="carnetPenaltyRate">Percentual de multa</label>
                             <p-inputNumber 
                                 mode="currency" 
                                 currency="BRL"
-                                id="price"
+                                id="carnetPenaltyRate"
                                 placeholder="R$ 0,00"
+                                formControlName="penaltyRate"
                             ></p-inputNumber>
                         </div>
                         <div class="field col-12 md:col-6">
-                            <label for="price">Percentual juros (mês)</label>
+                            <label for="carnetInterestRate">Percentual juros (mês)</label>
                             <p-inputNumber 
                                 mode="currency" 
                                 currency="BRL"
-                                id="price"
+                                id="carnetInterestRate"
                                 placeholder="R$ 0,00"
+                                formControlName="interestRate"
                             ></p-inputNumber>
                         </div>
                     </div>
@@ -722,7 +736,7 @@
                     </p-accordion>
                 </div>
             </div>
-
         </form>
+        
     </div>
 </div>

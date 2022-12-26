@@ -9,6 +9,7 @@ import { UFS_SELECT_LIST } from 'src/app/shared/constants/ufs.const';
 import { ProductsServicesService } from 'src/app/services/products-services.service';
 import { Dropdown } from 'primeng/dropdown';
 import { InputNumber } from 'primeng/inputnumber';
+import { DISCOUNT_TYPE_SELECT_LIST, INSTALLMENTS_SELECT_LIST } from './invoice-form.const';
 
 @Component({
   selector: 'app-invoice-form',
@@ -34,16 +35,22 @@ export class InvoiceFormComponent implements OnInit {
   public clientDataForm!: FormGroup;
   public productForm!: FormGroup;
 
-  public bankSlipForm!: FormGroup;
-  public creditCardForm!: FormGroup;
   public debitCardForm!: FormGroup;
   public pixForm!: FormGroup;
-  public carnetForm!: FormGroup;
-
+  
   public displayForm!: string;
-
+  
   // Carnet
   public messages: string[] = [];
+  public carnetForm!: FormGroup;
+  
+  // BankSlip
+  public bankSlipForm!: FormGroup;
+  public discountTypeSelectItems = DISCOUNT_TYPE_SELECT_LIST;
+  
+  //CreditCard
+  public creditCardForm!: FormGroup;
+  public installmentsSelectItems = INSTALLMENTS_SELECT_LIST;
 
   constructor(
     private router: Router,
@@ -94,23 +101,47 @@ export class InvoiceFormComponent implements OnInit {
     });
 
     this.bankSlipForm = this.fb.group({
-      messages: this.fb.array([]),
+      messages: [null],
+      description: [null],
+      discount: this.fb.group({
+        enabled: [null],
+        mode: [null],
+        amount: [null],
+        dueDate: [null],
+      }),
+      fees: this.fb.group({
+        enabled: [null],
+        penaltyRate: [null],
+        interestRate: [null],
+      })
     });
 
     this.creditCardForm = this.fb.group({
-      messages: this.fb.array([]),
+      description: [null],
+      maxInstallmentsQuantity: [null],
+      fees: this.fb.group({
+        enabled: [null],
+        interestRate: [null],
+      })
     });
 
     this.debitCardForm = this.fb.group({
-      messages: this.fb.array([]),
+      description: [null],
     });
 
     this.pixForm = this.fb.group({
-      messages: this.fb.array([]),
+      expiration: [null],
+      description: [null],
     });
 
     this.carnetForm = this.fb.group({
-      messages: this.fb.array([]),
+      description: [null],
+      fees: this.fb.group({
+        enabled: [null],
+        penaltyRate: [null],
+        interestRate: [null],
+      }),
+      bankSlips: this.fb.array([]),
     });
   }
 
@@ -217,6 +248,14 @@ export class InvoiceFormComponent implements OnInit {
     };
 
     this.displayForm = paymentMethod;
+  }
+
+  resetForm(form: FormGroup) {
+    form.reset();
+  }
+
+  submitForm() {
+    console.log(this.form.getRawValue());
   }
 
   cancel() {
