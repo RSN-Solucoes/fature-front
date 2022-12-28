@@ -92,6 +92,18 @@
             }
         }
     }
+    .payment-method--add-button {
+        a {
+            display: flex;
+            justify-content: center;
+            border: dashed 3px #c2c2c2;
+            padding: 0;
+            i {
+                font-size: 1.6rem;
+                font-weight: bold;
+            }
+        }
+    }
     .payment-methods--form {
         .form-header {
             display: flex;
@@ -122,6 +134,18 @@
                     font-weight: 600;
                     padding: 5px;
                 }
+            }
+        }
+        .qrCode {
+            display: flex;
+            align-items: center;
+            img {
+                height: 110px;
+            }
+            span {
+                margin-left: 2rem;
+                font-size: 1.6rem;
+                font-weight: bolder;
             }
         }
     }

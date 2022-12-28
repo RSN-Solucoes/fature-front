@@ -19,3 +19,31 @@ export const INSTALLMENTS_SELECT_LIST = [
       value: 4,
     },
 ];
+
+export const PAYMENT_METHODS_SELECT_LIST = [
+    {
+        name: 'Boleto',
+        value: 'bankSlip',
+        src: '../../../../assets/img/bankslip.png',
+    },
+    {
+        name: 'Crédito',
+        value: 'creditCard',
+        src: '../../../../assets/img/credit-card.png',
+    },
+    {
+        name: 'Débito',
+        value: 'debitCard',
+        src: '../../../../assets/img/debit-card.png',
+    },
+    {
+        name: 'Pix',
+        value: 'pix',
+        src: '../../../../assets/img/pix.png',
+    },
+    {
+        name: 'Carnê',
+        value: 'carnet',
+        src: '../../../../assets/img/carnet.png',
+    },
+];

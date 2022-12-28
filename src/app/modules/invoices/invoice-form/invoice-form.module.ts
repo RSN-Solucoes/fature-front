@@ -12,6 +12,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule } from 'primeng/calendar';
 import { AccordionModule } from 'primeng/accordion';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @NgModule({
   declarations: [InvoiceFormComponent],
@@ -30,6 +31,7 @@ import { AccordionModule } from 'primeng/accordion';
     NgxMaskModule,
     CalendarModule,
     AccordionModule,
+    OverlayPanelModule,
   ],
   exports: [InvoiceFormComponent],
 })

@@ -9,7 +9,7 @@ import { UFS_SELECT_LIST } from 'src/app/shared/constants/ufs.const';
 import { ProductsServicesService } from 'src/app/services/products-services.service';
 import { Dropdown } from 'primeng/dropdown';
 import { InputNumber } from 'primeng/inputnumber';
-import { DISCOUNT_TYPE_SELECT_LIST, INSTALLMENTS_SELECT_LIST } from './invoice-form.const';
+import { DISCOUNT_TYPE_SELECT_LIST, INSTALLMENTS_SELECT_LIST, PAYMENT_METHODS_SELECT_LIST } from './invoice-form.const';
 
 @Component({
   selector: 'app-invoice-form',
@@ -39,6 +39,9 @@ export class InvoiceFormComponent implements OnInit {
   public pixForm!: FormGroup;
   
   public displayForm!: string;
+
+  public paymentMethods = PAYMENT_METHODS_SELECT_LIST;
+  public selectedMethods: any[] = [];
   
   // Carnet
   public messages: string[] = [];
@@ -78,11 +81,6 @@ export class InvoiceFormComponent implements OnInit {
         referringDate: [null],
         reference: [null],
         amount: [null],
-        bankSlip: [null],
-        creditCard: [null],
-        debitCard: [null],
-        pix: [null],
-        carnet: [null],
       }),
     });
 
@@ -200,8 +198,6 @@ export class InvoiceFormComponent implements OnInit {
 
     productDropdown.writeValue(undefined);
     productQuantity.writeValue(undefined);
-
-    console.log(this.form.getRawValue());
   }
 
   removeProduct(index: number) {
@@ -241,6 +237,29 @@ export class InvoiceFormComponent implements OnInit {
     this.messages.splice(index, 1);
   }
 
+  addPaymentMethod(index: number) {
+    this.selectedMethods.push(this.paymentMethods[index]);
+
+    this.paymentMethods.splice(index, 1);
+  }
+
+  removePaymentMethod(formName: string) {
+    const method = this.selectedMethods.find(el => {
+      return el.value == formName;
+    });
+
+    const index = this.selectedMethods.indexOf(method);
+    
+    this.paymentMethods.push(method);
+    this.selectedMethods.splice(index, 1);
+
+    this.displayForm = '';
+  }
+
+  resetForm(form: FormGroup) {
+    form.reset();
+  }
+
   showPaymentMethodForm(paymentMethod: string) {
     if(this.displayForm == paymentMethod) {
       this.displayForm = '';
@@ -250,12 +269,43 @@ export class InvoiceFormComponent implements OnInit {
     this.displayForm = paymentMethod;
   }
 
-  resetForm(form: FormGroup) {
-    form.reset();
-  }
-
   submitForm() {
-    console.log(this.form.getRawValue());
+    const body = this.form.getRawValue();
+
+    if(this.selectedMethods.length) {
+      this.selectedMethods.forEach(el => {
+        
+        switch(el.value) {
+          case 'bankSlip':
+            body.billing.bankSlip = {
+              ...this.bankSlipForm.getRawValue()
+            }
+            break;
+          case 'creditCard':
+            body.billing.creditCard = {
+              ...this.creditCardForm.getRawValue()
+            }
+            break;
+          case 'debitCard':
+            body.billing.debitCard = {
+              ...this.debitCardForm.getRawValue()
+            }
+            break;
+          case 'pix':
+            body.billing.pix = {
+              ...this.pixForm.getRawValue()
+            }
+            break;
+          case 'carnet':
+            body.billing.carnet = {
+              ...this.carnetForm.getRawValue()
+            }
+            break;
+          }
+        });
+    }
+
+    console.log(body);
   }
 
   cancel() {

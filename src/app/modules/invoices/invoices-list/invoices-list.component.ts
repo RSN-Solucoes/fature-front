@@ -53,7 +53,6 @@ export class InvoicesListComponent implements OnInit {
     this.invoiceService.getInvoices(pagination).subscribe({
       next: (res) => {
         this.invoices = res.data;
-        console.log(this.invoices)
       },
       error: (err) => {
       }

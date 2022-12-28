@@ -294,26 +294,29 @@
             <p>Métodos de pagamento</p>
         </div>
         <div class="payment-method__buttons my-6 pb-6">
-            <a (click)="showPaymentMethodForm('bankSlip')">
-                <img src="../../../../assets/img/bankslip.png" alt="Boleto">
-                <span>Boleto</span>
+            <a
+                *ngFor="let formMethods of selectedMethods; let y = index"
+                (click)="showPaymentMethodForm(formMethods.value)"
+                ><img [src]="formMethods.src" [alt]="formMethods.name">
+                <span>{{ formMethods.name }}</span>
             </a>
-            <a (click)="showPaymentMethodForm('creditCard')">
-                <img src="../../../../assets/img/credit-card.png" alt="Crédito">
-                <span>Crédito</span>
-            </a>
-            <a (click)="showPaymentMethodForm('debitCard')">
-                <img src="../../../../assets/img/debit-card.png" alt="Crédito">
-                <span>Débito</span>
-            </a>
-            <a (click)="showPaymentMethodForm('pix')">
-                <img src="../../../../assets/img/pix.png" alt="Crédito">
-                <span>Pix</span>
-            </a>
-            <a (click)="showPaymentMethodForm('carnet')">
-                <img src="../../../../assets/img/carnet.png" alt="Crédito">
-                <span>Carnê</span>
-            </a>
+
+            <div class="payment-method--add-button">
+                <a *ngIf="paymentMethods.length" (click)="op.toggle($event)">
+                    <i class="pi pi-plus"></i>
+                </a>
+                <p-overlayPanel #op>
+                    <ng-template pTemplate>
+                        <a
+                            *ngFor="let methods of paymentMethods; let j = index"
+                            class="payment-methods"
+                            (click)="addPaymentMethod(j)"
+                            ><img [src]="methods.src" [alt]="methods.name">
+                            <span>{{ methods.name }}</span>
+                        </a>
+                    </ng-template>
+                </p-overlayPanel>
+            </div>
         </div>
 
         <form
@@ -334,7 +337,7 @@
                     <button 
                         type="button" 
                         class="line-button"
-                        
+                        (click)="removePaymentMethod('bankSlip')"
                     >
                         Remover pagamento
                     </button>
@@ -437,6 +440,7 @@
                     <button 
                         type="button" 
                         class="line-button"
+                        (click)="removePaymentMethod('creditCard')"
                     >
                         Remover pagamento
                     </button>
@@ -500,6 +504,7 @@
                     <button 
                         type="button" 
                         class="line-button"
+                        (click)="removePaymentMethod('debitCard')"
                     >
                         Remover pagamento
                     </button>
@@ -535,6 +540,7 @@
                     <button 
                         type="button" 
                         class="line-button"
+                        (click)="removePaymentMethod('pix')"
                     >
                         Remover pagamento
                     </button>
@@ -560,6 +566,13 @@
                     formControlName="description"
                 />
             </div>
+            <div class="field col-12">
+                <label for="description">Código de pagamento</label>
+                <div class="qrCode">
+                    <img src="https://acesso.gov.br/faq/_images/imagem_qrcode_exemplo.jpg" alt="QR">
+                    <span>a98h - 5545 - 8br - 98556oi987hg5</span>
+                </div>
+            </div>
         </form>
 
         <form
@@ -580,6 +593,7 @@
                     <button 
                         type="button" 
                         class="line-button"
+                        (click)="removePaymentMethod('carnet')"
                     >
                         Remover pagamento
                     </button>
