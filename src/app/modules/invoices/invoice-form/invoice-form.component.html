@@ -162,25 +162,25 @@
                     filterBy="label"
                     [filter]="true"
                     placeholder="Busque o produto"
-                    (onChange)="productQuantity.writeValue(undefined)"
+                    (onChange)="productQuantity.value = ''"
                     #productDropdown
                 ></p-dropdown>
             </div>
             <div class="field col-3 md:col-2">
                 <label for="quantity">Quantidade</label>
-                <p-inputNumber 
-                    [min]="1"
-                    [max]="100"
+                <input 
+                    type="text"
+                    pInputText
                     id="quantity"
                     placeholder="Quantidade"
-                    [useGrouping]="false"
-                    (onInput)="calculateProductValue(
+                    (change)="calculateProductValue(
                         productDropdown, 
-                        productQuantity, 
+                        productQuantity,
                         productValue
                     )"
+                    mask="00"
                     #productQuantity
-                ></p-inputNumber>
+                />
             </div>
             <div class="field col-3 md:col-2">
                 <label for="price">Valor final</label>
@@ -310,7 +310,7 @@
                         <a
                             *ngFor="let methods of paymentMethods; let j = index"
                             class="payment-methods"
-                            (click)="addPaymentMethod(j)"
+                            (click)="addPaymentMethod(j, op, methods.value)"
                             ><img [src]="methods.src" [alt]="methods.name">
                             <span>{{ methods.name }}</span>
                         </a>
@@ -410,15 +410,46 @@
                     </div>
                 </div>
             </div>
-            <div class="field col-12">
+
+            <div class="field col-11">
                 <label for="messages">Mensagens</label>
                 <input
-                    type="messages"
+                    type="text"
                     id="messages"
                     pInputText
                     placeholder="Escreva uma mensagem no boleto"
-                    formControlName="messages"
+                    #bankSlipInputMessages
                 />
+            </div>
+            <div class="field col-1 message-button mt-6">
+                <a (click)="addMessage(bankSlipInputMessages, 'bankSlip')"><i class="pi pi-plus"></i></a>
+            </div>
+
+            <div class="field col-12 py-6" *ngIf="bankSlipMessages.length">
+                <table class="item-list-table">
+                    <thead>
+                    <th>Mensagem</th>
+                    <th style="width: 10%"></th>
+                    </thead>
+            
+                    <tbody>
+                    <tr *ngFor="let message of bankSlipMessages; let i = index">
+                        <td>
+                        {{ message }}
+                        </td>
+            
+                        <td>
+                        <button
+                            pTooltip="Remover"
+                            tooltipPosition="left"
+                            (click)="removeMessage(i,'bankSlip')"
+                        >
+                            <i class="pi pi-trash"></i>
+                        </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </form>
 
@@ -606,6 +637,8 @@
                     placeholder="Selecione parcelas"
                     [options]="installmentsSelectItems"
                     optionLabel="name"
+                    optionValue="value"
+                    #installments
                 ></p-dropdown>
             </div>
 
@@ -614,7 +647,7 @@
                     <div class="header-title">
                         <p>Descontos</p>
                     </div>
-                    <div class="discount--fields grid py-6">
+                    <div class="discount--fields grid pt-6">
                         <div class="field col-12 md:col-6">
                             <label for="client">Desconto</label>
                             <p-dropdown
@@ -639,7 +672,7 @@
                     <div class="header-title">
                         <p>Juros e multas</p>
                     </div>
-                    <div class="fees--fields grid py-6">
+                    <div class="fees--fields grid pt-6">
                         <div class="field col-12 md:col-6">
                             <label for="carnetPenaltyRate">Percentual de multa</label>
                             <p-inputNumber 
@@ -664,6 +697,17 @@
                 </div>
             </div>
 
+            <div class="field col-12 md:col-3">
+                <label for="limitDay">Dia limite do desconto</label>
+                <p-inputNumber 
+                    [min]="1"
+                    [max]="31"
+                    [useGrouping]="false"
+                    id="limitDay"
+                    placeholder="Insira o dia"
+                ></p-inputNumber>
+            </div>
+
             <div class="field col-11">
                 <label for="messages">Mensagens</label>
                 <input
@@ -671,14 +715,14 @@
                     id="messages"
                     pInputText
                     placeholder="Escreva uma mensagem no boleto"
-                    #mensagem
+                    #carnetInputMessages
                 />
             </div>
             <div class="field col-1 message-button mt-6">
-                <a (click)="addMessage(mensagem)"><i class="pi pi-plus"></i></a>
+                <a (click)="addMessage(carnetInputMessages, 'carnet')"><i class="pi pi-plus"></i></a>
             </div>
 
-            <div class="field col-12 py-6" *ngIf="messages.length">
+            <div class="field col-12 py-6" *ngIf="carnetMessages.length">
                 <table class="item-list-table">
                     <thead>
                     <th>Mensagem</th>
@@ -686,7 +730,7 @@
                     </thead>
             
                     <tbody>
-                    <tr *ngFor="let message of messages; let i = index">
+                    <tr *ngFor="let message of carnetMessages; let i = index">
                         <td>
                         {{ message }}
                         </td>
@@ -695,7 +739,7 @@
                         <button
                             pTooltip="Remover"
                             tooltipPosition="left"
-                            (click)="removeMessage(i)"
+                            (click)="removeMessage(i, 'carnet')"
                         >
                             <i class="pi pi-trash"></i>
                         </button>

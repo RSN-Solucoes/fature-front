@@ -1,8 +1,7 @@
-import { ProductsServicesFormComponent } from './../../products-services/products-services-form/products-services-form.component';
 import { I_Client } from './../../../core/interfaces/client.interface';
 import { I_Product } from './../../../core/interfaces/product.interface';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ClientsService } from 'src/app/services/clients.service';
 import { UFS_SELECT_LIST } from 'src/app/shared/constants/ufs.const';
@@ -10,13 +9,14 @@ import { ProductsServicesService } from 'src/app/services/products-services.serv
 import { Dropdown } from 'primeng/dropdown';
 import { InputNumber } from 'primeng/inputnumber';
 import { DISCOUNT_TYPE_SELECT_LIST, INSTALLMENTS_SELECT_LIST, PAYMENT_METHODS_SELECT_LIST } from './invoice-form.const';
+import { OverlayPanel } from 'primeng/overlaypanel';
 
 @Component({
   selector: 'app-invoice-form',
   templateUrl: './invoice-form.component.html',
   styleUrls: ['./invoice-form.component.scss']
 })
-export class InvoiceFormComponent implements OnInit {
+export class InvoiceFormComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
   public formSubmited: boolean = false;
 
@@ -28,32 +28,32 @@ export class InvoiceFormComponent implements OnInit {
 
   // Products
   public productsServices: I_Product[] = [];
-
   public selectedProducts: any[] = [];
 
   // Forms
   public clientDataForm!: FormGroup;
-  public productForm!: FormGroup;
-
-  public debitCardForm!: FormGroup;
-  public pixForm!: FormGroup;
-  
   public displayForm!: string;
-
-  public paymentMethods = PAYMENT_METHODS_SELECT_LIST;
+  public paymentMethods: any = PAYMENT_METHODS_SELECT_LIST;
   public selectedMethods: any[] = [];
   
   // Carnet
-  public messages: string[] = [];
   public carnetForm!: FormGroup;
+  public carnetMessages: string[] = [];
   
   // BankSlip
   public bankSlipForm!: FormGroup;
   public discountTypeSelectItems = DISCOUNT_TYPE_SELECT_LIST;
+  public bankSlipMessages: string[] = [];
   
   //CreditCard
   public creditCardForm!: FormGroup;
   public installmentsSelectItems = INSTALLMENTS_SELECT_LIST;
+  
+  //DebitCard
+  public debitCardForm!: FormGroup;
+  
+  //Pix
+  public pixForm!: FormGroup;
 
   constructor(
     private router: Router,
@@ -68,6 +68,12 @@ export class InvoiceFormComponent implements OnInit {
 
     this.getClients();
     this.getProductsServices();
+  }
+
+  ngOnDestroy(): void {
+    this.selectedMethods.forEach(el => {
+      this.paymentMethods.push(el);
+    })
   }
 
   createForms() {
@@ -85,21 +91,21 @@ export class InvoiceFormComponent implements OnInit {
     });
 
     this.clientDataForm = this.fb.group({
-      name: [null],
-      email: [null],
-      tel: [null],
-      cep: [null],
-      address: [null],
-      addressNumber: [null],
-      addressComplement: [null],
-      district: [null],
-      uf: [null],
-      city: [null],
+      name: [{value: null, disabled: true}],
+      email: [{value: null, disabled: true}],
+      tel: [{value: null, disabled: true}],
+      cep: [{value: null, disabled: true}],
+      address: [{value: null, disabled: true}],
+      addressNumber: [{value: null, disabled: true}],
+      addressComplement: [{value: null, disabled: true}],
+      district: [{value: null, disabled: true}],
+      uf: [{value: null, disabled: true}],
+      city: [{value: null, disabled: true}],
       id: [null],
     });
 
     this.bankSlipForm = this.fb.group({
-      messages: [null],
+      messages: this.fb.array([]),
       description: [null],
       discount: this.fb.group({
         enabled: [null],
@@ -134,6 +140,7 @@ export class InvoiceFormComponent implements OnInit {
 
     this.carnetForm = this.fb.group({
       description: [null],
+      messages: this.fb.array([]),
       fees: this.fb.group({
         enabled: [null],
         penaltyRate: [null],
@@ -179,7 +186,7 @@ export class InvoiceFormComponent implements OnInit {
     });
   }
 
-  addProduct(productDropdown: Dropdown, productQuantity: InputNumber, productValue: InputNumber) {
+  addProduct(productDropdown: Dropdown, productQuantity: HTMLInputElement, productValue: InputNumber) {
     if (!productDropdown.value || !productQuantity.value) return;
     const productsForm = this.form.controls['products'] as FormArray;
 
@@ -197,7 +204,8 @@ export class InvoiceFormComponent implements OnInit {
     );
 
     productDropdown.writeValue(undefined);
-    productQuantity.writeValue(undefined);
+    productQuantity.value = '';
+    productValue.writeValue(null);
   }
 
   removeProduct(index: number) {
@@ -209,35 +217,56 @@ export class InvoiceFormComponent implements OnInit {
     productsForm.removeAt(index);
   }
 
-  calculateProductValue(productDropdown: Dropdown, productQuantity: InputNumber, productValue: InputNumber) {
+  calculateProductValue(productDropdown: Dropdown, productQuantity: HTMLInputElement, productValue: InputNumber) {
     if (!productDropdown.value) return;
 
-    let value = productDropdown.value.price * productQuantity.value;
+    let value = productDropdown.value.price * Number(productQuantity.value);
 
     productValue.writeValue(value)
   }
 
-  addMessage(message: HTMLInputElement) {
+  addMessage(message: HTMLInputElement, form: string) {
     if (!message.value) return;
-    if (this.messages.length == 9) return;
 
-    const messagesForm = this.carnetForm.controls['messages'] as FormArray;
+    switch(form) {
+      case 'bankSlip':
+        if (this.bankSlipMessages.length == 9) return;
 
-    messagesForm.push(new FormControl(message));
+        const messagesBankSlipForm = this.bankSlipForm.controls['messages'] as FormArray;
+        messagesBankSlipForm.push(new FormControl(message));
+        this.bankSlipMessages.push(message.value);
+        break;
+      case 'carnet':
+        if (this.carnetMessages.length == 9) return;
 
-    this.messages.push(message.value);
+        const messagesCarnetForm = this.carnetForm.controls['messages'] as FormArray;
+        messagesCarnetForm.push(new FormControl(message));
+        this.carnetMessages.push(message.value);
+        break;
+    }
 
     message.value = '';
   }
 
-  removeMessage(index: number) {
-    const messagesForm = this.carnetForm.controls['messages'] as FormArray;
-    messagesForm.removeAt(index);
-
-    this.messages.splice(index, 1);
+  removeMessage(index: number, form: string) {
+    switch(form) {
+      case 'bankSlip':
+        const messagesBankSlipForm = this.bankSlipForm.controls['messages'] as FormArray;
+        messagesBankSlipForm.removeAt(index);
+        this.bankSlipMessages.splice(index, 1);
+        break;
+      case 'carnet':
+        const messagesCarnetForm = this.carnetForm.controls['messages'] as FormArray;
+        messagesCarnetForm.removeAt(index);
+        this.carnetMessages.splice(index, 1);
+        break;
+    }
   }
 
-  addPaymentMethod(index: number) {
+  addPaymentMethod(index: number, op: OverlayPanel, paymentMethod: string) {
+    op.hide();
+    this.showPaymentMethodForm(paymentMethod);
+
     this.selectedMethods.push(this.paymentMethods[index]);
 
     this.paymentMethods.splice(index, 1);
