@@ -223,7 +223,7 @@
                             </td>
     
                             <td>
-                                {{ product.totalValue }}
+                                {{ product.totalValue | currency:'BRL' }}
                             </td>
                 
                             <td>
@@ -243,7 +243,7 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <span>R$ 250,10</span>
+                                <span>{{ invoiceAmount | currency:'BRL' }}</span>
                             </td>
                         </tr>
                         </tbody>
@@ -638,6 +638,7 @@
                     [options]="installmentsSelectItems"
                     optionLabel="name"
                     optionValue="value"
+                    (onChange)="generateBankSlips(installments)"
                     #installments
                 ></p-dropdown>
             </div>
@@ -649,13 +650,15 @@
                     </div>
                     <div class="discount--fields grid pt-6">
                         <div class="field col-12 md:col-6">
-                            <label for="client">Desconto</label>
-                            <p-dropdown
+                            <label for="limitDay">Dia limite do desconto</label>
+                            <p-inputNumber
                                 placeholder="Dia do vencimento"
-                                [options]="clients"
-                                filterBy="label"
-                                [filter]="true"
-                            ></p-dropdown>
+                                id="limitDay"
+                                [min]="1"
+                                [max]="31"
+                                [useGrouping]="false"
+                                formControlName="discountDue"
+                            ></p-inputNumber>
                         </div>
                         <div class="field col-12 md:col-6">
                             <label for="price">Valor do desconto</label>
@@ -695,17 +698,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="field col-12 md:col-3">
-                <label for="limitDay">Dia limite do desconto</label>
-                <p-inputNumber 
-                    [min]="1"
-                    [max]="31"
-                    [useGrouping]="false"
-                    id="limitDay"
-                    placeholder="Insira o dia"
-                ></p-inputNumber>
             </div>
 
             <div class="field col-11">
@@ -749,13 +741,14 @@
                 </table>
             </div>
 
-            <div class="form--installments col-12">
+            <div class="form--installments col-12 pt-6">
                 <div class="header-title">
                     <p>Parcelas</p>
                 </div>
                 <div class="installments mt-6">
                     <p-accordion [multiple]="true">
-                        <p-accordionTab header="Parcela 1">
+                        <p-accordionTab *ngFor="let bankSlips of carnetBankSlips"
+                            header="Parcela 1">
                             <div class="field col-6 md:col-3">
                                 <label for="installmentValue">Valor da parcela</label>
                                 <p-inputNumber 

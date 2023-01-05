@@ -35,10 +35,12 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   public displayForm!: string;
   public paymentMethods: any = PAYMENT_METHODS_SELECT_LIST;
   public selectedMethods: any[] = [];
+  public invoiceAmount = 0;
   
   // Carnet
   public carnetForm!: FormGroup;
   public carnetMessages: string[] = [];
+  public carnetBankSlips: any[] = [];
   
   // BankSlip
   public bankSlipForm!: FormGroup;
@@ -141,6 +143,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     this.carnetForm = this.fb.group({
       description: [null],
       messages: this.fb.array([]),
+      discountDue: [null],
       fees: this.fb.group({
         enabled: [null],
         penaltyRate: [null],
@@ -203,6 +206,9 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       })
     );
 
+    this.invoiceAmount += productValue.value;
+    this.form.get('billing.amount')?.setValue(this.invoiceAmount);
+
     productDropdown.writeValue(undefined);
     productQuantity.value = '';
     productValue.writeValue(null);
@@ -211,6 +217,9 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   removeProduct(index: number) {
     const product = this.selectedProducts[index];
     const productsForm = this.form.controls['products'] as FormArray;
+
+    this.invoiceAmount -= product.totalValue;
+    this.form.get('billing.amount')?.setValue(this.invoiceAmount);
 
     this.selectedProducts.splice(index, 1);
 
@@ -296,6 +305,59 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     };
 
     this.displayForm = paymentMethod;
+  }
+
+  generateBankSlips(installments: any) {
+    const carnetInstallments = installments.value;
+    const bankSlips = this.carnetForm.controls['bankSlips'] as FormArray;
+
+    const formatCarnetDates = (
+      firstDate: any,
+      totalMonths: number
+    ) => {
+      const dates: any = [];
+
+      for (let i = 0; i < totalMonths; i++) {
+        if (i == 0) dates.push(firstDate.toISOString());
+        else {
+          const tempDate = new Date(firstDate);
+
+          tempDate.setMonth(tempDate.getMonth() + i);
+
+          dates.push(tempDate.toISOString());
+        }
+      }
+      return dates;
+    };
+
+    const bankSlipDueDates = formatCarnetDates(
+      this.form.get('billing.dueDate')?.value,
+      carnetInstallments
+    );
+
+    const discountDueDates = formatCarnetDates(
+      new Date(
+        new Date().getFullYear(),
+        new Date().getMonth(),
+        this.carnetForm.get('discountDue')?.value
+      ),
+      carnetInstallments
+    );
+
+    const bankSlipAmount = this.invoiceAmount / carnetInstallments;
+
+    for(let j = 0; j < carnetInstallments; j++) {
+      this.carnetBankSlips.push({
+        dueDate: bankSlipDueDates[j],
+        amount: bankSlipAmount,
+        discount: {
+          amount: null,
+          discountDue: discountDueDates[j],
+        }
+      });
+    };
+
+    bankSlips.push(new FormControl(this.carnetBankSlips));
   }
 
   submitForm() {
