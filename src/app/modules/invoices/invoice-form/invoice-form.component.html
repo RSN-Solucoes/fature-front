@@ -279,7 +279,7 @@
             <div class="field col-12 md:col-6" formGroupName="billing">
                 <label for="reference">Descrição</label>
                 <input
-                    type="reference"
+                    type="text"
                     id="reference"
                     formControlName="reference"
                     pInputText
@@ -606,8 +606,8 @@
             </div>
         </form>
 
-        <form
-            *ngIf="displayForm == 'carnet'"
+        <ng-container *ngIf="displayForm == 'carnet'">
+            <form
             class="invoices--form payment-methods--form carnet-form grid"
             [formGroup]="carnetForm"
             ><div class="form-header col-12">
@@ -740,54 +740,63 @@
                     </tbody>
                 </table>
             </div>
-
-            <div class="form--installments col-12 pt-6">
-                <div class="header-title">
-                    <p>Parcelas</p>
-                </div>
-                <div class="installments mt-6">
-                    <p-accordion [multiple]="true">
-                        <p-accordionTab *ngFor="let bankSlips of carnetBankSlips"
-                            header="Parcela 1">
-                            <div class="field col-6 md:col-3">
-                                <label for="installmentValue">Valor da parcela</label>
-                                <p-inputNumber 
-                                    mode="currency" 
-                                    currency="BRL"
-                                    id="installmentValue"
-                                    placeholder="R$ 0,00"
-                                ></p-inputNumber>
-                            </div>
-                            <div class="field col-6 md:col-3">
-                                <label for="dueDate">Data de vencimento</label>
-                                <p-calendar 
-                                    id="dueDate"
-                                    dateFormat="dd/mm/yy"
-                                    placeholder="Escolha a data"
-                                ></p-calendar>
-                            </div>
-                            <div class="field col-6 md:col-3">
-                                <label for="discountValue">Valor do desconto</label>
-                                <p-inputNumber 
-                                    mode="currency" 
-                                    currency="BRL"
-                                    id="discountValue"
-                                    placeholder="R$ "
-                                ></p-inputNumber>
-                            </div>
-                            <div class="field col-6 md:col-3">
-                                <label for="limitDueDate">Data limite do desconto</label>
-                                <p-calendar 
-                                    id="limitDueDate"
-                                    dateFormat="dd/mm/yy"
-                                    placeholder="Escolha a data"
-                                ></p-calendar>
-                            </div>
-                        </p-accordionTab>
-                    </p-accordion>
-                </div>
-            </div>
         </form>
+
+        <div class="form--installments col-12 pt-6">
+            <div class="header-title">
+                <p>Parcelas</p>
+            </div>
+            <div class="installments mt-6">
+                <p-accordion [multiple]="true">
+                    <p-accordionTab *ngFor="let bankSlip of carnetBankSlips"
+                        header="Parcela {{ bankSlip.installmentNumber }}">
+                        <div class="field col-6 md:col-3">
+                            <label for="installmentValue">Valor da parcela</label>
+                            <p-inputNumber 
+                                mode="currency" 
+                                currency="BRL"
+                                id="installmentValue"
+                                placeholder="R$ 0,00"
+                                [(ngModel)]="bankSlip.amount"
+                            ></p-inputNumber>
+                        </div>
+                        <div class="field col-6 md:col-3">
+                            <label for="dueDate">Data de vencimento</label>
+                            <p-calendar 
+                                id="dueDate"
+                                dateFormat="dd/mm/yy"
+                                placeholder="Escolha a data"
+                                [(ngModel)]="bankSlip.dueDate"
+                            ></p-calendar>
+                        </div>
+                        <div class="field col-6 md:col-3">
+                            <label for="discountValue">Valor do desconto</label>
+                            <p-inputNumber 
+                                mode="currency" 
+                                currency="BRL"
+                                id="discountValue"
+                                placeholder="R$ "
+                                [(ngModel)]="bankSlip.discount.amount"
+                            ></p-inputNumber>
+                        </div>
+                        <div class="field col-6 md:col-3">
+                            <label for="limitDueDate">Data limite do desconto</label>
+                            <p-calendar 
+                                id="limitDueDate"
+                                dateFormat="dd/mm/yy"
+                                placeholder="Escolha a data"
+                                [(ngModel)]="bankSlip.discount.discountDue"
+                            ></p-calendar>
+                        </div>
+                    </p-accordionTab>
+                </p-accordion>
+            </div>
+        </div>
+        </ng-container>
+
+        
+
+       
         
     </div>
 </div>

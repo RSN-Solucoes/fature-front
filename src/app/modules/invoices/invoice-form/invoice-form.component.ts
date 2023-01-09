@@ -142,7 +142,6 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
 
     this.carnetForm = this.fb.group({
       description: [null],
-      messages: this.fb.array([]),
       discountDue: [null],
       fees: this.fb.group({
         enabled: [null],
@@ -248,8 +247,6 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       case 'carnet':
         if (this.carnetMessages.length == 9) return;
 
-        const messagesCarnetForm = this.carnetForm.controls['messages'] as FormArray;
-        messagesCarnetForm.push(new FormControl(message));
         this.carnetMessages.push(message.value);
         break;
     }
@@ -350,14 +347,22 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       this.carnetBankSlips.push({
         dueDate: bankSlipDueDates[j],
         amount: bankSlipAmount,
+        messages: this.carnetMessages,
         discount: {
-          amount: null,
+          amount: this.carnetForm.get('')?.value,
           discountDue: discountDueDates[j],
         }
       });
     };
 
     bankSlips.push(new FormControl(this.carnetBankSlips));
+
+    // Conversão das datas para os inputs da tela
+    this.carnetBankSlips.map((el, index) => {
+      el.dueDate = new Date(el.dueDate);
+      el.discount.discountDue = new Date(el.discount.discountDue);
+      el.installmentNumber = index + 1;
+    });
   }
 
   submitForm() {
