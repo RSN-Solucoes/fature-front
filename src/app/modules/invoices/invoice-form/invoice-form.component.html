@@ -277,7 +277,7 @@
                 ></p-calendar>
             </div>
             <div class="field col-12 md:col-6" formGroupName="billing">
-                <label for="reference">Descrição</label>
+                <label for="reference">Referência</label>
                 <input
                     type="text"
                     id="reference"
@@ -344,9 +344,28 @@
                 </div>
             </div>
 
+            <div class="field col-12">
+                <label for="description">Descrição</label>
+                <input
+                    type="text"
+                    id="description"
+                    formControlName="description"
+                    pInputText
+                    placeholder="Descrição"
+                />
+            </div>
+
             <div class="discount col-12" formGroupName="discount">
                 <div class="header-title py-6">
                     <p>Descontos</p>
+                    <p-inputSwitch
+                        formControlName="enabled"
+                        (onChange)="toggleSwitchFields(
+                            ['discount.mode','discount.amount','discount.dueDate'],
+                            bankSlipForm.get('discount.enabled')?.value,
+                            bankSlipForm
+                            )"
+                    ></p-inputSwitch>
                 </div>
                 <div class="discount--fields grid">
                     <div class="field col-12 md:col-4">
@@ -385,6 +404,14 @@
             <div class="fees col-12" formGroupName="fees">
                 <div class="header-title py-6">
                     <p>Juros e multas</p>
+                    <p-inputSwitch
+                        formControlName="enabled"
+                        (onChange)="toggleSwitchFields(
+                            ['fees.interestRate','fees.penaltyRate'],
+                            bankSlipForm.get('fees.enabled')?.value,
+                            bankSlipForm
+                            )"
+                    ></p-inputSwitch>
                 </div>
                 <div class="fees--fields grid">
                     <div class="field col-12 md:col-4">
@@ -501,6 +528,14 @@
             <div class="fees col-12" formGroupName="fees">
                 <div class="header-title py-6">
                     <p>Juros e multas</p>
+                    <p-inputSwitch
+                        formControlName="enabled"
+                        (onChange)="toggleSwitchFields(
+                            ['fees.interestRate'],
+                            creditCardForm.get('fees.enabled')?.value,
+                            creditCardForm
+                            )"
+                    ></p-inputSwitch>
                 </div>
                 <div class="fees--fields grid ">
                     <div class="field col-12 md:col-4">
@@ -579,12 +614,12 @@
             </div>
 
             <div class="field col-6 md:col-3">
-                <label for="expiration">Data de vencimento</label>
+                <label for="dueDate">Data de vencimento</label>
                 <p-calendar 
-                    id="expiration"
+                    id="dueDate"
                     dateFormat="dd/mm/yy"
                     placeholder="Escolha a data"
-                    formControlName="expiration"
+                    formControlName="dueDate"
                 ></p-calendar>
             </div>
             <div class="field col-6 md:col-9">
@@ -631,6 +666,17 @@
                 </div>
             </div>
 
+            <div class="field col-12 pt-6">
+                <label for="description">Descrição</label>
+                <input
+                    type="text"
+                    id="description"
+                    formControlName="description"
+                    pInputText
+                    placeholder="Descrição"
+                />
+            </div>
+
             <div class="field col-12 md:col-6 py-6">
                 <label>Parcelas</label>
                 <p-dropdown
@@ -638,7 +684,7 @@
                     [options]="installmentsSelectItems"
                     optionLabel="name"
                     optionValue="value"
-                    (onChange)="generateBankSlips(installments)"
+                    (onChange)="generateBankSlips(installments, discountDue, discountValue)"
                     #installments
                 ></p-dropdown>
             </div>
@@ -647,6 +693,11 @@
                 <div class="discount col-6">
                     <div class="header-title">
                         <p>Descontos</p>
+                        <p-inputSwitch
+                            (onChange)="carnetDiscountEnabled = discountEnable.modelValue"
+                            #discountEnable
+                            class="mr-2"
+                        ></p-inputSwitch>
                     </div>
                     <div class="discount--fields grid pt-6">
                         <div class="field col-12 md:col-6">
@@ -657,7 +708,8 @@
                                 [min]="1"
                                 [max]="31"
                                 [useGrouping]="false"
-                                formControlName="discountDue"
+                                [disabled]="!carnetDiscountEnabled"
+                                #discountDue
                             ></p-inputNumber>
                         </div>
                         <div class="field col-12 md:col-6">
@@ -667,6 +719,8 @@
                                 currency="BRL"
                                 id="price"
                                 placeholder="R$ 0,00"
+                                [disabled]="!carnetDiscountEnabled"
+                                #discountValue
                             ></p-inputNumber>
                         </div>
                     </div>
@@ -674,6 +728,15 @@
                 <div class="fees col-6" formGroupName="fees">
                     <div class="header-title">
                         <p>Juros e multas</p>
+                        <p-inputSwitch
+                            formControlName="enabled"
+                            (onChange)="toggleSwitchFields(
+                                ['fees.penaltyRate', 'fees.interestRate'],
+                                carnetForm.get('fees.enabled')?.value,
+                                carnetForm
+                                )"
+                            class="mr-2"
+                        ></p-inputSwitch>
                     </div>
                     <div class="fees--fields grid pt-6">
                         <div class="field col-12 md:col-6">
@@ -742,7 +805,9 @@
             </div>
         </form>
 
-        <div class="form--installments col-12 pt-6">
+        <div *ngIf="carnetBankSlips.length"
+            class="form--installments col-12 pt-6"
+            >
             <div class="header-title">
                 <p>Parcelas</p>
             </div>
@@ -793,10 +858,5 @@
             </div>
         </div>
         </ng-container>
-
-        
-
-       
-        
     </div>
 </div>

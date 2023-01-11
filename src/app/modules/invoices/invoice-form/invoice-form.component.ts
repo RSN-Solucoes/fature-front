@@ -10,6 +10,7 @@ import { Dropdown } from 'primeng/dropdown';
 import { InputNumber } from 'primeng/inputnumber';
 import { DISCOUNT_TYPE_SELECT_LIST, INSTALLMENTS_SELECT_LIST, PAYMENT_METHODS_SELECT_LIST } from './invoice-form.const';
 import { OverlayPanel } from 'primeng/overlaypanel';
+import { InputSwitch } from 'primeng/inputswitch';
 
 @Component({
   selector: 'app-invoice-form',
@@ -41,6 +42,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   public carnetForm!: FormGroup;
   public carnetMessages: string[] = [];
   public carnetBankSlips: any[] = [];
+  public carnetDiscountEnabled: boolean = false;
   
   // BankSlip
   public bankSlipForm!: FormGroup;
@@ -111,14 +113,14 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       description: [null],
       discount: this.fb.group({
         enabled: [null],
-        mode: [null],
-        amount: [null],
-        dueDate: [null],
+        mode: [{value: null, disabled: true}],
+        amount: [{value: null, disabled: true}],
+        dueDate: [{value: null, disabled: true}],
       }),
       fees: this.fb.group({
         enabled: [null],
-        penaltyRate: [null],
-        interestRate: [null],
+        penaltyRate: [{value: null, disabled: true}],
+        interestRate: [{value: null, disabled: true}],
       })
     });
 
@@ -127,7 +129,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       maxInstallmentsQuantity: [null],
       fees: this.fb.group({
         enabled: [null],
-        interestRate: [null],
+        interestRate: [{value: null, disabled: true}],
       })
     });
 
@@ -136,20 +138,23 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     });
 
     this.pixForm = this.fb.group({
-      expiration: [null],
+      dueDate: [null],
       description: [null],
     });
 
     this.carnetForm = this.fb.group({
       description: [null],
-      discountDue: [null],
       fees: this.fb.group({
         enabled: [null],
-        penaltyRate: [null],
-        interestRate: [null],
+        penaltyRate: [{value: null, disabled: true}],
+        interestRate: [{value: null, disabled: true}],
       }),
       bankSlips: this.fb.array([]),
     });
+  }
+
+  teste() {
+    console.log('funcionou!!')
   }
 
   selectClient(user: any) {
@@ -300,11 +305,14 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       this.displayForm = '';
       return;
     };
+    if(paymentMethod == 'pix') {
+      this.pixForm.get('dueDate')?.setValue(this.form.get('billing.dueDate')?.value);
+    }
 
     this.displayForm = paymentMethod;
   }
 
-  generateBankSlips(installments: any) {
+  generateBankSlips(installments: any, discountDue: InputNumber, discountValue: InputNumber) {
     const carnetInstallments = installments.value;
     const bankSlips = this.carnetForm.controls['bankSlips'] as FormArray;
 
@@ -336,7 +344,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       new Date(
         new Date().getFullYear(),
         new Date().getMonth(),
-        this.carnetForm.get('discountDue')?.value
+        discountDue.value
       ),
       carnetInstallments
     );
@@ -349,7 +357,8 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
         amount: bankSlipAmount,
         messages: this.carnetMessages,
         discount: {
-          amount: this.carnetForm.get('')?.value,
+          enabled: this.carnetDiscountEnabled,
+          amount: discountValue.value,
           discountDue: discountDueDates[j],
         }
       });
@@ -362,6 +371,18 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       el.dueDate = new Date(el.dueDate);
       el.discount.discountDue = new Date(el.discount.discountDue);
       el.installmentNumber = index + 1;
+    });
+  }
+
+  toggleSwitchFields(fields: string[], toggle: boolean, form: FormGroup) {
+    fields.forEach((field) => {
+      if (toggle) {
+        form.get(field)?.enable();
+        form.get(field)?.updateValueAndValidity();
+      } else {
+        form.get(field)?.disable();
+        form.get(field)?.reset();
+      }
     });
   }
 

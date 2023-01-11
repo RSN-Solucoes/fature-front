@@ -355,3 +355,13 @@ p-accordion {
   }
 
 }
+
+// InputSwitch
+
+.p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+  background: var(--primary);
+}
+
+.p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:hover {
+  background: var(--primary) !important;
+}

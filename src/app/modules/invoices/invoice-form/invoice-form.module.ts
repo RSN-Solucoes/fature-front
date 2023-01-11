@@ -13,6 +13,7 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
 import { CalendarModule } from 'primeng/calendar';
 import { AccordionModule } from 'primeng/accordion';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [InvoiceFormComponent],
@@ -32,6 +33,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     CalendarModule,
     AccordionModule,
     OverlayPanelModule,
+    InputSwitchModule,
   ],
   exports: [InvoiceFormComponent],
 })
