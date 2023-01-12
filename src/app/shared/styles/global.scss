@@ -81,11 +81,12 @@
   border-radius: 3px;
   font-size: 1.4rem;
   padding: 10px 20px;
-  background-color: var(--line);
-  border: none;
-  color: #000;
+  background-color: var(--line) !important;
+  border: none !important;
+  color: #000 !important;
   cursor: pointer;
   transition: .3s;
+  text-align: center;
 }
 
 label {
@@ -96,8 +97,9 @@ label {
 }
 
 .item-list-table {
-  border-radius: 10px;
   width: 100%;
+  padding-bottom: 1rem;
+  border-bottom: solid 2px var(--black);
   tbody tr {
     td {
       padding: 1rem 0;

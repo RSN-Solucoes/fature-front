@@ -194,12 +194,14 @@
                 ></p-inputNumber>
             </div>
             <div class="field col-12 invoice-product__new-button mt-4">
-                <button 
+                <button
+                    pButton
                     type="button" 
                     class="line-button"
+                    [disabled]="disabledProductButton"
                     (click)="addProduct(productDropdown, productQuantity, productValue)"
                     ><i class="pi pi-plus">
-                    </i>Novo Produto
+                    </i>Adicionar Produto
                 </button>
             </div>
             <div class="field col-12" *ngIf="selectedProducts.length">
@@ -377,15 +379,30 @@
                             optionValue="value"
                             formControlName="mode"
                             placeholder="Selecione o tipo"
+                            (onChange)="bankSlipForm.get('discount.amount')?.reset()"
                         ></p-dropdown>
                     </div>
-                    <div class="field col-12 md:col-4">
+                    <div *ngIf="bankSlipForm.get('discount.mode')?.value == 'fixed'"
+                        class="field col-12 md:col-4">
                         <label for="amount">Valor do desconto</label>
                         <p-inputNumber 
                             mode="currency" 
                             currency="BRL"
                             id="amount"
                             placeholder="R$ 0,00"
+                            formControlName="amount"
+                        ></p-inputNumber>
+                    </div>
+                    <div *ngIf="bankSlipForm.get('discount.mode')?.value == 'percent'"
+                        class="field col-12 md:col-4">
+                        <label for="amount">Valor do desconto</label>
+                        <p-inputNumber
+                            suffix="%"
+                            id="amount"
+                            [max]="100"
+                            [min]="1"
+                            placeholder="0%"
+                            [maxFractionDigits]="2"
                             formControlName="amount"
                         ></p-inputNumber>
                     </div>
@@ -416,22 +433,25 @@
                 <div class="fees--fields grid">
                     <div class="field col-12 md:col-4">
                         <label for="penaltyRate">Percentual de multa</label>
-                        <p-inputNumber 
-                            mode="currency" 
-                            currency="BRL"
-                            id="penaltyRate"
-                            placeholder="R$ 0,00"
-                            formControlName="penaltyRate"
-                        ></p-inputNumber>
+                            <p-inputNumber
+                                suffix="%"
+                                id="penaltyRate"
+                                [max]="100"
+                                [min]="1"
+                                placeholder="0%"
+                                [maxFractionDigits]="2"
+                                formControlName="penaltyRate"
+                            ></p-inputNumber>
                     </div>
-
                     <div class="field col-12 md:col-4">
                         <label for="interestRate">Percentual juros (mês)</label>
-                        <p-inputNumber 
-                            mode="currency" 
-                            currency="BRL"
+                        <p-inputNumber
+                            suffix="%"
                             id="interestRate"
-                            placeholder="R$ 0,00"
+                            [max]="100"
+                            [min]="1"
+                            placeholder="0%"                            
+                            [maxFractionDigits]="2"
                             formControlName="interestRate"
                         ></p-inputNumber>
                     </div>
@@ -540,11 +560,13 @@
                 <div class="fees--fields grid ">
                     <div class="field col-12 md:col-4">
                         <label for="interestRate">Percentual juros (mês)</label>
-                        <p-inputNumber 
-                            mode="currency" 
-                            currency="BRL"
+                        <p-inputNumber
+                            suffix="%"
                             id="interestRate"
-                            placeholder="R$ 0,00"
+                            [max]="100"
+                            [min]="1"
+                            placeholder="0%"
+                            [maxFractionDigits]="2"
                             formControlName="interestRate"
                         ></p-inputNumber>
                     </div>
@@ -633,8 +655,8 @@
                 />
             </div>
             <div class="field col-12">
-                <label for="description">Código de pagamento</label>
-                <div class="qrCode">
+                <label>Código de pagamento</label>
+                <div class="qrCode pt-2">
                     <img src="https://acesso.gov.br/faq/_images/imagem_qrcode_exemplo.jpg" alt="QR">
                     <span>a98h - 5545 - 8br - 98556oi987hg5</span>
                 </div>
@@ -651,7 +673,7 @@
                     <button 
                         type="button" 
                         class="line-button"
-                        (click)="resetForm(carnetForm)"
+                        (click)="resetForm(carnetForm, [discountEnable, discountDue, discountValue])"
                     >
                         Limpar
                     </button>
@@ -679,14 +701,14 @@
 
             <div class="field col-12 md:col-6 py-6">
                 <label>Parcelas</label>
-                <p-dropdown
+                <input 
+                    type="number"
+                    pInputText
+                    id="installments"
                     placeholder="Selecione parcelas"
-                    [options]="installmentsSelectItems"
-                    optionLabel="name"
-                    optionValue="value"
-                    (onChange)="generateBankSlips(installments, discountDue, discountValue)"
+                    (change)="generateBankSlips(installments, discountDue, discountValue)"   
                     #installments
-                ></p-dropdown>
+                />
             </div>
 
             <div class="form--discount-fees col-12 grid">

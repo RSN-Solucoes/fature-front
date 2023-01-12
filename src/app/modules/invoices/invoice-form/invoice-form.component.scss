@@ -60,6 +60,8 @@
         button {
             height: 48px;
             font-weight: 500;
+            display: flex;
+            justify-content: center;
             i {
                 margin-right: 1rem;
                 font-size: 1.3rem;
@@ -67,7 +69,7 @@
         }
     }
     .products-list {
-        margin: 0 8rem;
+        width: 100%;
     }
 }
 .payment-method {
@@ -143,11 +145,13 @@
             align-items: center;
             img {
                 height: 110px;
+                filter: blur(2px);
             }
             span {
                 margin-left: 2rem;
                 font-size: 1.6rem;
                 font-weight: bolder;
+                filter: blur(2px);
             }
         }
     }

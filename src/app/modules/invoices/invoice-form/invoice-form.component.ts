@@ -10,7 +10,7 @@ import { Dropdown } from 'primeng/dropdown';
 import { InputNumber } from 'primeng/inputnumber';
 import { DISCOUNT_TYPE_SELECT_LIST, INSTALLMENTS_SELECT_LIST, PAYMENT_METHODS_SELECT_LIST } from './invoice-form.const';
 import { OverlayPanel } from 'primeng/overlaypanel';
-import { InputSwitch } from 'primeng/inputswitch';
+import { InputText } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-invoice-form',
@@ -30,6 +30,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   // Products
   public productsServices: I_Product[] = [];
   public selectedProducts: any[] = [];
+  public disabledProductButton: boolean = true;
 
   // Forms
   public clientDataForm!: FormGroup;
@@ -153,10 +154,6 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  teste() {
-    console.log('funcionou!!')
-  }
-
   selectClient(user: any) {
     this.selectedClient = user;
 
@@ -233,6 +230,8 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   calculateProductValue(productDropdown: Dropdown, productQuantity: HTMLInputElement, productValue: InputNumber) {
     if (!productDropdown.value) return;
 
+    this.disabledProductButton = false;
+
     let value = productDropdown.value.price * Number(productQuantity.value);
 
     productValue.writeValue(value)
@@ -267,8 +266,6 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
         this.bankSlipMessages.splice(index, 1);
         break;
       case 'carnet':
-        const messagesCarnetForm = this.carnetForm.controls['messages'] as FormArray;
-        messagesCarnetForm.removeAt(index);
         this.carnetMessages.splice(index, 1);
         break;
     }
@@ -296,7 +293,28 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     this.displayForm = '';
   }
 
-  resetForm(form: FormGroup) {
+  resetForm(form: FormGroup, fields: any[] = []) {
+    switch(form) {
+      case this.bankSlipForm:
+        const messagesBankSlipForm = this.bankSlipForm.controls['messages'] as FormArray;
+
+        messagesBankSlipForm.reset();
+        while(this.bankSlipMessages.length) {
+          this.bankSlipMessages.pop();
+        }
+        break;
+      case this.carnetForm:
+        while(this.carnetMessages.length || this.carnetBankSlips.length) {
+          this.carnetMessages.length ? this.carnetMessages.pop() : this.carnetBankSlips.pop();
+        }
+        fields.forEach(el => {
+          el.writeValue('')
+        });
+
+        this.carnetDiscountEnabled = false;
+        break;
+    }
+
     form.reset();
   }
 
@@ -312,9 +330,11 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     this.displayForm = paymentMethod;
   }
 
-  generateBankSlips(installments: any, discountDue: InputNumber, discountValue: InputNumber) {
-    const carnetInstallments = installments.value;
+  generateBankSlips(installments: HTMLInputElement, discountDue: InputNumber, discountValue: InputNumber) {
+    const carnetInstallments = Number(installments.value);
     const bankSlips = this.carnetForm.controls['bankSlips'] as FormArray;
+
+    
 
     const formatCarnetDates = (
       firstDate: any,
