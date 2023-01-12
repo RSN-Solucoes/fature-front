@@ -38,6 +38,9 @@ export class ClientsListComponent implements OnInit {
     },
   ];
 
+  private pageIndex = 1;
+  private pageLimit = 10;
+
   constructor(
     private router: Router,
     private clientsService: ClientsService,
@@ -48,7 +51,8 @@ export class ClientsListComponent implements OnInit {
   }
 
   getClients() {
-    this.clientsService.getClients().subscribe({
+    const pagination = `page=${this.pageIndex}&limit=${this.pageLimit}`;
+    this.clientsService.getClients(pagination).subscribe({
       next: (res) => {
         this.clients = res.data;
       },

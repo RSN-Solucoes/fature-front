@@ -16,6 +16,7 @@ import { ProductsServicesListModule } from './products-services/products-service
 import { TransfersModule } from './transfers/transfers.module';
 import { LoginModule } from './login/login.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { InvoiceFormModule } from './invoices/invoice-form/invoice-form.module';
 
 @NgModule({
   declarations: [],
@@ -31,6 +32,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     LoginModule,
     DashboardModule,
     ProductsServicesFormModule,
+    InvoiceFormModule,
   ],
   exports: [],
   providers: [

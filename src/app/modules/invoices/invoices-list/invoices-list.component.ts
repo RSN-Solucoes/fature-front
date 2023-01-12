@@ -1,9 +1,10 @@
+import { InvoiceService } from './../../../services/invoice.service';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {
   INVOICES_COLUMNS,
   INVOICES_FIELDS,
   INVOICES_PIPES,
-  INVOICES_VALUE_SELECT_LIST,
 } from './invoices-lis.const';
 
 @Component({
@@ -16,7 +17,7 @@ export class InvoicesListComponent implements OnInit {
   public invoicesFields = INVOICES_FIELDS;
   public invoicesPipes = INVOICES_PIPES;
 
-  public invoices = INVOICES_VALUE_SELECT_LIST;
+  public invoices!: any[];
 
   public invoicesActions = [
     {
@@ -35,9 +36,31 @@ export class InvoicesListComponent implements OnInit {
     },
   ];
 
-  constructor() { }
+  private pageIndex = 1;
+  private pageLimit = 10;
+
+  constructor(
+    private router: Router,
+    private invoiceService: InvoiceService,
+  ) { }
 
   ngOnInit(): void {
+    this.getInvoices();
+  }
+
+  getInvoices() {
+    const pagination = `page=${this.pageIndex}&limit=${this.pageLimit}`;
+    this.invoiceService.getInvoices(pagination).subscribe({
+      next: (res) => {
+        this.invoices = res.data;
+      },
+      error: (err) => {
+      }
+    });
+  }
+
+  navigateToForm() {
+    this.router.navigate(['painel/faturas/novo']);
   }
 
 }

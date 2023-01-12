@@ -17,8 +17,8 @@ export class ProductsServicesService {
     return this.http.get(`${this.API_BASE}/products/${id}`);
   }
 
-  getProductsServices(): Observable<any> {
-    return this.http.get(`${this.API_BASE}/products`);
+  getProductsServices(pagination: string): Observable<any> {
+    return this.http.get(`${this.API_BASE}/products?${pagination}`);
   }
 
   createProductService(body: I_Product): Observable<any> {
