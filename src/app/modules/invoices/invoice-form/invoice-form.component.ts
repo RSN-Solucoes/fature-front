@@ -38,6 +38,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   public paymentMethods: any = PAYMENT_METHODS_SELECT_LIST;
   public selectedMethods: any[] = [];
   public invoiceAmount = 0;
+  public actualDate: Date = new Date();
   
   // Carnet
   public carnetForm!: FormGroup;
@@ -190,6 +191,22 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     });
   }
 
+  getDate() {
+    const date = new Date(
+      this.form.get('billing.dueDate')?.value.getFullYear(),
+      this.form.get('billing.dueDate')?.value.getMonth(),
+      this.form.get('billing.dueDate')?.value.getDate() - 1
+    );
+
+    return date;
+  }
+
+  resetFormFields(fields: string[], form: FormGroup) {
+    fields.forEach(field => {
+      form.get(field)?.reset();
+    });
+  }
+
   addProduct(productDropdown: Dropdown, productQuantity: HTMLInputElement, productValue: InputNumber) {
     if (!productDropdown.value || !productQuantity.value) return;
     const productsForm = this.form.controls['products'] as FormArray;
@@ -331,10 +348,12 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   }
 
   generateBankSlips(installments: HTMLInputElement, discountDue: InputNumber, discountValue: InputNumber) {
+    if(!installments.value || !discountDue.value || !discountValue.value || !this.form.get('billing.dueDate')?.value) {
+      return alert("preencha todos os campos para gerar os boletos!!!");
+      
+    }
     const carnetInstallments = Number(installments.value);
     const bankSlips = this.carnetForm.controls['bankSlips'] as FormArray;
-
-    
 
     const formatCarnetDates = (
       firstDate: any,

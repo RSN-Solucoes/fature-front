@@ -99,10 +99,19 @@ label {
 .item-list-table {
   width: 100%;
   padding-bottom: 1rem;
-  border-bottom: solid 2px var(--black);
+  thead th {
+    padding: 1rem 0;
+    font-size: 1.4rem;
+    text-align: start;
+  }
+  tbody tr:last-of-type {
+    td {
+      border-top: solid 2px #d2d2d2;
+    }
+  }
   tbody tr {
     td {
-      padding: 1rem 0;
+      padding: 1.5rem 0;
       font-size: 1.2rem;
       button {
         background: none;
@@ -123,10 +132,37 @@ label {
       }
     }
   }
+}
 
+.message-list-table {
+  width: 100%;
+  padding-bottom: 1rem;
   thead th {
     padding: 1rem 0;
     font-size: 1.4rem;
     text-align: start;
+  }
+  tbody tr {
+    td {
+      padding: 1.5rem 0;
+      font-size: 1.2rem;
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        i {
+          font-size: 1.4rem;
+        }
+      }
+      button:hover  {
+        i {
+          color: red;
+        }
+      }
+      span {
+        font-size: 1.4rem;
+        font-weight: bold;
+      }
+    }
   }
 }
