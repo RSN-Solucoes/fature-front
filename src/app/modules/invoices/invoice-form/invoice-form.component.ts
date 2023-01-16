@@ -10,7 +10,6 @@ import { Dropdown } from 'primeng/dropdown';
 import { InputNumber } from 'primeng/inputnumber';
 import { DISCOUNT_TYPE_SELECT_LIST, INSTALLMENTS_SELECT_LIST, PAYMENT_METHODS_SELECT_LIST } from './invoice-form.const';
 import { OverlayPanel } from 'primeng/overlaypanel';
-import { InputText } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-invoice-form',
@@ -39,6 +38,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   public selectedMethods: any[] = [];
   public invoiceAmount = 0;
   public actualDate: Date = new Date();
+  public maxDiscountDate: Date = new Date();
   
   // Carnet
   public carnetForm!: FormGroup;
@@ -153,6 +153,14 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       }),
       bankSlips: this.fb.array([]),
     });
+
+    this.form.valueChanges.subscribe({
+      next: (change) => {
+        this.maxDiscountDate.setDate(
+          new Date(change.billing.dueDate).getDate() - 1
+        );
+      },
+    });
   }
 
   selectClient(user: any) {
@@ -189,16 +197,6 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       error: (err) => {
       }
     });
-  }
-
-  getDate() {
-    const date = new Date(
-      this.form.get('billing.dueDate')?.value.getFullYear(),
-      this.form.get('billing.dueDate')?.value.getMonth(),
-      this.form.get('billing.dueDate')?.value.getDate() - 1
-    );
-
-    return date;
   }
 
   resetFormFields(fields: string[], form: FormGroup) {
