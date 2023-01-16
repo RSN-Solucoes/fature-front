@@ -39,6 +39,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   public invoiceAmount = 0;
   public actualDate: Date = new Date();
   public maxDiscountDate: Date = new Date();
+  public emptyDate: Date[] = [];
   
   // Carnet
   public carnetForm!: FormGroup;
@@ -300,6 +301,24 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       return el.value == formName;
     });
 
+    switch (formName) {
+      case 'bankSlip':
+        this.resetForm(this.bankSlipForm);
+        break;
+      case 'creditCard':
+        this.resetForm(this.creditCardForm);
+        break;
+      case 'debitCard':
+        this.resetForm(this.debitCardForm);
+        break;
+      case 'pix':
+        this.resetForm(this.pixForm);
+        break;
+      case 'carnet':
+        this.resetForm(this.carnetForm);
+        break;
+    };
+
     const index = this.selectedMethods.indexOf(method);
     
     this.paymentMethods.push(method);
@@ -346,10 +365,10 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   }
 
   generateBankSlips(installments: HTMLInputElement, discountDue: InputNumber, discountValue: InputNumber) {
-    if(!installments.value || !discountDue.value || !discountValue.value || !this.form.get('billing.dueDate')?.value) {
+    if(!installments.value || !this.form.get('billing.dueDate')?.value) {
       return alert("preencha todos os campos para gerar os boletos!!!");
-      
-    }
+    };
+
     const carnetInstallments = Number(installments.value);
     const bankSlips = this.carnetForm.controls['bankSlips'] as FormArray;
 
@@ -377,14 +396,17 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       carnetInstallments
     );
 
-    const discountDueDates = formatCarnetDates(
-      new Date(
+    const discountDueDates = discountDue.value ? 
+    formatCarnetDates(
+      new Date
+      (
         new Date().getFullYear(),
         new Date().getMonth(),
         discountDue.value
       ),
       carnetInstallments
-    );
+    ) : 
+    null;
 
     const bankSlipAmount = this.invoiceAmount / carnetInstallments;
 
@@ -395,20 +417,29 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
         messages: this.carnetMessages,
         discount: {
           enabled: this.carnetDiscountEnabled,
-          amount: discountValue.value,
-          discountDue: discountDueDates[j],
+          amount: discountValue.value ? discountValue.value : null,
         }
       });
+      if(discountDue.value) {
+        this.emptyDate.push(discountDueDates[j]);
+      };
     };
 
+    
     bankSlips.push(new FormControl(this.carnetBankSlips));
-
+    
     // Conversão das datas para os inputs da tela
     this.carnetBankSlips.map((el, index) => {
       el.dueDate = new Date(el.dueDate);
       el.discount.discountDue = new Date(el.discount.discountDue);
       el.installmentNumber = index + 1;
     });
+
+    if(this.emptyDate.length) {
+      this.emptyDate = this.emptyDate.map((el) => {
+         return new Date(el);
+      });
+    };
   }
 
   toggleSwitchFields(fields: string[], toggle: boolean, form: FormGroup) {

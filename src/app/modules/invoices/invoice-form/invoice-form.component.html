@@ -650,6 +650,7 @@
                     placeholder="Escolha a data"
                     formControlName="dueDate"
                     [minDate]="actualDate"
+                    [defaultDate]="form.get('billing.dueDate')?.value"
                 ></p-calendar>
             </div>
             <div class="field col-6 md:col-9">
@@ -711,7 +712,8 @@
                 <label>Parcelas</label>
                 <div class="field--button">
                     <input 
-                        type="number"
+                        type="text"
+                        mask="00"
                         pInputText
                         id="installments"
                         placeholder="Selecione parcelas"  
@@ -779,21 +781,25 @@
                     <div class="fees--fields grid pt-6">
                         <div class="field col-12 md:col-6">
                             <label for="carnetPenaltyRate">Percentual de multa</label>
-                            <p-inputNumber 
-                                mode="currency" 
-                                currency="BRL"
+                            <p-inputNumber
+                                suffix="%"
                                 id="carnetPenaltyRate"
-                                placeholder="R$ 0,00"
+                                [max]="100"
+                                [min]="1"
+                                placeholder="0%"
+                                [maxFractionDigits]="2"
                                 formControlName="penaltyRate"
                             ></p-inputNumber>
                         </div>
                         <div class="field col-12 md:col-6">
                             <label for="carnetInterestRate">Percentual juros (mês)</label>
-                            <p-inputNumber 
-                                mode="currency" 
-                                currency="BRL"
+                            <p-inputNumber
+                                suffix="%"
                                 id="carnetInterestRate"
-                                placeholder="R$ 0,00"
+                                [max]="100"
+                                [min]="1"
+                                placeholder="0%"
+                                [maxFractionDigits]="2"
                                 formControlName="interestRate"
                             ></p-inputNumber>
                         </div>
@@ -851,7 +857,7 @@
             </div>
             <div class="installments mt-6">
                 <p-accordion [multiple]="true">
-                    <p-accordionTab *ngFor="let bankSlip of carnetBankSlips"
+                    <p-accordionTab *ngFor="let bankSlip of carnetBankSlips;let w = index"
                         header="Parcela {{ bankSlip.installmentNumber }}">
                         <div class="field col-6 md:col-3">
                             <label for="installmentValue">Valor da parcela</label>
@@ -888,7 +894,7 @@
                                 id="limitDueDate"
                                 dateFormat="dd/mm/yy"
                                 placeholder="Escolha a data"
-                                [(ngModel)]="bankSlip.discount.discountDue"
+                                [(ngModel)]="emptyDate[w]"
                             ></p-calendar>
                         </div>
                     </p-accordionTab>
