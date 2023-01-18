@@ -388,7 +388,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
           dates.push(tempDate.toISOString());
         }
       }
-      return dates;
+      return dates
     };
 
     const bankSlipDueDates = formatCarnetDates(
@@ -408,7 +408,11 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     ) : 
     null;
 
+    console.log(bankSlipDueDates)
+
     const bankSlipAmount = this.invoiceAmount / carnetInstallments;
+
+    const carnetFormBankSlips = [];
 
     for(let j = 0; j < carnetInstallments; j++) {
       this.carnetBankSlips.push({
@@ -423,8 +427,8 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       if(discountDue.value) {
         this.emptyDate.push(discountDueDates[j]);
       };
+      this.carnetBankSlips[j].discount.discountDue = this.emptyDate[j];
     };
-
     
     bankSlips.push(new FormControl(this.carnetBankSlips));
     
@@ -488,7 +492,15 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
             break;
           }
         });
-    }
+    };
+
+    // Conversão da data para ISOString
+    body.billing.dueDate = body.billing.dueDate.toISOString();
+    body.billing.referringDate = body.billing.referringDate.toISOString();
+    if (body.billing.bankSlip?.discount?.dueDate ) {
+      body.billing.bankSlip.discount.dueDate = body.billing.bankSlip.discount.dueDate.toISOString();
+    };
+    if (body.billing.pix) body.billing.pix.dueDate = body.billing.pix.dueDate.toISOString();
 
     console.log(body);
   }
