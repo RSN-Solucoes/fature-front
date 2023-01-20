@@ -10,6 +10,7 @@ import { Dropdown } from 'primeng/dropdown';
 import { InputNumber } from 'primeng/inputnumber';
 import { DISCOUNT_TYPE_SELECT_LIST, INSTALLMENTS_SELECT_LIST, PAYMENT_METHODS_SELECT_LIST } from './invoice-form.const';
 import { OverlayPanel } from 'primeng/overlaypanel';
+import { InvoiceService } from 'src/app/services/invoice.service';
 
 @Component({
   selector: 'app-invoice-form',
@@ -67,6 +68,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private clientsService: ClientsService,
+    private invoiceService: InvoiceService,
     private productsServicesService: ProductsServicesService,
   ) { }
 
@@ -115,13 +117,13 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       messages: this.fb.array([]),
       description: [null],
       discount: this.fb.group({
-        enabled: [null],
+        enabled: [false],
         mode: [{value: null, disabled: true}],
         amount: [{value: null, disabled: true}],
         dueDate: [{value: null, disabled: true}],
       }),
       fees: this.fb.group({
-        enabled: [null],
+        enabled: [false],
         penaltyRate: [{value: null, disabled: true}],
         interestRate: [{value: null, disabled: true}],
       })
@@ -131,7 +133,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       description: [null],
       maxInstallmentsQuantity: [null],
       fees: this.fb.group({
-        enabled: [null],
+        enabled: [false],
         interestRate: [{value: null, disabled: true}],
       })
     });
@@ -148,7 +150,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     this.carnetForm = this.fb.group({
       description: [null],
       fees: this.fb.group({
-        enabled: [null],
+        enabled: [false],
         penaltyRate: [{value: null, disabled: true}],
         interestRate: [{value: null, disabled: true}],
       }),
@@ -408,11 +410,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     ) : 
     null;
 
-    console.log(bankSlipDueDates)
-
     const bankSlipAmount = this.invoiceAmount / carnetInstallments;
-
-    const carnetFormBankSlips = [];
 
     for(let j = 0; j < carnetInstallments; j++) {
       this.carnetBankSlips.push({
@@ -430,7 +428,9 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       this.carnetBankSlips[j].discount.discountDue = this.emptyDate[j];
     };
     
-    bankSlips.push(new FormControl(this.carnetBankSlips));
+    this.carnetBankSlips.forEach(el => {
+      bankSlips.push(new FormControl(el));
+    });
     
     // Conversão das datas para os inputs da tela
     this.carnetBankSlips.map((el, index) => {
@@ -501,6 +501,30 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       body.billing.bankSlip.discount.dueDate = body.billing.bankSlip.discount.dueDate.toISOString();
     };
     if (body.billing.pix) body.billing.pix.dueDate = body.billing.pix.dueDate.toISOString();
+
+    if(body.billing.carnet?.bankSlips.length > 0) {
+      for(let i = 0; body.billing.carnet.bankSlips.length > i; i++) {
+        body.billing.carnet.bankSlips[i].dueDate = 
+        body.billing.carnet.bankSlips[i].dueDate.toISOString();
+        if(
+          body.billing.carnet.bankSlips[i].discount.discountDue instanceof Date && 
+          !isNaN(body.billing.carnet.bankSlips[i].discount.discountDue)
+        ) {
+          body.billing.carnet.bankSlips[i].discount.discountDue = 
+          body.billing.carnet?.bankSlips[i].discount.discountDue.toISOString();
+        }
+      }
+    };
+    // Fim Conversão das datas
+
+    this.invoiceService.createInvoice(body).subscribe({
+      next: (res) => {
+        alert("Fatura cadastrada com sucesso!");
+      },
+      error: (err) => {
+        console.log(err.message.error);
+      }
+    });
 
     console.log(body);
   }

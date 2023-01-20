@@ -17,7 +17,7 @@ export class InvoicesListComponent implements OnInit {
   public invoicesFields = INVOICES_FIELDS;
   public invoicesPipes = INVOICES_PIPES;
 
-  public invoices!: any[];
+  public invoices: any[] = [];
 
   public invoicesActions = [
     {
@@ -48,11 +48,45 @@ export class InvoicesListComponent implements OnInit {
     this.getInvoices();
   }
 
+  transformPaymentMethods(invoice: any) {
+    const methods: string[] = [];
+
+    if (invoice.billing.bankSlip) {
+      methods.push('Boleto');
+    }
+    if (invoice.billing.carnet) {
+      methods.push('Carnê');
+    }
+    if (invoice.billing.creditCard) {
+      methods.push('Cartão de crédito');
+    }
+    if (invoice.billing.debitCard) {
+      methods.push('Cartão de débito');
+    }
+    if (invoice.billing.pix) {
+      methods.push('Pix');
+    }
+
+    return methods.join(' / ');
+  }
+
   getInvoices() {
     const pagination = `page=${this.pageIndex}&limit=${this.pageLimit}`;
     this.invoiceService.getInvoices(pagination).subscribe({
       next: (res) => {
-        this.invoices = res.data;
+        res.data.forEach((el: any) => {
+          this.invoices.push(
+            {
+              user: el.user.name,
+              referringDate: el.billing.referringDate,
+              dueDate: el.billing.dueDate,
+              paymentMethod: this.transformPaymentMethods(el),
+              status: el.status,
+              paid: el.payment.paid,
+              value: el.billing.amount
+            }
+          );
+        });
       },
       error: (err) => {
       }

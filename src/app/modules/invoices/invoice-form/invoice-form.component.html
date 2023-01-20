@@ -548,6 +548,7 @@
                     [options]="installmentsSelectItems"
                     id="maxInstallmentsQuantity"
                     optionLabel="name"
+                    optionValue="value"
                     formControlName="maxInstallmentsQuantity"
                 ></p-dropdown>
             </div>
@@ -745,7 +746,7 @@
                             <p-inputNumber
                                 placeholder="Dia do vencimento"
                                 id="limitDay"
-                                [min]="1"
+                                [min]="actualDate.getDate()"
                                 [max]="31"
                                 [useGrouping]="false"
                                 [disabled]="!carnetDiscountEnabled"
