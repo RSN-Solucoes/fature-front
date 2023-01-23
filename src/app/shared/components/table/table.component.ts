@@ -11,8 +11,11 @@ export class TableComponent {
   @Input() value: any[] = [];
   @Input() pipes: string[] = [];
   @Input() actions!: any;
+  @Input() totalRecords!: number;
+  @Input() pageLimit!: number;
 
   @Output() selectedRows: EventEmitter<any[]> = new EventEmitter();
+  @Output() loadMoreItems: EventEmitter<number> = new EventEmitter();
 
   allSelected: boolean = false;
   checkedRows: any[] = [];
@@ -55,5 +58,9 @@ export class TableComponent {
     else this.allSelected = false;
 
     this.selectedRows.emit(this.checkedRows);
+  }
+
+  loadMore() {
+    this.loadMoreItems.emit(this.pageLimit += 5);
   }
 }

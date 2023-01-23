@@ -19,6 +19,10 @@ export class LoginService {
     return this.http.post(`${this.API_BASE}/auth/login`, data);
   }
 
+  checkToken(token: string): Observable<any> {
+    return this.http.get(`${this.API_BASE}/auth/token/${token}`);
+  }
+  
   getToken() {
     localStorage.getItem('token');
   }
@@ -37,4 +41,5 @@ export class LoginService {
     this.token$.next('');
     localStorage.removeItem('token');
   }
+
 }

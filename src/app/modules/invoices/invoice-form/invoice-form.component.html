@@ -10,6 +10,7 @@
                 type="button"
                 class="primary-form-button"
                 (click)="submitForm()"
+                [disabled]="formSubmited"
                 >
                 <i class="pi pi-plus pr-2">
                 </i>
@@ -152,10 +153,9 @@
             <p>Produto da cobrança</p>
         </div>
         <form class="invoices--form my-6 grid">
-            <div class="field col-6 md:col-8">
+            <div class="field col-5 md:col-8">
                 <label for="client">Produtos <span>*</span></label>
                 <p-dropdown
-                    [(ngModel)]="selectedClient"
                     [options]="productsServices"
                     optionLabel="name"
                     name="client"
@@ -166,8 +166,8 @@
                     #productDropdown
                 ></p-dropdown>
             </div>
-            <div class="field col-3 md:col-2">
-                <label for="quantity">Quantidade</label>
+            <div class="field col-4 md:col-2">
+                <label for="quantity">Quantidade <span>*</span></label>
                 <input 
                     type="text"
                     pInputText
@@ -225,7 +225,7 @@
                             </td>
     
                             <td>
-                                {{ product.totalValue | currency:'BRL' }}
+                                {{ product.price | currency:'BRL' }}
                             </td>
                 
                             <td>
@@ -261,7 +261,7 @@
         </div>
         <form class="invoices--form my-6 grid" [formGroup]="form">
             <div class="field col-12 md:col-3" formGroupName="billing">
-                <label for="referringDate">Data referente</label>
+                <label for="referringDate">Data referente <span>*</span></label>
                 <p-calendar 
                     id="referringDate"
                     formControlName="referringDate"
@@ -270,7 +270,7 @@
                 ></p-calendar>
             </div>
             <div class="field col-12 md:col-3" formGroupName="billing">
-                <label for="dueDate">Data de vencimento</label>
+                <label for="dueDate">Data de vencimento <span>*</span></label>
                 <p-calendar 
                     id="dueDate"
                     formControlName="dueDate"
@@ -683,7 +683,7 @@
                     <button 
                         type="button" 
                         class="line-button"
-                        (click)="resetForm(carnetForm, [discountEnable, discountDue, discountValue])"
+                        (click)="resetForm(carnetForm)"
                     >
                         Limpar
                     </button>
@@ -717,13 +717,17 @@
                         mask="00"
                         pInputText
                         id="installments"
-                        placeholder="Selecione parcelas"  
-                        #installments
+                        placeholder="Selecione parcelas"
+                        formControlName="installments"
                     />
                     <button
                         pButton
                         type="button"
-                        (click)="generateBankSlips(installments, discountDue, discountValue)"
+                        (click)="generateBankSlips(
+                            carnetForm.get('installments')?.value,
+                            carnetForm.get('discount.limitDay')?.value,
+                            carnetForm.get('discount.amount')?.value
+                        )"
                         >
                         Gerar carnê
                     </button>
@@ -731,12 +735,16 @@
             </div>
 
             <div class="form--discount-fees col-12 grid">
-                <div class="discount col-6">
+                <div class="discount col-6" formGroupName="discount">
                     <div class="header-title">
                         <p>Descontos</p>
                         <p-inputSwitch
-                            (onChange)="carnetDiscountEnabled = discountEnable.modelValue"
-                            #discountEnable
+                            formControlName="enabled"
+                            (onChange)="toggleSwitchFields(
+                                ['discount.limitDay', 'discount.amount'],
+                                carnetForm.get('discount.enabled')?.value,
+                                carnetForm
+                                )"
                             class="mr-2"
                         ></p-inputSwitch>
                     </div>
@@ -749,19 +757,17 @@
                                 [min]="actualDate.getDate()"
                                 [max]="31"
                                 [useGrouping]="false"
-                                [disabled]="!carnetDiscountEnabled"
-                                #discountDue
+                                formControlName="limitDay"
                             ></p-inputNumber>
                         </div>
                         <div class="field col-12 md:col-6">
-                            <label for="price">Valor do desconto</label>
+                            <label for="amount">Valor do desconto</label>
                             <p-inputNumber 
                                 mode="currency" 
                                 currency="BRL"
-                                id="price"
+                                id="amount"
                                 placeholder="R$ 0,00"
-                                [disabled]="!carnetDiscountEnabled"
-                                #discountValue
+                                formControlName="amount"
                             ></p-inputNumber>
                         </div>
                     </div>
@@ -851,7 +857,7 @@
         </form>
 
         <div *ngIf="carnetBankSlips.length"
-            class="form--installments col-12 pt-6"
+            class="form--installments col-12"
             >
             <div class="header-title">
                 <p>Parcelas</p>

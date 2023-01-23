@@ -1,8 +1,8 @@
 import { I_Client } from './../../../core/interfaces/client.interface';
 import { I_Product } from './../../../core/interfaces/product.interface';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClientsService } from 'src/app/services/clients.service';
 import { UFS_SELECT_LIST } from 'src/app/shared/constants/ufs.const';
 import { ProductsServicesService } from 'src/app/services/products-services.service';
@@ -11,6 +11,7 @@ import { InputNumber } from 'primeng/inputnumber';
 import { DISCOUNT_TYPE_SELECT_LIST, INSTALLMENTS_SELECT_LIST, PAYMENT_METHODS_SELECT_LIST } from './invoice-form.const';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { InvoiceService } from 'src/app/services/invoice.service';
+import { RequestMessageService } from 'src/app/shared/components/request-message/request-message.service';
 
 @Component({
   selector: 'app-invoice-form',
@@ -18,21 +19,23 @@ import { InvoiceService } from 'src/app/services/invoice.service';
   styleUrls: ['./invoice-form.component.scss']
 })
 export class InvoiceFormComponent implements OnInit, OnDestroy {
-  public form!: FormGroup;
+  public invoiceId = this.activatedRoute.snapshot.paramMap.get('id') || '';
+  
   public formSubmited: boolean = false;
-
+  
   public ufSelectItems: any = UFS_SELECT_LIST;
-
+  
   // Users
   public clients: I_Client[] = [];
   public selectedClient!: any;
-
+  
   // Products
   public productsServices: I_Product[] = [];
   public selectedProducts: any[] = [];
   public disabledProductButton: boolean = true;
-
+  
   // Forms
+  public form!: FormGroup;
   public clientDataForm!: FormGroup;
   public displayForm!: string;
   public paymentMethods: any = PAYMENT_METHODS_SELECT_LIST;
@@ -46,7 +49,6 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   public carnetForm!: FormGroup;
   public carnetMessages: string[] = [];
   public carnetBankSlips: any[] = [];
-  public carnetDiscountEnabled: boolean = false;
   
   // BankSlip
   public bankSlipForm!: FormGroup;
@@ -70,6 +72,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     private clientsService: ClientsService,
     private invoiceService: InvoiceService,
     private productsServicesService: ProductsServicesService,
+    private requestMessageService: RequestMessageService,
   ) { }
 
   ngOnInit(): void {
@@ -77,6 +80,10 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
 
     this.getClients();
     this.getProductsServices();
+
+    if(this.invoiceId) {
+      this.getInvoiceData();
+    }
   }
 
   ngOnDestroy(): void {
@@ -88,16 +95,18 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   createForms() {
     this.form = this.fb.group({
       user: this.fb.group({
-        id: [null],
+        id: [null, Validators.required],
       }),
       products: this.fb.array([]),
       billing: this.fb.group({
-        dueDate: [null],
-        referringDate: [null],
+        dueDate: [null, Validators.required],
+        referringDate: [null, Validators.required],
         reference: [null],
         amount: [null],
       }),
     });
+    const products = this.form.controls['products'] as FormArray;
+    products.addValidators(Validators.required);
 
     this.clientDataForm = this.fb.group({
       name: [{value: null, disabled: true}],
@@ -149,10 +158,16 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
 
     this.carnetForm = this.fb.group({
       description: [null],
+      installments: [null],
       fees: this.fb.group({
         enabled: [false],
         penaltyRate: [{value: null, disabled: true}],
         interestRate: [{value: null, disabled: true}],
+      }),
+      discount: this.fb.group({
+        enabled: [false],
+        amount: [{value: null, disabled: true}],
+        limitDay: [{value: null, disabled: true}],
       }),
       bankSlips: this.fb.array([]),
     });
@@ -162,6 +177,47 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
         this.maxDiscountDate.setDate(
           new Date(change.billing.dueDate).getDate() - 1
         );
+      },
+    });
+  }
+
+  getInvoiceData() {
+    this.invoiceService.getInvoice(this.invoiceId).subscribe({
+      next: (res) => {
+        console.log(res.data)
+        this.form.patchValue({
+          ...res.data,
+          billing: {
+            amount: res.data.billing.amount,
+            referringDate: new Date(res.data.billing.referringDate),
+            dueDate: new Date(res.data.billing.dueDate),
+            reference: res.data.billing.reference
+          },
+        });
+        this.invoiceAmount = res.data.billing.amount;
+
+        this.clientsService.getClient(res.data.user.id).subscribe(client => {
+          this.selectClient(client.data);
+        });
+
+        this.selectedProducts = res.data.products;
+        const products = this.form.controls['products'] as FormArray;
+
+        res.data.products.forEach((el: any) => {
+          products.push(
+            this.fb.group({
+              id: el.id,
+              quantity: el.quantity,
+            }));
+        });
+
+        this.patchPaymentMethodForm(res.data.billing);
+
+        console.log(this.form.getRawValue())
+
+      },
+      error: (err) => {
+
       },
     });
   }
@@ -215,7 +271,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     this.selectedProducts.push({
       ...productDropdown.value,
       quantity: productQuantity.value,
-      totalValue: productValue.value
+      price: productValue.value
     });
 
     productsForm.push(
@@ -237,7 +293,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     const product = this.selectedProducts[index];
     const productsForm = this.form.controls['products'] as FormArray;
 
-    this.invoiceAmount -= product.totalValue;
+    this.invoiceAmount -= product.price;
     this.form.get('billing.amount')?.setValue(this.invoiceAmount);
 
     this.selectedProducts.splice(index, 1);
@@ -329,7 +385,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     this.displayForm = '';
   }
 
-  resetForm(form: FormGroup, fields: any[] = []) {
+  resetForm(form: FormGroup) {
     switch(form) {
       case this.bankSlipForm:
         const messagesBankSlipForm = this.bankSlipForm.controls['messages'] as FormArray;
@@ -343,11 +399,6 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
         while(this.carnetMessages.length || this.carnetBankSlips.length) {
           this.carnetMessages.length ? this.carnetMessages.pop() : this.carnetBankSlips.pop();
         }
-        fields.forEach(el => {
-          el.writeValue('')
-        });
-
-        this.carnetDiscountEnabled = false;
         break;
     }
 
@@ -366,12 +417,12 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     this.displayForm = paymentMethod;
   }
 
-  generateBankSlips(installments: HTMLInputElement, discountDue: InputNumber, discountValue: InputNumber) {
-    if(!installments.value || !this.form.get('billing.dueDate')?.value) {
+  generateBankSlips(installments: number, discountDue: number, discountValue: number) {
+    if(!installments || !this.form.get('billing.dueDate')?.value) {
       return alert("preencha todos os campos para gerar os boletos!!!");
     };
 
-    const carnetInstallments = Number(installments.value);
+    const carnetInstallments = installments;
     const bankSlips = this.carnetForm.controls['bankSlips'] as FormArray;
 
     const formatCarnetDates = (
@@ -398,13 +449,13 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
       carnetInstallments
     );
 
-    const discountDueDates = discountDue.value ? 
+    const discountDueDates = discountDue ? 
     formatCarnetDates(
       new Date
       (
         new Date().getFullYear(),
         new Date().getMonth(),
-        discountDue.value
+        discountDue
       ),
       carnetInstallments
     ) : 
@@ -418,11 +469,11 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
         amount: bankSlipAmount,
         messages: this.carnetMessages,
         discount: {
-          enabled: this.carnetDiscountEnabled,
-          amount: discountValue.value ? discountValue.value : null,
+          enabled: this.carnetForm.get('discount.enabled')?.value,
+          amount: discountValue ? discountValue : null,
         }
       });
-      if(discountDue.value) {
+      if(discountDue) {
         this.emptyDate.push(discountDueDates[j]);
       };
       this.carnetBankSlips[j].discount.discountDue = this.emptyDate[j];
@@ -458,7 +509,134 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     });
   }
 
+  patchPaymentMethodForm(data: any) {
+    let index = 0;
+
+    if(data.bankSlip) {
+      this.selectedMethods.push(this.paymentMethods.find((el: any, i: any) => {
+        index = i;
+        return el.value == 'bankSlip';
+      }));
+
+      this.paymentMethods.splice(index , 1);
+
+      this.bankSlipForm.patchValue({
+        ...data.bankSlip
+      });
+
+      if(this.bankSlipForm.get('discount.dueDate')?.value) {
+        this.bankSlipForm.get('discount.dueDate')?.setValue(
+          new Date(this.bankSlipForm.get('discount.dueDate')?.value)
+        );
+      };
+
+      if(data.bankSlip.messages.length > 0) {
+        const messagesBankSlip = this.bankSlipForm.controls['messages'] as FormArray;
+
+        data.bankSlip.messages.forEach((message: any) => {
+          messagesBankSlip.push(new FormControl(message));
+          this.bankSlipMessages.push(message);
+        });
+      };
+
+    };
+
+    if(data.creditCard) {
+      this.selectedMethods.push(this.paymentMethods.find((el: any, i: any) => {
+        index = i;
+        return el.value == 'creditCard';
+      }));
+
+      this.paymentMethods.splice(index , 1);
+
+      this.creditCardForm.patchValue({
+        ...data.creditCard
+      });
+    };
+
+    if(data.debitCard) {
+      this.selectedMethods.push(this.paymentMethods.find((el: any, i: any) => {
+        index = i;
+        return el.value == 'debitCard';
+      }));
+
+      this.paymentMethods.splice(index , 1);
+
+      this.debitCardForm.patchValue({
+        ...data.debitCard
+      });
+    };
+
+    if(data.pix) {
+      this.selectedMethods.push(this.paymentMethods.find((el: any, i: any) => {
+        index = i;
+        return el.value == 'pix';
+      }));
+
+      this.paymentMethods.splice(index , 1);
+
+      this.pixForm.patchValue({
+        ...data.pix
+      });
+    };
+
+    if(data.carnet) {
+      this.selectedMethods.push(this.paymentMethods.find((el: any, i: any) => {
+        index = i;
+        return el.value == 'carnet';
+      }));
+
+      this.paymentMethods.splice(index , 1);
+
+      this.carnetForm.patchValue({
+        ...data.carnet,
+        installments: data.carnet.bankSlips.length,
+        discount: {
+          enabled: data.carnet.bankSlips[0].discount.enabled,
+          amount: data.carnet.bankSlips[0].discount.amount,
+          limitDay: data.carnet.bankSlips[0].discount.discountDue ? 
+          new Date(data.carnet.bankSlips[0].discount.discountDue).getDate() :
+          null,
+        }
+      });
+
+      console.log(this.carnetForm.getRawValue())
+
+      if (data.carnet.bankSlips[0].messages.length > 0) {
+        data.carnet.bankSlips[0].messages.forEach((message: any) => {
+          this.carnetMessages.push(message);
+        });
+      };
+
+      data.carnet.bankSlips.forEach((el: any) => {
+        this.carnetBankSlips.push(el);
+      });
+
+      const bankSlips = this.carnetForm.controls['bankSlips'] as FormArray;
+
+      this.carnetBankSlips.forEach(el => {
+        bankSlips.push(new FormControl(el));
+      });
+
+      this.carnetBankSlips.map((el, index) => {
+        el.dueDate = new Date(el.dueDate);
+        el.discount.discountDue = new Date(el.discount.discountDue);
+        el.installmentNumber = index + 1;
+      });
+    };
+  }
+
   submitForm() {
+    this.formSubmited = this.form.valid;
+    
+    if(!this.form.valid) {
+      this.requestMessageService.show(
+        `Preencha todos os campos obrigatórios`,
+        'error'
+      )
+      return;
+    };
+
     const body = this.form.getRawValue();
 
     if(this.selectedMethods.length) {
@@ -517,14 +695,21 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     };
     // Fim Conversão das datas
 
-    this.invoiceService.createInvoice(body).subscribe({
-      next: (res) => {
-        alert("Fatura cadastrada com sucesso!");
-      },
-      error: (err) => {
-        console.log(err.message.error);
-      }
-    });
+    // this.invoiceService.createInvoice(body).subscribe({
+    //   next: (res) => {
+    //     this.requestMessageService.show(
+    //       `Fatura ${this.invoiceId ? 'atualizada' : 'cadastrada'} com sucesso.`,
+    //       'success'
+    //     );
+
+    //     setTimeout(() => {
+    //       this.router.navigate([`painel/faturas/editar/${res.data._id}`]);
+    //     }, 1500);
+    //   },
+    //   error: (err) => {
+    //     console.log(err.message.error);
+    //   }
+    // });
 
     console.log(body);
   }

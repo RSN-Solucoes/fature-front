@@ -19,5 +19,8 @@
       [pipes]="invoicesPipes"
       [actions]="invoicesActions"
       [value]="invoices"
+      [totalRecords]="totalRecords"
+      [pageLimit]="pageLimit"
+      (loadMoreItems)="loadMoreItems($event)"
     ></app-table>
   </div>

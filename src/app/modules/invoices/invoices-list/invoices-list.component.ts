@@ -23,21 +23,22 @@ export class InvoicesListComponent implements OnInit {
     {
       label: 'Visualizar',
       icon: 'pi-eye',
-      action: (id: string) => {
-        console.log(id);
+      action: (row: any) => {
+        this.editInvoice(row);
       },
     },
     {
       label: 'Deletar',
       icon: 'pi-trash',
-      action: () => {
-        alert('Deletar');
+      action: (row: any) => {
+        this.deleteInvoice(row);
       },
     },
   ];
 
-  private pageIndex = 1;
-  private pageLimit = 10;
+  public pageIndex = 1;
+  public pageLimit = 10;
+  public totalRecords = 0;
 
   constructor(
     private router: Router,
@@ -45,7 +46,7 @@ export class InvoicesListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getInvoices();
+    this.getInvoices(this.pageIndex, this.pageLimit);
   }
 
   transformPaymentMethods(invoice: any) {
@@ -70,10 +71,13 @@ export class InvoicesListComponent implements OnInit {
     return methods.join(' / ');
   }
 
-  getInvoices() {
-    const pagination = `page=${this.pageIndex}&limit=${this.pageLimit}`;
+  getInvoices(pageIndex: number, pageLimit: number) {
+    const pagination = `page=${pageIndex}&limit=${pageLimit}`;
     this.invoiceService.getInvoices(pagination).subscribe({
       next: (res) => {
+        this.invoices = [];
+        this.totalRecords = res.pagination.totalItems;
+        
         res.data.forEach((el: any) => {
           this.invoices.push(
             {
@@ -83,7 +87,8 @@ export class InvoicesListComponent implements OnInit {
               paymentMethod: this.transformPaymentMethods(el),
               status: el.status,
               paid: el.payment.paid,
-              value: el.billing.amount
+              value: el.billing.amount,
+              id: el.id,
             }
           );
         });
@@ -95,6 +100,25 @@ export class InvoicesListComponent implements OnInit {
 
   navigateToForm() {
     this.router.navigate(['painel/faturas/novo']);
+  }
+
+  editInvoice(row: any) {
+    this.router.navigate([`painel/faturas/editar/${row.id}`]);
+  }
+
+  deleteInvoice(row: any) {
+    this.invoiceService.deleteInvoice(row.id).subscribe({
+      next: (res) => {
+        alert('Fatura excluída com sucesso!');
+      },
+      error: (err) => {
+
+      }
+    });
+  }
+
+  loadMoreItems(pageLimit: number) {
+    this.getInvoices(this.pageIndex, pageLimit);
   }
 
 }

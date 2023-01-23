@@ -50,3 +50,19 @@
     </tr>
   </ng-template>
 </p-table>
+
+<div class="footer-buttons py-3">
+  <button
+    *ngIf="totalRecords && totalRecords > value.length"
+    pButton
+    type="button" 
+    class="line-button"
+    (click)="loadMore()"
+    ><i class="pi pi-replay">
+    </i>
+    Carregar mais
+  </button>
+  <span *ngIf="value.length == totalRecords">
+    Não há mais itens para carregar na listagem!!!
+  </span>
+</div>

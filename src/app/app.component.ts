@@ -21,6 +21,31 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.loginService.token$.subscribe((token) => {
       this.token = token;
+
+      this.checkToken();
     });
+
+    setInterval(() => this.checkToken(), 1000 * 1800);
+  }
+
+  checkToken() {
+    if (!this.token) {
+      this.router.navigate(['login']);
+
+      return;
+    }
+
+    this.loginService.checkToken(this.token).subscribe({
+      next: (valid) => {
+        if (!valid) this.loggout();
+      },
+      error: () => this.loggout(),
+    });
+  }
+
+  loggout() {
+    this.token = null;
+    this.loginService.deleteToken();
+    this.router.navigate(['login']);
   }
 }

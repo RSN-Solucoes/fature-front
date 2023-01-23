@@ -75,6 +75,11 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
+    path: 'painel/faturas/editar/:id',
+    component: InvoiceFormComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
     path: 'painel/transferencias',
     component: TransfersComponent,
   },

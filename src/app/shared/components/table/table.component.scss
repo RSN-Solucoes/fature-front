@@ -67,4 +67,16 @@
       }
     }
   }
+
+}
+
+.footer-buttons {
+  display: flex;
+  justify-content: center;
+  i {
+    font-size: 1.6rem;
+  }
+  span {
+    font-size: 1.4rem;
+  }
 }
