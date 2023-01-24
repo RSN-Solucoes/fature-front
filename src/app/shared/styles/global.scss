@@ -137,6 +137,8 @@ label {
 .message-list-table {
   width: 100%;
   padding-bottom: 1rem;
+  border-collapse: collapse;
+  border-bottom: 1pt solid #D2D2D2;
   thead th {
     padding: 1rem 0;
     font-size: 1.4rem;
@@ -144,8 +146,9 @@ label {
   }
   tbody tr {
     td {
-      padding: 1.5rem 0;
+      padding: 1.5rem;
       font-size: 1.2rem;
+      border-bottom: 1pt solid #D2D2D2;
       button {
         background: none;
         border: none;

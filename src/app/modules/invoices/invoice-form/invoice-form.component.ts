@@ -695,23 +695,21 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     };
     // Fim Conversão das datas
 
-    // this.invoiceService.createInvoice(body).subscribe({
-    //   next: (res) => {
-    //     this.requestMessageService.show(
-    //       `Fatura ${this.invoiceId ? 'atualizada' : 'cadastrada'} com sucesso.`,
-    //       'success'
-    //     );
+    this.invoiceService.createInvoice(body).subscribe({
+      next: (res) => {
+        this.requestMessageService.show(
+          `Fatura ${this.invoiceId ? 'atualizada' : 'cadastrada'} com sucesso.`,
+          'success'
+        );
 
-    //     setTimeout(() => {
-    //       this.router.navigate([`painel/faturas/editar/${res.data._id}`]);
-    //     }, 1500);
-    //   },
-    //   error: (err) => {
-    //     console.log(err.message.error);
-    //   }
-    // });
-
-    console.log(body);
+        setTimeout(() => {
+          this.router.navigate([`painel/faturas/editar/${res.data._id}`]);
+        }, 1500);
+      },
+      error: (err) => {
+        console.log(err.message.error);
+      }
+    });
   }
 
   cancel() {

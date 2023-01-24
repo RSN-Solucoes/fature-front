@@ -61,6 +61,6 @@ export class TableComponent {
   }
 
   loadMore() {
-    this.loadMoreItems.emit(this.pageLimit += 5);
+    this.loadMoreItems.emit(this.pageLimit += 10);
   }
 }
