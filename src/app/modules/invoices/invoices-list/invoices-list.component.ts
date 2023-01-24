@@ -28,8 +28,8 @@ export class InvoicesListComponent implements OnInit {
       },
     },
     {
-      label: 'Deletar',
-      icon: 'pi-trash',
+      label: 'Cancelar',
+      icon: 'pi-ban',
       action: (row: any) => {
         this.deleteInvoice(row);
       },
