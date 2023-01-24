@@ -624,6 +624,10 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
         el.installmentNumber = index + 1;
       });
     };
+
+    if(this.selectedMethods.length > 0) {
+      this.showPaymentMethodForm(this.selectedMethods[0].value);
+    }
   }
 
   submitForm() {
