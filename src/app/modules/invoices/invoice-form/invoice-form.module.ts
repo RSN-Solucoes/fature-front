@@ -14,9 +14,17 @@ import { CalendarModule } from 'primeng/calendar';
 import { AccordionModule } from 'primeng/accordion';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { BankslipFormComponent } from './bankslip-form/bankslip-form.component';
+import { CreditFormComponent } from './credit-form/credit-form.component';
+import { DebitFormComponent } from './debit-form/debit-form.component';
+import { PixFormComponent } from './pix-form/pix-form.component';
+import { CarnetFormComponent } from './carnet-form/carnet-form.component';
 
 @NgModule({
-  declarations: [InvoiceFormComponent],
+  declarations: [
+    InvoiceFormComponent, 
+    BankslipFormComponent, CreditFormComponent, DebitFormComponent, PixFormComponent, CarnetFormComponent,
+  ],
   imports: [
     CommonModule,
     TableModule,

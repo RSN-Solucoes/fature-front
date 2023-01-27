@@ -1,0 +1,53 @@
+<form
+    class="invoices--form payment-methods--form pix-form grid"
+    [formGroup]="pixForm"
+    ><div class="form-header col-12 pb-6">
+        <span>Configurações do pix</span>
+        <div class="form-header__buttons">
+            <button 
+                type="button" 
+                class="line-button"
+                (click)="resetForm()"
+            >
+                Limpar
+            </button>
+            <span>|</span>
+            <button 
+                type="button" 
+                class="line-button"
+                (click)="removePixMethod('pix')"
+            >
+                Remover pagamento
+            </button>
+        </div>
+    </div>
+
+    <div class="field col-6 md:col-3">
+        <label for="dueDate">Data de vencimento</label>
+        <p-calendar 
+            id="dueDate"
+            dateFormat="dd/mm/yy"
+            placeholder="Escolha a data"
+            formControlName="dueDate"
+            [minDate]="actualDate"
+        ></p-calendar>
+        <!-- Corrigir -->
+    </div>
+    <div class="field col-6 md:col-9">
+        <label for="description">Descrição da fatura</label>
+        <input
+            type="text"
+            id="description"
+            pInputText
+            placeholder="Escreva uma mensagem na fatura"
+            formControlName="description"
+        />
+    </div>
+    <div class="field col-12">
+        <label>Código de pagamento</label>
+        <div class="qrCode pt-2">
+            <img src="https://acesso.gov.br/faq/_images/imagem_qrcode_exemplo.jpg" alt="QR">
+            <span>a98h - 5545 - 8br - 98556oi987hg5</span>
+        </div>
+    </div>
+</form>

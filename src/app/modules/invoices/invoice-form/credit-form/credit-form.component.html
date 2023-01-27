@@ -1,0 +1,72 @@
+<form
+    class="invoices--form payment-methods--form creditCard-form grid"
+    [formGroup]="creditCardForm"
+    ><div class="form-header col-12 pb-6">
+        <span>Configurações do cartão de crédito</span>
+        <div class="form-header__buttons">
+            <button 
+                type="button" 
+                class="line-button"
+                (click)="resetForm()"
+            >
+                Limpar
+            </button>
+            <span>|</span>
+            <button 
+                type="button" 
+                class="line-button"
+                (click)="removeCreditCardMethod('creditCard')"
+            >
+                Remover pagamento
+            </button>
+        </div>
+    </div>
+    <div class="field col-12 md:col-4">
+        <label for="invoiceDescription">Descrição da fatura</label>
+        <input
+            type="text"
+            id="invoiceDescription"
+            pInputText
+            placeholder="Escreva uma mensagem na fatura"
+            formControlName="description"
+        />
+    </div>
+    <div class="field col-12 md:col-4">
+        <label for="maxInstallmentsQuantity">Parcelamento máximo</label>
+        <p-dropdown
+            placeholder="Selecione o tipo"
+            [options]="installmentsSelectItems"
+            id="maxInstallmentsQuantity"
+            optionLabel="name"
+            optionValue="value"
+            formControlName="maxInstallmentsQuantity"
+        ></p-dropdown>
+    </div>
+
+    <div class="fees col-12" formGroupName="fees">
+        <div class="header-title py-6">
+            <p>Juros e multas</p>
+            <p-inputSwitch
+                formControlName="enabled"
+                (onChange)="toggleSwitchFields(
+                    ['fees.interestRate'],
+                    creditCardForm.get('fees.enabled')?.value
+                    )"
+            ></p-inputSwitch>
+        </div>
+        <div class="fees--fields grid ">
+            <div class="field col-12 md:col-4">
+                <label for="interestRate">Percentual juros (mês)</label>
+                <p-inputNumber
+                    suffix="%"
+                    id="interestRate"
+                    [max]="100"
+                    [min]="1"
+                    placeholder="0%"
+                    [maxFractionDigits]="2"
+                    formControlName="interestRate"
+                ></p-inputNumber>
+            </div>
+        </div>
+    </div>
+</form>

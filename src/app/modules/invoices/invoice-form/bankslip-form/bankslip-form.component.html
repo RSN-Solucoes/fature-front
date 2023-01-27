@@ -1,0 +1,177 @@
+<form
+    class="invoices--form payment-methods--form bankSlip-form grid"
+    [formGroup]="bankSlipForm"
+    ><div class="form-header col-12">
+        <span>Configurações do boleto</span>
+        <div class="form-header__buttons">
+            <button 
+                type="button" 
+                class="line-button"
+                (click)="resetForm()"
+            >
+                Limpar
+            </button>
+            <span>|</span>
+            <button 
+                type="button" 
+                class="line-button"
+                (click)="removeBankSlipMethod('bankSlip')"
+            >
+                Remover pagamento
+            </button>
+        </div>
+    </div>
+
+    <div class="field col-12 pt-6">
+        <label for="description">Descrição</label>
+        <input
+            type="text"
+            id="description"
+            formControlName="description"
+            pInputText
+            placeholder="Descrição"
+        />
+    </div>
+
+    <div class="discount col-12" formGroupName="discount">
+        <div class="header-title py-6">
+            <p>Descontos</p>
+            <p-inputSwitch
+                formControlName="enabled"
+                (onChange)="toggleSwitchFields(
+                    ['discount.mode','discount.amount','discount.dueDate'],
+                    bankSlipForm.get('discount.enabled')?.value
+                    )"
+            ></p-inputSwitch>
+        </div>
+        <div class="discount--fields grid">
+            <div class="field col-12 md:col-4">
+                <label for="mode">Tipo de valor</label>
+                <p-dropdown
+                    [options]="discountTypeSelectItems"
+                    id="mode"
+                    optionLabel="name"
+                    optionValue="value"
+                    formControlName="mode"
+                    placeholder="Selecione o tipo"
+                    (onChange)="bankSlipForm.get('discount.amount')?.reset()"
+                ></p-dropdown>
+            </div>
+            <div *ngIf="bankSlipForm.get('discount.mode')?.value == 'fixed'"
+                class="field col-12 md:col-4">
+                <label for="amount">Valor do desconto</label>
+                <p-inputNumber 
+                    mode="currency" 
+                    currency="BRL"
+                    id="amount"
+                    placeholder="R$ 0,00"
+                    formControlName="amount"
+                ></p-inputNumber>
+            </div>
+            <div *ngIf="bankSlipForm.get('discount.mode')?.value == 'percent'"
+                class="field col-12 md:col-4">
+                <label for="amount">Valor do desconto</label>
+                <p-inputNumber
+                    suffix="%"
+                    id="amount"
+                    [max]="100"
+                    [min]="1"
+                    placeholder="0%"
+                    [maxFractionDigits]="2"
+                    formControlName="amount"
+                ></p-inputNumber>
+            </div>
+            <div class="field col-6 md:col-4">
+                <label for="limitDueDate">Data limite do desconto</label>
+                <p-calendar 
+                    id="limitDueDate"
+                    dateFormat="dd/mm/yy"
+                    placeholder="Escolha a data"
+                    formControlName="dueDate"
+                    [minDate]="actualDate"
+                    [maxDate]="maxDiscountDate"
+                ></p-calendar>
+            </div>
+        </div>
+    </div>
+
+    <div class="fees col-12" formGroupName="fees">
+        <div class="header-title py-6">
+            <p>Juros e multas</p>
+            <p-inputSwitch
+                formControlName="enabled"
+                (onChange)="toggleSwitchFields(
+                    ['fees.interestRate','fees.penaltyRate'],
+                    bankSlipForm.get('fees.enabled')?.value
+                    )"
+            ></p-inputSwitch>
+        </div>
+        <div class="fees--fields grid">
+            <div class="field col-12 md:col-4">
+                <label for="penaltyRate">Percentual de multa</label>
+                    <p-inputNumber
+                        suffix="%"
+                        id="penaltyRate"
+                        [max]="100"
+                        [min]="1"
+                        placeholder="0%"
+                        [maxFractionDigits]="2"
+                        formControlName="penaltyRate"
+                    ></p-inputNumber>
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="interestRate">Percentual juros (mês)</label>
+                <p-inputNumber
+                    suffix="%"
+                    id="interestRate"
+                    [max]="100"
+                    [min]="1"
+                    placeholder="0%"                            
+                    [maxFractionDigits]="2"
+                    formControlName="interestRate"
+                ></p-inputNumber>
+            </div>
+        </div>
+    </div>
+
+    <div class="field col-11">
+        <label for="messages">Mensagens</label>
+        <input
+            type="text"
+            id="messages"
+            pInputText
+            placeholder="Escreva uma mensagem no boleto"
+            #bankSlipInputMessages
+        />
+    </div>
+    <div class="field col-1 message-button mt-6">
+        <a (click)="addMessage(bankSlipInputMessages)"><i class="pi pi-plus"></i></a>
+    </div>
+
+    <div class="field col-12 py-6" *ngIf="messages.length">
+        <table class="message-list-table">
+            <thead>
+            <th>Mensagem</th>
+            <th style="width: 10%"></th>
+            </thead>
+
+            <tbody>
+            <tr *ngFor="let message of messages; let i = index">
+                <td>
+                {{ message }}
+                </td>
+
+                <td>
+                <button
+                    pTooltip="Remover"
+                    tooltipPosition="left"
+                    (click)="removeMessage(i)"
+                >
+                    <i class="pi pi-trash"></i>
+                </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</form>
