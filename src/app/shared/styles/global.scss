@@ -29,6 +29,19 @@
   border-color: darken($color: #1b1b1b, $amount: 5) !important;
 }
 
+.disabled-form-button {
+  width: auto;
+  height: 48px;
+  border-radius: 3px;
+  font-size: 1.4rem;
+  font-weight: 300;
+  padding: 10px 20px;
+  background-color: var(--black);
+  border: solid 1px var(--black);
+  color: #fff;
+  cursor: pointer;
+  opacity: 0.3;
+}
 
 .secondary-form-button {
   width: auto;

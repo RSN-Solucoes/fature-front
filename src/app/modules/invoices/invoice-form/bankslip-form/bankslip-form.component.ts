@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { type } from 'os';
 import { DISCOUNT_TYPE_SELECT_LIST } from '../invoice-form.const';
@@ -8,7 +8,7 @@ import { DISCOUNT_TYPE_SELECT_LIST } from '../invoice-form.const';
   templateUrl: './bankslip-form.component.html',
   styleUrls: ['./bankslip-form.component.scss']
 })
-export class BankslipFormComponent implements OnInit, OnChanges {
+export class BankslipFormComponent implements OnInit, OnChanges, AfterViewInit {
   public bankSlipForm!: FormGroup;
   public discountTypeSelectItems = DISCOUNT_TYPE_SELECT_LIST;
   public messages: string[] = [];
@@ -41,6 +41,12 @@ export class BankslipFormComponent implements OnInit, OnChanges {
     };
 
     this.getMaxDiscountDate();
+  }
+
+  ngAfterViewInit(): void {
+    setInterval(() => {
+      this.bankSlipFormData.emit(this.bankSlipForm.getRawValue());
+    }, 500);
   }
 
   createBankSlipForm() {

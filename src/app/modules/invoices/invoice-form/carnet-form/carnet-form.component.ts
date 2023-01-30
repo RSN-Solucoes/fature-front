@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
   templateUrl: './carnet-form.component.html',
   styleUrls: ['./carnet-form.component.scss']
 })
-export class CarnetFormComponent implements OnInit, OnChanges {
+export class CarnetFormComponent implements OnInit, OnChanges, AfterViewInit {
   public carnetForm!: FormGroup;
 
   public messages: string[] = [];
@@ -38,6 +38,12 @@ export class CarnetFormComponent implements OnInit, OnChanges {
     if(changes?.['invoice']) {
       this.invoice = changes?.['invoice'].currentValue;
     };
+  }
+
+  ngAfterViewInit(): void {
+    setInterval(() => {
+      this.carnetFormData.emit(this.carnetForm.getRawValue());
+    }, 500);
   }
 
   createCarnetForm() {

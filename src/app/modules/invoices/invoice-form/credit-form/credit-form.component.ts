@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { INSTALLMENTS_SELECT_LIST } from '../invoice-form.const';
 
@@ -7,7 +7,7 @@ import { INSTALLMENTS_SELECT_LIST } from '../invoice-form.const';
   templateUrl: './credit-form.component.html',
   styleUrls: ['./credit-form.component.scss']
 })
-export class CreditFormComponent implements OnInit {
+export class CreditFormComponent implements OnInit, AfterViewInit {
   public creditCardForm!: FormGroup;
   public installmentsSelectItems = INSTALLMENTS_SELECT_LIST;
 
@@ -27,7 +27,13 @@ export class CreditFormComponent implements OnInit {
 
     if(this.formValue) {
       this.patchFormValues();
-    }
+    };
+  }
+
+  ngAfterViewInit(): void {
+    setInterval(() => {
+      this.creditCardFormData.emit(this.creditCardForm.getRawValue());
+    }, 500);
   }
 
   createCreditCardForm() {

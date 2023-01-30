@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   templateUrl: './debit-form.component.html',
   styleUrls: ['./debit-form.component.scss']
 })
-export class DebitFormComponent implements OnInit {
+export class DebitFormComponent implements OnInit, AfterViewInit {
   public debitCardForm!: FormGroup;
 
   @Input() formValue!: any;
@@ -26,6 +26,12 @@ export class DebitFormComponent implements OnInit {
     if(this.formValue) {
       this.patchFormValues();
     }
+  }
+
+  ngAfterViewInit(): void {
+    setInterval(() => {
+      this.debitCardFormData.emit(this.debitCardForm.getRawValue());
+    }, 500);
   }
 
   createDebitCardForm() {

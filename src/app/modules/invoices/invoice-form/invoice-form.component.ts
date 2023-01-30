@@ -408,7 +408,7 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     if (body.billing.bankSlip?.discount?.dueDate ) {
       body.billing.bankSlip.discount.dueDate = body.billing.bankSlip.discount.dueDate.toISOString();
     };
-    if (body.billing.pix) body.billing.pix.dueDate = body.billing.pix.dueDate.toISOString();
+    if (body.billing?.pix?.dueDate) body.billing.pix.dueDate = body.billing.pix.dueDate.toISOString();
 
     if(body.billing.carnet?.bankSlips.length > 0) {
       for(let i = 0; body.billing.carnet.bankSlips.length > i; i++) {

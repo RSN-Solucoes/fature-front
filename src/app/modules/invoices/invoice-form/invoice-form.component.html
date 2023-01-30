@@ -8,7 +8,7 @@
         <div class="invoice-navbar__submit">
             <button
                 type="button"
-                class="primary-form-button"
+                [class]="!formSubmited ? 'primary-form-button' : 'disabled-form-button'"
                 (click)="submitForm()"
                 [disabled]="formSubmited"
                 >

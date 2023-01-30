@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   templateUrl: './pix-form.component.html',
   styleUrls: ['./pix-form.component.scss']
 })
-export class PixFormComponent implements OnInit, OnChanges {
+export class PixFormComponent implements OnInit, OnChanges, AfterViewInit {
   public pixForm!: FormGroup;
   public actualDate: Date = new Date();
 
@@ -33,7 +33,13 @@ export class PixFormComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if(changes?.['invoice']) {
       this.invoice = changes?.['invoice'].currentValue;
-    }; 
+    };
+  }
+
+  ngAfterViewInit(): void {
+    setInterval(() => {
+      this.pixFormData.emit(this.pixForm.getRawValue());
+    }, 500);
   }
 
   createPixForm() {
