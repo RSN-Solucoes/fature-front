@@ -22,6 +22,7 @@
     "@fullcalendar/daygrid": "^5.11.3",
     "@fullcalendar/interaction": "^5.11.3",
     "@fullcalendar/timegrid": "^5.11.3",
+    "chart.js": "^4.2.0",
     "ngx-mask": "^14.2.4",
     "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",
