@@ -2,7 +2,9 @@
     <div class="invoice-navbar">
         <div class="invoice-navbar__title">
             <a (click)="cancel()"><i class="pi pi-angle-left"></i></a>
-            <span>Nova fatura</span>
+            <span>
+                {{ invoiceId ? '' : 'Nova'}} Fatura
+            </span>
         </div>
 
         <div class="invoice-navbar__submit">
@@ -299,6 +301,9 @@
         <div class="payment-method__buttons my-6 pb-6">
             <a
                 *ngFor="let formMethods of selectedMethods; let y = index"
+                [ngClass]="{
+                    'payment-method__buttons--active': displayForm === formMethods.value
+                }"
                 (click)="showPaymentMethodForm(formMethods.value)"
                 ><img [src]="formMethods.src" [alt]="formMethods.name">
                 <span>{{ formMethods.name }}</span>

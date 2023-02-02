@@ -96,7 +96,7 @@
             padding-top: 2rem;
             height: 120px;
             width: 110px;
-            cursor: pointer;
+            cursor: pointer;  
             img {
                 height: 42px;
             }
@@ -104,6 +104,10 @@
                 font-size: 1.4rem;
                 margin-top: 2rem;
             }
+        }
+        .payment-method__buttons--active {
+            border: solid 2px var(--primary);
+            transition: .3s;
         }
     }
     .payment-method--add-button {
