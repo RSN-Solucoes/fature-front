@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { reduce } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,29 +25,40 @@ export class DashboardComponent implements OnInit {
         'AGO', 'SET', 'OUT', 'NOV', 'DEZ'
       ],
       datasets: [
-          {
-              label: 'First Dataset',
-              data: [65, 59, 80, 81, 56, 55, 40, 85, 55, 56, 28, 34],
-              fill: false,
-              borderColor: '#42A5F5',
-              tension: .4
-          },
-          {
-              label: 'Second Dataset',
-              data: [28, 48, 40, 19, 86, 27, 90, 25, 22, 44, 58, 74],
-              fill: false,
-              borderColor: '#FFA726',
-              tension: .4
-          }
+        {
+            label: 'Renovações',
+            data: [38, 41, 48, 46, 35, 38, 61, 38, 32, 35, 32, 40],
+            fill: false,
+            borderColor: '#F38BE8',
+        },
+        {
+            label: 'Novos Assinantes',
+            data: [18, 22, 18, 23, 23, 32, 38, 52, 38, 35, 28, 45],
+            fill: false,
+            borderColor: '#6feaa7',
+        },
+        {
+            label: 'Cancelamento',
+            data: [28, 48, 40, 19, 86, 27, 90, 25, 22, 44, 58, 74],
+            fill: false,
+            borderColor: '#9449f4',
+        }
       ]
     };
+
 
     this.basicOptions = {
       plugins: {
           legend: {
               labels: {
-                  color: '#495057'
-              }
+                //   color: '#495057',
+                //   boxWidth: 3,
+                //   boxHeight: 4,
+                //   useBorderRadius: true,
+                //   borderRadius: 1,
+              },
+              position: 'bottom',
+              align: 'start',
           }
       },
       scales: {
@@ -76,18 +88,32 @@ export class DashboardComponent implements OnInit {
           {
               data: [300, 50, 100],
               backgroundColor: [
-                  "#FF6384",
-                  "#36A2EB",
-                  "#FFCE56"
+                  "#02b69c",
+                  "#6feaa7",
+                  "#34e483"
               ],
               hoverBackgroundColor: [
-                  "#FF6384",
-                  "#36A2EB",
-                  "#FFCE56"
+                  "#029781",
+                  "#60ca90",
+                  "#52ad7b"
               ]
           }
       ]
     };
+
+    this.chartOptions = {
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#495057',
+                    boxWidth: 15,
+                    boxHeight: 15,
+                },
+                position: 'bottom',
+                align: 'center',
+            }
+        },
+      };
   }
 
 }
