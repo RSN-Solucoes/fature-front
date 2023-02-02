@@ -89,3 +89,9 @@
         }
     }
 }
+
+::ng-deep {
+    canvas {
+        max-height: 400px;
+    }
+}
