@@ -30,18 +30,21 @@ export class DashboardComponent implements OnInit {
             data: [38, 41, 48, 46, 35, 38, 61, 38, 32, 35, 32, 40],
             fill: false,
             borderColor: '#F38BE8',
+            backgroundColor: '#F38BE8'
         },
         {
             label: 'Novos Assinantes',
             data: [18, 22, 18, 23, 23, 32, 38, 52, 38, 35, 28, 45],
             fill: false,
             borderColor: '#6feaa7',
+            backgroundColor: '#6feaa7'
         },
         {
             label: 'Cancelamento',
             data: [28, 48, 40, 19, 86, 27, 90, 25, 22, 44, 58, 74],
             fill: false,
             borderColor: '#9449f4',
+            backgroundColor: '#9449f4'
         }
       ]
     };
@@ -51,11 +54,11 @@ export class DashboardComponent implements OnInit {
       plugins: {
           legend: {
               labels: {
-                //   color: '#495057',
-                //   boxWidth: 3,
-                //   boxHeight: 4,
-                //   useBorderRadius: true,
-                //   borderRadius: 1,
+                  color: '#495057',
+                  boxWidth: 20,
+                  boxHeight: 20,
+                  usePointStyle: true,
+                  padding: 20,
               },
               position: 'bottom',
               align: 'start',
@@ -106,8 +109,10 @@ export class DashboardComponent implements OnInit {
             legend: {
                 labels: {
                     color: '#495057',
-                    boxWidth: 15,
-                    boxHeight: 15,
+                    boxWidth: 20,
+                    boxHeight: 20,
+                    usePointStyle: true,
+                    padding: 20,
                 },
                 position: 'bottom',
                 align: 'center',

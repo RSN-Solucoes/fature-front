@@ -64,19 +64,22 @@
     </div>
     <div class="grid graphics pt-6">
         <div class="col-6 graphics_card">
-            <div class="graphics_card--subscriptions">
+            <div class="graphics_card--panel">
                 <p>Assinaturas</p>
                 <p-chart type="line" [data]="basicData" [options]="basicOptions"></p-chart>
             </div>
         </div>
         <div class="col-3 graphics_card">
-            <div class="graphics_card--subscriptions">
+            <div class="graphics_card--panel graphics_card--doughnut">
                 <p>Pagamentos mais utilizados</p>
-                <p-chart type="doughnut" [data]="data" [options]="chartOptions"></p-chart>
+                <div class="graphics_card--most-used-payments">
+                    <p></p>
+                    <p-chart type="doughnut" [data]="data" [options]="chartOptions"></p-chart>
+                </div>
             </div>
         </div>
         <div class="col-3 graphics_card">
-            <div class="graphics_card--subscriptions">
+            <div class="graphics_card--panel">
                 <p>Produtos mais vendidos</p>
 
                 <div class="graphics_card-product--items">
