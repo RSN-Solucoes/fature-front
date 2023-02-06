@@ -32,6 +32,13 @@ export class InvoicesListComponent implements OnInit {
       label: 'Cancelar',
       icon: 'pi-ban',
       action: (row: any) => {
+        if(row.status !== 'Pendente') {
+          this.requestMessageService.show(
+            `Não é possível cancelar uma fatura já cancelada ou estornada`,
+            'error'
+          )
+          return;
+        }
         this.deleteInvoice(row);
       },
     },

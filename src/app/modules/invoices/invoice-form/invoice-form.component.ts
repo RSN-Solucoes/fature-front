@@ -425,7 +425,14 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
     };
     // Fim Conversão das datas
 
-    this.invoiceService.createInvoice(body).subscribe({
+    if(this.invoiceId) {
+      body.id = this.invoiceId;
+    };
+
+    const request = this.invoiceId ? this.invoiceService.updateInvoice(this.invoiceId, body) :
+    this.invoiceService.createInvoice(body);
+
+    request.subscribe({
       next: (res) => {
         this.requestMessageService.show(
           `Fatura ${this.invoiceId ? 'atualizada' : 'cadastrada'} com sucesso.`,
