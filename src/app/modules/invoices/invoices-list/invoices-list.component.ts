@@ -6,6 +6,7 @@ import {
   INVOICES_FIELDS,
   INVOICES_PIPES,
 } from './invoices-lis.const';
+import { RequestMessageService } from 'src/app/shared/components/request-message/request-message.service';
 
 @Component({
   selector: 'app-invoices-list',
@@ -43,6 +44,7 @@ export class InvoicesListComponent implements OnInit {
   constructor(
     private router: Router,
     private invoiceService: InvoiceService,
+    private requestMessageService: RequestMessageService,
   ) { }
 
   ngOnInit(): void {
@@ -109,10 +111,12 @@ export class InvoicesListComponent implements OnInit {
   deleteInvoice(row: any) {
     this.invoiceService.deleteInvoice(row.id).subscribe({
       next: (res) => {
-        alert('Fatura excluída com sucesso!');
+        this.requestMessageService.show(
+          `Fatura cancelada com sucesso`,
+          'success'
+        )
       },
       error: (err) => {
-
       }
     });
   }
