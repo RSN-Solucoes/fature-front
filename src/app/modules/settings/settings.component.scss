@@ -1,0 +1,54 @@
+.settings-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    .settings-navbar--title {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+    .settings-navbar--buttons {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        a:first-of-type {
+            border-right: solid 1px var(--line);
+            padding-right: 2rem;
+        }
+        a {
+            margin-left: 2rem;
+            cursor: pointer;
+        }
+
+        i {
+            font-size: 2rem;
+            font-weight: 500;
+        }   
+    }
+}
+
+.bank-data {
+    width: 100%;
+    padding: 6rem;
+    background-color: #fff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    label {
+        font-weight: 400;
+        margin-bottom: 1rem;
+    }
+    .bank-data--header {
+        p {
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+    }
+    .bank-data--form {
+        display: flex;
+    }
+    .bank-data--footer {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
