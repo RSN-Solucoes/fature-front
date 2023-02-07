@@ -41,7 +41,7 @@
         ><a *ngFor="let action of actions">
           <i 
             class="pi {{ action.icon }}" 
-            (click)="action.action(row)"
+            (click)="action.action(row, $event)"
             [pTooltip]="action.label" 
             tooltipPosition="top"
           ></i>
@@ -50,6 +50,8 @@
     </tr>
   </ng-template>
 </p-table>
+
+<p-confirmPopup></p-confirmPopup>
 
 <div class="footer-buttons py-3">
   <button

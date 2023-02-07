@@ -367,3 +367,37 @@ p-accordion {
 .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:hover {
   background: var(--primary) !important;
 }
+
+// Confirm Popup
+
+.p-confirm-popup {
+    .p-confirm-popup-content {
+      span {
+        font-size: 1.5rem;
+      }
+    }
+    .p-confirm-popup-footer {
+      .p-confirm-popup-accept {
+        span {
+          font-size: 1.4rem;
+          color: #fff;
+          font-weight: 500;
+        }
+      }
+      .p-confirm-popup-reject {
+        span {
+          font-size: 1.4rem;
+          color: #000;
+          font-weight: 500;
+        }
+      }
+      .p-confirm-popup-reject:hover {
+        span {
+          font-size: 1.4rem;
+          color: #fff;
+          font-weight: 500;
+          
+        }
+      }
+    }
+}

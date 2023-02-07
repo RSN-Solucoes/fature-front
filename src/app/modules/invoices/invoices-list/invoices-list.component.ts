@@ -7,6 +7,7 @@ import {
   INVOICES_PIPES,
 } from './invoices-lis.const';
 import { RequestMessageService } from 'src/app/shared/components/request-message/request-message.service';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-invoices-list',
@@ -31,7 +32,7 @@ export class InvoicesListComponent implements OnInit {
     {
       label: 'Cancelar',
       icon: 'pi-ban',
-      action: (row: any) => {
+      action: (row: any, event: Event) => {
         if(row.status !== 'Pendente') {
           this.requestMessageService.show(
             `Não é possível cancelar uma fatura já cancelada ou estornada`,
@@ -39,7 +40,7 @@ export class InvoicesListComponent implements OnInit {
           )
           return;
         }
-        this.deleteInvoice(row);
+        this.deleteInvoice(row, event);
       },
     },
   ];
@@ -52,6 +53,7 @@ export class InvoicesListComponent implements OnInit {
     private router: Router,
     private invoiceService: InvoiceService,
     private requestMessageService: RequestMessageService,
+    private confirmationService: ConfirmationService,
   ) { }
 
   ngOnInit(): void {
@@ -115,15 +117,24 @@ export class InvoicesListComponent implements OnInit {
     this.router.navigate([`painel/faturas/editar/${row.id}`]);
   }
 
-  deleteInvoice(row: any) {
-    this.invoiceService.deleteInvoice(row.id).subscribe({
-      next: (res) => {
-        this.requestMessageService.show(
-          `Fatura cancelada com sucesso`,
-          'success'
-        )
-      },
-      error: (err) => {
+  deleteInvoice(row: any, event: Event) {
+    this.confirmationService.confirm({
+      target: event.target ? event.target : undefined,
+      message: 'Deseja cancelar a fatura?',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      accept: () => {
+        this.invoiceService.deleteInvoice(row.id).subscribe({
+          next: (res) => {
+            this.requestMessageService.show(
+              `Fatura cancelada com sucesso`,
+              'success'
+            )
+          },
+          error: (err) => {
+          }
+        });
       }
     });
   }
