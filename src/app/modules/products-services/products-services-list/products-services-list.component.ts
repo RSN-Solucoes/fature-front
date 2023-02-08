@@ -39,6 +39,9 @@ export class ProductsServicesListComponent implements OnInit {
     },
   ];
 
+  private pageIndex = 1;
+  private pageLimit = 10;
+
   constructor(
     private router: Router,
     private productsServicesService: ProductsServicesService,
@@ -49,10 +52,10 @@ export class ProductsServicesListComponent implements OnInit {
   }
 
   getProductsServices() {
-    this.productsServicesService.getProductsServices().subscribe({
+    const pagination = `page=${this.pageIndex}&limit=${this.pageLimit}`;
+    this.productsServicesService.getProductsServices(pagination).subscribe({
       next: (res) => {
         this.productsServices = res.data;
-        console.log(this.productsServices)
       },
       error: (err) => {
       }

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { SettingsComponent } from './modules/settings/settings.component';
+=======
+import { InvoiceFormComponent } from './modules/invoices/invoice-form/invoice-form.component';
+>>>>>>> ffde44c59853d2b14ae6547dbd62a1eb8ca7c784
 import { ProductsServicesFormComponent } from './modules/products-services/products-services-form/products-services-form.component';
 import { InvoicesListComponent } from './modules/invoices/invoices-list/invoices-list.component';
 import { ClientsFormComponent } from './modules/clients/clients-form/clients-form.component';
@@ -67,6 +71,16 @@ const routes: Routes = [
   {
     path: 'painel/faturas',
     component: InvoicesListComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'painel/faturas/novo',
+    component: InvoiceFormComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'painel/faturas/editar/:id',
+    component: InvoiceFormComponent,
     canActivate: [AuthGuardService],
   },
   {

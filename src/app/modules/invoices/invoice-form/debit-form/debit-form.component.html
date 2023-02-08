@@ -1,0 +1,34 @@
+<form
+    class="invoices--form payment-methods--form debitCard-form grid"
+    [formGroup]="debitCardForm"
+    ><div class="form-header col-12 pb-6">
+        <span>Configurações do cartão de débito</span>
+        <div class="form-header__buttons">
+            <button 
+                type="button" 
+                class="line-button"
+                (click)="resetForm()"
+            >
+                Limpar
+            </button>
+            <span>|</span>
+            <button 
+                type="button" 
+                class="line-button"
+                (click)="removeDebitCardMethod('debitCard')"
+            >
+                Remover pagamento
+            </button>
+        </div>
+    </div>
+    <div class="field col-12">
+        <label for="description">Descrição na fatura</label>
+        <input
+            type="text"
+            id="description"
+            pInputText
+            placeholder="Escreva uma mensagem na fatura"
+            formControlName="description"
+        />
+    </div>
+</form>

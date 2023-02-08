@@ -67,4 +67,13 @@
       }
     }
   }
+
+}
+
+.footer-buttons {
+  display: flex;
+  justify-content: center;
+  i {
+    font-size: 1.6rem;
+  }
 }

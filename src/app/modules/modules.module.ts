@@ -16,7 +16,11 @@ import { ProductsServicesListModule } from './products-services/products-service
 import { TransfersModule } from './transfers/transfers.module';
 import { LoginModule } from './login/login.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+<<<<<<< HEAD
 import { SettingsModule } from './settings/settings.module';
+=======
+import { InvoiceFormModule } from './invoices/invoice-form/invoice-form.module';
+>>>>>>> ffde44c59853d2b14ae6547dbd62a1eb8ca7c784
 
 @NgModule({
   declarations: [
@@ -34,7 +38,11 @@ import { SettingsModule } from './settings/settings.module';
     LoginModule,
     DashboardModule,
     ProductsServicesFormModule,
+<<<<<<< HEAD
     SettingsModule,
+=======
+    InvoiceFormModule,
+>>>>>>> ffde44c59853d2b14ae6547dbd62a1eb8ca7c784
   ],
   exports: [],
   providers: [
