@@ -12,7 +12,7 @@ import { ConfirmationService } from 'primeng/api';
 @Component({
   selector: 'app-invoices-list',
   templateUrl: './invoices-list.component.html',
-  styleUrls: ['./invoices-list.component.scss']
+  styleUrls: ['./invoices-list.component.scss'],
 })
 export class InvoicesListComponent implements OnInit {
   public invoicesColumns = INVOICES_COLUMNS;
@@ -33,11 +33,11 @@ export class InvoicesListComponent implements OnInit {
       label: 'Cancelar',
       icon: 'pi-ban',
       action: (row: any, event: Event) => {
-        if(row.status !== 'Pendente') {
+        if (row.status !== 'Pendente') {
           this.requestMessageService.show(
             `Não é possível cancelar uma fatura já cancelada ou estornada`,
             'error'
-          )
+          );
           return;
         }
         this.deleteInvoice(row, event);
@@ -48,16 +48,17 @@ export class InvoicesListComponent implements OnInit {
   public pageIndex = 1;
   public pageLimit = 10;
   public totalRecords = 0;
+  public order = 'desc';
 
   constructor(
     private router: Router,
     private invoiceService: InvoiceService,
     private requestMessageService: RequestMessageService,
-    private confirmationService: ConfirmationService,
-  ) { }
+    private confirmationService: ConfirmationService
+  ) {}
 
   ngOnInit(): void {
-    this.getInvoices(this.pageIndex, this.pageLimit);
+    this.getInvoices(this.pageIndex, this.pageLimit, this.order);
   }
 
   transformPaymentMethods(invoice: any) {
@@ -82,30 +83,27 @@ export class InvoicesListComponent implements OnInit {
     return methods.join(' / ');
   }
 
-  getInvoices(pageIndex: number, pageLimit: number) {
-    const pagination = `page=${pageIndex}&limit=${pageLimit}`;
+  getInvoices(pageIndex: number, pageLimit: number, order: string) {
+    const pagination = `page=${pageIndex}&limit=${pageLimit}&order=${order}`;
     this.invoiceService.getInvoices(pagination).subscribe({
       next: (res) => {
         this.invoices = [];
         this.totalRecords = res.pagination.totalItems;
-        
+
         res.data.forEach((el: any) => {
-          this.invoices.push(
-            {
-              user: el.user.name,
-              referringDate: el.billing.referringDate,
-              dueDate: el.billing.dueDate,
-              paymentMethod: this.transformPaymentMethods(el),
-              status: el.status,
-              paid: el.payment.paid,
-              value: el.billing.amount,
-              id: el.id,
-            }
-          );
+          this.invoices.push({
+            user: el.user.name,
+            referringDate: el.billing.referringDate,
+            dueDate: el.billing.dueDate,
+            paymentMethod: this.transformPaymentMethods(el),
+            status: el.status,
+            paid: el.payment.paid,
+            value: el.billing.amount,
+            id: el.id,
+          });
         });
       },
-      error: (err) => {
-      }
+      error: (err) => {},
     });
   }
 
@@ -130,17 +128,15 @@ export class InvoicesListComponent implements OnInit {
             this.requestMessageService.show(
               `Fatura cancelada com sucesso`,
               'success'
-            )
+            );
           },
-          error: (err) => {
-          }
+          error: (err) => {},
         });
-      }
+      },
     });
   }
 
   loadMoreItems(pageLimit: number) {
-    this.getInvoices(this.pageIndex, pageLimit);
+    this.getInvoices(this.pageIndex, pageLimit, this.order);
   }
-
 }
