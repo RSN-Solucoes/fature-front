@@ -5,6 +5,8 @@
       </span>
   
       <div class="invoices-navbar--buttons">
+        <a (click)="navigateToForm()"><i class="pi pi-plus"></i></a>
+        
         <a><i class="pi pi-sliders-h"></i></a>
       </div>
     </div>
@@ -17,5 +19,8 @@
       [pipes]="invoicesPipes"
       [actions]="invoicesActions"
       [value]="invoices"
+      [totalRecords]="totalRecords"
+      [pageLimit]="pageLimit"
+      (loadMoreItems)="loadMoreItems($event)"
     ></app-table>
   </div>

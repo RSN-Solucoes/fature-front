@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { NavbarModule } from 'src/app/shared/components/navbar/navbar.module';
 import { TableModule } from 'src/app/shared/components/table/table.module';
 
+import { ConfirmationService } from 'primeng/api';
+
 
 @NgModule({
   declarations: [InvoicesListComponent],
@@ -12,6 +14,7 @@ import { TableModule } from 'src/app/shared/components/table/table.module';
     TableModule,
     NavbarModule,
   ],
+  providers: [ConfirmationService],
   exports: [InvoicesListComponent]
 })
 export class InvoicesListModule { }

@@ -1,0 +1,234 @@
+<ng-container>
+    <form
+        class="invoices--form payment-methods--form carnet-form grid"
+        [formGroup]="carnetForm"
+        ><div class="form-header col-12">
+            <span>Configurações do carnê</span>
+            <div class="form-header__buttons">
+                <button 
+                    type="button" 
+                    class="line-button"
+                    (click)="resetForm()"
+                >
+                    Limpar
+                </button>
+                <span>|</span>
+                <button 
+                    type="button" 
+                    class="line-button"
+                    (click)="removeCarnetMethod('carnet')"
+                >
+                    Remover pagamento
+                </button>
+            </div>
+        </div>
+
+        <div class="field col-12 pt-6">
+            <label for="description">Descrição</label>
+            <input
+                type="text"
+                id="description"
+                formControlName="description"
+                pInputText
+                placeholder="Descrição"
+            />
+        </div>
+
+        <div class="field col-12 md:col-6 py-6">
+            <label>Parcelas</label>
+            <div class="field--button">
+                <input 
+                    type="text"
+                    mask="00"
+                    pInputText
+                    id="installments"
+                    placeholder="Selecione parcelas"
+                    formControlName="installments"
+                />
+                <button
+                    pButton
+                    type="button"
+                    (click)="generateBankSlips(
+                        carnetForm.get('installments')?.value,
+                        carnetForm.get('discount.limitDay')?.value,
+                        carnetForm.get('discount.amount')?.value
+                    )"
+                    >
+                    Gerar carnê
+                </button>
+            </div>
+        </div>
+
+        <div class="form--discount-fees col-12 grid">
+            <div class="discount col-6" formGroupName="discount">
+                <div class="header-title">
+                    <p>Descontos</p>
+                    <p-inputSwitch
+                        formControlName="enabled"
+                        (onChange)="toggleSwitchFields(
+                            ['discount.limitDay', 'discount.amount'],
+                            carnetForm.get('discount.enabled')?.value
+                            )"
+                        class="mr-2"
+                    ></p-inputSwitch>
+                </div>
+                <div class="discount--fields grid pt-6">
+                    <div class="field col-12 md:col-6">
+                        <label for="limitDay">Dia limite do desconto</label>
+                        <p-inputNumber
+                            placeholder="Dia do vencimento"
+                            id="limitDay"
+                            [min]="actualDate.getDate()"
+                            [max]="31"
+                            [useGrouping]="false"
+                            formControlName="limitDay"
+                        ></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="amount">Valor do desconto</label>
+                        <p-inputNumber 
+                            mode="currency" 
+                            currency="BRL"
+                            id="amount"
+                            placeholder="R$ 0,00"
+                            formControlName="amount"
+                        ></p-inputNumber>
+                    </div>
+                </div>
+            </div>
+            <div class="fees col-6" formGroupName="fees">
+                <div class="header-title">
+                    <p>Juros e multas</p>
+                    <p-inputSwitch
+                        formControlName="enabled"
+                        (onChange)="toggleSwitchFields(
+                            ['fees.penaltyRate', 'fees.interestRate'],
+                            carnetForm.get('fees.enabled')?.value
+                            )"
+                        class="mr-2"
+                    ></p-inputSwitch>
+                </div>
+                <div class="fees--fields grid pt-6">
+                    <div class="field col-12 md:col-6">
+                        <label for="carnetPenaltyRate">Percentual de multa</label>
+                        <p-inputNumber
+                            suffix="%"
+                            id="carnetPenaltyRate"
+                            [max]="100"
+                            [min]="1"
+                            placeholder="0%"
+                            [maxFractionDigits]="2"
+                            formControlName="penaltyRate"
+                        ></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="carnetInterestRate">Percentual juros (mês)</label>
+                        <p-inputNumber
+                            suffix="%"
+                            id="carnetInterestRate"
+                            [max]="100"
+                            [min]="1"
+                            placeholder="0%"
+                            [maxFractionDigits]="2"
+                            formControlName="interestRate"
+                        ></p-inputNumber>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field col-11">
+            <label for="messages">Mensagens</label>
+            <input
+                type="messages"
+                id="messages"
+                pInputText
+                placeholder="Escreva uma mensagem no boleto"
+                #carnetInputMessages
+            />
+        </div>
+        <div class="field col-1 message-button mt-6">
+            <a (click)="addMessage(carnetInputMessages)"><i class="pi pi-plus"></i></a>
+        </div>
+
+        <div class="field col-12 py-6" *ngIf="messages.length">
+            <table class="message-list-table">
+                <thead>
+                <th>Mensagem</th>
+                <th style="width: 10%"></th>
+                </thead>
+        
+                <tbody>
+                <tr *ngFor="let message of messages; let i = index">
+                    <td>
+                    {{ message }}
+                    </td>
+        
+                    <td>
+                    <button
+                        pTooltip="Remover"
+                        tooltipPosition="left"
+                        (click)="removeMessage(i)"
+                    >
+                        <i class="pi pi-trash"></i>
+                    </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+
+    <div *ngIf="bankSlips.length"
+        class="form--installments col-12"
+        >
+        <div class="header-title">
+            <p>Parcelas</p>
+        </div>
+        <div class="installments mt-6">
+            <p-accordion [multiple]="true">
+                <p-accordionTab *ngFor="let bankSlip of bankSlips;let w = index"
+                    header="Parcela {{ bankSlip.installmentNumber }}">
+                    <div class="field col-6 md:col-3">
+                        <label for="installmentValue">Valor da parcela</label>
+                        <p-inputNumber 
+                            mode="currency" 
+                            currency="BRL"
+                            id="installmentValue"
+                            placeholder="R$ 0,00"
+                            [(ngModel)]="bankSlip.amount"
+                        ></p-inputNumber>
+                    </div>
+                    <div class="field col-6 md:col-3">
+                        <label for="dueDate">Data de vencimento</label>
+                        <p-calendar 
+                            id="dueDate"
+                            dateFormat="dd/mm/yy"
+                            placeholder="Escolha a data"
+                            [(ngModel)]="bankSlip.dueDate"
+                        ></p-calendar>
+                    </div>
+                    <div class="field col-6 md:col-3">
+                        <label for="discountValue">Valor do desconto</label>
+                        <p-inputNumber 
+                            mode="currency" 
+                            currency="BRL"
+                            id="discountValue"
+                            placeholder="R$ "
+                            [(ngModel)]="bankSlip.discount.amount"
+                        ></p-inputNumber>
+                    </div>
+                    <div class="field col-6 md:col-3">
+                        <label for="limitDueDate">Data limite do desconto</label>
+                        <p-calendar 
+                            id="limitDueDate"
+                            dateFormat="dd/mm/yy"
+                            placeholder="Escolha a data"
+                            [(ngModel)]="emptyDate[w]"
+                        ></p-calendar>
+                    </div>
+                </p-accordionTab>
+            </p-accordion>
+        </div>
+    </div>
+</ng-container>

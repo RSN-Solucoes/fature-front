@@ -1,0 +1,187 @@
+.invoice-navbar {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: space-between;
+    .invoice-navbar__title {
+        display: flex;
+        align-items: center;
+        a {
+            cursor: pointer;
+            i {
+                border: solid 1px var(--black);
+                font-size: 2rem;
+                border-radius: 50px;
+                padding: 5px;
+            }
+        }
+        span {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-left: 1.5rem;
+        }
+    }
+}
+.invoices {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 6rem;
+    margin-bottom: 2rem;
+    .invoices--header {
+        p {
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+    }
+    .invoices--form {
+        label {
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+    }
+    .invoices--footer {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+.header-title {
+    display: flex;
+    justify-content: space-between;
+    p {
+        font-size: 1.6rem;
+        font-weight: bold;
+    }
+}
+
+.field .field--button {
+    display: flex;
+    flex-direction: row;
+    button {
+        width: 8rem;
+        margin-left: 1rem;
+        font-size: 1.4rem;
+    }
+}
+
+.invoice-product {
+    .invoice-product__new-button {
+        button {
+            height: 48px;
+            font-weight: 500;
+            display: flex;
+            justify-content: center;
+            i {
+                margin-right: 1rem;
+                font-size: 1.3rem;
+            }
+        }
+    }
+    .products-list {
+        width: 100%;
+    }
+}
+.payment-method {
+    .payment-method__buttons {
+        display: flex;
+        border-bottom: solid 3px var(--line);
+        a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: solid 2px var(--line);
+            border-radius: 8px;
+            margin-right: 3rem;
+            padding-top: 2rem;
+            height: 120px;
+            width: 110px;
+            cursor: pointer;  
+            img {
+                height: 42px;
+            }
+            span {
+                font-size: 1.4rem;
+                margin-top: 2rem;
+            }
+        }
+        .payment-method__buttons--active {
+            border: solid 2px var(--primary);
+            transition: .3s;
+        }
+    }
+    .payment-method--add-button {
+        a {
+            display: flex;
+            justify-content: center;
+            border: dashed 3px #c2c2c2;
+            padding: 0;
+            i {
+                font-size: 1.6rem;
+                font-weight: bold;
+            }
+        }
+    }
+    .payment-methods--form {
+        .form-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            span {
+                font-size: 1.5rem;
+            }
+            .form-header__buttons {
+                span {
+                    margin: 0 1rem;
+                    font-size: 1.6rem;
+                }
+            }
+        }
+        .message-button {
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            a {
+                border: solid 2px black;
+                cursor: pointer;
+                border-radius: 120px;
+                i {
+                    font-size: 1.4rem;
+                    font-weight: 600;
+                    padding: 5px;
+                }
+            }
+        }
+        .qrCode {
+            display: flex;
+            align-items: center;
+            img {
+                height: 110px;
+                filter: blur(2px);
+            }
+            span {
+                margin-left: 2rem;
+                font-size: 1.6rem;
+                font-weight: bolder;
+                filter: blur(2px);
+            }
+        }
+    }
+    .form--installments {
+        .installments {
+            .installments-field {
+                border: solid 2px var(--line);
+                .installments-field--header {
+                    display: flex;
+                    justify-content: space-between;
+                    span {
+                        font-size: 1.6rem;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+}

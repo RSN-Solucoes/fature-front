@@ -29,6 +29,20 @@
   border-color: darken($color: #1b1b1b, $amount: 5) !important;
 }
 
+.disabled-form-button {
+  width: auto;
+  height: 48px;
+  border-radius: 3px;
+  font-size: 1.4rem;
+  font-weight: 300;
+  padding: 10px 20px;
+  background-color: var(--black);
+  border: solid 1px var(--black);
+  color: #fff;
+  cursor: pointer;
+  opacity: 0.3;
+}
+
 .secondary-form-button {
   width: auto;
   height: 48px;
@@ -63,9 +77,169 @@
   }
 }
 
+.line-button {
+  width: auto;
+  height: auto;
+  border-radius: 3px;
+  font-size: 1.4rem;
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  color: #000;
+  cursor: pointer;
+}
+
+.line-button:hover {
+  width: auto;
+  height: auto;
+  border-radius: 3px;
+  font-size: 1.4rem;
+  padding: 10px 20px;
+  background-color: var(--line) !important;
+  border: none !important;
+  color: #000 !important;
+  cursor: pointer;
+  transition: .3s;
+  text-align: center;
+}
+
 label {
   span {
     color: #ff0000;
     font-size: 1.4rem;
   }  
+}
+
+.item-list-table {
+  width: 100%;
+  padding-bottom: 1rem;
+  border-collapse: collapse;
+  thead th {
+    padding: 1rem 0;
+    font-size: 1.4rem;
+    text-align: start;
+  }
+  tbody tr:last-of-type {
+    border-top: solid 2px #d2d2d2;
+  }
+  tbody tr {
+    td {
+      padding: 1.5rem 0;
+      font-size: 1.2rem;
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        i {
+          font-size: 1.4rem;
+        }
+      }
+      button:hover  {
+        i {
+          color: red;
+        }
+      }
+      span {
+        font-size: 1.4rem;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.message-list-table {
+  width: 100%;
+  padding-bottom: 1rem;
+  border-collapse: collapse;
+  thead th {
+    padding: 1rem 0;
+    font-size: 1.4rem;
+    text-align: start;
+  }
+  tbody tr {
+    td {
+      padding: 1.5rem;
+      font-size: 1.2rem;
+      border-bottom: 1pt solid #D2D2D2;
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        i {
+          font-size: 1.4rem;
+        }
+      }
+      button:hover  {
+        i {
+          color: red;
+        }
+      }
+      span {
+        font-size: 1.4rem;
+        font-weight: bold;
+      }
+    }
+    td:last-of-type {
+      text-align: center;
+    }
+  }
+}
+
+
+// Payment Methods Forms
+
+.payment-methods--form {
+  .header-title {
+      display: flex;
+      justify-content: space-between;
+      p {
+          font-size: 1.6rem;
+          font-weight: bold;
+      }
+  }
+  .form-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      span {
+          font-size: 1.5rem;
+      }
+      .form-header__buttons {
+          span {
+              margin: 0 1rem;
+              font-size: 1.6rem;
+          }
+      }
+  }
+  .message-button {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      a {
+          border: solid 2px black;
+          cursor: pointer;
+          border-radius: 120px;
+          i {
+              font-size: 1.4rem;
+              font-weight: 600;
+              padding: 5px;
+          }
+      }
+  }
+  .qrCode {
+      display: flex;
+      align-items: center;
+      img {
+          height: 110px;
+          filter: blur(2px);
+      }
+      span {
+          margin-left: 2rem;
+          font-size: 1.6rem;
+          font-weight: bolder;
+          filter: blur(2px);
+      }
+  }
 }

@@ -47,4 +47,8 @@ export class DynamicPipe implements PipeTransform {
   date(value: string) {
     return new Date(value).toLocaleDateString();
   }
+
+  paid(value: boolean) {
+    return value == true ? "Pago" : "Não pago";
+  }
 }

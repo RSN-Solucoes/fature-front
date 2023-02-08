@@ -1,0 +1,369 @@
+<app-navbar>
+    <div class="invoice-navbar">
+        <div class="invoice-navbar__title">
+            <a (click)="cancel()"><i class="pi pi-angle-left"></i></a>
+            <span>
+                {{ invoiceId ? '' : 'Nova'}} Fatura
+            </span>
+        </div>
+
+        <div class="invoice-navbar__submit">
+            <button
+                type="button"
+                [class]="!formSubmited ? 'primary-form-button' : 'disabled-form-button'"
+                (click)="submitForm()"
+                [disabled]="formSubmited"
+                >
+                <i class="pi pi-plus pr-2">
+                </i>
+                {{ invoiceId ? 'Atualizar' : 'Criar'}} Fatura
+            </button>
+        </div>
+    </div>
+</app-navbar>
+
+<div class="content">
+    <div class="invoices client-data">
+        <div class="invoices--header header-title">
+            <p>Dados do cliente</p>
+        </div>
+        <form class="invoices--form my-6 grid">
+            <div class="field col-12 md:col-6">
+                <label for="client">Cliente <span>*</span></label>
+                <p-dropdown
+                    [(ngModel)]="selectedClient"
+                    placeholder="Busque pelo nome, CPF ou CNPJ"
+                    [options]="clients"
+                    optionLabel="name"
+                    name="client"
+                    filterBy="name"
+                    [filter]="true"
+                    (onChange)="selectClient(clientDropdown.value)"
+                    #clientDropdown
+                ></p-dropdown>
+            </div>
+            <div class="field col-12 md:col-6" [formGroup]="clientDataForm">
+                <label for="corporateReason">Razão social</label>
+                <input
+                    type="text"
+                    id="corporateReason"
+                    formControlName="name"
+                    pInputText
+                    placeholder="Razão social do cliente"
+                />
+            </div>
+            <div class="field col-12 md:col-4" [formGroup]="clientDataForm">
+                <label for="email">E-mail</label>
+                <input
+                    type="email"
+                    id="email"
+                    formControlName="email"
+                    pInputText
+                    placeholder="E-mail para envio"
+                />
+            </div>
+            <div class="field col-12 md:col-4" [formGroup]="clientDataForm">
+                <label for="tel">Contato</label>
+                <input
+                    type="text"
+                    id="tel"
+                    formControlName="tel"
+                    pInputText
+                    placeholder="Telefone ou celular"
+                    mask="(00) 0 0000-0000||(00) 0000-0000"
+                />
+            </div>
+            <div class="field col-12 md:col-4" [formGroup]="clientDataForm">
+                <label for="cep">CEP</label>
+                <input
+                    type="text"
+                    id="cep"
+                    formControlName="cep"
+                    pInputText
+                    placeholder="Digite o CEP de envio"
+                    mask="00000-000"
+                />
+            </div>
+            <div class="field col-8 md:col-6" [formGroup]="clientDataForm">
+                <label for="address">Logradouro</label>
+                <input
+                    type="text"
+                    id="address"
+                    formControlName="address"
+                    pInputText
+                    placeholder="Rua, avenida..."
+                />
+            </div>
+            <div class="field col-4 md:col-2" [formGroup]="clientDataForm">
+                <label for="addressNumber">Número</label>
+                <p-inputNumber
+                    placeholder="Número"
+                    id="addressNumber"
+                    formControlName="addressNumber"
+                    [useGrouping]="false"
+                >
+                </p-inputNumber>
+            </div>
+            <div class="field col-12 md:col-4" [formGroup]="clientDataForm">
+                <label for="addressComplement">Complemento</label>
+                <input
+                    type="text"
+                    id="addressComplement"
+                    formControlName="addressComplement"
+                    pInputText
+                    placeholder="Apartamento, bloco..."
+                />
+            </div>
+            <div class="field col-12 md:col-4" [formGroup]="clientDataForm">
+                <label for="district">Bairro</label>
+                <input
+                    type="text"
+                    id="district"
+                    formControlName="district"
+                    pInputText
+                    placeholder="Bairro"
+                />
+            </div>
+            <div class="field col-12 md:col-4" [formGroup]="clientDataForm">
+                <label for="state">Estado</label>
+                <p-dropdown
+                    [options]="ufSelectItems"
+                    optionLabel="name"
+                    optionValue="uf"
+                    placeholder="Estado"
+                    formControlName="uf"
+                    filterBy="name"
+                    [filter]="true"
+                >
+                </p-dropdown>
+            </div>
+            <div class="field col-12 md:col-4" [formGroup]="clientDataForm">
+                <label for="city">Cidade</label>
+                <input
+                    type="text"
+                    id="city"
+                    formControlName="city"
+                    pInputText
+                    placeholder="Cidade"
+                />
+            </div>
+        </form>
+    </div>
+
+    <div class="invoices invoice-product">
+        <div class="invoices--header">
+            <p>Produto da cobrança</p>
+        </div>
+        <form class="invoices--form my-6 grid">
+            <div class="field col-5 md:col-8">
+                <label for="client">Produtos <span>*</span></label>
+                <p-dropdown
+                    [options]="productsServices"
+                    optionLabel="name"
+                    name="client"
+                    filterBy="label"
+                    [filter]="true"
+                    placeholder="Busque o produto"
+                    (onChange)="productQuantity.value = ''"
+                    #productDropdown
+                ></p-dropdown>
+            </div>
+            <div class="field col-4 md:col-2">
+                <label for="quantity">Quantidade <span>*</span></label>
+                <input 
+                    type="text"
+                    pInputText
+                    id="quantity"
+                    placeholder="Quantidade"
+                    (change)="calculateProductValue(
+                        productDropdown, 
+                        productQuantity,
+                        productValue
+                    )"
+                    mask="00"
+                    #productQuantity
+                />
+            </div>
+            <div class="field col-3 md:col-2">
+                <label for="price">Valor final</label>
+                <p-inputNumber 
+                    mode="currency" 
+                    currency="BRL"
+                    id="price"
+                    placeholder="R$ 0,00"
+                    [disabled]="true"
+                    #productValue
+                ></p-inputNumber>
+            </div>
+            <div class="field col-12 invoice-product__new-button mt-4">
+                <button
+                    pButton
+                    type="button" 
+                    class="line-button"
+                    [disabled]="disabledProductButton"
+                    (click)="addProduct(productDropdown, productQuantity, productValue)"
+                    ><i class="pi pi-plus">
+                    </i>Adicionar Produto
+                </button>
+            </div>
+            <div class="field col-12" *ngIf="selectedProducts.length">
+                <div class="products-list">
+                    <table class="item-list-table">
+                        <thead>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Valor</th>
+                        <th>Ações</th>
+                        </thead>
+                
+                        <tbody>
+                        <tr *ngFor="let product of selectedProducts; let i = index">
+                            <td>
+                                {{ product.name }}
+                            </td>
+    
+                            <td>
+                                {{ product.quantity }}
+                            </td>
+    
+                            <td>
+                                {{ product.price | currency:'BRL' }}
+                            </td>
+                
+                            <td>
+                                <button
+                                    pTooltip="Remover"
+                                    tooltipPosition="left"
+                                    (click)="removeProduct(i)"
+                                >
+                                    <i class="pi pi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>Valor total</span>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <span>{{ invoiceAmount | currency:'BRL' }}</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="invoices invoice-info">
+        <div class="invoices--header">
+            <p>Informações da cobrança</p>
+        </div>
+        <form class="invoices--form my-6 grid" [formGroup]="form">
+            <div class="field col-12 md:col-3" formGroupName="billing">
+                <label for="referringDate">Data referente <span>*</span></label>
+                <p-calendar 
+                    id="referringDate"
+                    formControlName="referringDate"
+                    dateFormat="dd/mm/yy"
+                    placeholder="Escolha a data"
+                ></p-calendar>
+            </div>
+            <div class="field col-12 md:col-3" formGroupName="billing">
+                <label for="dueDate">Data de vencimento <span>*</span></label>
+                <p-calendar 
+                    id="dueDate"
+                    formControlName="dueDate"
+                    dateFormat="dd/mm/yy"
+                    placeholder="Escolha a data"
+                    [minDate]="actualDate"
+                ></p-calendar>
+            </div>
+            <div class="field col-12 md:col-6" formGroupName="billing">
+                <label for="reference">Referência</label>
+                <input
+                    type="text"
+                    id="reference"
+                    formControlName="reference"
+                    pInputText
+                    placeholder="Descrição"
+                />
+            </div>
+        </form>
+    </div>
+
+    <div class="invoices payment-method">
+        <div class="invoices--header">
+            <p>Métodos de pagamento</p>
+        </div>
+        <div class="payment-method__buttons my-6 pb-6">
+            <a
+                *ngFor="let formMethods of selectedMethods; let y = index"
+                [ngClass]="{
+                    'payment-method__buttons--active': displayForm === formMethods.value
+                }"
+                (click)="showPaymentMethodForm(formMethods.value)"
+                ><img [src]="formMethods.src" [alt]="formMethods.name">
+                <span>{{ formMethods.name }}</span>
+            </a>
+
+            <div class="payment-method--add-button">
+                <a *ngIf="paymentMethods.length" (click)="op.toggle($event)">
+                    <i class="pi pi-plus"></i>
+                </a>
+                <p-overlayPanel #op>
+                    <ng-template pTemplate>
+                        <a
+                            *ngFor="let methods of paymentMethods; let j = index"
+                            class="payment-methods"
+                            (click)="addPaymentMethod(j, op, methods.value)"
+                            ><img [src]="methods.src" [alt]="methods.name">
+                            <span>{{ methods.name }}</span>
+                        </a>
+                    </ng-template>
+                </p-overlayPanel>
+            </div>
+        </div>
+
+        <app-bankslip-form
+            *ngIf="displayForm == 'bankSlip'"
+            [invoice]="form.getRawValue()"
+            [formValue]="bankSlipFormValues"
+            (removeMethod)="removePaymentMethod($event)"
+            (bankSlipFormData)="patchFormData($event, 'bankSlip')"
+        >
+        </app-bankslip-form>
+        <app-credit-form
+            *ngIf="displayForm == 'creditCard'"
+            [formValue]="creditCardFormValues"
+            (removeMethod)="removePaymentMethod($event)"
+            (creditCardFormData)="patchFormData($event, 'creditCard')"
+        >
+        </app-credit-form>
+        <app-debit-form
+            *ngIf="displayForm == 'debitCard'"
+            [formValue]="debitCardFormValues"
+            (removeMethod)="removePaymentMethod($event)"
+            (debitCardFormData)="patchFormData($event, 'debitCard')"
+        >
+        </app-debit-form>
+        <app-pix-form
+            *ngIf="displayForm == 'pix'"
+            [invoice]="form.getRawValue()"
+            [formValue]="pixFormValues"
+            (removeMethod)="removePaymentMethod($event)"
+            (pixFormData)="patchFormData($event, 'pix')"
+        >
+        </app-pix-form>
+        <app-carnet-form
+            *ngIf="displayForm == 'carnet'"
+            [invoice]="form.getRawValue()"
+            [formValue]="carnetFormValues"
+            (removeMethod)="removePaymentMethod($event)"
+            (carnetFormData)="patchFormData($event, 'carnet')"
+        >
+        </app-carnet-form>
+    </div>
+</div>

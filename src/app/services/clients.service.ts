@@ -20,8 +20,8 @@ export class ClientsService extends BaseHttpService {
     return this.get(`${this.API_BASE}/users/${id}`);
   }
 
-  getClients(): Observable<any> {
-    return this.get(`${this.API_BASE}/users`);
+  getClients(pagination: string): Observable<any> {
+    return this.get(`${this.API_BASE}/users?${pagination}`);
   }
 
   createClient(body: I_Client): Observable<any> {
