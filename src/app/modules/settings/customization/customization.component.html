@@ -1,0 +1,81 @@
+<div class="customization mt-6 grid">
+    <div class="col-6 form">
+        <div class="customization--header">
+            <p>Customização</p>
+
+            <span>Customize os e-mails e páginas enviadas para os clientes</span>
+        </div>
+
+        <form class="customization--form pt-6 grid">
+            <div class="field col-6 md:col-2">
+                <label for="logo">Logo</label>
+                <p-fileUpload
+                    id="logo"
+                    mode="basic"
+                    name="logo" 
+                    url="./upload.php" 
+                    accept="image/*"
+                ></p-fileUpload>
+            </div>
+            <div class="field col-6 md:col-4">
+                <label for="imageBackground">Papel de parede</label>
+                <p-fileUpload
+                    id="imageBackground"
+                    mode="basic"
+                    name="imageBackground" 
+                    url="./upload.php" 
+                    accept="image/*"
+                ></p-fileUpload>
+            </div>
+            <div class="field col-12 md:col-6 color">
+                <label for="imageBackground">Cores</label>
+                <div class="color-picker--choose">
+                    <div class="color-picker--background">
+                        <p-colorPicker #colorPickerBackground format="hex"></p-colorPicker>
+                        <span>Fundo</span>          
+                    </div>
+                    <div class="color-picker--button">
+                        <p-colorPicker #colorPickerButton format="hex"></p-colorPicker>
+                        <span>Botão</span>          
+                    </div>
+                </div>
+            </div>
+            <div class="field col-12">
+                <label for="url">URL Customizada</label>
+                <input
+                    type="text"
+                    id="url"
+                    pInputText
+                    placeholder="Exemplo: Raipp-Studio"
+                />
+            </div>
+        </form>
+
+        <div class="customization--footer">
+            <button 
+                type="button" 
+                class="secondary-form-button"
+                (click)="clearForm()"
+                >
+                Limpar tudo
+            </button>
+            <button 
+                type="button" 
+                class="primary-form-button ml-5"
+                (click)="submitForm()"
+                >
+                Salvar modelo
+            </button>
+        </div>
+    </div>
+    <div class="col-6 customization-page">
+        <a class="customization-page--link">
+            <span>Visualize a URL da página</span>
+
+            <i class="pi pi-angle-right"></i>
+        </a>
+        <div class="customization-page--preview">
+
+        </div>
+    </div>
+</div>

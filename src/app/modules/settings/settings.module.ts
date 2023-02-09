@@ -1,3 +1,5 @@
+import { CustomizationModule } from './customization/customization.module';
+import { BankDataModule } from './bank-data/bank-data.module';
 import { SettingsComponent } from './settings.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -16,8 +18,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     TableModule,
     NavbarModule,
     TabViewModule,
-    DropdownModule,
-    InputNumberModule,
+    BankDataModule,
+    CustomizationModule,
   ],
   exports: [SettingsComponent]
 })

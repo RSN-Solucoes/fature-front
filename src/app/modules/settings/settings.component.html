@@ -14,104 +14,15 @@
 
 <div class="content">
     <p-tabView>
-        <p-tabPanel header="Customização" [disabled]="true">
+        <p-tabPanel header="Customização">
+            <app-customization></app-customization>
         </p-tabPanel>
         <p-tabPanel header="Modelo de e-mails" [disabled]="true">
         </p-tabPanel>
         <p-tabPanel header="Colaboradores" [disabled]="true">
         </p-tabPanel>
         <p-tabPanel header="Dados bancários" [selected]="true">
-            <div class="bank-data form mt-6">
-                <div class="bank-data--header">
-                    <p>Dados da conta</p>
-                </div>
-                <form class="bank-data--form pt-6 grid">
-                    <div class="field col-6 md:col-4">
-                        <label for="agency">Agência</label>
-                        <p-dropdown
-                            id="agency"
-                            [options]="agencyOptions"
-                            placeholder="Escolha a agência"
-                            optionLabel="name"
-                            optionValue="name"
-                        >
-                        </p-dropdown>
-                    </div>
-                    <div class="field col-6 md:col-2">
-                        <label for="agencyDigit">Dígito da agência</label>
-                        <p-inputNumber
-                            placeholder="Ex: 51"
-                            id="agencyDigit"
-                            [useGrouping]="false"
-                        > 
-                        </p-inputNumber>
-                    </div>
-                    <div class="field col-6 md:col-4">
-                        <label for="currentAccount">Conta corrente</label>
-                        <p-inputNumber
-                            id="currentAccount"
-                            [useGrouping]="false"
-                            placeholder="Número da conta corrente"
-                        > 
-                        </p-inputNumber>
-                    </div>
-                    <div class="field col-6 md:col-2">
-                        <label for="currentAccountDigit">Dígito da conta</label>
-                        <p-inputNumber
-                            placeholder="Ex: 51"
-                            id="agencyDigit"
-                            [useGrouping]="false"
-                        > 
-                        </p-inputNumber>
-                    </div>
-                    <div class="field col-12 md:col-3">
-                        <label for="accountType">Tipo da conta</label>
-                        <p-dropdown
-                            id="accountType"
-                            [options]="accountType"
-                            optionLabel="name"
-                            placeholder="Conta corrente"
-                        >
-                        </p-dropdown>
-                    </div>
-                    <div class="field col-6 md:col-3">
-                        <label for="frequency">Frequencia de repasse</label>
-                        <p-dropdown
-                            id="frequency"
-                            [options]="frequency"
-                            optionLabel="title"
-                            placeholder="Mensal"
-                        >
-                        </p-dropdown>
-                    </div>
-                    <div class="field col-6 md:col-2">
-                        <label for="day">Dia</label>
-                        <p-inputNumber
-                            id="day"
-                            [useGrouping]="false"
-                            placeholder="1"
-                        > 
-                        </p-inputNumber>
-                    </div>
-                </form>
-
-                <div class="bank-data--footer">
-                    <button 
-                      type="button" 
-                      class="secondary-form-button"
-                      (click)="clearForm()"
-                      >
-                      Limpar
-                    </button>
-                    <button 
-                      type="button" 
-                      class="primary-form-button ml-5"
-                      (click)="submitForm()"
-                      >
-                      Salvar
-                    </button>
-                  </div>
-            </div>
+            <app-bank-data></app-bank-data>
         </p-tabPanel>
         <p-tabPanel header="Dados da empresa" [disabled]="true">
         </p-tabPanel>

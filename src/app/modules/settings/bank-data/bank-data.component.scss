@@ -1,0 +1,26 @@
+.bank-data {
+    width: 100%;
+    padding: 6rem;
+    background-color: #fff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    label {
+        font-weight: 400;
+        margin-bottom: 1rem;
+    }
+    .bank-data--header {
+        p {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #000;
+        }
+    }
+    .bank-data--form {
+        display: flex;
+    }
+    .bank-data--footer {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
