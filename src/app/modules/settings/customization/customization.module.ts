@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomizationComponent } from './customization.component';
 
 import { FileUploadModule } from 'primeng/fileupload';
@@ -16,6 +17,8 @@ import { InputTextModule } from 'primeng/inputtext';
     FileUploadModule,
     ColorPickerModule,
     InputTextModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [CustomizationComponent]
 })

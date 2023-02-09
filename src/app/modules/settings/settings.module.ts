@@ -8,8 +8,6 @@ import { NavbarModule } from 'src/app/shared/components/navbar/navbar.module';
 
 //PrimeNG
 import { TabViewModule } from 'primeng/tabview';
-import { DropdownModule } from 'primeng/dropdown';
-import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [SettingsComponent],

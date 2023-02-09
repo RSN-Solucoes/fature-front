@@ -6,7 +6,7 @@
             <span>Customize os e-mails e páginas enviadas para os clientes</span>
         </div>
 
-        <form class="customization--form pt-6 grid">
+        <form class="customization--form pt-6 grid" [formGroup]="form">
             <div class="field col-6 md:col-2">
                 <label for="logo">Logo</label>
                 <p-fileUpload
@@ -29,13 +29,23 @@
             </div>
             <div class="field col-12 md:col-6 color">
                 <label for="imageBackground">Cores</label>
-                <div class="color-picker--choose">
+                <div class="color-picker--choose" formGroupName="color">
                     <div class="color-picker--background">
-                        <p-colorPicker #colorPickerBackground format="hex"></p-colorPicker>
+                        <p-colorPicker 
+                            format="hex"
+                            formControlName="background"
+                            (onChange)="updateColorField(colorPickerBackground.inputBgColor, 'background')"
+                            #colorPickerBackground
+                        ></p-colorPicker>
                         <span>Fundo</span>          
                     </div>
                     <div class="color-picker--button">
-                        <p-colorPicker #colorPickerButton format="hex"></p-colorPicker>
+                        <p-colorPicker
+                            formControlName="button"
+                            format="hex"
+                            (onChange)="updateColorField(colorPickerButton.inputBgColor, 'button')"
+                            #colorPickerButton
+                        ></p-colorPicker>
                         <span>Botão</span>          
                     </div>
                 </div>
