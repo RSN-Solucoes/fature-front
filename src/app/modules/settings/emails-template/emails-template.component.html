@@ -1,0 +1,15 @@
+<div class="emails-template mt-6">
+    <div class="emails-template--header">
+        <p>E-mail que seu cliente receberá</p>
+    </div>
+
+    <div class="emails-template--content">
+        <a  *ngFor="let template of emailTemplates; let i = index"
+            class="emails-template--content_options my-5"
+            >
+            <img [src]="template.src" [alt]="template.title">
+
+            <span>{{ template.title }}</span>
+        </a>
+    </div>
+</div>

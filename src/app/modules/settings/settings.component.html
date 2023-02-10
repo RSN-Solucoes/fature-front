@@ -17,14 +17,17 @@
         <p-tabPanel header="Customização">
             <app-customization></app-customization>
         </p-tabPanel>
-        <p-tabPanel header="Modelo de e-mails" [disabled]="true">
+        <p-tabPanel header="Modelo de e-mails">
+            <app-emails-template></app-emails-template>
         </p-tabPanel>
-        <p-tabPanel header="Colaboradores" [disabled]="true">
+        <p-tabPanel header="Colaboradores">
+            <app-users></app-users>
         </p-tabPanel>
         <p-tabPanel header="Dados bancários">
             <app-bank-data></app-bank-data>
         </p-tabPanel>
-        <p-tabPanel header="Dados da empresa" [disabled]="true">
+        <p-tabPanel header="Dados da empresa">
+            <app-company-data></app-company-data>
         </p-tabPanel>
     </p-tabView>
 </div>
