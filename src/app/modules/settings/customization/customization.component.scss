@@ -21,12 +21,11 @@
         .customization--form {
             .color-picker--choose {
                 display: flex;
-                justify-content: start;
                 div {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    margin-left: 4rem;
+                    margin-right: 3rem;
                     p-colorpicker {
                         width: 50px;
                         height: 45px;
@@ -61,8 +60,56 @@
         }
         .customization-page--preview {
             min-height: 100px;
-            height: auto;
-            background-color: var(--line);
+            height: 100%;
+            background-color: #c2c2c2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            .page-content {
+                background: #fff;
+                border-radius: 10px;
+                padding: 2rem 2rem;
+                .page-content--title {
+                    display: flex;
+                    align-items: center;
+                    div {
+                        background: #c2c2c2;
+                        border-radius: 50%;
+                        padding: 18px 13px;
+                        p {
+                            font-size: 1.2rem;
+                            font-weight: 700;
+                            color: #000;
+                        }
+                    }
+                    span {
+                        font-size: 1.4rem;
+                        font-weight: 700;
+                        margin-left: 3rem;
+                    }
+                }
+                .page-content--main {
+                    .line {
+                        height: 38px;
+                        background-color: #c2c2c2;
+                    }
+                }
+                .page-content--footer {
+                    .button {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 31px;
+                        background: #000;
+                        span {
+                            font-size: 1rem;
+                            color: #fff;
+                            font-weight: 200;
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -7,7 +7,7 @@
         </div>
 
         <form class="customization--form pt-6 grid" [formGroup]="form">
-            <div class="field col-6 md:col-2">
+            <div class="field col-3">
                 <label for="logo">Logo</label>
                 <p-fileUpload
                     id="logo"
@@ -17,7 +17,7 @@
                     accept="image/*"
                 ></p-fileUpload>
             </div>
-            <div class="field col-6 md:col-4">
+            <div class="field col-3">
                 <label for="imageBackground">Papel de parede</label>
                 <p-fileUpload
                     id="imageBackground"
@@ -27,7 +27,7 @@
                     accept="image/*"
                 ></p-fileUpload>
             </div>
-            <div class="field col-12 md:col-6 color">
+            <div class="field col-3">
                 <label for="imageBackground">Cores</label>
                 <div class="color-picker--choose" formGroupName="color">
                     <div class="color-picker--background">
@@ -85,7 +85,25 @@
             <i class="pi pi-angle-right"></i>
         </a>
         <div class="customization-page--preview">
-
+            <div class="page-content">
+                <div class="page-content--title">
+                    <div>
+                        <p>LOGO</p>
+                    </div>
+                    <span>Informações da cobrança</span>
+                </div>
+                <div class="page-content--main my-5 grid">
+                    <div class="col-12 mt-3 line"></div>
+                    <div class="col-6 mt-3 line"></div>
+                    <div class="col-offset-2 col-4 mt-3 line"></div>
+                    <div class="col-10 mt-3 line"></div>
+                </div>
+                <div class="page-content--footer grid py-5">
+                    <div class="col-12 button">
+                        <span>Pagar</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
