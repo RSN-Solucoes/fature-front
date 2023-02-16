@@ -1,3 +1,4 @@
+import { ImageCropperModule } from './../../shared/components/image-cropper/image-cropper.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'src/app/shared/components/table/table.module';
@@ -19,6 +20,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { CompanyDataComponent } from './company-data/company-data.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { EmailsTemplateComponent } from './emails-template/emails-template.component';
+import { DialogModule } from 'primeng/dialog';
 
 
 @NgModule({
@@ -34,6 +36,7 @@ import { EmailsTemplateComponent } from './emails-template/emails-template.compo
     CommonModule,
     TableModule,
     NavbarModule,
+    ImageCropperModule,
     TabViewModule,
     FileUploadModule,
     ColorPickerModule,
@@ -42,7 +45,8 @@ import { EmailsTemplateComponent } from './emails-template/emails-template.compo
     ReactiveFormsModule,
     DropdownModule,
     InputNumberModule,
-    NgxMaskModule
+    NgxMaskModule,
+    DialogModule,
   ],
   exports: [
     BankDataComponent,

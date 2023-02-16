@@ -422,6 +422,9 @@ p-accordion {
       font-weight: 700;
       align-self: center;
     }
+    .p-button-label {
+      display: none;
+    }
   }
   .p-fileupload-choose:hover {
     background: none !important;

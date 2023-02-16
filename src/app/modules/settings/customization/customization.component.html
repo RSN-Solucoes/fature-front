@@ -13,19 +13,95 @@
                     id="logo"
                     mode="basic"
                     name="logo" 
-                    url="./upload.php" 
                     accept="image/*"
+                    (onSelect)="selectLogo()"
+                    #logo
                 ></p-fileUpload>
+
+                <p-dialog 
+                    [(visible)]="displayCropDialog" 
+                    [draggable]="false" 
+                    [resizable]="false"
+                    [closable]="false"
+                    [modal]="true"
+                >
+                    <div class="cropper--content">
+                        <div class="cropper--header">
+                            <p>Cortar imagem</p>
+                        </div>
+
+                        <div class="cropper--main py-6">
+                            <app-image-cropper *ngIf="imageLogoSource"
+                                [src]="imageLogoSource"
+                                (croppedImage)="logoPreviewImage = $event"
+                            ></app-image-cropper>
+                        </div>
+
+                        <div class="cropper--footer">
+                            <button 
+                                type="button" 
+                                class="secondary-form-button"
+                                (click)="cancelImageSelection()"
+                                >
+                                Cancelar
+                            </button>
+                            <button 
+                                type="button" 
+                                class="primary-form-button ml-5"
+                                (click)="this.displayCropDialog = false"
+                                >
+                                Salvar
+                            </button>
+                        </div>
+                    </div>
+                </p-dialog>
             </div>
             <div class="field col-3">
                 <label for="imageBackground">Papel de parede</label>
-                <p-fileUpload
-                    id="imageBackground"
-                    mode="basic"
-                    name="imageBackground" 
-                    url="./upload.php" 
-                    accept="image/*"
-                ></p-fileUpload>
+                <div class="background" (click)="displayDialog = true">
+                    <i class="pi pi-plus"></i>
+                </div>
+
+                <p-dialog 
+                    [(visible)]="displayDialog" 
+                    [draggable]="false" 
+                    [resizable]="false"
+                    [closable]="false"
+                    [modal]="true"
+                >
+                    <div class="background--content">
+                        <div class="dialog--header">
+                            <p>Escolha um plano de fundo</p>
+                        </div>
+
+                        <div class="background--items py-6">
+                            <a *ngFor="let background of customizationBackgrounds; let i = index"
+                            (click)="selectBackground(i)"
+                            [ngClass]="{
+                                'item-active': selectedBackground === background
+                            }"
+                            >
+                                <img [src]="background.src" [alt]="background.title">
+                            </a>
+                        </div>
+
+                        <div class="background--footer">
+                            <button 
+                                type="button" 
+                                class="secondary-form-button"
+                                (click)="displayDialog = false"
+                                >
+                                Cancelar
+                            </button>
+                            <button 
+                                type="button" 
+                                class="primary-form-button ml-5"
+                                >
+                                Escolher
+                            </button>
+                        </div>
+                    </div>
+                </p-dialog>
             </div>
             <div class="field col-3">
                 <label for="imageBackground">Cores</label>
@@ -84,11 +160,11 @@
 
             <i class="pi pi-angle-right"></i>
         </a>
-        <div class="customization-page--preview">
+        <div class="customization-page--preview" style="background: url(../../../../assets/img/customization-background/background-1.png);">
             <div class="page-content">
                 <div class="page-content--title">
-                    <div>
-                        <p>LOGO</p>
+                    <div class="image-logo">
+                        <img [src]="logoPreviewImage" alt="image-logo">
                     </div>
                     <span>Informações da cobrança</span>
                 </div>
