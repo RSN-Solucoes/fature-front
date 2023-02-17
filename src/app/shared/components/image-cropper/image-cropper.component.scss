@@ -5,7 +5,10 @@
         border: solid 2px var(--line);
         img {
             width: auto;
-            max-height: 250px;
+            height: 512px;
+            width: 512px;
+            max-height: 1080px;
+            max-width: 1920px;
         }
     }
     .image-preview {

@@ -1,6 +1,6 @@
 import { CUSTOMIZATION_BACKGROUNDS } from './customization.const';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, ModuleWithComponentFactories, OnInit, ViewChild } from '@angular/core';
 import { FileUpload } from 'primeng/fileupload';
 
 @Component({
@@ -9,16 +9,17 @@ import { FileUpload } from 'primeng/fileupload';
   styleUrls: ['./customization.component.scss']
 })
 export class CustomizationComponent implements OnInit {
-  public displayDialog: boolean = false;
+  public displayBackgroundImageDialog: boolean = false;
+  public defaultBackgroundStyle = "background-color: #c2c2c2";
   public customizationBackgrounds: any = CUSTOMIZATION_BACKGROUNDS;
-  public selectedBackground!: any;
+  public selectedBackgroundImage!: any;
 
   public displayCropDialog: boolean = false;
 
+  public imageLogoSource!: any;
+
   @ViewChild("logo", {static: false})
   public logoUploader!: FileUpload;
-
-  public imageLogoSource!: any;
 
   public logoPreviewImage: any = "assets/img/profile_photo.png";
 
@@ -34,12 +35,10 @@ export class CustomizationComponent implements OnInit {
     this.createCustomizationForm();
   }
 
-  getCroppedImageLogo(event: any) {
-    this.logoPreviewImage = event;
-  }
-
-  createCustomizationForm() {
+  createCustomizationForm(): void {
     this.form = this.fb.group({
+      logo: [null],
+      backgroundImage: [null],
       color: this.fb.group({
         background: [null],
         button: [null]
@@ -48,7 +47,7 @@ export class CustomizationComponent implements OnInit {
     });
   }
 
-  updateColorField(color: string, type: string) {
+  updateColorField(color: string, type: string): void {
     if(type === 'button') {
       this.form.patchValue({
         color: {
@@ -59,13 +58,13 @@ export class CustomizationComponent implements OnInit {
     if(type === 'background') {
       this.form.patchValue({
         color: {
-          background: color
+          background: color,
         }
       });
     };
   }
 
-  selectLogo() {
+  selectLogo(): void {
     this.displayCropDialog = true;
 
     const selectedLogo = this.logoUploader._files;
@@ -82,21 +81,46 @@ export class CustomizationComponent implements OnInit {
     };
   }
 
-  cancelImageSelection() {
-    this.displayCropDialog = false;
+  removeLogo(): void {
+    this.logoPreviewImage = "assets/img/profile_photo.png";
+
+    this.cancelLogoSelection();
+  }
+
+  cancelLogoSelection(): void {
+    if (this.displayCropDialog == true) {
+      this.displayCropDialog = false;
+    }
+
+    this.logoPreviewImage = "assets/img/profile_photo.png";
+    this.imageLogoSource = ""
 
     this.logoUploader.clear();
   }
 
-  selectBackground(index: any) {
-    this.selectedBackground = this.customizationBackgrounds[index];
+  saveCroppedLogo(): void {
+    this.form.get('logo')?.setValue(this.logoPreviewImage);
+
+    this.displayCropDialog = false;
   }
 
-  clearForm() {
-    alert('clear form');
+  selectBackground(index: any): void {
+    this.selectedBackgroundImage = this.customizationBackgrounds[index];
   }
 
-  submitForm() {
+  chooseBackgroundImage(): void {
+    this.defaultBackgroundStyle = this.selectedBackgroundImage.style;
+
+    this.displayBackgroundImageDialog = false;
+  }
+
+  clearForm(): void {
+    this.form.reset();
+
+    this.removeLogo();
+  }
+
+  submitForm(): void {
     alert('submit form');
   }
 

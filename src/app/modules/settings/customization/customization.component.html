@@ -10,6 +10,7 @@
             <div class="field col-3">
                 <label for="logo">Logo</label>
                 <p-fileUpload
+                    *ngIf="logoPreviewImage === 'assets/img/profile_photo.png'"
                     id="logo"
                     mode="basic"
                     name="logo" 
@@ -17,6 +18,20 @@
                     (onSelect)="selectLogo()"
                     #logo
                 ></p-fileUpload>
+
+                <div class="input-logo-preview" *ngIf="logoPreviewImage !== 'assets/img/profile_photo.png'">
+                    <!-- <p-image src="https://primefaces.org/cdn/primeng/images/galleria/galleria1.jpg" 
+                        alt="Image" width="250" [preview]="true" pTooltip="Remover" (onShow)="removeLogo()">
+                        <ng-template pTemplate="indicator">
+                            <i class="pi pi-times"></i>
+                        </ng-template>
+                    </p-image> -->
+                    <img [src]="logoPreviewImage" 
+                        alt="logoInputPreview">
+                    <div class="input-logo-preview_indicator" (click)="removeLogo()" pTooltip="Remover">
+                        <i class="pi pi-times"></i>
+                    </div>
+                </div>
 
                 <p-dialog 
                     [(visible)]="displayCropDialog" 
@@ -31,7 +46,7 @@
                         </div>
 
                         <div class="cropper--main py-6">
-                            <app-image-cropper *ngIf="imageLogoSource"
+                            <app-image-cropper *ngIf="imageLogoSource && displayCropDialog"
                                 [src]="imageLogoSource"
                                 (croppedImage)="logoPreviewImage = $event"
                             ></app-image-cropper>
@@ -41,14 +56,14 @@
                             <button 
                                 type="button" 
                                 class="secondary-form-button"
-                                (click)="cancelImageSelection()"
+                                (click)="cancelLogoSelection()"
                                 >
                                 Cancelar
                             </button>
                             <button 
                                 type="button" 
                                 class="primary-form-button ml-5"
-                                (click)="this.displayCropDialog = false"
+                                (click)="saveCroppedLogo()"
                                 >
                                 Salvar
                             </button>
@@ -58,12 +73,12 @@
             </div>
             <div class="field col-3">
                 <label for="imageBackground">Papel de parede</label>
-                <div class="background" (click)="displayDialog = true">
+                <div class="background" (click)="displayBackgroundImageDialog = true">
                     <i class="pi pi-plus"></i>
                 </div>
 
                 <p-dialog 
-                    [(visible)]="displayDialog" 
+                    [(visible)]="displayBackgroundImageDialog" 
                     [draggable]="false" 
                     [resizable]="false"
                     [closable]="false"
@@ -78,7 +93,7 @@
                             <a *ngFor="let background of customizationBackgrounds; let i = index"
                             (click)="selectBackground(i)"
                             [ngClass]="{
-                                'item-active': selectedBackground === background
+                                'item-active': selectedBackgroundImage === background
                             }"
                             >
                                 <img [src]="background.src" [alt]="background.title">
@@ -89,13 +104,14 @@
                             <button 
                                 type="button" 
                                 class="secondary-form-button"
-                                (click)="displayDialog = false"
+                                (click)="displayBackgroundImageDialog = false"
                                 >
                                 Cancelar
                             </button>
                             <button 
                                 type="button" 
                                 class="primary-form-button ml-5"
+                                (click)="chooseBackgroundImage()"
                                 >
                                 Escolher
                             </button>
@@ -132,6 +148,7 @@
                     type="text"
                     id="url"
                     pInputText
+                    formControlName="url"
                     placeholder="Exemplo: Raipp-Studio"
                 />
             </div>
@@ -160,7 +177,10 @@
 
             <i class="pi pi-angle-right"></i>
         </a>
-        <div class="customization-page--preview" style="background: url(../../../../assets/img/customization-background/background-1.png);">
+        <div class="page-content--background" >
+
+        </div>
+        <div class="customization-page--preview" [style]="defaultBackgroundStyle">
             <div class="page-content">
                 <div class="page-content--title">
                     <div class="image-logo">

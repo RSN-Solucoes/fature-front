@@ -21,6 +21,8 @@ import { CompanyDataComponent } from './company-data/company-data.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { EmailsTemplateComponent } from './emails-template/emails-template.component';
 import { DialogModule } from 'primeng/dialog';
+import { ImageModule } from 'primeng/image';
+import { TooltipModule } from 'primeng/tooltip';
 
 
 @NgModule({
@@ -47,6 +49,8 @@ import { DialogModule } from 'primeng/dialog';
     InputNumberModule,
     NgxMaskModule,
     DialogModule,
+    ImageModule,
+    TooltipModule,
   ],
   exports: [
     BankDataComponent,
