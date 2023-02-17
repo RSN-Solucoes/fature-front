@@ -1,6 +1,6 @@
 import { CUSTOMIZATION_BACKGROUNDS } from './customization.const';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Component, ElementRef, ModuleWithComponentFactories, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FileUpload } from 'primeng/fileupload';
 
 @Component({
@@ -26,6 +26,8 @@ export class CustomizationComponent implements OnInit {
   public color!: string;
   public form!: FormGroup;
 
+  public buttonPreviewStyle!: string;
+
   constructor(
     private fb: FormBuilder,
   ) { 
@@ -47,21 +49,12 @@ export class CustomizationComponent implements OnInit {
     });
   }
 
-  updateColorField(color: string, type: string): void {
-    if(type === 'button') {
-      this.form.patchValue({
-        color: {
-          button: color
-        }
-      });
-    };
-    if(type === 'background') {
-      this.form.patchValue({
-        color: {
-          background: color,
-        }
-      });
-    };
+  updateButtonPreviewColor(color: string): void {
+    this.buttonPreviewStyle = `background-color: ${color}`;
+  }
+
+  updateBackgroundPreviewColor(color: string): void {
+    this.defaultBackgroundStyle = `${this.defaultBackgroundStyle}; background-color: ${color}`;
   }
 
   selectLogo(): void {
@@ -109,7 +102,9 @@ export class CustomizationComponent implements OnInit {
   }
 
   chooseBackgroundImage(): void {
-    this.defaultBackgroundStyle = this.selectedBackgroundImage.style;
+    this.defaultBackgroundStyle = `background: url(${this.selectedBackgroundImage.src})`;
+
+    this.form.get('color.background')?.reset();
 
     this.displayBackgroundImageDialog = false;
   }

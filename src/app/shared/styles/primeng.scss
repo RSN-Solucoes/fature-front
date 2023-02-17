@@ -431,19 +431,3 @@ p-accordion {
     border: none !important;
   }
 }
-
-// ImageModule
-
-p-image {
-  .p-image-preview-container {
-    img {
-      height: 70px;
-      width: 70px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-    .p-image-preview-indicator {
-      border-radius: 50%;
-    }
-  }
-}

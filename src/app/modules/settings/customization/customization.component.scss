@@ -154,11 +154,6 @@
                 padding: 0 5px;
             }
         }
-        .page-content--background {
-            height: 100%;
-            background-color: blue;
-            opacity: 0.5;
-        }
         .customization-page--preview {
             min-height: 100px;
             height: 100%;
@@ -166,6 +161,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            opacity: 0.8;
             .page-content {
                 background: #fff;
                 border-radius: 10px;

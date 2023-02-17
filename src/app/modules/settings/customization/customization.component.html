@@ -20,12 +20,6 @@
                 ></p-fileUpload>
 
                 <div class="input-logo-preview" *ngIf="logoPreviewImage !== 'assets/img/profile_photo.png'">
-                    <!-- <p-image src="https://primefaces.org/cdn/primeng/images/galleria/galleria1.jpg" 
-                        alt="Image" width="250" [preview]="true" pTooltip="Remover" (onShow)="removeLogo()">
-                        <ng-template pTemplate="indicator">
-                            <i class="pi pi-times"></i>
-                        </ng-template>
-                    </p-image> -->
                     <img [src]="logoPreviewImage" 
                         alt="logoInputPreview">
                     <div class="input-logo-preview_indicator" (click)="removeLogo()" pTooltip="Remover">
@@ -126,7 +120,7 @@
                         <p-colorPicker 
                             format="hex"
                             formControlName="background"
-                            (onChange)="updateColorField(colorPickerBackground.inputBgColor, 'background')"
+                            (onChange)="updateBackgroundPreviewColor(colorPickerBackground.inputBgColor)"
                             #colorPickerBackground
                         ></p-colorPicker>
                         <span>Fundo</span>          
@@ -135,7 +129,7 @@
                         <p-colorPicker
                             formControlName="button"
                             format="hex"
-                            (onChange)="updateColorField(colorPickerButton.inputBgColor, 'button')"
+                            (onChange)="updateButtonPreviewColor(colorPickerButton.inputBgColor)"
                             #colorPickerButton
                         ></p-colorPicker>
                         <span>Botão</span>          
@@ -177,9 +171,6 @@
 
             <i class="pi pi-angle-right"></i>
         </a>
-        <div class="page-content--background" >
-
-        </div>
         <div class="customization-page--preview" [style]="defaultBackgroundStyle">
             <div class="page-content">
                 <div class="page-content--title">
@@ -195,7 +186,7 @@
                     <div class="col-10 mt-3 line"></div>
                 </div>
                 <div class="page-content--footer grid py-5">
-                    <div class="col-12 button">
+                    <div class="col-12 button" [style]="buttonPreviewStyle">
                         <span>Pagar</span>
                     </div>
                 </div>
