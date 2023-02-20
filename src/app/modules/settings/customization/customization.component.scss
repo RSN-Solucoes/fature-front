@@ -21,12 +21,12 @@
         .customization--form {
             .input-logo-preview {
                 display: flex;
-                justify-content: center;
+                justify-content: start;
                 img {
                     height: 60px;
-                    width: 60px;
+                    width: auto;
                     object-fit: cover;
-                    border-radius: 50%;
+                    border-radius: 10px;
                 }
                 .input-logo-preview_indicator {                    
                     display: flex;
@@ -72,7 +72,7 @@
                 width: 100%;
                 height: 60px;
                 border: solid 2px #c2c2c2;
-                border-radius: 5px;
+                border-radius: 10px;
                 display: flex;
                 justify-content: center;
                 cursor: pointer;
@@ -181,12 +181,6 @@
                         font-size: 1.4rem;
                         font-weight: 700;
                         margin-left: 3rem;
-                    }
-                }
-                .page-content--main {
-                    .line {
-                        height: 38px;
-                        background-color: #c2c2c2;
                     }
                 }
                 .page-content--footer {

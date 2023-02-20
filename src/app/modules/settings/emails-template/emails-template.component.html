@@ -3,59 +3,12 @@
         <p>E-mail que seu cliente receberá</p>
     </div>
 
-    <div class="emails-template--content grid">
-        <div class="col-12">
+    <div class="emails-template--content">
+        <div *ngFor="let template of emailTemplates">
             <a class="emails-template--content_options my-5">
-                <img [src]="emailTemplates[0].src" [alt]="emailTemplates[0].title">
+                <img [src]="template.src" [alt]="template.title">
 
-                <span>{{ emailTemplates[0].title }}</span>
-            </a>
-            <a class="emails-template--content_options my-5">
-                <img [src]="emailTemplates[1].src" [alt]="emailTemplates[1].title">
-
-                <span>{{ emailTemplates[1].title }}</span>
-            </a>
-            <a class="emails-template--content_options my-5">
-                <img [src]="emailTemplates[2].src" [alt]="emailTemplates[2].title">
-
-                <span>{{ emailTemplates[2].title }}</span>
-            </a>
-            <a class="emails-template--content_options my-5">
-                <img [src]="emailTemplates[3].src" [alt]="emailTemplates[3].title">
-
-                <span>{{ emailTemplates[3].title }}</span>
-            </a>
-            <a class="emails-template--content_options my-5">
-                <img [src]="emailTemplates[4].src" [alt]="emailTemplates[4].title">
-
-                <span>{{ emailTemplates[4].title }}</span>
-            </a>
-        </div>
-        <div class="col-12">
-            <a class="emails-template--content_options my-5">
-                <img [src]="emailTemplates[5].src" [alt]="emailTemplates[5].title">
-
-                <span>{{ emailTemplates[5].title }}</span>
-            </a>
-            <a class="emails-template--content_options my-5">
-                <img [src]="emailTemplates[6].src" [alt]="emailTemplates[6].title">
-
-                <span>{{ emailTemplates[6].title }}</span>
-            </a>
-            <a class="emails-template--content_options my-5">
-                <img [src]="emailTemplates[7].src" [alt]="emailTemplates[7].title">
-
-                <span>{{ emailTemplates[7].title }}</span>
-            </a>
-            <a class="emails-template--content_options my-5">
-                <img [src]="emailTemplates[8].src" [alt]="emailTemplates[8].title">
-
-                <span>{{ emailTemplates[8].title }}</span>
-            </a>
-            <a class="emails-template--content_options my-5">
-                <img [src]="emailTemplates[9].src" [alt]="emailTemplates[9].title">
-
-                <span>{{ emailTemplates[9].title }}</span>
+                <span>{{ template.title }}</span>
             </a>
         </div>
     </div>

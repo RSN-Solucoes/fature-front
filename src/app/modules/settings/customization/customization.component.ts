@@ -14,6 +14,8 @@ export class CustomizationComponent implements OnInit {
   public customizationBackgrounds: any = CUSTOMIZATION_BACKGROUNDS;
   public selectedBackgroundImage!: any;
 
+  public backgroundInputStyle!: any;
+
   public displayCropDialog: boolean = false;
 
   public imageLogoSource!: any;
@@ -103,6 +105,8 @@ export class CustomizationComponent implements OnInit {
 
   chooseBackgroundImage(): void {
     this.defaultBackgroundStyle = `background: url(${this.selectedBackgroundImage.src})`;
+
+    this.backgroundInputStyle = this.defaultBackgroundStyle;
 
     this.form.get('color.background')?.reset();
 

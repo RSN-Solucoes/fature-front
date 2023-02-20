@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, ElementRef, AfterViewInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ElementRef, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import Cropper from 'cropperjs';
 
 @Component({

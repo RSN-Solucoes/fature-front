@@ -406,7 +406,7 @@ p-accordion {
 
 .p-fileupload-basic {
   border: solid 2px #c2c2c2 !important;
-  border-radius: 6px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -429,5 +429,16 @@ p-accordion {
   .p-fileupload-choose:hover {
     background: none !important;
     border: none !important;
+  }
+}
+
+// Color Picker 
+
+p-colorpicker {
+  .p-colorpicker {
+    .p-colorpicker-preview {
+      border-radius: 10px;
+      border: none;
+    }
   }
 }

@@ -22,6 +22,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { EmailsTemplateComponent } from './emails-template/emails-template.component';
 import { DialogModule } from 'primeng/dialog';
 import { TooltipModule } from 'primeng/tooltip';
+import { SkeletonModule } from 'primeng/skeleton';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { TooltipModule } from 'primeng/tooltip';
     NgxMaskModule,
     DialogModule,
     TooltipModule,
+    SkeletonModule,
   ],
   exports: [
     BankDataComponent,
