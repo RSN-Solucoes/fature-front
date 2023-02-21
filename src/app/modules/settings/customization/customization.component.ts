@@ -6,11 +6,11 @@ import { FileUpload } from 'primeng/fileupload';
 @Component({
   selector: 'app-customization',
   templateUrl: './customization.component.html',
-  styleUrls: ['./customization.component.scss']
+  styleUrls: ['./customization.component.scss'],
 })
 export class CustomizationComponent implements OnInit {
   public displayBackgroundImageDialog: boolean = false;
-  public defaultBackgroundStyle = "background-color: #c2c2c2";
+  public defaultBackgroundStyle = 'background-color: #c2c2c2';
   public customizationBackgrounds: any = CUSTOMIZATION_BACKGROUNDS;
   public selectedBackgroundImage!: any;
 
@@ -20,20 +20,17 @@ export class CustomizationComponent implements OnInit {
 
   public imageLogoSource!: any;
 
-  @ViewChild("logo", {static: false})
+  @ViewChild('logo', { static: false })
   public logoUploader!: FileUpload;
 
-  public logoPreviewImage: any = "assets/img/profile_photo.png";
+  public logoPreviewImage: any = 'assets/img/profile_photo.png';
 
   public color!: string;
   public form!: FormGroup;
 
   public buttonPreviewStyle!: string;
 
-  constructor(
-    private fb: FormBuilder,
-  ) { 
-  }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.createCustomizationForm();
@@ -44,8 +41,8 @@ export class CustomizationComponent implements OnInit {
       logo: [null],
       backgroundImage: [null],
       color: this.fb.group({
-        background: [null],
-        button: [null]
+        background: ['#d9d9d9'],
+        button: ['#000'],
       }),
       url: [null],
     });
@@ -64,20 +61,20 @@ export class CustomizationComponent implements OnInit {
 
     const selectedLogo = this.logoUploader._files;
 
-    if(selectedLogo.length > 0) {
+    if (selectedLogo.length > 0) {
       const loadImage = selectedLogo[0];
 
       const read = new FileReader();
 
       read.onload = (loadedArchive: any) => {
         this.imageLogoSource = loadedArchive.target.result;
-      }
+      };
       read.readAsDataURL(loadImage);
-    };
+    }
   }
 
   removeLogo(): void {
-    this.logoPreviewImage = "assets/img/profile_photo.png";
+    this.logoPreviewImage = 'assets/img/profile_photo.png';
 
     this.cancelLogoSelection();
   }
@@ -87,8 +84,8 @@ export class CustomizationComponent implements OnInit {
       this.displayCropDialog = false;
     }
 
-    this.logoPreviewImage = "assets/img/profile_photo.png";
-    this.imageLogoSource = ""
+    this.logoPreviewImage = 'assets/img/profile_photo.png';
+    this.imageLogoSource = '';
 
     this.logoUploader.clear();
   }
@@ -122,5 +119,4 @@ export class CustomizationComponent implements OnInit {
   submitForm(): void {
     alert('submit form');
   }
-
 }

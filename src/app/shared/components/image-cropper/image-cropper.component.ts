@@ -1,32 +1,40 @@
-import { Component, OnInit, ViewChild, Input, ElementRef, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Input,
+  ElementRef,
+  AfterViewInit,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import Cropper from 'cropperjs';
 
 @Component({
   selector: 'app-image-cropper',
   templateUrl: './image-cropper.component.html',
-  styleUrls: ['./image-cropper.component.scss']
+  styleUrls: ['./image-cropper.component.scss'],
 })
 export class ImageCropperComponent implements OnInit, AfterViewInit {
   // Cropper
-  @ViewChild("image", {static: false})
+  @ViewChild('image', { static: false })
   public imageElement!: ElementRef;
 
-  @ViewChild("destinationImage", {static: false})
+  @ViewChild('destinationImage', { static: false })
   public canvas!: ElementRef;
 
-  @Input("src")
+  @Input('src')
   public imageSource!: string;
 
   public imageDestination!: string;
-  
-  @Output() croppedImage: EventEmitter<any> = new EventEmitter;
+
+  @Output() croppedImage: EventEmitter<any> = new EventEmitter();
   private cropper!: Cropper;
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
-    this.imageDestination = "";
+    this.imageDestination = '';
   }
 
   ngAfterViewInit(): void {
@@ -34,6 +42,7 @@ export class ImageCropperComponent implements OnInit, AfterViewInit {
       zoomable: false,
       scalable: false,
       aspectRatio: 1,
+
       crop: () => {
         const canvas = this.cropper.getCroppedCanvas();
 
@@ -44,4 +53,3 @@ export class ImageCropperComponent implements OnInit, AfterViewInit {
     });
   }
 }
-
