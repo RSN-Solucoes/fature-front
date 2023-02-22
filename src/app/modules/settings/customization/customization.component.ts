@@ -105,8 +105,6 @@ export class CustomizationComponent implements OnInit {
 
     this.backgroundInputStyle = this.defaultBackgroundStyle;
 
-    this.form.get('color.background')?.reset();
-
     this.displayBackgroundImageDialog = false;
   }
 

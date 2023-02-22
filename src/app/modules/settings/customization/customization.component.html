@@ -76,11 +76,22 @@
       <div class="field col-2 mr-4">
         <label for="imageBackground">Papel de parede</label>
         <div
+          *ngIf="!backgroundInputStyle"
           class="background"
           (click)="displayBackgroundImageDialog = true"
           [style]="backgroundInputStyle"
         >
           <i class="pi pi-plus"></i>
+        </div>
+
+        <div
+          class="background-input-preview"
+          *ngIf="backgroundInputStyle"
+          pTooltip="Editar"
+          [style]="backgroundInputStyle"
+          (click)="displayBackgroundImageDialog = true"
+        >
+            <i class="pi pi-pencil"></i>
         </div>
 
         <p-dialog
