@@ -1,7 +1,7 @@
 import { I_Client } from './../../../core/interfaces/client.interface';
 import { I_Product } from './../../../core/interfaces/product.interface';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, ElementRef, OnDestroy, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClientsService } from 'src/app/services/clients.service';
 import { UFS_SELECT_LIST } from 'src/app/shared/constants/ufs.const';
@@ -40,8 +40,6 @@ export class InvoiceFormComponent implements OnInit, OnDestroy {
   public selectedMethods: any[] = [];
   public invoiceAmount = 0;
   public actualDate: Date = new Date();
-
-  // public emptyDate: Date[] = [];
   
   // Carnet
   public carnetFormValues!: any;

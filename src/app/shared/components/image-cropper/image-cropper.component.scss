@@ -1,0 +1,26 @@
+.image-cropper--content {
+    display: flex;
+    justify-content: center;
+    .image-crop {
+        border: solid 2px var(--line);
+        img {
+            width: auto;
+            height: 512px;
+            width: 512px;
+            max-height: 1080px;
+            max-width: 1920px;
+        }
+    }
+    .image-preview {
+        height: 75px;
+        width: auto;
+        margin-left: 3rem;
+    }
+}
+
+::ng-deep {
+    .cropper-view-box,
+    .cropper-face {
+        border-radius: 50%;
+    }
+}

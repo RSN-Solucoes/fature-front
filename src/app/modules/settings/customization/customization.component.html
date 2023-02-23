@@ -1,0 +1,246 @@
+<div class="customization mt-6 grid">
+  <div class="col-5 form">
+    <div class="customization--header">
+      <p>Customização</p>
+
+      <span>Customize os e-mails e páginas enviadas para os clientes</span>
+    </div>
+
+    <form class="customization--form pt-6 grid" [formGroup]="form">
+      <div class="field col-2 mr-4">
+        <label for="logo">Logo</label>
+        <p-fileUpload
+          *ngIf="logoPreviewImage === 'assets/img/profile_photo.png'"
+          id="logo"
+          mode="basic"
+          name="logo"
+          accept="image/*"
+          (onSelect)="selectLogo()"
+          #logo
+        ></p-fileUpload>
+
+        <div
+          class="input-logo-preview"
+          *ngIf="logoPreviewImage !== 'assets/img/profile_photo.png'"
+        >
+          <img [src]="logoPreviewImage" alt="logoInputPreview" />
+          <div
+            class="input-logo-preview_indicator"
+            (click)="removeLogo()"
+            pTooltip="Remover"
+          >
+            <i class="pi pi-times"></i>
+          </div>
+        </div>
+
+        <p-dialog
+          [(visible)]="displayCropDialog"
+          [draggable]="false"
+          [resizable]="false"
+          [closable]="false"
+          [modal]="true"
+        >
+          <div class="cropper--content">
+            <div class="cropper--header">
+              <p>Cortar imagem</p>
+            </div>
+
+            <div class="cropper--main py-6">
+              <app-image-cropper
+                *ngIf="imageLogoSource && displayCropDialog"
+                [src]="imageLogoSource"
+                (croppedImage)="logoPreviewImage = $event"
+              ></app-image-cropper>
+            </div>
+
+            <div class="cropper--footer">
+              <button
+                type="button"
+                class="secondary-form-button"
+                (click)="cancelLogoSelection()"
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                class="primary-form-button ml-5"
+                (click)="saveCroppedLogo()"
+              >
+                Salvar
+              </button>
+            </div>
+          </div>
+        </p-dialog>
+      </div>
+
+      <div class="field col-2 mr-4">
+        <label for="imageBackground">Papel de parede</label>
+        <div
+          *ngIf="!backgroundInputStyle"
+          class="background"
+          (click)="displayBackgroundImageDialog = true"
+          [style]="backgroundInputStyle"
+        >
+          <i class="pi pi-plus"></i>
+        </div>
+
+        <div
+          class="background-input-preview"
+          *ngIf="backgroundInputStyle"
+          pTooltip="Editar"
+          [style]="backgroundInputStyle"
+          (click)="displayBackgroundImageDialog = true"
+        >
+            <i class="pi pi-pencil"></i>
+        </div>
+
+        <p-dialog
+          [(visible)]="displayBackgroundImageDialog"
+          [draggable]="false"
+          [resizable]="false"
+          [closable]="false"
+          [modal]="true"
+        >
+          <div class="background--content">
+            <div class="dialog--header">
+              <p>Escolha um plano de fundo</p>
+            </div>
+
+            <div class="background--items py-6">
+              <a
+                *ngFor="
+                  let background of customizationBackgrounds;
+                  let i = index
+                "
+                (click)="selectBackground(i)"
+                [ngClass]="{
+                  'item-active': selectedBackgroundImage === background
+                }"
+              >
+                <img [src]="background.src" [alt]="background.title" />
+              </a>
+            </div>
+
+            <div class="background--footer">
+              <button
+                type="button"
+                class="secondary-form-button"
+                (click)="displayBackgroundImageDialog = false"
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                class="primary-form-button ml-5"
+                (click)="chooseBackgroundImage()"
+              >
+                Escolher
+              </button>
+            </div>
+          </div>
+        </p-dialog>
+      </div>
+
+      <div class="field col-2">
+        <label for="imageBackground">Cores</label>
+        <div class="color-picker--choose" formGroupName="color">
+          <div class="color-picker--background">
+            <p-colorPicker
+              format="hex"
+              formControlName="background"
+              (onChange)="
+                updateBackgroundPreviewColor(colorPickerBackground.inputBgColor)
+              "
+              #colorPickerBackground
+            ></p-colorPicker>
+            <span>Fundo</span>
+          </div>
+
+          <div class="color-picker--button">
+            <p-colorPicker
+              formControlName="button"
+              format="hex"
+              (onChange)="
+                updateButtonPreviewColor(colorPickerButton.inputBgColor)
+              "
+              #colorPickerButton
+            ></p-colorPicker>
+
+            <span>Botão</span>
+          </div>
+        </div>
+      </div>
+      <div class="field col-12">
+        <label for="url">URL Customizada</label>
+        <input
+          type="text"
+          id="url"
+          pInputText
+          formControlName="url"
+          placeholder="Exemplo: Raipp-Studio"
+        />
+      </div>
+    </form>
+
+    <div class="customization--footer">
+      <button type="button" class="secondary-form-button" (click)="clearForm()">
+        Limpar tudo
+      </button>
+      <button
+        type="button"
+        class="primary-form-button ml-5"
+        (click)="submitForm()"
+      >
+        Salvar modelo
+      </button>
+    </div>
+  </div>
+  <div class="col-6 col-offset-1 customization-page">
+    <a class="customization-page--link">
+      <span>Visualize a URL da página</span>
+
+      <i class="pi pi-angle-right"></i>
+    </a>
+    <div class="customization-page--preview" [style]="defaultBackgroundStyle">
+      <div class="page-content">
+        <div class="page-content--title">
+          <div class="image-logo">
+            <img [src]="logoPreviewImage" alt="image-logo" />
+          </div>
+          <span>Informações da cobrança</span>
+        </div>
+        <div class="page-content--main my-5 grid">
+          <div class="field col-12">
+            <p-skeleton
+              height="3rem"
+              width="18rem"
+              styleClass="my-2"
+              animation="none"
+            ></p-skeleton>
+            <p-skeleton
+              height="3rem"
+              styleClass="my-2"
+              animation="none"
+            ></p-skeleton>
+            <p-skeleton
+              height="3rem"
+              width="5rem"
+              styleClass="my-2"
+              animation="none"
+            ></p-skeleton>
+            <p-skeleton
+              height="3rem"
+              styleClass="my-2"
+              animation="none"
+            ></p-skeleton>
+          </div>
+        </div>
+        <div class="page-content--footer grid pb-5">
+          <div class="col-12 button" [style]="buttonPreviewStyle">
+            <span>Pagar</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
