@@ -16,10 +16,12 @@ import { ProductsServicesListModule } from './products-services/products-service
 import { TransfersModule } from './transfers/transfers.module';
 import { LoginModule } from './login/login.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { SettingsModule } from './settings/settings.module';
 import { InvoiceFormModule } from './invoices/invoice-form/invoice-form.module';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
     CommonModule,
     SharedModule,
@@ -33,6 +35,7 @@ import { InvoiceFormModule } from './invoices/invoice-form/invoice-form.module';
     DashboardModule,
     ProductsServicesFormModule,
     InvoiceFormModule,
+    SettingsModule,
   ],
   exports: [],
   providers: [

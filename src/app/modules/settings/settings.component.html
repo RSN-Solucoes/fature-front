@@ -1,0 +1,33 @@
+<app-navbar>
+    <div class="settings-navbar">
+        <span class="settings-navbar--title">
+        Configurações
+        </span>
+
+        <div class="settings-navbar--buttons">
+        <a><i class="pi pi-plus"></i></a>
+
+        <a><i class="pi pi-sliders-h"></i></a>
+        </div>
+    </div>
+</app-navbar>
+
+<div class="content">
+    <p-tabView>
+        <p-tabPanel header="Customização">
+            <app-customization></app-customization>
+        </p-tabPanel>
+        <p-tabPanel header="Modelo de e-mails">
+            <app-emails-template></app-emails-template>
+        </p-tabPanel>
+        <p-tabPanel header="Colaboradores">
+            <app-users></app-users>
+        </p-tabPanel>
+        <p-tabPanel header="Dados bancários">
+            <app-bank-data></app-bank-data>
+        </p-tabPanel>
+        <p-tabPanel header="Dados da empresa">
+            <app-company-data></app-company-data>
+        </p-tabPanel>
+    </p-tabView>
+</div>

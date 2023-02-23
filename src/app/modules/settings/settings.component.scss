@@ -1,0 +1,28 @@
+.settings-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    .settings-navbar--title {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+    .settings-navbar--buttons {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        a:first-of-type {
+            border-right: solid 1px var(--line);
+            padding-right: 2rem;
+        }
+        a {
+            margin-left: 2rem;
+            cursor: pointer;
+        }
+
+        i {
+            font-size: 2rem;
+            font-weight: 500;
+        }   
+    }
+}

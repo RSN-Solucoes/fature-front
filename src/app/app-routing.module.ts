@@ -1,3 +1,4 @@
+import { SettingsComponent } from './modules/settings/settings.component';
 import { InvoiceFormComponent } from './modules/invoices/invoice-form/invoice-form.component';
 import { ProductsServicesFormComponent } from './modules/products-services/products-services-form/products-services-form.component';
 import { InvoicesListComponent } from './modules/invoices/invoices-list/invoices-list.component';
@@ -82,6 +83,10 @@ const routes: Routes = [
   {
     path: 'painel/transferencias',
     component: TransfersComponent,
+  },
+  {
+    path: 'painel/configuracoes',
+    component: SettingsComponent,
   },
 ];
 
