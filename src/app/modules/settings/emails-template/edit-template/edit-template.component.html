@@ -24,7 +24,7 @@
         </div>
 
         <div class="edit-template--variables my-6">
-            <a>[NOME_CLIENTE]</a>
+            <a (click)="teste()">[NOME_CLIENTE]</a>
             <a>[EMAIL_CLIENTE]</a>
             <a>[PRODUTOS]</a>
             <a>[VALOR]</a>
@@ -38,15 +38,21 @@
             <p>Personalize o texto do seu e-mail</p>
         </div>
 
-        <div class="edit-template--textarea py-6">
-            <textarea 
+        <div class="edit-template--textarea py-6" [formGroup]="form">
+            <!-- <textarea 
                 [rows]="10"
                 [cols]="30" 
                 pInputTextarea 
                 [autoResize]="true" 
                 (input)="teste(textareaTemplate)"
                 #textareaTemplate
-            ></textarea>
+            ></textarea> -->
+            <p-editor
+                formControlName="content"
+                #textareaTemplate
+                [style]="{'height':'320px'}"
+                >
+            </p-editor>
         </div>
 
         <div class="edit-template--footer">
