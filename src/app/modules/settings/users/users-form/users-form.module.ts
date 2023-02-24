@@ -9,6 +9,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { NgxMaskModule } from 'ngx-mask';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { AccordionModule } from 'primeng/accordion';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AccordionModule } from 'primeng/accordion';
     NgxMaskModule,
     InputTextareaModule,
     AccordionModule,
+    InputSwitchModule,
   ],
   exports: [UsersFormComponent],
 })
