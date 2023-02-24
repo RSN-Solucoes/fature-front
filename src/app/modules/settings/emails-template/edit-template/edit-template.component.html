@@ -1,0 +1,74 @@
+<app-navbar>
+    <div class="edit-template-navbar">
+        <div class="edit-template-navbar--title">
+            <a (click)="cancel()"><i class="pi pi-angle-left"></i></a>
+            <span>
+            Configurações
+            </span>
+        </div>
+
+        <div class="edit-template-navbar--buttons">
+            <a>
+                <span>Visualizar e-mail</span>
+
+                <i class="pi pi-angle-right"></i>
+            </a>
+        </div>
+    </div>
+</app-navbar>
+
+<div class="content">
+    <div class="edit-template">
+        <div class="edit-template--header">
+            <p>Variáveis</p>
+        </div>
+
+        <div class="edit-template--variables my-6">
+            <a>[NOME_CLIENTE]</a>
+            <a>[EMAIL_CLIENTE]</a>
+            <a>[PRODUTOS]</a>
+            <a>[VALOR]</a>
+            <a>[PAGO]</a>
+            <a>[METODO_PAGAMENTO]</a>
+            <a>[DATA_VENCIMENTO]</a>
+            <a>[DATA_REFERENTE]</a>
+        </div>
+
+        <div class="edit-template--header">
+            <p>Personalize o texto do seu e-mail</p>
+        </div>
+
+        <div class="edit-template--textarea py-6">
+            <textarea 
+                [rows]="10"
+                [cols]="30" 
+                pInputTextarea 
+                [autoResize]="true" 
+                (input)="teste(textareaTemplate)"
+                #textareaTemplate
+            ></textarea>
+        </div>
+
+        <div class="edit-template--footer">
+            <button 
+                type="button" 
+                class="line-button"
+                (click)="displayDescription = true"
+                >
+                Consultar descrição
+            </button>
+            <button 
+                type="button" 
+                class="secondary-form-button ml-5"
+                >
+                Limpar
+            </button>
+            <button 
+                type="button" 
+                class="primary-form-button ml-5"
+                >
+                Atualizar e-mail
+            </button>
+        </div>
+    </div>
+</div>

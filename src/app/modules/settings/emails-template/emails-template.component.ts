@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { EMAIL_TEMPLATES } from './emails-template.const';
 
@@ -10,9 +11,15 @@ export class EmailsTemplateComponent implements OnInit {
 
   public emailTemplates: any = EMAIL_TEMPLATES;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  navigateToEditTemplate(): void {
+    this.router.navigate(['painel/configuracoes/edit-template']);
   }
 
 }
