@@ -1,0 +1,101 @@
+<app-navbar>
+    <div class="users-form-navbar">
+        <a (click)="cancel()"><i class="pi pi-angle-left"></i></a>
+        <span>Novo colaborador</span>
+    </div>
+</app-navbar>
+
+<div class="content">
+    <div class="users-form">
+        <form class="users-form--section grid">
+            <div class="users-form--header">
+                <p>Dados do colaborador</p>
+            </div>
+
+            <div class="col-12 profile_photo py-6">
+                <div class="profile">
+
+                </div>
+                <div class="profile_photo--tools ml-6">
+                    <div class="profile_photo--buttons">
+                        <button
+                            type="button" 
+                            class="line-button"
+                        >
+                            Adicionar foto
+                        </button>
+                        <button
+                            type="button" 
+                            class="secondary-form-button"
+                        >
+                            Limpar
+                        </button>
+                    </div>
+                    <span>JPG, GIF or PNG. Max size of 800k</span>
+                </div>
+            </div>
+            <div class="field col-12 md:col-8">
+                <label for="name">Nome do colaborador</label>
+                <input
+                  type="text"
+                  id="name"
+                  pInputText
+                  placeholder="Nome completo"
+                />
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="phone">Telefone</label>
+                <input
+                  type="text"
+                  id="phone"
+                  pInputText
+                  placeholder="Telefone"
+                  mask="(00) 0 0000-0000||(00) 0000-0000"
+                />
+            </div>
+            <div class="field col-12 md:col-8">
+                <label for="email">E-mail</label>
+                <input
+                  type="email"
+                  id="email"
+                  pInputText
+                  placeholder="Email para envio"
+                />
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="email">Senha</label>
+                <input
+                  type="email"
+                  id="email"
+                  pInputText
+                  placeholder="Email para envio"
+                />
+            </div>
+            <div class="field col-12">
+                <label for="obs">Observações</label>
+                <textarea 
+                    [rows]="3" 
+                    [cols]="30" 
+                    pInputTextarea
+                    placeholder="Escreva alguma observação"
+                    [autoResize]="true"
+                ></textarea>
+            </div>
+
+            <div class="users-form--header py-6 col-12">
+                <p>Permissões</p>
+            </div>
+
+            <div class="users-form--permissions col-12">
+                <p-accordion [multiple]="true">
+                    <p-accordionTab
+                        header="Gestão da plataforma"
+                    ></p-accordionTab>
+                    <p-accordionTab
+                        header="Gestão de cobranças"
+                    ></p-accordionTab>
+                </p-accordion>
+            </div>
+        </form>
+    </div>
+</div>

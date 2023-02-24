@@ -1,3 +1,4 @@
+import { UsersFormModule } from './users/users-form/users-form.module';
 import { ImageCropperModule } from './../../shared/components/image-cropper/image-cropper.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -51,6 +52,7 @@ import { SkeletonModule } from 'primeng/skeleton';
     DialogModule,
     TooltipModule,
     SkeletonModule,
+    UsersFormModule,
   ],
   exports: [
     BankDataComponent,

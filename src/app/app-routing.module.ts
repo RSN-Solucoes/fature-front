@@ -1,3 +1,4 @@
+import { UsersFormComponent } from './modules/settings/users/users-form/users-form.component';
 import { SettingsComponent } from './modules/settings/settings.component';
 import { InvoiceFormComponent } from './modules/invoices/invoice-form/invoice-form.component';
 import { ProductsServicesFormComponent } from './modules/products-services/products-services-form/products-services-form.component';
@@ -83,10 +84,17 @@ const routes: Routes = [
   {
     path: 'painel/transferencias',
     component: TransfersComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'painel/configuracoes',
     component: SettingsComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'painel/configuracoes/colaboradores/novo',
+    component: UsersFormComponent,
+    canActivate: [AuthGuardService],
   },
 ];
 
