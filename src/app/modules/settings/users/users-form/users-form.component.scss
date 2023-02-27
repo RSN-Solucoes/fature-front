@@ -32,10 +32,12 @@
         .profile_photo {
             display: flex;
             .profile {
-                height: 100px;
-                width: 100px;
-                border-radius: 50%;
-                background-color: var(--primary);
+                img {
+                    height: 100px;
+                    width: 100px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
             }
             .profile_photo--tools {
                 display: flex;
@@ -47,9 +49,24 @@
                     font-weight: 300;
                 }
                 .profile_photo--buttons {
-                    button {
+                    input[type="file"] {
+                        display: none;
+                    }
+                    .photo-input-uploader {
+                        border: solid 2px var(--line);
+                        width: auto;
+                        border-radius: 3px;
+                        font-size: 1.4rem;
+                        padding: 13px 20px;
+                        background: none;
+                        color: #000;
+                        cursor: pointer;
                         margin-right: 2rem;
                         height: 48px;
+                    }
+                    .photo-input-uploader:hover {
+                        background-color: var(--line) !important;
+                        transition: .3s;
                     }
                     .line-button {
                         border: solid 2px var(--line);
@@ -58,10 +75,72 @@
                         border: solid 2px var(--line) !important;
                     }
                 }
+                p-dialog {
+                    .cropper--content {
+                      padding: 2rem 5rem;
+                      .cropper--header {
+                        p {
+                          font-size: 1.6rem;
+                          font-weight: bold;
+                          color: #000;
+                        }
+                      }
+                      .cropper--footer {
+                        display: flex;
+                        justify-content: flex-end;
+                      }
+                    }
+                    .background--content {
+                      width: 725px;
+                      padding: 2rem 5rem;
+                      .dialog--header {
+                        p {
+                          font-size: 1.6rem;
+                          font-weight: bold;
+                          color: #000;
+                        }
+                      }
+                      .background--items {
+                        display: flex;
+                        justify-content: space-between;
+                        a {
+                          border: solid 2px #fff;
+                          cursor: pointer;
+                          img {
+                            height: 120px;
+                            width: 120px;
+                          }
+                        }
+                        a:hover {
+                          border: solid 2px var(--black);
+                        }
+                        .item-active {
+                          border: solid 2px var(--black);
+                        }
+                      }
+                      .background--footer {
+                        display: flex;
+                        justify-content: flex-end;
+                      }
+                    }
+                  }
             }
         }
         .users-form--permissions {
             width: 100%;
+            .permissions {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                .permission-field {   
+                    display: flex;
+                    justify-content: space-between;
+                    padding-bottom: 2rem;
+                }
+                span {
+                    font-size: 1.4rem;
+                }
+            }
         }
         label {
             font-weight: 400;
@@ -72,4 +151,23 @@
         display: flex;
         justify-content: flex-end;
     }
+}
+
+::ng-deep {
+    .p-checkbox .p-checkbox-box {
+        background: none;
+        border-radius: 0;
+        border: solid 3px gray;
+        }
+      .p-checkbox .p-checkbox-box:hover {
+        border-color: var(--primary) !important;
+        }
+      .p-checkbox .p-checkbox-box.p-highlight {
+        border-color: var(--primary) !important;
+        background: var(--primary) !important;
+        color: #fff;
+        }
+      .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+        background: var(--primary) !important;
+        }
 }

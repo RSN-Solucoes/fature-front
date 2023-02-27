@@ -7,23 +7,26 @@
 
 <div class="content">
     <div class="users-form">
-        <form class="users-form--section grid">
+        <form class="users-form--section grid" [formGroup]="form">
             <div class="users-form--header">
                 <p>Dados do colaborador</p>
             </div>
 
             <div class="col-12 profile_photo py-6">
                 <div class="profile">
-
+                    <img [src]="finalProfilePhoto" alt="profilePhoto">
                 </div>
                 <div class="profile_photo--tools ml-6">
                     <div class="profile_photo--buttons">
-                        <button
-                            type="button" 
-                            class="line-button"
-                        >
-                            Adicionar foto
-                        </button>
+                        <label for="photo" class="photo-input-uploader">Adicionar foto</label>
+                        <input 
+                            type="file"
+                            (input)="selectProfilePhoto()"
+                            id="photo"
+                            name="profile_photo"
+                            accept="image/*"
+                            formControlName="logo"
+                            #profilePhoto>
                         <button
                             type="button" 
                             class="secondary-form-button"
@@ -32,6 +35,45 @@
                         </button>
                     </div>
                     <span>JPG, GIF or PNG. Max size of 800k</span>
+
+                    <p-dialog
+                        [(visible)]="displayCropDialog"
+                        [draggable]="false"
+                        [resizable]="false"
+                        [closable]="false"
+                        [modal]="true"
+                    >
+                        <div class="cropper--content">
+                        <div class="cropper--header">
+                            <p>Cortar imagem</p>
+                        </div>
+            
+                        <div class="cropper--main py-6">
+                            <app-image-cropper
+                            *ngIf="profilePhotoSource && displayCropDialog"
+                            [src]="profilePhotoSource"
+                            (croppedImage)="profilePhotoPreviewImage = $event"
+                            ></app-image-cropper>
+                        </div>
+            
+                        <div class="cropper--footer">
+                            <button
+                                type="button"
+                                class="secondary-form-button"
+                                (click)="cancelPhotoSelection()"
+                                >
+                                Cancelar
+                            </button>
+                            <button
+                                type="button"
+                                class="primary-form-button ml-5"
+                                (click)="saveCroppedProfilePhoto()"
+                                >
+                                Salvar
+                            </button>
+                        </div>
+                        </div>
+                    </p-dialog>
                 </div>
             </div>
             <div class="field col-12 md:col-8">
@@ -90,14 +132,42 @@
                 <p-accordion [multiple]="true">
                     <p-accordionTab
                         header="Gestão da plataforma"
-                    ></p-accordionTab>
+                    >
+                    <div class="permissions">
+                        <div class="permission-field">
+                            <span>Permission Title</span>
+                            <p-checkbox 
+                                [binary]="true" 
+                                inputId="binary"
+                            ></p-checkbox>
+                        </div>
 
-                    <p-inputSwitch
-                    ></p-inputSwitch>
+                        <div class="permission-field">
+                            <span>Permission Title</span>
+                            <p-checkbox 
+                                [binary]="true" 
+                                inputId="binary"
+                            ></p-checkbox>
+                        </div>
+                    </div>
+                    </p-accordionTab>
                 </p-accordion>
-
-
             </div>
         </form>
+        <div class="users-form--footer">
+            <button 
+              type="button" 
+              class="secondary-form-button"
+              >
+              Limpar
+            </button>
+            <button 
+              type="button" 
+              class="primary-form-button ml-5"
+              
+              >
+              ALterar dados
+            </button>
+          </div>
     </div>
 </div>
