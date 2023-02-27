@@ -51,6 +51,46 @@
             font-weight: bold;
         }
     }
+    .edit-template--textarea {
+        p-dialog {
+            .descriptionTable {
+                border-collapse: collapse;
+                margin: 0 3rem;
+                tr {
+                    width: 100%;
+                    border-bottom: solid 2px var(--line);
+                    td {
+                        width: 50%;
+                        height: 48px;
+                        padding: 2rem 0;
+                    }
+                }
+                tr:last-of-type {
+                    border-bottom: none;
+                }
+                .header {
+                    td {
+                        font-size: 1.6rem;
+                        font-weight: bold;
+                    }
+                }
+                .body {
+                    td {
+                        font-size: 1.4rem;
+                        a {
+                            background-color: var(--secondary);
+                            padding: 1rem;
+                            font-size: 1.4rem;
+                            font-weight: bolder;
+                            border-radius: 10px;
+                            margin-right: 1rem;
+                            color: #000;
+                        }
+                    }
+                }
+            }
+        }
+    }
     .edit-template--variables {
         display: flex;
         flex-wrap: wrap;

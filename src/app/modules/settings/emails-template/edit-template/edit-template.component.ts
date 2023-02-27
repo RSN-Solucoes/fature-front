@@ -1,7 +1,6 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { EditorModule } from 'primeng/editor';
 
 @Component({
   selector: 'app-edit-template',
@@ -29,22 +28,31 @@ export class EditTemplateComponent implements OnInit {
     })
   }
 
-  teste(): void {
-    const variableModel = 
-    '<span style="background-color: #6feaa7; color: #000; font-weight: bolder; padding: 5rem"; border-radius: 10px>[NOME_CLIENTE]</span>'
-    // let text = event.quill.root.innerHTML;
+  setVariable(variable: string) {
+    const variableHTML = `<span>${variable}</span>`
+    
+    if(!this.form.get('content')?.value) {
+      this.form.get('content')?.setValue(variableHTML)
+      return;
+    }
 
-    // event.quill.root.innerHTML.concat(variableModel)
+    let emailText = this.form.get('content')?.value;
+    let arrayText = emailText.split('</p>');
+    let variableText = `${arrayText.join('')} ${variableHTML}</p>`;
 
-    let text = this.form.get('content')?.value;
-
-    this.form.get('content')?.setValue(text.concat(variableModel))
-
-    console.log(this.form.get('content')?.value)
+    this.form.get('content')?.setValue(variableText);
   }
 
   cancel(): void {
     this.router.navigate(['painel/configuracoes']);
+  }
+
+  clear(): void {
+    this.form.get('content')?.reset();
+  }
+
+  submit(): void {
+
   }
 
 }
