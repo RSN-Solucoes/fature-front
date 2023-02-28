@@ -72,8 +72,12 @@ export class UsersFormComponent implements OnInit {
     
     this.form.get('logo')?.reset();
     this.displayCropDialog = false;
+  }
 
-    console.log(this.form.getRawValue())
+  removeProfilePhoto(): void {
+    this.finalProfilePhoto = 'assets/img/profile_photo.png';
+
+    this.form.get('profilePhoto')?.reset();
   }
 
   cancel(): void {

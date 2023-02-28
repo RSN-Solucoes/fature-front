@@ -30,6 +30,7 @@
                         <button
                             type="button" 
                             class="secondary-form-button"
+                            (click)="removeProfilePhoto()"
                         >
                             Limpar
                         </button>
@@ -128,30 +129,126 @@
                 <p>Permissões</p>
             </div>
 
-            <div class="users-form--permissions col-12">
-                <p-accordion [multiple]="true">
-                    <p-accordionTab
-                        header="Gestão da plataforma"
-                    >
-                    <div class="permissions">
-                        <div class="permission-field">
-                            <span>Permission Title</span>
-                            <p-checkbox 
-                                [binary]="true" 
-                                inputId="binary"
-                            ></p-checkbox>
-                        </div>
+            <div class="users-form--permissions col-12 grid">
+                <div class="col-11 accordion">
+                    <p-accordion [multiple]="true">
+                        <p-accordionTab
+                            header="Gestão da plataforma"
+                        >
+                            <div class="permissions">
+                                <div class="permission-field">
+                                    <span>Permission Title</span>
+                                    <p-checkbox 
+                                        [binary]="true" 
+                                        inputId="binary"
+                                    ></p-checkbox>
+                                </div>
+    
+                                <div class="permission-field">
+                                    <span>Permission Title</span>
+                                    <p-checkbox 
+                                        [binary]="true" 
+                                        inputId="binary"
+                                    ></p-checkbox>
+                                </div>
+                            </div>
+                        </p-accordionTab>
+                    </p-accordion>
+                </div>
+                <div class="col-1 switch-button">
+                    <p-inputSwitch>
+                    </p-inputSwitch>
+                </div>
 
-                        <div class="permission-field">
-                            <span>Permission Title</span>
-                            <p-checkbox 
-                                [binary]="true" 
-                                inputId="binary"
-                            ></p-checkbox>
-                        </div>
-                    </div>
-                    </p-accordionTab>
-                </p-accordion>
+                <div class="col-11 accordion">
+                    <p-accordion [multiple]="true">
+                        <p-accordionTab
+                            header="Gestão de cobranças"
+                        >
+                            <div class="permissions">
+                                <div class="permission-field">
+                                    <span>Permission Title</span>
+                                    <p-checkbox 
+                                        [binary]="true" 
+                                        inputId="binary"
+                                    ></p-checkbox>
+                                </div>
+    
+                                <div class="permission-field">
+                                    <span>Permission Title</span>
+                                    <p-checkbox 
+                                        [binary]="true" 
+                                        inputId="binary"
+                                    ></p-checkbox>
+                                </div>
+                            </div>
+                        </p-accordionTab>
+                    </p-accordion>
+                </div>
+                <div class="col-1 switch-button">
+                    <p-inputSwitch>
+                    </p-inputSwitch>
+                </div>
+
+                <div class="col-11 accordion">
+                    <p-accordion [multiple]="true">
+                        <p-accordionTab
+                            header="Gestão do cliente"
+                        >
+                            <div class="permissions">
+                                <div class="permission-field">
+                                    <span>Permission Title</span>
+                                    <p-checkbox 
+                                        [binary]="true" 
+                                        inputId="binary"
+                                    ></p-checkbox>
+                                </div>
+    
+                                <div class="permission-field">
+                                    <span>Permission Title</span>
+                                    <p-checkbox 
+                                        [binary]="true" 
+                                        inputId="binary"
+                                    ></p-checkbox>
+                                </div>
+                            </div>
+                        </p-accordionTab>
+                    </p-accordion>
+                </div>
+                <div class="col-1 switch-button">
+                    <p-inputSwitch>
+                    </p-inputSwitch>
+                </div>
+
+                <div class="col-11 accordion">
+                    <p-accordion [multiple]="true">
+                        <p-accordionTab
+                            header="Gestão de produtos e serviços"
+                        >
+                            <div class="permissions">
+                                <div class="permission-field">
+                                    <span>Permission Title</span>
+                                    <p-checkbox 
+                                        [binary]="true" 
+                                        inputId="binary"
+                                    ></p-checkbox>
+                                </div>
+    
+                                <div class="permission-field">
+                                    <span>Permission Title</span>
+                                    <p-checkbox 
+                                        [binary]="true" 
+                                        inputId="binary"
+                                    ></p-checkbox>
+                                </div>
+                            </div>
+                        </p-accordionTab>
+                    </p-accordion>
+                </div>
+                <div class="col-1 switch-button">
+                    <p-inputSwitch>
+                    </p-inputSwitch>
+                </div>
             </div>
         </form>
         <div class="users-form--footer pt-6">
