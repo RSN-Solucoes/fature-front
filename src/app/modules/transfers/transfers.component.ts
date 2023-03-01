@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular';
 
@@ -16,17 +17,17 @@ export class TransfersComponent implements OnInit, AfterViewInit {
   public events: any[] = [
     {
       title: 'Event 1',
-      date: '2022-12-12',
+      date: '2023-03-12',
       color: '#55a1ff',
     },
     {
       title: 'Pago',
-      date: '2022-12-12',
+      date: '2023-03-12',
       color: '#02b69c',
     },
     {
       title: 'Event 2',
-      date: '2022-12-01',
+      date: '2023-03-01',
       color: '#55a1ff',
     },
   ];
@@ -46,7 +47,9 @@ export class TransfersComponent implements OnInit, AfterViewInit {
   
   @ViewChild('calendar') calendarComponent!: FullCalendarComponent;
   
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.setDateTitle(this.actualDate);
@@ -57,7 +60,7 @@ export class TransfersComponent implements OnInit, AfterViewInit {
   }
 
   handleDateClick(arg: any) {
-    alert('date click! ' + arg.dateStr);
+    this.router.navigate(['painel/transferencias/listagem']);
   }
 
   setDateTitle(currentDate: any) {

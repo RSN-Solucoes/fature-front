@@ -10,6 +10,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { TransfersListComponent } from './transfers-list/transfers-list.component';
+import { TableModule } from 'src/app/shared/components/table/table.module';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -18,8 +20,8 @@ FullCalendarModule.registerPlugins([
 ]);
 
 @NgModule({
-  declarations: [TransfersComponent],
-  imports: [CommonModule, NavbarModule, ButtonModule, FullCalendarModule],
+  declarations: [TransfersComponent, TransfersListComponent],
+  imports: [CommonModule, NavbarModule, ButtonModule, FullCalendarModule, TableModule],
   exports: [TransfersComponent, FullCalendarModule],
 })
 export class TransfersModule {}

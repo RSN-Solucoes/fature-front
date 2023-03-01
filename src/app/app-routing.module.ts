@@ -1,3 +1,4 @@
+import { TransfersListComponent } from './modules/transfers/transfers-list/transfers-list.component';
 import { SettingsComponent } from './modules/settings/settings.component';
 import { InvoiceFormComponent } from './modules/invoices/invoice-form/invoice-form.component';
 import { ProductsServicesFormComponent } from './modules/products-services/products-services-form/products-services-form.component';
@@ -88,6 +89,12 @@ const routes: Routes = [
     path: 'painel/configuracoes',
     component: SettingsComponent,
   },
+  {
+    path: 'painel/transferencias/listagem',
+    component: TransfersListComponent,
+    canActivate: [AuthGuardService],
+  },
+  
 ];
 
 @NgModule({

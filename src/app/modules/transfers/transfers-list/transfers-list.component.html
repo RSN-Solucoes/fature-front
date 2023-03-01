@@ -1,0 +1,18 @@
+<app-navbar>
+    <div class="transfers-list-navbar">
+      <a (click)="cancel()"><i class="pi pi-angle-left"></i></a>
+      <span>Detalhes do pagamento</span>
+    </div>
+</app-navbar>
+
+<div class="content">
+    <app-table
+        [columns]="transfersListColumns"
+        [fields]="transfersListFields"
+        [pipes]="transfersListTablePipes"
+        [value]="transfersListValue"
+        [totalRecords]="totalRecords"
+        [pageLimit]="pageLimit"
+        (loadMoreItems)="loadMoreItems($event)"
+    ></app-table>
+</div>
