@@ -10,6 +10,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { NavbarModule } from 'src/app/shared/components/navbar/navbar.module';
 import { BrowserAnimationsModule, NoopAnimationsModule  } from '@angular/platform-browser/animations'
 import { ReactiveFormsModule } from '@angular/forms';
+import { TabViewModule } from 'primeng/tabview';
+import { TableModule } from 'src/app/shared/components/table/table.module';
 
 
 @NgModule({
@@ -25,6 +27,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     NoopAnimationsModule,
     NavbarModule,
     NgxMaskModule,
+    TabViewModule,
+    TableModule,
   ],
   exports: [
     ClientsFormComponent,
