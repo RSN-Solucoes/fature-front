@@ -37,9 +37,13 @@
               "node_modules/@fullcalendar/timegrid/main.css",
               "src/styles.scss",
               "src/app/shared/styles/primeng.scss",
-              "src/app/shared/styles/global.scss"
+              "src/app/shared/styles/global.scss",
+              "node_modules/quill/dist/quill.core.css", 
+              "node_modules/quill/dist/quill.snow.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/quill/dist/quill.js"
+            ]
           },
           "configurations": {
             "production": {

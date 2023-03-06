@@ -1,0 +1,132 @@
+<app-navbar>
+    <div class="edit-template-navbar">
+        <div class="edit-template-navbar--title">
+            <a (click)="cancel()"><i class="pi pi-angle-left"></i></a>
+            <span>
+                Pré Autorizado
+            </span>
+        </div>
+
+        <div class="edit-template-navbar--buttons">
+            <a>
+                <span>Visualizar e-mail</span>
+
+                <i class="pi pi-angle-right"></i>
+            </a>
+        </div>
+    </div>
+</app-navbar>
+
+<div class="content">
+    <div class="edit-template">
+        <div class="edit-template--header">
+            <p>Variáveis</p>
+        </div>
+
+        <div class="edit-template--variables my-6">
+            <a (click)="setVariable('[NOME_CLIENTE]')">[NOME_CLIENTE]</a>
+            <a (click)="setVariable('[EMAIL_CLIENTE]')">[EMAIL_CLIENTE]</a>
+            <a (click)="setVariable('[PRODUTOS]')">[PRODUTOS]</a>
+            <a (click)="setVariable('[VALOR]')">[VALOR]</a>
+            <a (click)="setVariable('[PAGO]')">[PAGO]</a>
+            <a (click)="setVariable('[METODO_PAGAMENTO]')">[METODO_PAGAMENTO]</a>
+            <a (click)="setVariable('[DATA_VENCIMENTO]')">[DATA_VENCIMENTO]</a>
+            <a (click)="setVariable('[DATA_REFERENTE]')">[DATA_REFERENTE]</a>
+        </div>
+
+        <div class="edit-template--header">
+            <p>Personalize o texto do seu e-mail</p>
+        </div>
+
+        <div class="edit-template--textarea py-6" [formGroup]="form">
+            <p-editor
+                formControlName="content"
+                #textareaTemplate
+                [style]="{'height':'320px'}"
+                >
+                <ng-template pTemplate="header">
+                    <span class="ql-format-group">
+                        <span title="Bold" class="ql-format-button ql-bold"></span>
+                        <span class="ql-format-separator"></span>
+                        <span title="Italic" class="ql-format-button ql-italic"></span>
+                        <span class="ql-format-separator"></span>
+                        <span title="Underline" class="ql-format-button ql-underline"></span>
+                        <span class="ql-format-separator"></span>
+                        <span title="Strikethrough" class="ql-format-button ql-strike"></span>
+                    </span>
+                </ng-template>
+            </p-editor>
+            <p-dialog
+                [(visible)]="displayDescription"
+                [draggable]="false"
+                [resizable]="false"
+                [closable]="true"
+                [modal]="true"
+                [style]="{width: '650px'}"
+            >
+                <table class="descriptionTable">
+                    <tr class="header">
+                        <td>Variávies</td>
+                        <td>Descrição</td>
+                    </tr>
+                    <tr class="body">
+                        <td><a>[NOME_CLIENTE]</a></td>
+                        <td>Nome do cliente que irá receber a fatura</td>
+                    </tr>
+                    <tr class="body">
+                        <td><a>[EMAIL_CLIENTE]</a></td>
+                        <td>E-mail do cliente que irá receber a fatura</td>
+                    </tr>
+                    <tr class="body">
+                        <td><a>[PRODUTOS]</a></td>
+                        <td>Produtos referentes a fatura do cliente</td>
+                    </tr>
+                    <tr class="body">
+                        <td><a>[VALOR]</a></td>
+                        <td>Valor total da fatura</td>
+                    </tr>
+                    <tr class="body">
+                        <td><a>[PAGO]</a></td>
+                        <td>Se a fatura está paga ou não</td>
+                    </tr>
+                    <tr class="body">
+                        <td><a>[METODO_PAGAMENTO]</a></td>
+                        <td>Método de pagamento da fatura</td>
+                    </tr>
+                    <tr class="body">
+                        <td><a>[DATA_VENCIMENTO]</a></td>
+                        <td>Data de vencimento da fatura</td>
+                    </tr>
+                    <tr class="body">
+                        <td><a>[DATA_REFERENTE]</a></td>
+                        <td>Data de referência da fatura</td>
+                    </tr>
+                </table>
+            </p-dialog>
+        </div>
+
+        <div class="edit-template--footer">
+            <button 
+                type="button"
+                class="line-button"
+                (click)="displayDescription = true"
+                >
+                Consultar descrição
+            </button>
+            <button 
+                type="button"
+                class="secondary-form-button ml-5"
+                (click)="clear()"
+                >
+                Limpar
+            </button>
+            <button 
+                type="button"
+                class="primary-form-button ml-5"
+                (click)="submit()"
+                >
+                Atualizar e-mail
+            </button>
+        </div>
+    </div>
+</div>
