@@ -7,12 +7,12 @@ import ptbrLocale from '@fullcalendar/core/locales/pt-br';
 @Component({
   selector: 'app-transfers',
   templateUrl: './transfers.component.html',
-  styleUrls: ['./transfers.component.scss']
+  styleUrls: ['./transfers.component.scss'],
 })
 export class TransfersComponent implements OnInit, AfterViewInit {
   public title!: string;
   public actualDate = new Date();
-  public calendarDate: any = this.actualDate.toISOString().substring(0,10);
+  public calendarDate: any = this.actualDate.toISOString().substring(0, 10);
 
   public events: any[] = [
     {
@@ -32,7 +32,6 @@ export class TransfersComponent implements OnInit, AfterViewInit {
     },
   ];
 
-  
   calendarOptions: CalendarOptions = {
     headerToolbar: false,
     initialDate: this.calendarDate,
@@ -44,12 +43,12 @@ export class TransfersComponent implements OnInit, AfterViewInit {
     selectMirror: true,
     dayMaxEvents: true,
   };
-  
+
   @ViewChild('calendar') calendarComponent!: FullCalendarComponent;
-  
+
   constructor(
     private router: Router,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.setDateTitle(this.actualDate);
@@ -64,14 +63,22 @@ export class TransfersComponent implements OnInit, AfterViewInit {
   }
 
   setDateTitle(currentDate: any) {
-    const month = currentDate.getMonth()
+    const month = currentDate.getMonth();
     const months = [
-      'Janeiro', 'Fevereiro', 'Março',
-      'Abril', 'Maio', 'Junho', 'Julho',
-      'Agosto', 'Setembro', 'Outubro', 
-      'Novembro', 'Dezembro'
+      'Janeiro',
+      'Fevereiro',
+      'Março',
+      'Abril',
+      'Maio',
+      'Junho',
+      'Julho',
+      'Agosto',
+      'Setembro',
+      'Outubro',
+      'Novembro',
+      'Dezembro',
     ];
-    
+
     this.title = `${months[month]}`;
   }
 
@@ -83,20 +90,19 @@ export class TransfersComponent implements OnInit, AfterViewInit {
 
   nextMonth() {
     const calendarApi = this.calendarComponent.getApi();
-    
+
     calendarApi.next();
-    
+
     const currentDate = calendarApi.getDate();
     this.setDateTitle(currentDate);
   }
 
   previousMonth() {
     const calendarApi = this.calendarComponent.getApi();
-    
+
     calendarApi.prev();
 
     const currentDate = calendarApi.getDate();
     this.setDateTitle(currentDate);
   }
-
 }
