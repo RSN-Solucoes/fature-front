@@ -21,6 +21,7 @@ import {
 export class ClientsFormComponent implements OnInit {
   public clientsForm!: FormGroup;
   public formSubmited: boolean = false;
+  public editForm: boolean = true;
 
   public ufSelectItems: any = UFS_SELECT_LIST;
 
@@ -53,7 +54,10 @@ export class ClientsFormComponent implements OnInit {
 
     if (this.clientId) {
       this.getClient();
-    }
+
+      this.editForm = false;
+      this.clientsForm.disable();
+    };
 
     this.payments = [
       {
@@ -108,6 +112,18 @@ export class ClientsFormComponent implements OnInit {
       uf: [{ value: null, disabled: true }, Validators.required],
       codeIbge: [null],
     });
+  }
+
+  editClientData(): void {
+    this.clientsForm.get('name')?.enable();
+    this.clientsForm.get('email')?.enable();
+    this.clientsForm.get('tel')?.enable();
+    this.clientsForm.get('document')?.enable();
+    this.clientsForm.get('addressNumber')?.enable();
+    this.clientsForm.get('addressComplement')?.enable();
+    this.clientsForm.get('cep')?.enable();
+    
+    this.editForm = true;
   }
 
   getClient() {

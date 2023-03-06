@@ -12,7 +12,12 @@
           <div class="clients--header">
             <p>Abaixo os dados do cliente</p>
 
-            <span>Editar</span>
+            <span
+              *ngIf="!editForm"
+              (click)="editClientData()"
+              >
+              Editar
+            </span>
           </div>
           <form class="clients--form my-6 grid" [formGroup]="clientsForm">
             <div class="field col-12 md:col-6">
@@ -136,7 +141,7 @@
               />
             </div>
           </form>
-          <div class="clients--footer">
+          <div *ngIf="editForm" class="clients--footer">
             <button 
               type="button" 
               class="secondary-form-button"
@@ -154,7 +159,7 @@
           </div>
         </div>
       </p-tabPanel>
-      <p-tabPanel header="E-mails enviados">
+      <p-tabPanel header="E-mails enviados" [disabled]="editForm">
         <app-table
           [columns]="sentEmailsColumns"
           [fields]="sentEmailsFields"
@@ -165,7 +170,7 @@
           (loadMoreItems)="loadMoreSentEmailsItems($event)"
         ></app-table>
       </p-tabPanel>
-      <p-tabPanel header="Pagamentos">
+      <p-tabPanel header="Pagamentos" [disabled]="editForm">
         <app-table
           [columns]="paymentsColumns"
           [fields]="paymentsFields"
