@@ -34,8 +34,8 @@ import { InvoiceFormModule } from './invoices/invoice-form/invoice-form.module';
     LoginModule,
     DashboardModule,
     ProductsServicesFormModule,
-    InvoiceFormModule,
     SettingsModule,
+    InvoiceFormModule,
   ],
   exports: [],
   providers: [
