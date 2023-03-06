@@ -1,3 +1,4 @@
+import { TransfersListComponent } from './modules/transfers/transfers-list/transfers-list.component';
 import { EditTemplateComponent } from './modules/settings/emails-template/edit-template/edit-template.component';
 import { SettingsComponent } from './modules/settings/settings.component';
 import { InvoiceFormComponent } from './modules/invoices/invoice-form/invoice-form.component';
@@ -96,6 +97,12 @@ const routes: Routes = [
     component: EditTemplateComponent,
     canActivate: [AuthGuardService],
   },
+  {
+    path: 'painel/transferencias/listagem',
+    component: TransfersListComponent,
+    canActivate: [AuthGuardService],
+  },
+  
 ];
 
 @NgModule({
