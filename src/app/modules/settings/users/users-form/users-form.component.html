@@ -136,24 +136,9 @@
                             header="Gestão da plataforma"
                         >
                             <div class="permissions">
-                                <div class="permission-field">
-                                    <span>Visualizar dados da empresa</span>
-                                    <p-checkbox 
-                                        [binary]="true" 
-                                        inputId="binary"
-                                    ></p-checkbox>
-                                </div>
-    
-                                <div class="permission-field">
-                                    <span>Criar colaborador</span>
-                                    <p-checkbox 
-                                        [binary]="true"
-                                        inputId="binary"
-                                    ></p-checkbox>
-                                </div>
-
-                                <div class="permission-field">
-                                    <span>Atualizar dados de colaboradores</span>
+                                <div *ngFor="let permissions of platformManagementSelectItems"
+                                    class="permission-field">
+                                    <span>{{ permissions.title }}</span>
                                     <p-checkbox 
                                         [binary]="true"
                                         inputId="binary"
@@ -174,18 +159,11 @@
                             header="Gestão de cobranças"
                         >
                             <div class="permissions">
-                                <div class="permission-field">
-                                    <span>Permission Title</span>
+                                <div *ngFor="let permissions of billingManagementSelectItems"
+                                    class="permission-field">
+                                    <span>{{ permissions.title }}</span>
                                     <p-checkbox 
-                                        [binary]="true" 
-                                        inputId="binary"
-                                    ></p-checkbox>
-                                </div>
-    
-                                <div class="permission-field">
-                                    <span>Permission Title</span>
-                                    <p-checkbox 
-                                        [binary]="true" 
+                                        [binary]="true"
                                         inputId="binary"
                                     ></p-checkbox>
                                 </div>
@@ -204,6 +182,14 @@
                             header="Gestão do cliente"
                         >
                             <div class="permissions">
+                                <div *ngFor="let permissions of clientManagementSelectItems"
+                                    class="permission-field">
+                                    <span>{{ permissions.title }}</span>
+                                    <p-checkbox 
+                                        [binary]="true"
+                                        inputId="binary"
+                                    ></p-checkbox>
+                                </div>
                             </div>
                         </p-accordionTab>
                     </p-accordion>
@@ -219,18 +205,11 @@
                             header="Gestão de produtos e serviços"
                         >
                             <div class="permissions">
-                                <div class="permission-field">
-                                    <span>Permission Title</span>
+                                <div *ngFor="let permissions of servicesAndProductsManagementSelectItems"
+                                    class="permission-field">
+                                    <span>{{ permissions.title }}</span>
                                     <p-checkbox 
-                                        [binary]="true" 
-                                        inputId="binary"
-                                    ></p-checkbox>
-                                </div>
-    
-                                <div class="permission-field">
-                                    <span>Permission Title</span>
-                                    <p-checkbox 
-                                        [binary]="true" 
+                                        [binary]="true"
                                         inputId="binary"
                                     ></p-checkbox>
                                 </div>

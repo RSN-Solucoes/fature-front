@@ -1,3 +1,4 @@
+import { BILLING_MANAGEMENT_SELECT_LIST, PLATFORM_MANAGEMENT_SELECT_LIST, CLIENT_MANAGEMENT_SELECT_LIST, SERVICES_AND_PRODUCTS_MANAGEMENT_SELECT_LIST } from './users-form.const';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
@@ -19,6 +20,12 @@ export class UsersFormComponent implements OnInit {
   public finalProfilePhoto: any = 'assets/img/profile_photo.png';
 
   public form!: FormGroup;
+
+  // Permissions
+  public platformManagementSelectItems: any[] = PLATFORM_MANAGEMENT_SELECT_LIST;
+  public billingManagementSelectItems: any[] = BILLING_MANAGEMENT_SELECT_LIST;
+  public clientManagementSelectItems: any[] = CLIENT_MANAGEMENT_SELECT_LIST;
+  public servicesAndProductsManagementSelectItems: any[] = SERVICES_AND_PRODUCTS_MANAGEMENT_SELECT_LIST;
 
   constructor(
     private router: Router,
