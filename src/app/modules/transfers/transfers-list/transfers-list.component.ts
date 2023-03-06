@@ -44,10 +44,6 @@ export class TransfersListComponent implements OnInit {
     },
   ];
 
-  public pageIndex = 1;
-  public totalRecords = 10;
-  public pageLimit = 10;
-
   constructor(
     private router: Router,
   ) { }
@@ -55,16 +51,6 @@ export class TransfersListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  loadMoreItems(pageLimit: number) {
-    this.transfersListValue.push(
-      {
-        client: 'Luiz André Bragança Santos',
-        methods: 'Crédito',
-        product: 'Caixa Surpresa 01',
-        value: '200',
-      },
-    );
-  }
 
   cancel(): void {
     this.router.navigate(['painel/transferencias']);

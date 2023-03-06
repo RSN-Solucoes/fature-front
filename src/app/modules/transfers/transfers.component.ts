@@ -59,8 +59,13 @@ export class TransfersComponent implements OnInit, AfterViewInit {
     this.setCalendarLocale();
   }
 
-  handleDateClick(arg: any) {
-    this.router.navigate(['painel/transferencias/listagem']);
+  handleDateClick(arg: any): void {
+    const calendarApi = this.calendarComponent.getApi();
+
+    if(calendarApi.getDate().getMonth() === arg.date.getMonth()) {
+
+      this.router.navigate(['painel/transferencias/listagem']);
+    };
   }
 
   setDateTitle(currentDate: any) {
