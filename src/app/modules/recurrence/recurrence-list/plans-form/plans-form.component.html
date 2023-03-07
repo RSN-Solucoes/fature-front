@@ -1,0 +1,35 @@
+<app-navbar>
+    <div class="plans-navbar">
+      <a (click)="cancel()"><i class="pi pi-angle-left"></i></a>
+      <span>Novo plano</span>
+    </div>
+</app-navbar>
+
+<div class="content">
+    <div class="plans">
+        <div class="plans--header">
+          <p>Dados do plano</p>
+        </div>
+
+        <form class="plans--form my-6 grid" [formGroup]="plansForm">
+
+        </form>
+
+        <div class="plans--footer">
+          <button 
+            type="button" 
+            class="secondary-form-button"
+            (click)="clearForm()"
+            >
+            Limpar
+          </button>
+          <button 
+            type="button" 
+            class="primary-form-button ml-5"
+            (click)="submitForm()"
+            >
+            Criar plano
+          </button>
+        </div>
+    </div>
+</div>

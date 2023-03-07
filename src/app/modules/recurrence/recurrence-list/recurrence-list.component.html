@@ -5,7 +5,7 @@
         </span>
 
         <div class="recurrence-navbar--buttons">
-        <a><i class="pi pi-plus"></i></a>
+        <a (click)="navigateToForm()"><i class="pi pi-plus"></i></a>
 
         <a><i class="pi pi-sliders-h"></i></a>
         </div>
@@ -13,7 +13,7 @@
 </app-navbar>
 
 <div class="content">
-    <p-tabView>
+    <p-tabView (onChange)="changeIndex($event)">
         <p-tabPanel header="Planos">
             <app-table
                 [columns]="plansColumns"
