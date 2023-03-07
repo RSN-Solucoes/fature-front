@@ -1,3 +1,4 @@
+import { ClientsCreateComponent } from './modules/clients/clients-form/clients-create/clients-create.component';
 import { SettingsComponent } from './modules/settings/settings.component';
 import { InvoiceFormComponent } from './modules/invoices/invoice-form/invoice-form.component';
 import { ProductsServicesFormComponent } from './modules/products-services/products-services-form/products-services-form.component';
@@ -37,7 +38,7 @@ const routes: Routes = [
   },
   {
     path: 'painel/clientes/novo',
-    component: ClientsFormComponent,
+    component: ClientsCreateComponent,
     canActivate: [AuthGuardService],
   },
   {
