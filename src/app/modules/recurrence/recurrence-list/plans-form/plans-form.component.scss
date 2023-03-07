@@ -55,9 +55,43 @@
             font-weight: 400;
             margin-bottom: 1rem;
         }
+        .term-switch {
+            align-self: center;
+            label {
+                color: #fff;
+            } 
+            .term-switch--item {
+                display: flex;
+                align-items: center;
+                span {
+                    margin-left: 1rem;
+                    font-size: 1.4rem;
+                }
+
+            }
+        }
+        .text-length {
+            label {
+                color: #fff;
+            }
+            align-self: center;
+            span {
+                font-size: 1.4rem;
+                font-weight: 500;
+            }
+        }
     }
     .plans--footer {
         display: flex;
         justify-content: flex-end;
+    }
+}
+
+::ng-deep {
+    .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+        background: var(--black) !important;
+    }  
+    .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:hover {
+        background: var(--black) !important;
     }
 }

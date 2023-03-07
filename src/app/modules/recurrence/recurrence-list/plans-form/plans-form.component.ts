@@ -1,6 +1,7 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { FREQUENCY_SELECT_LIST, WEEKLY_DAYS_SELECT_LIST } from './plans.const';
 
 @Component({
   selector: 'app-plans-form',
@@ -10,6 +11,20 @@ import { Component, OnInit } from '@angular/core';
 export class PlansFormComponent implements OnInit {
 
   public plansForm!: FormGroup;
+
+  public descriptionLength: number = 0;
+  public frequencySelectItems = FREQUENCY_SELECT_LIST;
+  public weeklyDaysSelectItems = WEEKLY_DAYS_SELECT_LIST;
+  public options: any[] = [
+    {
+      name: 'Sim',
+      value: true
+    },
+    {
+      name: 'Não',
+      value: false
+    }
+  ]
 
   constructor(
     private router: Router,
@@ -24,7 +39,12 @@ export class PlansFormComponent implements OnInit {
     this.plansForm = this.fb.group({
       name: [null],
       description: [null],
+      frequency: ['monthly'],
     });
+  }
+
+  updateDescriptionLength(): void {
+    this.descriptionLength = this.plansForm.get('description')?.value.length;
   }
 
   clearForm(): void {

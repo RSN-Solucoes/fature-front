@@ -12,7 +12,120 @@
         </div>
 
         <form class="plans--form my-6 grid" [formGroup]="plansForm">
+          <div class="field col-6">
+              <label for="name">Nome</label>
+              <input
+                type="text"
+                id="name"
+                pInputText
+                placeholder="Nome do plano"
+              />
+          </div>
+          <div class="field col-6 term-switch">
+            <label>'</label>
+            <div class="term-switch--item ml-3">
+              <p-inputSwitch></p-inputSwitch>
 
+              <span>Habilitar prazo na assinatura</span>
+            </div>
+          </div>
+
+          <div class="field col-11">
+              <label for="description">Descrição</label>
+              <input
+                type="text"
+                pInputText
+                id="description"
+                placeholder="Descreva o plano"
+                formControlName="description"
+                maxlength="150"
+                (input)="updateDescriptionLength()"
+              />
+          </div>
+          <div class="field col-1 text-length">
+              <label>'' </label>
+              <span>
+                  {{ descriptionLength }}/150
+              </span>
+          </div>
+
+          <div class="plans--header py-6 col-12">
+            <p>Cobrança</p>
+          </div>
+
+          <div class="field col-6 md:col-3">
+              <label for="value">Valor</label>
+              <p-inputNumber
+                  placeholder="R$"
+                  prefix="R$ "
+                  mode="decimal"
+                  id="value"
+                  [minFractionDigits]="2"
+              ></p-inputNumber>
+          </div>
+          <div class="field col-6 md:col-3">
+              <label for="subTax">Taxa de adesão </label>
+              <p-inputNumber
+                  placeholder="R$"
+                  prefix="R$ "
+                  id="subTax"
+                  mode="decimal"
+                  [minFractionDigits]="2"
+              ></p-inputNumber>
+          </div>
+          <div class="field col-6 md:col-3">
+              <label for="frequency">Frequencia</label>
+              <p-dropdown
+                  [options]="frequencySelectItems"
+                  id="frequency"
+                  optionLabel="name"
+                  optionValue="value"
+                  formControlName="frequency"
+              ></p-dropdown>
+          </div>
+          <div *ngIf="plansForm.get('frequency')?.value === 'monthly'" 
+              class="field col-6 md:col-3">
+              <label for="chargeDate">Dia da cobrança</label>
+              <p-inputNumber
+                [useGrouping]="false"
+                placeholder="Qual o dia?"
+                id="chargeDate"
+                [max]="31"
+                [min]="1"
+              ></p-inputNumber>
+          </div>
+          <div *ngIf="plansForm.get('frequency')?.value === 'weekly'" 
+              class="field col-6 md:col-3">
+              <label for="chargeDateDropdown">Dia da cobrança</label>
+              <p-dropdown
+                id="chargeDateDropdown"
+                placeholder="Qual o dia?"
+                optionLabel="name"
+                optionValue="value"
+                [options]="weeklyDaysSelectItems"
+              >
+              </p-dropdown>
+          </div>
+
+          <div class="field col-6 md:col-3">
+              <label for="chargeNow">Cobrar imediatamente</label>
+              <p-dropdown
+                [options]="options"
+                id="chargeNow"
+                optionLabel="name"
+                optionValue="value"
+              ></p-dropdown>
+          </div>
+
+          <div class="field col-6 md:col-3">
+              <label for="proporcionalAmount">Cobrar proporcionalmente</label>
+              <p-dropdown
+                [options]="options"
+                id="proporcionalAmount"
+                optionLabel="name"
+                optionValue="value"
+              ></p-dropdown>
+          </div>
         </form>
 
         <div class="plans--footer">

@@ -11,6 +11,8 @@ import { PlansFormComponent } from './plans-form/plans-form.component';
 import { SubscriptionsFormComponent } from './subscriptions-form/subscriptions-form.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [RecurrenceListComponent, PlansFormComponent, SubscriptionsFormComponent],
@@ -23,6 +25,8 @@ import { InputTextModule } from 'primeng/inputtext';
     ReactiveFormsModule,
     DropdownModule,
     InputTextModule,
+    InputSwitchModule,
+    InputNumberModule,
   ],
   exports: [RecurrenceListComponent]
 })
