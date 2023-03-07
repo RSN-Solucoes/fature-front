@@ -8,9 +8,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //PrimeNG
 import { TabViewModule } from 'primeng/tabview';
 import { PlansFormComponent } from './plans-form/plans-form.component';
+import { SubscriptionsFormComponent } from './subscriptions-form/subscriptions-form.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
-  declarations: [RecurrenceListComponent, PlansFormComponent],
+  declarations: [RecurrenceListComponent, PlansFormComponent, SubscriptionsFormComponent],
   imports: [
     CommonModule,
     TableModule,
@@ -18,6 +21,8 @@ import { PlansFormComponent } from './plans-form/plans-form.component';
     TabViewModule,
     FormsModule,
     ReactiveFormsModule,
+    DropdownModule,
+    InputTextModule,
   ],
   exports: [RecurrenceListComponent]
 })

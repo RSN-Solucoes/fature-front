@@ -80,7 +80,7 @@ export class RecurrenceListComponent implements OnInit {
   navigateToForm(): void {
     this.tabIndex === 0 
       ? this.router.navigate(['painel/recorrencias/planos/novo'])
-      : this.router.navigate(['painel/clientes']);
+      : this.router.navigate(['painel/recorrencias/assinaturas/novo']);
   }
 
 }

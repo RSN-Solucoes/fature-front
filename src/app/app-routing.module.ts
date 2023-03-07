@@ -1,3 +1,4 @@
+import { SubscriptionsFormComponent } from './modules/recurrence/recurrence-list/subscriptions-form/subscriptions-form.component';
 import { PlansFormComponent } from './modules/recurrence/recurrence-list/plans-form/plans-form.component';
 import { TransfersListComponent } from './modules/transfers/transfers-list/transfers-list.component';
 import { EditTemplateComponent } from './modules/settings/emails-template/edit-template/edit-template.component';
@@ -106,6 +107,11 @@ const routes: Routes = [
   {
     path: 'painel/recorrencias/planos/novo',
     component: PlansFormComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'painel/recorrencias/assinaturas/novo',
+    component: SubscriptionsFormComponent,
     canActivate: [AuthGuardService],
   },
   
