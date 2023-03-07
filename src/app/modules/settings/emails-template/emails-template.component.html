@@ -5,7 +5,7 @@
 
     <div class="emails-template--content">
         <div *ngFor="let template of emailTemplates">
-            <a class="emails-template--content_options my-5">
+            <a class="emails-template--content_options my-5" (click)="navigateToEditTemplate()">
                 <img [src]="template.src" [alt]="template.title">
 
                 <span>{{ template.title }}</span>

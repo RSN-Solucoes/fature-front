@@ -1,4 +1,5 @@
-import { UsersFormComponent } from './modules/settings/users/users-form/users-form.component';
+import { TransfersListComponent } from './modules/transfers/transfers-list/transfers-list.component';
+import { EditTemplateComponent } from './modules/settings/emails-template/edit-template/edit-template.component';
 import { SettingsComponent } from './modules/settings/settings.component';
 import { InvoiceFormComponent } from './modules/invoices/invoice-form/invoice-form.component';
 import { ProductsServicesFormComponent } from './modules/products-services/products-services-form/products-services-form.component';
@@ -10,6 +11,7 @@ import { RecurrenceListComponent } from './modules/recurrence/recurrence-list/re
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { LoginComponent } from './modules/login/login.component';
 import { TransfersComponent } from './modules/transfers/transfers.component';
+import { UsersFormComponent } from './modules/settings/users/users-form/users-form.component';
 
 import { AuthGuardService } from './core/guards/auth-guard.service';
 
@@ -96,6 +98,17 @@ const routes: Routes = [
     component: UsersFormComponent,
     canActivate: [AuthGuardService],
   },
+  {
+    path: 'painel/configuracoes/edit-template',
+    component: EditTemplateComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'painel/transferencias/listagem',
+    component: TransfersListComponent,
+    canActivate: [AuthGuardService],
+  },
+  
 ];
 
 @NgModule({
