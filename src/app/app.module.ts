@@ -36,7 +36,6 @@ registerLocaleData(localePt);
   declarations: [AppComponent, AsideComponent],
   imports: [
     BrowserModule,
-    FullCalendarModule,
     AppRoutingModule,
     HttpClientModule,
     SharedModule,

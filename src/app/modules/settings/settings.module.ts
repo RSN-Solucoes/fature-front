@@ -1,3 +1,4 @@
+import { EditTemplateModule } from './emails-template/edit-template/edit-template.module';
 import { ImageCropperModule } from './../../shared/components/image-cropper/image-cropper.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -51,6 +52,7 @@ import { SkeletonModule } from 'primeng/skeleton';
     DialogModule,
     TooltipModule,
     SkeletonModule,
+    EditTemplateModule,
   ],
   exports: [
     BankDataComponent,
