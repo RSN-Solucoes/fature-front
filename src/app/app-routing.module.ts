@@ -11,11 +11,13 @@ import { RecurrenceListComponent } from './modules/recurrence/recurrence-list/re
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { LoginComponent } from './modules/login/login.component';
 import { TransfersComponent } from './modules/transfers/transfers.component';
+import { ClientsCreateComponent } from './modules/clients/clients-form/clients-create/clients-create.component';
 
 import { AuthGuardService } from './core/guards/auth-guard.service';
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 
 const routes: Routes = [
   {
@@ -39,7 +41,7 @@ const routes: Routes = [
   },
   {
     path: 'painel/clientes/novo',
-    component: ClientsFormComponent,
+    component: ClientsCreateComponent,
     canActivate: [AuthGuardService],
   },
   {
