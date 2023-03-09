@@ -5,7 +5,7 @@
         </span>
 
         <div class="settings-navbar--buttons">
-        <a><i class="pi pi-plus"></i></a>
+        <a (click)="navigateToCreateUsers()"><i class="pi pi-plus"></i></a>
 
         <a><i class="pi pi-sliders-h"></i></a>
         </div>
@@ -13,7 +13,7 @@
 </app-navbar>
 
 <div class="content">
-    <p-tabView>
+    <p-tabView (onChange)="changeIndex($event)">
         <p-tabPanel header="Customização">
             <app-customization></app-customization>
         </p-tabPanel>

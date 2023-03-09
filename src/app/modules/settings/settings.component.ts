@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor() { }
+  public tabIndex: number = 0;
+
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
   }
 
+  changeIndex(event: any): void {
+    this.tabIndex = event.index;
+    console.log(this.tabIndex)
+  }
+
+  navigateToCreateUsers(): void {
+    if(this.tabIndex !== 2) return;
+
+    this.router.navigate(['painel/configuracoes/colaboradores/novo']);
+  }
 }
