@@ -151,6 +151,19 @@
             font-weight: 400;
             margin-bottom: 1rem;
         }
+        .generate-password {
+          align-self: center;
+          label {
+            color: #fff;
+          }
+          a {
+            cursor: pointer;
+            i {
+              font-size: 1.6rem;
+              font-weight: 700;
+            }
+          }
+        }
     }
     .users-form--footer {
         display: flex;

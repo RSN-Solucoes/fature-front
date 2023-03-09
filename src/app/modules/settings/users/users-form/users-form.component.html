@@ -35,7 +35,7 @@
                             Limpar
                         </button>
                     </div>
-                    <span>JPG, GIF or PNG. Max size of 800k</span>
+                    <span>JPG ou PNG. Tamanho máximo 500KB</span>
 
                     <p-dialog
                         [(visible)]="displayCropDialog"
@@ -105,15 +105,20 @@
                   placeholder="Email para envio"
                 />
             </div>
-            <div class="field col-12 md:col-4">
+            <div class="field col-11 md:col-3">
                 <label for="email">Senha</label>
                 <input
                   type="email"
                   id="email"
+                  formControlName="password"
                   pInputText
-                  placeholder="Email para envio"
                 />
             </div>
+            <div class="field col-1 generate-password">
+                <label>'</label>
+                <a (click)="generatePassword()"><i class="pi pi-refresh"></i></a>
+            </div>
+
             <div class="field col-12">
                 <label for="obs">Observações</label>
                 <textarea 

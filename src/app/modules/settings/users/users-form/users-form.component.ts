@@ -34,12 +34,15 @@ export class UsersFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.createUsersForm();
+
+    this.generatePassword();
   }
 
   createUsersForm() {
     this.form = this.fb.group({
       logo: [null],
       profilePhoto: [null],
+      password: [null],
     });
   }
 
@@ -85,6 +88,22 @@ export class UsersFormComponent implements OnInit {
     this.finalProfilePhoto = 'assets/img/profile_photo.png';
 
     this.form.get('profilePhoto')?.reset();
+  }
+
+  generatePassword(): void {
+    const chars =
+    '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const passwordLength = 8;
+    let password = '';
+    
+    for (let i = 0; i <= passwordLength; i++) {
+      const randomNumber = Math.floor(Math.random() * chars.length);
+      password += chars.substring(randomNumber, randomNumber + 1);
+    }
+    
+    this.form.patchValue({
+      password,
+    });
   }
 
   cancel(): void {
