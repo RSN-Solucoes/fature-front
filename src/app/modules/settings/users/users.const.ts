@@ -13,4 +13,3 @@ export const USERS_FIELDS = [
     ];
 
 export const USERS_PIPES = ['', '', '', ''];
-  

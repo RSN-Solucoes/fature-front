@@ -4,6 +4,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ClientsService } from 'src/app/services/clients.service';
 import { RequestMessageService } from 'src/app/shared/components/request-message/request-message.service';
 import { UFS_SELECT_LIST } from 'src/app/shared/constants/ufs.const';
+import { 
+  PAYMENTS_COLUMNS, 
+  PAYMENTS_FIELDS, 
+  PAYMENTS_PIPES, 
+  SENT_EMAILS_COLUMNS, 
+  SENT_EMAILS_FIELDS, 
+  SENT_EMAILS_PIPES 
+  } from './clients-form.const';
 
 @Component({
   selector: 'app-clients-form',
@@ -13,10 +21,25 @@ import { UFS_SELECT_LIST } from 'src/app/shared/constants/ufs.const';
 export class ClientsFormComponent implements OnInit {
   public clientsForm!: FormGroup;
   public formSubmited: boolean = false;
+  public editForm: boolean = true;
 
   public ufSelectItems: any = UFS_SELECT_LIST;
 
   public clientId = this.activatedRoute.snapshot.paramMap.get('id') || '';
+
+  public sentEmailsColumns = SENT_EMAILS_COLUMNS;
+  public sentEmailsFields = SENT_EMAILS_FIELDS;
+  public sentEmailsPipes = SENT_EMAILS_PIPES;
+  public sentEmails!: any[];
+
+  public paymentsColumns = PAYMENTS_COLUMNS;
+  public paymentsFields = PAYMENTS_FIELDS;
+  public paymentsPipes = PAYMENTS_PIPES;
+  public payments!: any[];
+
+  public pageIndex = 1;
+  public pageLimit = 10;
+  public totalRecords = 10;
 
   constructor(
     private fb: FormBuilder,
@@ -31,7 +54,47 @@ export class ClientsFormComponent implements OnInit {
 
     if (this.clientId) {
       this.getClient();
-    }
+
+      this.editForm = false;
+      this.clientsForm.disable();
+    };
+
+    this.payments = [
+      {
+        referringDate: '01/10/2022',
+        dueDate: '31/10/2022',
+        paymentMethod: 'Boleto',
+        status: 'Autorizado',
+        paid: 'Sim',
+        value: 200
+      },
+      {
+        referringDate: '01/10/2022',
+        dueDate: '31/10/2022',
+        paymentMethod: 'Boleto',
+        status: 'Autorizado',
+        paid: 'Sim',
+        value: 200
+      },
+    ];
+
+    this.sentEmails = [
+      {
+        title: 'Pagamento pendente',
+        destination: 'Luiz@gmail.com',
+        date: '08/11/2022',
+      },
+      {
+        title: 'Pagamento pendente',
+        destination: 'Luiz@gmail.com',
+        date: '08/11/2022',
+      },
+      {
+        title: 'Pagamento pendente',
+        destination: 'Luiz@gmail.com',
+        date: '08/11/2022',
+      },
+    ];
   }
 
   createClientsForm() {
@@ -49,6 +112,18 @@ export class ClientsFormComponent implements OnInit {
       uf: [{ value: null, disabled: true }, Validators.required],
       codeIbge: [null],
     });
+  }
+
+  editClientData(): void {
+    this.clientsForm.get('name')?.enable();
+    this.clientsForm.get('email')?.enable();
+    this.clientsForm.get('tel')?.enable();
+    this.clientsForm.get('document')?.enable();
+    this.clientsForm.get('addressNumber')?.enable();
+    this.clientsForm.get('addressComplement')?.enable();
+    this.clientsForm.get('cep')?.enable();
+    
+    this.editForm = true;
   }
 
   getClient() {
@@ -113,6 +188,29 @@ export class ClientsFormComponent implements OnInit {
         }, 1500);
       },
     });
+  }
+
+  loadMorePaymentItems(pageLimit: number): void {
+    this.payments.push(
+      {
+        referringDate: '01/10/2022',
+        dueDate: '31/10/2022',
+        paymentMethod: 'Boleto',
+        status: 'Autorizado',
+        paid: 'Sim',
+        value: 200
+      }
+    );
+  }
+
+  loadMoreSentEmailsItems(pageLimit: number): void {
+    this.sentEmails.push(
+      {
+        title: 'Pagamento pendente',
+        destination: 'Luiz@gmail.com',
+        date: '08/11/2022',
+      },
+    );
   }
 
   cancel() {

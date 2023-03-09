@@ -1,4 +1,4 @@
-.client-navbar {
+.client-create-navbar {
     display: flex;
     align-items: center;
     height: 100%;
@@ -17,12 +17,13 @@
         margin-left: 1.5rem;
     }
 }
-.clients {
+
+.clients-create {
     width: 100%;
     padding: 6rem;
     background-color: #fff;
     border-radius: 10px;
-    .clients--header {
+    .clients-create--header {
         display: flex;
         justify-content: space-between;
         p {
@@ -37,13 +38,13 @@
             cursor: pointer;
         }
     }
-    .clients--form {
+    .clients-create--form {
         label {
             font-weight: 400;
             margin-bottom: 1rem;
         }
     }
-    .clients--footer {
+    .clients-create--footer {
         display: flex;
         justify-content: flex-end;
     }
