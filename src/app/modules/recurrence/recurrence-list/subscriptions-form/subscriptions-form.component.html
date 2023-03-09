@@ -8,17 +8,17 @@
 <div class="content">
     <div class="subscriptions">
         <div class="subscriptions--header">
-          <p>Escolha o cliente</p>
+          <p>Dados da assinatura</p>
         </div>
 
         <form class="subscriptions--form my-6 grid" [formGroup]="subscriptionsForm">
             <div class="field col-12 md:col-6">
-                <label for="name">Nome</label>
+                <label for="client">Cliente</label>
                 <p-dropdown        
                     placeholder="Nome"
                     [options]="clientsList"
                     optionLabel="name"
-                    name="name"
+                    name="client"
                     formControlName="name"
                 ></p-dropdown>
             </div>

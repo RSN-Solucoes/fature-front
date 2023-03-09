@@ -40,6 +40,7 @@ export class PlansFormComponent implements OnInit {
       name: [null],
       description: [null],
       frequency: ['monthly'],
+      enableSubscriptionTerm: [null],
     });
   }
 

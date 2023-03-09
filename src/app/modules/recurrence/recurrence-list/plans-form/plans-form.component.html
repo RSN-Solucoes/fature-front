@@ -12,7 +12,7 @@
         </div>
 
         <form class="plans--form my-6 grid" [formGroup]="plansForm">
-          <div class="field col-6">
+          <div class="field col-8">
               <label for="name">Nome</label>
               <input
                 type="text"
@@ -21,13 +21,37 @@
                 placeholder="Nome do plano"
               />
           </div>
-          <div class="field col-6 term-switch">
+          <div class="field col-4 term-switch">
             <label>'</label>
             <div class="term-switch--item ml-3">
-              <p-inputSwitch></p-inputSwitch>
+              <p-inputSwitch
+                formControlName="enableSubscriptionTerm"
+              ></p-inputSwitch>
 
               <span>Habilitar prazo na assinatura</span>
             </div>
+          </div>
+
+          <div *ngIf="plansForm.get('enableSubscriptionTerm')?.value == true"
+            class="field col-3">
+              <label for="subscriptionTerm">Qual o prazo da assinatura</label>
+              <input
+                type="text"
+                id="subscriptionTerm"
+                pInputText
+                placeholder="Caso não tenha deixar em branco"
+              />
+          </div>
+
+          <div *ngIf="plansForm.get('enableSubscriptionTerm')?.value == true"
+            class="field col-3">
+              <label for="limit">Limite de adesão</label>
+              <input
+                type="text"
+                id="limit"
+                pInputText
+                placeholder="Qual o limite"
+              />
           </div>
 
           <div class="field col-11">
