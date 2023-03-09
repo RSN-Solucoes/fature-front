@@ -1,0 +1,152 @@
+<app-navbar>
+    <div class="client-create-navbar">
+      <a (click)="cancel()"><i class="pi pi-angle-left"></i></a>
+      <span>Clientes</span>
+    </div>
+</app-navbar>
+
+<div class="content">
+    <div class="clients-create">
+        <div class="clients-create--header">
+          <p>Dados do cliente</p>
+        </div>
+        <form class="clients-create--form my-6 grid" [formGroup]="clientsForm">
+          <div class="field col-12 md:col-6">
+            <label for="clientName">Nome do cliente <span>*</span></label>
+            <input
+              type="text"
+              id="clientName"
+              formControlName="name"
+              pInputText
+              placeholder="Nome completo do cliente"
+            />
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="cpf-cnpj">CPF/CNPJ <span>*</span></label>
+            <input
+              type="text"
+              id="cpf-cnpj"
+              formControlName="document"
+              pInputText
+              placeholder="Documento do cliente ou empresa"
+              mask="000.000.000-00 || 00.000.000/0000-00"
+            />
+          </div>
+    
+          <div class="field col-12 md:col-4">
+            <label for="email">E-mail <span>*</span></label>
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              pInputText
+              placeholder="Email para envio"
+            />
+          </div>
+          <div class="field col-12 md:col-4">
+            <label for="contact">Contato <span>*</span></label>
+            <input
+              type="text"
+              id="contact"
+              formControlName="tel"
+              pInputText
+              placeholder="Telefone ou celular"
+              mask="(00) 0 0000-0000||(00) 0000-0000"
+            />
+          </div>
+          <div class="field col-12 md:col-4">
+            <label for="cep">CEP <span>*</span></label>
+            <input
+              type="text"
+              id="cep"
+              formControlName="cep"
+              pInputText
+              placeholder="Digite o CEP de envio"
+              mask="00000-000"
+              (change)="getClientAddressData()"
+            />
+          </div>
+    
+          <div class="field col-8 md:col-6">
+            <label for="address">Logradouro <span>*</span></label>
+            <input
+              type="text"
+              id="address"
+              formControlName="address"
+              pInputText
+              placeholder="Rua, avenida..."
+            />
+          </div>
+          <div class="field col-4 md:col-2">
+            <label for="addressNumber">Número <span>*</span></label>
+            <p-inputNumber
+              placeholder="Número"
+              id="addressNumber"
+              formControlName="addressNumber"
+              [useGrouping]="false"
+            >
+            </p-inputNumber>
+          </div>
+          <div class="field col-12 md:col-4">
+            <label for="addressComplement">Complemento</label>
+            <input
+              type="text"
+              id="addressComplement"
+              formControlName="addressComplement"
+              pInputText
+              placeholder="Apartamento, bloco..."
+            />
+          </div>
+    
+          <div class="field col-12 md:col-4">
+            <label for="district">Bairro <span>*</span></label>
+            <input
+              type="text"
+              id="district"
+              formControlName="district"
+              pInputText
+              placeholder="Bairro"
+            />
+          </div>
+          <div class="field col-12 md:col-4">
+            <label for="state">Estado <span>*</span></label>
+            <p-dropdown
+              [options]="ufSelectItems"
+              optionLabel="name"
+              optionValue="uf"
+              formControlName="uf"
+              placeholder="Estado"
+              filterBy="name"
+              [filter]="true"
+            >
+            </p-dropdown>
+          </div>
+          <div class="field col-12 md:col-4">
+            <label for="city">Cidade <span>*</span></label>
+            <input
+              type="text"
+              id="city"
+              formControlName="city"
+              pInputText
+              placeholder="Cidade"
+            />
+          </div>
+        </form>
+        <div class="clients-create--footer">
+          <button 
+            type="button" 
+            class="secondary-form-button"
+            (click)="clearForm()"
+            >
+            Limpar
+          </button>
+          <button 
+            type="button" 
+            class="primary-form-button ml-5"
+            (click)="submitForm()"
+            >
+            Salvar
+          </button>
+        </div>
+    </div>
+</div>
