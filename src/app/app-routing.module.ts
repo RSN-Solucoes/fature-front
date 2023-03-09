@@ -1,3 +1,4 @@
+import { SubscriptionsViewComponent } from './modules/recurrence/recurrence-list/subscriptions-view/subscriptions-view.component';
 import { TransfersListComponent } from './modules/transfers/transfers-list/transfers-list.component';
 import { EditTemplateComponent } from './modules/settings/emails-template/edit-template/edit-template.component';
 import { SettingsComponent } from './modules/settings/settings.component';
@@ -100,6 +101,11 @@ const routes: Routes = [
   {
     path: 'painel/transferencias/listagem',
     component: TransfersListComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'painel/recorrencias/visualizar',
+    component: SubscriptionsViewComponent,
     canActivate: [AuthGuardService],
   },
   

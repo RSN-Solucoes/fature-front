@@ -1,0 +1,89 @@
+.subscriptions-view-navbar {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    a {
+        cursor: pointer;
+        i {
+            border: solid 1px var(--black);
+            font-size: 2rem;
+            border-radius: 50px;
+            padding: 5px;
+        }
+    }
+    span {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-left: 1.5rem;
+    }
+}
+.subscriptions-view {
+    width: 100%;
+    padding: 6rem;
+    background-color: #fff;
+    border-radius: 10px;
+    .subscriptions-view--header {
+        p {
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+    }
+    .subscriptions-view--content {
+        label {
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+        .subscriptions-view_subscriber {
+            border: solid 3px var(--line);
+            border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            .subscriber--content--item {
+                margin-right: 6rem;
+                p {
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    margin-bottom: .5rem;
+                }
+                span {
+                    font-size: 1.2rem;
+                }
+            }
+        }
+        .subscriptions-view_subscription {
+            display: flex;
+            justify-content: space-between;
+            border: solid 3px var(--line);
+            border-radius: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+            .subscription__items {
+                display: flex;
+                flex-wrap: wrap;
+                .subscription--content--item {
+                    margin-right: 6rem;
+                    p {
+                        font-size: 1.2rem;
+                        font-weight: 600;
+                        margin-bottom: .5rem;
+                    }
+                    span {
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+            .subscription--action {
+                button {
+                    border: solid 3px var(--line);
+                }
+                button:hover {
+                    border: solid 3px var(--line) !important;
+                }
+            }
+        }
+    }
+    .subscriptions-view--footer {
+        display: flex;
+        justify-content: flex-end;
+    }
+}

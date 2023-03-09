@@ -6,11 +6,12 @@ import { NavbarModule } from 'src/app/shared/components/navbar/navbar.module';
 
 //PrimeNG
 import { TabViewModule } from 'primeng/tabview';
+import { SubscriptionsViewComponent } from './subscriptions-view/subscriptions-view.component';
 
 
 
 @NgModule({
-  declarations: [RecurrenceListComponent],
+  declarations: [RecurrenceListComponent, SubscriptionsViewComponent],
   imports: [
     CommonModule,
     TableModule,

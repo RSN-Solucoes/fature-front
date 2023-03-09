@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {
   PLANS_COLUMNS,
@@ -49,8 +50,8 @@ export class RecurrenceListComponent implements OnInit {
     {
       label: 'Visualizar',
       icon: 'pi-eye',
-      action: () => {
-        alert('Visualizar');
+      action: (row: any) => {
+        this.navigateToSubscriptionView();
       },
     },
     {
@@ -62,9 +63,15 @@ export class RecurrenceListComponent implements OnInit {
     },
   ];
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  navigateToSubscriptionView(): void {
+    this.router.navigate(['painel/recorrencias/visualizar']);
   }
 
 }
