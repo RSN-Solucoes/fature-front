@@ -1,4 +1,4 @@
-import { ImageCropperModule } from './../../../../shared/components/image-cropper/image-cropper.module';
+import { ImageCropperModule } from '../../../../shared/components/image-cropper/image-cropper.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersFormComponent } from './users-form.component';
