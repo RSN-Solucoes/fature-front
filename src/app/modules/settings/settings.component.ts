@@ -19,12 +19,12 @@ export class SettingsComponent implements OnInit {
 
   changeIndex(event: any): void {
     this.tabIndex = event.index;
-    console.log(this.tabIndex)
   }
 
-  navigateToCreateUsers(): void {
-    if(this.tabIndex !== 2) return;
+  navigateNew(): void {
+    if(this.tabIndex === 2) {
 
-    this.router.navigate(['painel/configuracoes/colaboradores/novo']);
+      this.router.navigate(['painel/configuracoes/colaboradores/novo']);
+    };
   }
 }

@@ -5,11 +5,11 @@ export const PLATFORM_MANAGEMENT_SELECT_LIST = [
     },
     {
         title: 'Criar colaborador',
-        formName: 'createUser'
+        formName: 'createEmployee'
     },
     {
         title: 'Atualizar dados de colaboradores',
-        formName: 'updateUserData'
+        formName: 'updateEmployeeData'
     },
     {
         title: 'Visualizar dados bancários',

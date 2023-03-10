@@ -1,14 +1,14 @@
 <app-navbar>
-    <div class="users-form-navbar">
+    <div class="employees-form-navbar">
         <a (click)="cancel()"><i class="pi pi-angle-left"></i></a>
         <span>Novo colaborador</span>
     </div>
 </app-navbar>
 
 <div class="content">
-    <div class="users-form">
-        <form class="users-form--section grid" [formGroup]="form">
-            <div class="users-form--header">
+    <div class="employees-form">
+        <form class="employees-form--section grid" [formGroup]="form">
+            <div class="employees-form--header">
                 <p>Dados do colaborador</p>
             </div>
 
@@ -130,11 +130,11 @@
                 ></textarea>
             </div>
 
-            <div class="users-form--header py-6 col-12">
+            <div class="employees-form--header py-6 col-12">
                 <p>Permissões</p>
             </div>
 
-            <div class="users-form--permissions col-12 grid">
+            <div class="employees-form--permissions col-12 grid">
                 <div class="col-11 accordion">
                     <p-accordion [multiple]="true">
                         <p-accordionTab
@@ -228,7 +228,7 @@
                 </div>
             </div>
         </form>
-        <div class="users-form--footer pt-6">
+        <div class="employees-form--footer pt-6">
             <button 
               type="button" 
               class="secondary-form-button"

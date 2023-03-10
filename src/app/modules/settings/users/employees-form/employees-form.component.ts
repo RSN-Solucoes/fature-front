@@ -1,14 +1,14 @@
-import { BILLING_MANAGEMENT_SELECT_LIST, PLATFORM_MANAGEMENT_SELECT_LIST, CLIENT_MANAGEMENT_SELECT_LIST, SERVICES_AND_PRODUCTS_MANAGEMENT_SELECT_LIST } from './users-form.const';
+import { BILLING_MANAGEMENT_SELECT_LIST, PLATFORM_MANAGEMENT_SELECT_LIST, CLIENT_MANAGEMENT_SELECT_LIST, SERVICES_AND_PRODUCTS_MANAGEMENT_SELECT_LIST } from './employees-form.const';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'app-users-form',
-  templateUrl: './users-form.component.html',
-  styleUrls: ['./users-form.component.scss']
+  selector: 'app-employees-form',
+  templateUrl: './employees-form.component.html',
+  styleUrls: ['./employees-form.component.scss']
 })
-export class UsersFormComponent implements OnInit {
+export class EmployeesFormComponent implements OnInit {
   public displayCropDialog: boolean = false;
   
   @ViewChild('profilePhoto', { static: false })
@@ -33,12 +33,12 @@ export class UsersFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.createUsersForm();
+    this.createEmployeesForm();
 
     this.generatePassword();
   }
 
-  createUsersForm() {
+  createEmployeesForm() {
     this.form = this.fb.group({
       logo: [null],
       profilePhoto: [null],

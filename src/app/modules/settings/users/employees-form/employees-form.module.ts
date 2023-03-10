@@ -1,7 +1,7 @@
 import { ImageCropperModule } from '../../../../shared/components/image-cropper/image-cropper.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsersFormComponent } from './users-form.component';
+import { EmployeesFormComponent } from './employees-form.component';
 import { NavbarModule } from 'src/app/shared/components/navbar/navbar.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -18,7 +18,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [
-    UsersFormComponent
+    EmployeesFormComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +37,6 @@ import { CheckboxModule } from 'primeng/checkbox';
     ReactiveFormsModule,
     CheckboxModule
   ],
-  exports: [UsersFormComponent],
+  exports: [EmployeesFormComponent],
 })
-export class UsersFormModule { }
+export class EmployeesFormModule { }

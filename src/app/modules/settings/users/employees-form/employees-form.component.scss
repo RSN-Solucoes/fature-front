@@ -1,4 +1,4 @@
-.users-form-navbar {
+.employees-form-navbar {
     display: flex;
     align-items: center;
     height: 100%;
@@ -17,13 +17,13 @@
         margin-left: 1.5rem;
     }
 }
-.users-form {
+.employees-form {
     width: 100%;
     padding: 6rem;
     background-color: #fff;
     border-radius: 10px;
-    .users-form--section {
-        .users-form--header {
+    .employees-form--section {
+        .employees-form--header {
             p {
                 font-size: 1.6rem;
                 font-weight: bold;
@@ -126,7 +126,7 @@
                   }
             }
         }
-        .users-form--permissions {
+        .employees-form--permissions {
           display: flex;
           align-items: center;
             .permissions {
@@ -165,7 +165,7 @@
           }
         }
     }
-    .users-form--footer {
+    .employees-form--footer {
         display: flex;
         justify-content: flex-end;
     }

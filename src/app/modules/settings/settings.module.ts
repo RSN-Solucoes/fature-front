@@ -1,4 +1,4 @@
-import { UsersFormModule } from './users/employees-form/users-form.module';
+import { EmployeesFormModule } from './users/employees-form/employees-form.module';
 import { EditTemplateModule } from './emails-template/edit-template/edit-template.module';
 import { ImageCropperModule } from './../../shared/components/image-cropper/image-cropper.module';
 import { NgModule } from '@angular/core';
@@ -8,7 +8,7 @@ import { NavbarModule } from 'src/app/shared/components/navbar/navbar.module';
 import { SettingsComponent } from './settings.component';
 import { BankDataComponent } from './bank-data/bank-data.component';
 import { CustomizationComponent } from './customization/customization.component';
-import { UsersComponent } from './users/employees.component';
+import { EmployeesComponent } from './users/employees.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -32,7 +32,7 @@ import { SkeletonModule } from 'primeng/skeleton';
     SettingsComponent,
     BankDataComponent,
     CustomizationComponent,
-    UsersComponent,
+    EmployeesComponent,
     CompanyDataComponent,
     EmailsTemplateComponent,
   ],
@@ -53,14 +53,14 @@ import { SkeletonModule } from 'primeng/skeleton';
     DialogModule,
     TooltipModule,
     SkeletonModule,
-    UsersFormModule,
+    EmployeesFormModule,
     EditTemplateModule,
   ],
   exports: [
     BankDataComponent,
     SettingsComponent,
     CustomizationComponent,
-    UsersComponent,
+    EmployeesComponent,
   ]
 })
 export class SettingsModule { }

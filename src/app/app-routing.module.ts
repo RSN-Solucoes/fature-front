@@ -13,7 +13,7 @@ import { RecurrenceListComponent } from './modules/recurrence/recurrence-list/re
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { LoginComponent } from './modules/login/login.component';
 import { TransfersComponent } from './modules/transfers/transfers.component';
-import { UsersFormComponent } from './modules/settings/users/employees-form/users-form.component';
+import { EmployeesFormComponent } from './modules/settings/users/employees-form/employees-form.component';
 import { ClientsCreateComponent } from './modules/clients/clients-form/clients-create/clients-create.component';
 
 import { AuthGuardService } from './core/guards/auth-guard.service';
@@ -99,7 +99,7 @@ const routes: Routes = [
   },
   {
     path: 'painel/configuracoes/colaboradores/novo',
-    component: UsersFormComponent,
+    component: EmployeesFormComponent,
     canActivate: [AuthGuardService],
   },
   {
