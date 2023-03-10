@@ -8,6 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubscriptionsViewComponent implements OnInit {
 
+  public billingHistory: any[] = [
+    {
+      date: '05-11-2022',
+      total: 299
+    },
+    {
+      date: '05-11-2022',
+      total: 299
+    },
+    {
+      date: '05-11-2022',
+      total: 299
+    },
+  ];
+
   constructor(
     private router: Router,
   ) { }
