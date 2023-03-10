@@ -368,6 +368,10 @@ p-accordion {
   background: var(--primary) !important;
 }
 
+.p-inputswitch.p-focus .p-inputswitch-slider {
+  box-shadow: none;
+}
+
 // Confirm Popup
 
 .p-confirm-popup {
