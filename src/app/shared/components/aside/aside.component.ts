@@ -1,19 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { title } from 'process';
 
 @Component({
   selector: 'app-aside',
   templateUrl: './aside.component.html',
-  styleUrls: ['./aside.component.scss']
+  styleUrls: ['./aside.component.scss'],
 })
 export class AsideComponent implements OnInit {
-
   menuItems!: any[];
 
-  constructor(
-    private router: Router,
-  ) { }
+  constructor(private router: Router, private title: Title) {}
 
   ngOnInit(): void {
     this.createMenuItems();
@@ -26,8 +23,8 @@ export class AsideComponent implements OnInit {
         iconPath: 'assets/img/new.svg',
         alt: 'Novo',
         classes: 'image-new',
-        route: 'painel/novo',
-        active: String(location.href).includes('painel/novo'),
+        route: 'painel/faturas/novo',
+        active: String(location.href).includes('painel/faturas/novo'),
       },
       {
         title: 'Faturas',
@@ -80,8 +77,9 @@ export class AsideComponent implements OnInit {
     ];
   }
 
-  navigateToModule(route: string) {
-    this.router.navigate([route]);
-  }
+  navigateToModule(menu: any) {
+    this.title.setTitle(`Fature - ${menu.title}`);
 
+    this.router.navigate([menu.route]);
+  }
 }
