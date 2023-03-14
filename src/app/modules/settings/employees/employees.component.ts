@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { USERS_COLUMNS, USERS_FIELDS, USERS_PIPES } from './users.const';
+import { EMPLOYEES_COLUMNS, EMPLOYEES_FIELDS, EMPLOYEES_PIPES } from './employees.const';
 
 import { RequestMessageService } from 'src/app/shared/components/request-message/request-message.service';
 import { ConfirmationService } from 'primeng/api';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  selector: 'app-employees',
+  templateUrl: './employees.component.html',
+  styleUrls: ['./employees.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class EmployeesComponent implements OnInit {
 
-  public usersColumns = USERS_COLUMNS;
-  public usersFields = USERS_FIELDS;
-  public usersPipes = USERS_PIPES;
+  public employeesColumns = EMPLOYEES_COLUMNS;
+  public employeesFields = EMPLOYEES_FIELDS;
+  public employeesPipes = EMPLOYEES_PIPES;
 
-  public users!: any[];
+  public employees!: any[];
 
-  public usersActions = [
+  public employeesActions = [
     {
       label: 'Editar',
       icon: 'pi-pencil',
@@ -46,7 +46,7 @@ export class UsersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.users = [
+    this.employees = [
       {
         name: 'André Luiz Pedro da Silva',
         email: 'andre@raipp.com.br',
@@ -75,7 +75,7 @@ export class UsersComponent implements OnInit {
   }
 
   loadMoreItems(pageLimit: number) {
-    this.users.push(
+    this.employees.push(
       {
         name: 'André Luiz Pedro da Silva',
         email: 'andre@raipp.com.br',

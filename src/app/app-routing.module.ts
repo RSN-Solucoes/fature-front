@@ -11,6 +11,7 @@ import { RecurrenceListComponent } from './modules/recurrence/recurrence-list/re
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { LoginComponent } from './modules/login/login.component';
 import { TransfersComponent } from './modules/transfers/transfers.component';
+import { EmployeesFormComponent } from './modules/settings/employees/employees-form/employees-form.component';
 import { ClientsCreateComponent } from './modules/clients/clients-form/clients-create/clients-create.component';
 import { SubscriptionsViewComponent } from './modules/recurrence/recurrence-list/subscriptions-view/subscriptions-view.component';
 import { SubscriptionsFormComponent } from './modules/recurrence/recurrence-list/subscriptions-form/subscriptions-form.component';
@@ -94,6 +95,11 @@ const routes: Routes = [
   {
     path: 'painel/configuracoes',
     component: SettingsComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'painel/configuracoes/colaboradores/novo',
+    component: EmployeesFormComponent,
     canActivate: [AuthGuardService],
   },
   {

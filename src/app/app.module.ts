@@ -24,6 +24,9 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 
+// PrimeNG
+import { TooltipModule } from 'primeng/tooltip';
+
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
   interactionPlugin,
@@ -42,6 +45,7 @@ registerLocaleData(localePt);
     ModulesModule,
     RequestMessageModule,
     RequestLoadingModule,
+    TooltipModule,
   ],
   providers: [
     {
