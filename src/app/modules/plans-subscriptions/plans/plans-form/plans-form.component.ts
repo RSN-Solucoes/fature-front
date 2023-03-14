@@ -1,7 +1,7 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { FREQUENCY_SELECT_LIST, WEEKLY_DAYS_SELECT_LIST } from './plans.const';
+import { FREQUENCY_SELECT_LIST, WEEKLY_DAYS_SELECT_LIST } from '../plans.const';
 
 @Component({
   selector: 'app-plans-form',

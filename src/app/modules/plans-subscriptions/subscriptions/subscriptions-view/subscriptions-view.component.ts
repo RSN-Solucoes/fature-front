@@ -33,5 +33,4 @@ export class SubscriptionsViewComponent implements OnInit {
   cancel(): void {
     this.router.navigate(['painel/recorrencias']);
   }
-
 }

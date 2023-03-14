@@ -1,12 +1,11 @@
-import { RecurrenceListComponent } from './recurrence-list.component';
+import { SubscriptionsListModule } from './../subscriptions/subscriptions-list/subscriptions-list.module';
+import { PlansSubscriptionsListComponent } from './plans-subscriptions-list.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'src/app/shared/components/table/table.module';
 import { NavbarModule } from 'src/app/shared/components/navbar/navbar.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SubscriptionsViewComponent } from './subscriptions-view/subscriptions-view.component';
-import { PlansFormComponent } from './plans-form/plans-form.component';
-import { SubscriptionsFormComponent } from './subscriptions-form/subscriptions-form.component';
+import { PlansListModule } from '../plans/plans-list/plans-list.module';
 
 //PrimeNG
 import { TabViewModule } from 'primeng/tabview';
@@ -16,9 +15,10 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputNumberModule } from 'primeng/inputnumber';
 
 
-
 @NgModule({
-  declarations: [RecurrenceListComponent, SubscriptionsViewComponent, PlansFormComponent, SubscriptionsFormComponent],
+  declarations: [
+    PlansSubscriptionsListComponent,
+    ],
   imports: [
     CommonModule,
     TableModule,
@@ -30,7 +30,9 @@ import { InputNumberModule } from 'primeng/inputnumber';
     InputTextModule,
     InputSwitchModule,
     InputNumberModule,
+    PlansListModule,
+    SubscriptionsListModule,
   ],
-  exports: [RecurrenceListComponent]
+  exports: [PlansSubscriptionsListComponent]
 })
-export class RecurrenceListModule { }
+export class PlansSubscriptionsListModule { }
