@@ -19,7 +19,7 @@ export class LoginService {
     return this.http.post(`${this.API_BASE}/auth/login`, data);
   }
 
-  checkToken(token: string): Observable<any> {
+  checkToken(token: string | null): Observable<any> {
     return this.http.get(`${this.API_BASE}/auth/token/${token}`);
   }
   

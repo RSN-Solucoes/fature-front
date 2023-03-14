@@ -1,3 +1,4 @@
+import { CardPaymentModule } from './card-payment/card-payment.module';
 import { ProductsServicesFormModule } from './products-services/products-services-form/products-services-form.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -36,6 +37,7 @@ import { InvoiceFormModule } from './invoices/invoice-form/invoice-form.module';
     ProductsServicesFormModule,
     SettingsModule,
     InvoiceFormModule,
+    CardPaymentModule,
   ],
   exports: [],
   providers: [

@@ -1,0 +1,224 @@
+<div class="card-payment">
+    <div class="card-payment--billing-info grid">
+        <div class="line col-12 billing-info--title">
+            <img src="../../../assets/img/profile_photo.png" alt="logo">
+
+            <p>Informações da cobrança</p>
+        </div>
+        <div class="line col-12 billing-info--methods py-6">
+            <a
+                *ngFor="let methods of paymentMethods; let j = index"
+                [ngClass]="{
+                    'active-method': displayForm === methods.value
+                }"
+                (click)="showMethodForm(methods.value)"
+                ><img [src]="methods.src" [alt]="methods.name">
+                <span>{{ methods.name }}</span>
+            </a>
+        </div>
+
+        <div
+            *ngIf="displayForm == 'carnet'"
+            class="col-12 billing-info--carnet-payment grid"
+            >
+            <div class="line col-12 carnet-payment--actions">
+                <p>Visualizar parcelas do carnê</p>
+            
+                <i class="pi pi-eye"></i>
+            </div>
+            <div class="line col-12 carnet-payment--actions my-4">
+                <p>Baixar carnê</p>
+            
+                <i class="pi pi-cloud-download"></i>
+            </div>
+            <div class="line col-12 carnet-payment--actions mb-6">
+                <p>Imprimir carnê</p>
+            
+                <i class="pi pi-print"></i>
+            </div>
+        </div>
+
+        <div
+            *ngIf="displayForm == 'pix'"
+            class="col-12 billing-info--pix-payment grid"
+            >
+            <div class="line col-12 pix--actions">
+                <div class="pix--actions__data">
+                    <img src="https://acesso.gov.br/faq/_images/imagem_qrcode_exemplo.jpg" alt="QR">
+
+                    <div class="pix--info">
+                        <p>Chave pix</p>
+    
+                        <span>a98h - 5545 - 8br - 98556oi987hg5</span>
+                    </div>
+                </div>
+
+                <i class="pi pi-clone"></i>
+            </div>
+        </div>
+
+        <div
+            *ngIf="displayForm == 'bankSlip'"
+            class="col-12 billing-info--bankSlip-payment grid"
+            >
+            <div class="line col-12 bankSlip-payment--actions">
+                <div class="bankSlip--info">
+                    <p>Código de barra</p>
+
+                    <span>00190.00009 02996.786105 00006.182174 6 92950000008800</span>
+                </div>
+            
+                <i class="pi pi-clone"></i>
+            </div>
+            <div class="line col-12 bankSlip-payment--actions mt-4">
+                <p>Baixar boleto</p>
+            
+                <i class="pi pi-cloud-download"></i>
+            </div>
+            <div class="line col-12 bankSlip-payment--actions my-4">
+                <p>Visualizar boleto</p>
+            
+                <i class="pi pi-eye"></i>
+            </div>
+            <div class="line col-12 bankSlip-payment--actions mb-6">
+                <p>Imprimir boleto</p>
+            
+                <i class="pi pi-print"></i>
+            </div>
+        </div>
+
+        <div
+            *ngIf="displayForm == 'debitCard'"
+            class="col-12 billing-info--debitCard-payment grid"
+            >
+            <div class="field col-12">
+                <label for="cardName">Nome do titular do cartão</label>
+                <input
+                  type="text"
+                  id="cardName"
+                  name="cardName"
+                  pInputText
+                  placeholder="Nome igual ao cartão"
+                />
+            </div>
+            <div class="field col-8">
+                <label for="cardNumber">Número do cartão</label>
+                <input
+                  type="text"
+                  id="cardNumber"
+                  name="cardNumber"
+                  pInputText
+                  placeholder="0000-0000-0000-0000"
+                  mask="0000-0000-0000-0000"
+                />
+            </div>
+        </div>
+
+        <div
+            *ngIf="displayForm == 'creditCard'"
+            class="col-12 billing-info--creditCard-payment grid"
+            >
+            <div class="field col-12">
+                <label for="cardName">Nome do titular do cartão</label>
+                <input
+                type="text"
+                id="cardName"
+                name="cardName"
+                pInputText
+                placeholder="Nome igual ao cartão"
+                />
+            </div>
+
+            <div class="field col-9">
+                <label for="cardNumber">Número do cartão</label>
+                <input
+                type="text"
+                id="cardNumber"
+                name="cardNumber"
+                pInputText
+                placeholder="0000-0000-0000-0000"
+                mask="0000-0000-0000-0000"
+                />
+            </div>
+
+            <div class="col-3"></div>
+
+            <div class="field col-3">
+                <label for="cardDueDateDay">Validade</label>
+                <p-dropdown
+                    [options]="days"
+                    optionLabel="day"
+                    id="cardDueDateDay"
+                    name="cardDueDateDay"
+                    placeholder="Dia"
+                >
+                </p-dropdown>
+            </div>
+
+            <div class="field col-3">
+                <label class="noLabel" for="cardDueDateYear">'</label>
+                <p-dropdown
+                    [options]="days"
+                    optionLabel="day"
+                    id="cardDueDateYear"
+                    name="cardDueDateYear"
+                    placeholder="Ano"
+                >
+                </p-dropdown>
+            </div>
+
+            <div class="field col-3">
+                <label for="cardCvv">CVV</label>
+                <input
+                    type="text"
+                    id="cardCvv"
+                    name="cardCvv"
+                    pInputText
+                    placeholder="000"
+                    mask="000"
+                />
+            </div>
+
+            <div class="field col-9">
+                <label for="installmentQuantity">Quantidade de parcelas</label>
+                <p-dropdown
+                    [options]="installments"
+                    optionLabel="title"
+                    id="installmentQuantity"
+                    name="installmentQuantity"
+                >
+                </p-dropdown>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-payment--purchase grid">
+        <div class="col-12 purchase--title">
+            <p>Sua compra</p>
+        </div>
+
+        <div class="bottom-line col-12">
+            <span>Gel 20 G C/ NIACINAMIDA PC USO TOPIC</span>
+        </div>
+        <div class="bottom-line col-12 purchase--quantity">
+            <p>Quantidade</p>
+
+            <span>01</span>
+        </div>
+        <div class="bottom-line col-12 purchase--description">
+            <span>
+                Descrição: 
+            </span>
+        </div>
+        <div class="col-12 purchase--total">
+            <p>Total:</p>
+            
+            <span>R$ 200,00</span>
+        </div>
+        <div class="purchase--button">
+            <button type="button">
+                Pagar
+            </button>
+        </div>
+    </div>
+</div>

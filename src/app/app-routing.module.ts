@@ -1,3 +1,4 @@
+import { CardPaymentComponent } from './modules/card-payment/card-payment.component';
 import { SubscriptionsFormComponent } from './modules/recurrence/recurrence-list/subscriptions-form/subscriptions-form.component';
 import { PlansFormComponent } from './modules/recurrence/recurrence-list/plans-form/plans-form.component';
 import { TransfersListComponent } from './modules/transfers/transfers-list/transfers-list.component';
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'pagar',
+    component: CardPaymentComponent,
   },
   {
     path: 'painel/dashboard',

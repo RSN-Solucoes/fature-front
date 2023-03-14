@@ -29,8 +29,14 @@ export class AppComponent implements OnInit {
   }
 
   checkToken() {
-    if (!this.token) {
-      this.router.navigate(['login']);
+    const url = location.href;
+
+    if (
+      String(url).includes('pagar') ||
+      String(url).includes('assinatura') ||
+      String(url).includes('faturas')
+    ) {
+      this.token = null;
 
       return;
     }
