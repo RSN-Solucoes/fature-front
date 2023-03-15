@@ -80,6 +80,37 @@
                     cursor: pointer;
                 }
             }
+            .carnet-installments {
+                padding: 2rem 4rem;
+                .view-title {
+                    p {
+                        font-size: 1.2rem;
+                        font-weight: 700;
+                        color: #000;
+                    }
+                }
+                .carnet-installments--info {
+                    display: flex;
+                    align-items: center;
+                    border: solid 2px var(--line);
+                    border-radius: 10px;
+                    padding: 2rem ;
+                    p {
+                        font-size: 1rem;
+                        margin-right: 1rem;
+                        font-weight: 700;
+                    }
+                    span {
+                        font-size: 1rem;
+                    }
+                    i {
+                        font-size: 1.4rem;
+                        color: #000;
+                        font-weight: 700;
+                        margin-left: 1rem;
+                    }
+                }
+            }
         }
         .billing-info--pix-payment {
             .pix--actions {

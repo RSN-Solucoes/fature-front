@@ -9,7 +9,9 @@ import { PAYMENT_METHODS_SELECT_LIST } from '../invoices/invoice-form/invoice-fo
 export class CardPaymentComponent implements OnInit {
   public paymentMethods: any = PAYMENT_METHODS_SELECT_LIST;
 
-  public displayForm: string = 'bankSlip';
+  public showCarnetInstallments: boolean = false;
+
+  public displayForm: string = 'carnet';
 
   public days: any[] = [
     {

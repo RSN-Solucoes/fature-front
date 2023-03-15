@@ -24,8 +24,62 @@
             <div class="line col-12 carnet-payment--actions">
                 <p>Visualizar parcelas do carnê</p>
             
-                <i class="pi pi-eye"></i>
+                <i 
+                    class="pi pi-eye"
+                    (click)="showCarnetInstallments = true"
+                ></i>
             </div>
+
+            <p-dialog
+                [(visible)]="showCarnetInstallments"
+                [draggable]="false"
+                [resizable]="false"
+                [closable]="true"
+                [modal]="true"
+                [style]="{width: '1100px'}"
+            >
+                <div class="carnet-installments grid">
+                    <div class="col-12 view-title pb-4">
+                        <p>Informações do carnê</p>
+                    </div>
+
+                    <div class="col-fixed" style="width: 15%;">
+                        <div class="carnet-installments--info">
+                            <p>Parcelas</p>
+    
+                            <span>06</span>
+                        </div>
+                    </div>
+                    <div class="col-fixed" style="width: 20%;">
+                        <div class="carnet-installments--info">
+                            <p>Você pagou</p>
+    
+                            <span>0 parcelas</span>
+                        </div>
+                    </div>
+                    <div class="col-fixed" style="width: 20%;">
+                        <div class="carnet-installments--info">
+                            <p>Total</p>
+
+                            <span>R$ 2173 de R$3283</span>
+                        </div>
+                    </div>
+                    <div class="col-fixed" style="width: 45%;">
+                        <div class="carnet-installments--info">
+                            <p>Quitar carnê</p>
+    
+                            <span>00190.00009 02996.786105 00006.182174 6 92950000008800</span>
+
+                            <i class="pi pi-clone"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-12 view-title py-4">
+                        <p>Suas parcelas</p>
+                    </div>
+                </div>
+            </p-dialog>
+
             <div class="line col-12 carnet-payment--actions my-4">
                 <p>Baixar carnê</p>
             
