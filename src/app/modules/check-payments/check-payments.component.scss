@@ -13,12 +13,31 @@
         input {
             font-size: 1.2rem;
         }
+
+    }
+    .field-title {
+        p {
+            font-size: 1.4rem;
+        }
+    }
+    .inputs {
+        input {
+            font-size: 2.5rem;
+            font-weight: 700;
+            width: 20%;
+            height: 60px !important;
+            margin-right: 5%;
+            text-align: center;
+        }
+        input:last-of-type {
+            margin-right: none;
+        }
     }
     .check-payment--section {
         display: flex;
         flex-direction: column;
         background-color: #fff;
-        padding: 3rem 8rem;
+        padding: 3rem 6rem;
         border-radius: 10px;
         width: 500px;
         min-height: 400px;

@@ -31,7 +31,7 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'logina',
+    path: 'login',
     component: LoginComponent,
   },
   {
@@ -39,7 +39,7 @@ const routes: Routes = [
     component: CheckPaymentsComponent,
   },
   {
-    path: 'login',
+    path: 'consultar/dados',
     component: PaymentsDataComponent,
   },
   {

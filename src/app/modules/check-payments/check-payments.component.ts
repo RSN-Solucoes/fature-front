@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckPaymentsComponent implements OnInit {
 
+  public emailSubmitted: boolean = false;
+
   constructor(
     private router: Router,
   ) { }
@@ -15,8 +17,14 @@ export class CheckPaymentsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  handleInput(event: any) {
+    const input = event.target;
+    if (input.nextElementSibling && input.value) {
+      input.nextElementSibling.focus();
+    }
+  }
+
   navigateToPaymentsData(): void {
     this.router.navigate(['consultar/dados']);
   }
-
 }
