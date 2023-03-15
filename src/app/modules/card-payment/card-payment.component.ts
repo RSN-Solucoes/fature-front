@@ -8,9 +8,7 @@ import { PAYMENT_METHODS_SELECT_LIST } from '../invoices/invoice-form/invoice-fo
 })
 export class CardPaymentComponent implements OnInit {
   public paymentMethods: any = PAYMENT_METHODS_SELECT_LIST;
-
   public showCarnetInstallments: boolean = false;
-
   public displayForm: string = 'carnet';
 
   public days: any[] = [
@@ -19,6 +17,37 @@ export class CardPaymentComponent implements OnInit {
     },
     {
       day: 2
+    },
+  ];
+
+  public installmentsData: any[] = [
+    {
+      installmentTitle: 'Parcela 1',
+      value: 2173,
+      dueDate: '20/11/2022',
+      status: 'Aberto',
+      barCode: '00190.00009 02996.786105 00006.182174 6 92950000008800'
+    },
+    {
+      installmentTitle: 'Parcela 2',
+      value: 2173,
+      dueDate: '20/12/2022',
+      status: 'Pago',
+      barCode: '00190.00009 02996.786105 00006.182174 6 92950000008800'
+    },
+    {
+      installmentTitle: 'Parcela 3',
+      value: 2173,
+      dueDate: '20/01/2023',
+      status: 'Pago',
+      barCode: '00190.00009 02996.786105 00006.182174 6 92950000008800'
+    },
+    {
+      installmentTitle: 'Parcela 3',
+      value: 2173,
+      dueDate: '20/01/2023',
+      status: 'Pago',
+      barCode: '00190.00009 02996.786105 00006.182174 6 92950000008800'
     },
   ];
 

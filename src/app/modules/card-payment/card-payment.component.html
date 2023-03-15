@@ -77,6 +77,47 @@
                     <div class="col-12 view-title py-4">
                         <p>Suas parcelas</p>
                     </div>
+
+                    <div class="col-12 table">
+                        <table class="billing-data-table">
+                            <tbody>
+                              <tr *ngFor="let installment of installmentsData; let i = index">
+                                    <td>
+                                        <div class="table-items">
+                                            <p>{{ installment.installmentTitle }}</p>
+                                        </div>
+                                    </td>
+                
+                                    <td>
+                                        <div class="table-items">
+                                            <p>Parcela</p>
+                                            <span>{{ installment.value | currency: 'BRL' }}</span>
+                                        </div>
+                                    </td>
+                
+                                    <td>
+                                        <div class="table-items">
+                                            <p>Vencimento</p>
+                                            <span>{{ installment.dueDate }}</span>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="table-items">
+                                            <p>Código de barra</p>
+                                            <span>{{ installment.barCode }}</span>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="table-items">
+                                            <a><i class="pi pi-clone"></i></a>
+                                        </div>
+                                    </td>
+                              </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </p-dialog>
 
