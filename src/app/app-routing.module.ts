@@ -1,3 +1,5 @@
+import { PaymentsDataComponent } from './modules/check-payments/payments-data/payments-data.component';
+import { CheckPaymentsComponent } from './modules/check-payments/check-payments.component';
 import { SubscriptionsFormComponent } from './modules/recurrence/recurrence-list/subscriptions-form/subscriptions-form.component';
 import { PlansFormComponent } from './modules/recurrence/recurrence-list/plans-form/plans-form.component';
 import { TransfersListComponent } from './modules/transfers/transfers-list/transfers-list.component';
@@ -29,8 +31,16 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'login',
+    path: 'logina',
     component: LoginComponent,
+  },
+  {
+    path: 'consultar',
+    component: CheckPaymentsComponent,
+  },
+  {
+    path: 'login',
+    component: PaymentsDataComponent,
   },
   {
     path: 'painel/dashboard',

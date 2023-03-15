@@ -1,0 +1,42 @@
+<div class="check-payment">
+    <div class="check-payment--section grid">
+        <div class="col-12 pb-6">
+            <div class="check-payment--section__title">
+                <img src="../../../assets/img/profile_photo.png" alt="logo">
+
+                <p>Consultar faturas</p>
+            </div>
+        </div>
+
+        <div class="field col-12">
+            <label for="document">CPF/CNPJ</label>
+            <input
+              type="text"
+              id="document"
+              name="document"
+              pInputText
+              placeholder="Digite seu CPF ou CNPJ"
+              mask="000.000.000-00 || 00.000.000/0000-00"
+            />
+        </div>
+        <div class="field col-12">
+            <label for="document">E-mail</label>
+            <input
+              type="text"
+              id="document"
+              name="document"
+              pInputText
+              placeholder="Digite seu e-mail"
+            />
+        </div>
+
+        <div class=" check-button py-6">
+            <button 
+                type="button"
+                (click)="navigateToPaymentsData()"
+                >
+                Entrar
+            </button>
+        </div>
+    </div>
+</div>

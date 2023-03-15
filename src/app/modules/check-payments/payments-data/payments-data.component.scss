@@ -1,0 +1,57 @@
+.payments-data-navbar {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: space-between;
+    span {
+        font-size: 1.6rem;
+        font-weight: 700;
+    }
+    a {
+        cursor: pointer;
+        i {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+    }
+}
+
+.content {
+    .title {
+        p {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+    }
+}
+
+.payments-client-data {
+    background-color: #fff;
+    padding: 3rem 4rem;
+    border-radius: 10px;
+    width: 100%;
+    .payments-client-data--item {
+        border: solid 2px var(--line);
+        border-radius: 10px;
+        padding: 1.5rem 4rem;
+        .payments-client-data--item__info {
+            display: flex;
+            flex-direction: column;
+            p {
+                font-size: 1.2rem;
+                font-weight: 700;
+                margin-bottom: .5rem;
+            }
+            span {
+                font-size: 1.2rem;
+            }
+        }
+    }
+}
+
+.payments-billing-info {
+    background-color: #fff;
+    padding: 3rem 4rem;
+    border-radius: 10px;
+    width: 100%;
+}
