@@ -2,71 +2,103 @@
     <div class="bank-data--header">
         <p>Dados da conta</p>
     </div>
-    <form class="bank-data--form pt-6 grid">
+    <form class="bank-data--form pt-6 grid" [formGroup]="bankDataForm">
         <div class="field col-6 md:col-4">
             <label for="agency">Agência</label>
-            <p-dropdown
+                <input
+                type="text"
                 id="agency"
-                [options]="agencyOptions"
-                placeholder="Escolha a agência"
-                optionLabel="name"
-                optionValue="name"
-            >
-            </p-dropdown>
+                name="agency"
+                formControlName="agency"
+                pInputText
+                placeholder="Nome completo do cliente"
+                mask="0000"
+            />
         </div>
         <div class="field col-6 md:col-2">
             <label for="agencyDigit">Dígito da agência</label>
-            <p-inputNumber
-                placeholder="Ex: 51"
+            <input
+                type="text"
                 id="agencyDigit"
-                [useGrouping]="false"
-            > 
-            </p-inputNumber>
+                name="agencyDigit"
+                formControlName="agencyDigit"
+                pInputText
+                placeholder="Ex: 51"
+                mask="00"
+            />
+        </div>
+        <div class="field col-12 md:col-6">
+            <label for="bank">Banco</label>
+            <p-dropdown
+                id="bank"
+                name="bank"
+                [options]="banksSelectItems"
+                placeholder="Escolha o banco"
+                optionLabel="label"
+                optionValue="value"
+                formControlName="bankCode"
+            >
+            </p-dropdown>
         </div>
         <div class="field col-6 md:col-4">
-            <label for="currentAccount">Conta corrente</label>
+            <label for="account">Conta corrente</label>
             <p-inputNumber
-                id="currentAccount"
+                id="account"
+                name="account"
                 [useGrouping]="false"
                 placeholder="Número da conta corrente"
+                formControlName="account"
             > 
             </p-inputNumber>
         </div>
         <div class="field col-6 md:col-2">
-            <label for="currentAccountDigit">Dígito da conta</label>
-            <p-inputNumber
+            <label for="accountDigit">Dígito da conta</label>
+            <input
+                type="text"
+                id="accountDigit"
+                name="accountDigit"
+                formControlName="accountDigit"
+                pInputText
                 placeholder="Ex: 51"
-                id="agencyDigit"
-                [useGrouping]="false"
-            > 
-            </p-inputNumber>
+                mask="00"
+            />
         </div>
         <div class="field col-12 md:col-3">
             <label for="accountType">Tipo da conta</label>
             <p-dropdown
                 id="accountType"
-                [options]="accountType"
+                name="accountType"
+                [options]="accountTypeSelectItems"
                 optionLabel="name"
+                optionValue="acronym"
                 placeholder="Conta corrente"
+                formControlName="accountType"
             >
             </p-dropdown>
         </div>
-        <div class="field col-6 md:col-3">
-            <label for="frequency">Frequencia de repasse</label>
+
+        <div class="col-0 md:col-3"></div>
+
+        <div class="field col-12 md:col-3">
+            <label for="paymentFrequency">Frequencia de repasse</label>
             <p-dropdown
-                id="frequency"
-                [options]="frequency"
+                id="paymentFrequency"
+                name="paymentFrequency"
+                [options]="frequencySelectItems"
                 optionLabel="title"
                 placeholder="Mensal"
+                formControlName="paymentFrequency"
             >
             </p-dropdown>
         </div>
-        <div class="field col-6 md:col-2">
-            <label for="day">Dia</label>
+        <div class="field col-12 md:col-2">
+            <label for="paymentDay">Dia</label>
             <p-inputNumber
-                id="day"
+                id="paymentDay"
+                name="paymentDay"
                 [useGrouping]="false"
                 placeholder="1"
+                formControlName="paymentDay"
             > 
             </p-inputNumber>
         </div>
