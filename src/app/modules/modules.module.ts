@@ -10,7 +10,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './../shared/shared.module';
 import { ClientsFormModule } from './clients/clients-form/clients-form.module';
 import { ClientsListModule } from './clients/clients-list/clients-list.module';
-import { RecurrenceListModule } from './recurrence/recurrence-list/recurrence-list.module';
 import { InvoicesListModule } from './invoices/invoices-list/invoices-list.module';
 import { ProductsServicesListModule } from './products-services/products-services-list/products-services-list.module';
 import { TransfersModule } from './transfers/transfers.module';
@@ -18,17 +17,17 @@ import { LoginModule } from './login/login.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { SettingsModule } from './settings/settings.module';
 import { InvoiceFormModule } from './invoices/invoice-form/invoice-form.module';
+import { PlansSubscriptionsModule } from './plans-subscriptions/plans-subscriptions.module';
 
 @NgModule({
-  declarations: [
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     SharedModule,
     ClientsListModule,
     ClientsFormModule,
     ProductsServicesListModule,
-    RecurrenceListModule,
+    PlansSubscriptionsModule,
     InvoicesListModule,
     TransfersModule,
     LoginModule,
