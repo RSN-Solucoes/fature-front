@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { PAYMENT_METHODS_SELECT_LIST } from '../invoices/invoice-form/invoice-form.const';
 
 @Component({
-  selector: 'app-card-payment',
-  templateUrl: './card-payment.component.html',
-  styleUrls: ['./card-payment.component.scss']
+  selector: 'app-checkout',
+  templateUrl: './checkout.component.html',
+  styleUrls: ['./checkout.component.scss']
 })
-export class CardPaymentComponent implements OnInit {
+export class CheckoutComponent implements OnInit {
   public paymentMethods: any = PAYMENT_METHODS_SELECT_LIST;
   public showCarnetInstallments: boolean = false;
   public displayForm: string = 'carnet';

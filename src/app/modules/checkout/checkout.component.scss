@@ -1,4 +1,4 @@
-.card-payment {
+.checkout {
     height: 100%;
     background-color: #6b7b94;
     display: flex;
@@ -13,7 +13,7 @@
             color: #fff;
         }
     }
-    .card-payment--billing-info {
+    .checkout--billing-info {
         display: flex;
         flex-direction: column;
         height: auto;
@@ -173,7 +173,7 @@
             }
         }
     }
-    .card-payment--purchase {
+    .checkout--purchase {
         height: auto;
         min-height: 580px;
         width: 300px;

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardPaymentComponent } from './card-payment.component';
+import { CheckoutComponent } from './checkout.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgxMaskModule } from 'ngx-mask';
@@ -9,7 +9,7 @@ import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
-    CardPaymentComponent,
+    CheckoutComponent,
   ],
   imports: [
     CommonModule,
@@ -21,7 +21,7 @@ import { DialogModule } from 'primeng/dialog';
     DialogModule,
   ],
   exports: [
-    CardPaymentComponent,
+    CheckoutComponent,
   ]
 })
-export class CardPaymentModule { }
+export class CheckoutModule { }
