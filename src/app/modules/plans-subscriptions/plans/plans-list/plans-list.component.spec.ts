@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RecurrenceListComponent } from './recurrence-list.component';
+import { PlansListComponent } from './plans-list.component';
 
-describe('RecurrenceListComponent', () => {
-  let component: RecurrenceListComponent;
-  let fixture: ComponentFixture<RecurrenceListComponent>;
+describe('PlansListComponent', () => {
+  let component: PlansListComponent;
+  let fixture: ComponentFixture<PlansListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RecurrenceListComponent ]
+      declarations: [ PlansListComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RecurrenceListComponent);
+    fixture = TestBed.createComponent(PlansListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
