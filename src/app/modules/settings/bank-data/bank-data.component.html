@@ -37,6 +37,10 @@
                 optionLabel="label"
                 optionValue="value"
                 formControlName="bankCode"
+                [virtualScroll]="true"
+                [virtualScrollItemSize]="30"
+                filterBy="label"
+                [filter]="true"
             >
             </p-dropdown>
         </div>

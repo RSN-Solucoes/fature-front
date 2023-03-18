@@ -128,9 +128,11 @@
                 name="responsibleUf"
                 [options]="ufList"
                 optionLabel="name"
-                optionValue="value"
+                optionValue="uf"
+                value=""
                 placeholder="Estado"
                 formControlName="uf"
+                (onChange)="setUf('responsible')"
             >
             </p-dropdown>
         </div>
@@ -139,11 +141,15 @@
             <p-dropdown
                 id="responsibleCity"
                 name="responsibleCity"
-                [options]="cityList"
-                optionLabel="name"
-                optionValue="name"
+                [options]="responsibleCityList"
+                optionLabel="city"
+                optionValue="city"
                 placeholder="Cidade"
                 formControlName="city"
+                [virtualScroll]="true"
+                [virtualScrollItemSize]="30"
+                filterBy="city"
+                [filter]="true"
             >
             </p-dropdown>
         </div>
@@ -204,9 +210,10 @@
                 name="companyUf"
                 [options]="ufList"
                 optionLabel="name"
-                optionValue="value"
+                optionValue="uf"
                 placeholder="Estado"
                 formControlName="uf"
+                (onChange)="setUf('address')"
             >
             </p-dropdown>
         </div>
@@ -215,10 +222,16 @@
             <p-dropdown
                 id="companyCity"
                 name="companyCity"
-                [options]="cityList"
-                optionLabel="name"
+                [options]="companyCityList"
+                optionLabel="city"
+                optionValue="city"
                 placeholder="Cidade"
                 formControlName="city"
+                [virtualScroll]="true"
+                [virtualScrollItemSize]="30"
+                filterBy="city"
+                [filter]="true"
+                
             >
             </p-dropdown>
         </div>

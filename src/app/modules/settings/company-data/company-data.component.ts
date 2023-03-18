@@ -1,3 +1,4 @@
+import { NavbarModule } from './../../../shared/components/navbar/navbar.module';
 import { SettingsService } from './../../../services/settings.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -13,36 +14,11 @@ export class CompanyDataComponent implements OnInit {
   public companyDataForm!: FormGroup;
   public companyData!: any;
 
-  public ufList = [
-    {
-      name: 'São Paulo',
-      value: 'SP'
-    },
-    {
-      name: 'Bahia',
-      value: 'BA'
-    },
-    {
-      name: 'Rio de Janeiro',
-      value: 'RJ'
-    },
-    {
-      name: 'Minas Gerais',
-      value: 'MG'
-    },
-  ];
+  public statesAndCities!: any[];
 
-  public cityList = [
-    {
-      name: 'Salto',
-    },
-    {
-      name: 'São Paulo',
-    },
-    {
-      name: 'Indaiatuba',
-    },
-  ];
+  public ufList: any[] = [];
+  public companyCityList: any[] = [];
+  public responsibleCityList: any[] = [];
 
   constructor(
     private settingsService: SettingsService,
@@ -54,6 +30,8 @@ export class CompanyDataComponent implements OnInit {
     this.createCompanyDataForm();
 
     this.getCompanyData();
+
+    this.getStatesAndCities();
   }
 
   createCompanyDataForm(): void {
@@ -92,9 +70,64 @@ export class CompanyDataComponent implements OnInit {
         this.companyDataForm.patchValue({
           ...this.companyData,
         });
+        this.setUf('address');
+        this.setUf('responsible');
+        this.companyDataForm.patchValue({
+          responsible: {
+            city: this.companyData.responsible.city,
+          },
+          address: {
+            city: this.companyData.address.city,
+          }
+        })
       },
       error: (err) =>
       {
+      }
+    });
+  }
+
+  getStatesAndCities(): void {
+    this.settingsService.getStatesAndCities().subscribe({
+      next: (res) => {
+        this.statesAndCities = res.states;
+        this.ufList = this.statesAndCities.map(el => {
+          return {
+            uf: el.uf,
+            name: el.name
+          }
+        });
+      }
+    });
+  }
+
+  checkFormFieldsValue(path: string): boolean {
+    return this.companyDataForm.get(path)?.value;
+  }
+
+  setUf(path: string): void {
+    const ufFormValue = this.companyDataForm.get(`${path}.uf`)?.value;
+    
+    if(!ufFormValue) {
+      this.companyDataForm.get(`${path}.city`)?.disable();
+      return;
+    };
+    
+    this.companyDataForm.get(`${path}.city`)?.enable();
+
+    const selectedUf = this.statesAndCities.find(el => {
+      return el.uf == ufFormValue;
+    });
+
+    path == 'address' ? 
+    this.companyCityList = selectedUf.cities.map((el: any) => {
+      return {
+        city: el
+      }
+    }) :
+    this.responsibleCityList = selectedUf.cities.map((el: any) => {
+      return {
+        city: el
       }
     });
   }
@@ -105,6 +138,8 @@ export class CompanyDataComponent implements OnInit {
 
   submitForm() {
     const body = this.companyDataForm.getRawValue();
+
+    console.log(body)
 
     this.settingsService.updateCompanyData(body).subscribe({
       next: () => {
