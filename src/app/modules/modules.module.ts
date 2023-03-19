@@ -1,3 +1,4 @@
+import { CheckoutModule } from './checkout/checkout.module';
 import { ProductsServicesFormModule } from './products-services/products-services-form/products-services-form.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -35,6 +36,7 @@ import { PlansSubscriptionsModule } from './plans-subscriptions/plans-subscripti
     ProductsServicesFormModule,
     SettingsModule,
     InvoiceFormModule,
+    CheckoutModule,
   ],
   exports: [],
   providers: [
