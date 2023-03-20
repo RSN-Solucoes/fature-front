@@ -1,0 +1,252 @@
+.checkout {
+    height: 100%;
+    background-color: #6b7b94;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    .field {
+        label {
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+        .noLabel {
+            color: #fff;
+        }
+    }
+    .checkout--billing-info {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        min-height: 580px;
+        width: 700px;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 3rem 4rem;
+        margin-right: 3rem;
+        margin-top: 4rem;
+        .line {
+            display: flex;
+            align-items: center;
+        }
+        .billing-info--title {
+            img {
+                height: 50px;
+                width: 50px;
+                object-fit: cover;
+                border-radius: 50%;
+                margin-right: 3rem;
+            }
+            p {
+                font-size: 2rem;
+                font-weight: 500;
+            }
+        }
+        .billing-info--methods {
+            a {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                border: solid 2px var(--line);
+                border-radius: 8px;
+                cursor: pointer;
+                padding: 2rem 3rem;
+                margin-right: 3rem;
+                img {
+                    height: 25px;
+                }
+                span {
+                    font-size: 1.2rem;
+                    margin-top: 1rem;
+                }
+            }
+            .active-method {
+                border: solid 2px var(--black);
+                transition: .3s;
+            }
+        }
+        .billing-info--carnet-payment {
+            .carnet-payment--actions {
+                background-color: var(--line);
+                padding: 3rem;
+                border-radius: 10px;
+                justify-content: space-between;
+                p {
+                    font-size: 1.4rem;
+                    font-weight: 700;
+                }
+                i {
+                    font-size: 2rem;
+                    font-weight: 700;
+                    cursor: pointer;
+                }
+            }
+            .carnet-installments {
+                padding: 2rem 4rem;
+                .view-title {
+                    p {
+                        font-size: 1.2rem;
+                        font-weight: 700;
+                        color: #000;
+                    }
+                }
+                .carnet-installments--info {
+                    display: flex;
+                    align-items: center;
+                    border: solid 2px var(--line);
+                    border-radius: 10px;
+                    padding: 2rem ;
+                    p {
+                        font-size: 1rem;
+                        margin-right: 1rem;
+                        font-weight: 700;
+                    }
+                    span {
+                        font-size: 1rem;
+                    }
+                    i {
+                        font-size: 1.4rem;
+                        color: #000;
+                        font-weight: 700;
+                        margin-left: 1rem;
+                    }
+                }
+            }
+        }
+        .billing-info--pix-payment {
+            .pix--actions {
+                background-color: var(--line);
+                padding: 3rem;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .pix--actions__data {
+                    display: flex;
+                    img {
+                        height: 80px;
+                        margin-right: 2rem;
+                    }
+                }
+                .pix--info {
+                    display: flex;
+                    flex-direction: column;
+                    align-self: flex-start;
+                    p {
+                        font-size: 1.4rem;
+                        font-weight: 700;
+                    }
+                    span {
+                        margin-top: 1rem;
+                        font-size: 1.4rem;
+                    }
+                }
+                i {
+                    font-size: 2rem;
+                    font-weight: 700;
+                    cursor: pointer;
+                }
+            }
+        }
+        .billing-info--bankSlip-payment {
+            .bankSlip-payment--actions {
+                background-color: var(--line);
+                padding: 3rem;
+                border-radius: 10px;
+                justify-content: space-between;
+                .bankSlip--info {
+                    display: flex;
+                    flex-direction: column;
+                    span {
+                        margin-top: 1rem;
+                        font-size: 1.4rem;
+                    }
+                }
+                p {
+                    font-size: 1.4rem;
+                    font-weight: 700;
+                }
+                i {
+                    font-size: 2rem;
+                    font-weight: 700;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    .checkout--purchase {
+        height: auto;
+        min-height: 580px;
+        width: 300px;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 3rem 4rem;
+        margin-top: 4rem;
+        span {
+            font-size: 1.4rem;
+        }
+        .purchase--title {
+            p {
+                font-size: 2rem;
+                font-weight: 500;
+            }
+        }
+        .purchase--quantity {
+            p {
+                font-size: 1.4rem;
+            }
+        }
+        .purchase--description {
+            padding-bottom: 8rem !important;
+        }
+        .bottom-line {
+            border-bottom: solid 2px var(--line);
+            padding: 2rem 0;
+        }
+        .purchase--total {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 0;
+            p {
+                font-size: 1.4rem;
+            }
+            span {
+                font-size: 2rem;
+                font-weight: 500;
+            }
+        }
+        .purchase--button {
+            width: 100%;
+            button {
+                height: 42px;
+                background: var(--black);
+                border: solid 1px var(--black);
+                color: #fff;
+                font-weight: 200;
+                border-radius: 3px;
+                width: 100%;
+                font-size: 1.2rem;
+                cursor: pointer;
+            }
+            button:hover {
+                background: darken($color: #1b1b1b, $amount: 5);
+                transition: .3s;
+            }
+        }
+    }
+}
+
+.billing-data-table {
+    tbody tr td {
+        padding: 2rem 1rem !important;
+        .table-items {
+            a {
+                cursor: pointer;
+                i {
+                    font-size: 1.4rem;
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+}

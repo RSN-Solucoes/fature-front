@@ -26,6 +26,7 @@ import { DialogModule } from 'primeng/dialog';
 import { TooltipModule } from 'primeng/tooltip';
 import { SkeletonModule } from 'primeng/skeleton';
 
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { SkeletonModule } from 'primeng/skeleton';
     SettingsComponent,
     CustomizationComponent,
     EmployeesComponent,
-  ]
+  ],
+  providers: [NgxImageCompressService],
 })
-export class SettingsModule { }
+export class SettingsModule {}

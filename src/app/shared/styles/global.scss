@@ -147,6 +147,46 @@ label {
   }
 }
 
+.billing-data-table {
+  width: 100%;
+  padding-bottom: 1rem;
+  border-collapse: collapse;
+  tbody tr {
+    background-color: #c2c2c2;
+    td {
+      padding: 1rem 5rem 1rem 0;
+      .table-items {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        p {
+          font-size: 1.2rem;
+          font-weight: 700;
+          margin-right: 1rem;
+        }
+        span {
+          font-size: 1.2rem;
+          font-weight: 500;
+        }
+        a {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+        .pending-charge-link {
+          color: #AE90D7;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  tbody tr:nth-child(odd) {
+    background: #f5f5f7;
+  }
+  tbody tr:nth-child(even) {
+    background: #fff;
+  }
+}
+
 .message-list-table {
   width: 100%;
   padding-bottom: 1rem;

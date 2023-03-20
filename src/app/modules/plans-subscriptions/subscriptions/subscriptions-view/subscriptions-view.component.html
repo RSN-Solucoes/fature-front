@@ -1,0 +1,147 @@
+<app-navbar>
+    <div class="subscriptions-view-navbar">
+      <a (click)="cancel()"><i class="pi pi-angle-left"></i></a>
+      <span>Dados da assinatura</span>
+    </div>
+</app-navbar>
+
+<div class="content">
+    <div class="subscriptions-view">
+        <div class="subscriptions-view--content">
+            <div class="subscriptions-view--header pb-6">
+                <p>Assinante</p>
+            </div>
+
+            <div class="subscriptions-view_subscription p-6">
+                <div class="subscription__items">
+                    <div class="subscription--content--item">
+                        <p>Nome</p>
+    
+                        <span>Maria Antônia Lucatto</span>
+                    </div>
+                    <div class="subscription--content--item">
+                        <p>CPF/CNPJ</p>
+    
+                        <span>33662455896</span>
+                    </div>
+                    <div class="subscription--content--item">
+                        <p>E-mail</p>
+    
+                        <span>atendimento@lucatto.com.br</span>
+                    </div>
+                    <div class="subscription--content--item">
+                        <p>Contato</p>
+    
+                        <span>+55 11 3326-6395</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subscriptions-view--header py-6">
+                <p>Assinatura</p>
+            </div>
+
+            <div class="subscriptions-view_subscription p-6">
+                <div class="subscription__items">
+                    <div class="subscription--content--item">
+                        <p>Plano</p>
+    
+                        <span>Caixa surpresa</span>
+                    </div>
+                    <div class="subscription--content--item">
+                        <p>Valor</p>
+    
+                        <span>R$ 299,00</span>
+                    </div>
+                    <div class="subscription--content--item">
+                        <p>Status</p>
+    
+                        <span>Ativo</span>
+                    </div>
+                </div>
+
+                <div class="subscription--action">
+                    <button 
+                        type="button" 
+                        class="line-button cancel-btn" 
+                    >
+                        Cancelar plano
+                    </button>
+                </div>
+            </div>
+
+            <div class="subscriptions-view--header py-6">
+                <p>Histórico de cobrança</p>
+            </div>
+
+            <div class="subscriptions-view_subscription p-6">
+                <div class="subscription__items">
+                    <div class="subscription--content--item">
+                        <p>Número do cartão</p>
+    
+                        <div class="card-info">
+                            <img src="../../../../../assets/img/mc_symbol.svg" alt="mastercard logo">
+
+                            <span class="card-info--number">
+                                **** **** **** 2234
+                            </span>
+
+                            <span class="card-info--expiration">
+                                <strong>Expira</strong>
+                                10/27
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subscription--action">
+                    <button 
+                        type="button" 
+                        class="line-button remove-btn" 
+                    >
+                        Remover
+                    </button>
+                    <span>|</span>
+                    <button 
+                        type="button" 
+                        class="line-button edit-btn" 
+                    >
+                        Editar
+                    </button>
+                </div>
+            </div>
+
+            <div class="subscriptions-view_subscription p-6 mt-6">
+                <table class="item-list-table mx-6">
+                    <thead>
+                    <th>Data</th>
+                    <th>Total</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    </thead>
+            
+                    <tbody>
+                    <tr *ngFor="let billings of billingHistory; let i = index">
+                        <td>
+                           {{ billings.date }}
+                        </td>
+
+                        <td>
+                            {{ billings.total | currency: 'BRL' }}
+                        </td>
+
+                        <td></td>
+                        <td></td>
+            
+                        <td>
+                            <a>Baixar</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
