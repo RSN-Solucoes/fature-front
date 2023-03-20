@@ -65,9 +65,13 @@ export class CustomizationComponent implements OnInit {
       next: (res) => {
         this.customizationData = res.data;
         this.form.patchValue({
-          ...this.customizationData
-        })
-        //this.logoPreviewImage = res.data.logo; ERRO
+          ...this.customizationData,
+        });
+        this.logoPreviewImage = `data:image/${res.data.logoExtension};base64,${res.data.logo}`;
+
+        this.selectBackground(res.data.wallpaper);
+        this.chooseBackgroundImage();
+
         this.updateButtonPreviewColor(res.data.buttonColor);
         this.updateBackgroundPreviewColor(res.data.backgroundColor);
       },
@@ -115,21 +119,32 @@ export class CustomizationComponent implements OnInit {
 
     this.logoPreviewImage = 'assets/img/profile_photo.png';
     this.imageLogoSource = '';
-
-    this.logoUploader.clear();
   }
 
   saveCroppedLogo(): void {
     this.imageCompress
       .compressFile(this.logoPreviewImage, 0, 50, 50)
       .then((res: any) => {
-        this.form.get('logo')?.setValue(res);
 
+        let logoText = ''
+
+        if(res.substring(0,20).includes('jpeg')) {
+          this.form.get('logoExtension')?.setValue('jpeg');
+
+          logoText = res.replace('data:image/jpeg;base64,', '');
+        } else {
+          this.form.get('logoExtension')?.setValue('png');
+
+          logoText = res.replace('data:image/png;base64,', '');
+        };
+
+        this.form.get('logo')?.setValue(logoText);
         this.displayCropDialog = false;
       });
   }
 
   selectBackground(index: any): void {
+    this.form.get('wallpaper')?.setValue(`${index}`);
     this.selectedBackgroundImage = this.customizationBackgrounds[index];
   }
 
