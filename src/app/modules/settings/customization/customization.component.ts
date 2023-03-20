@@ -1,7 +1,9 @@
+import { SettingsService } from './../../../services/settings.service';
 import { CUSTOMIZATION_BACKGROUNDS } from './customization.const';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FileUpload } from 'primeng/fileupload';
+import { RequestMessageService } from 'src/app/shared/components/request-message/request-message.service';
 
 @Component({
   selector: 'app-customization',
@@ -30,21 +32,45 @@ export class CustomizationComponent implements OnInit {
 
   public buttonPreviewStyle!: string;
 
-  constructor(private fb: FormBuilder) {}
+  public customizationData!: any[];
+
+  constructor(
+    private fb: FormBuilder,
+    private settingsService: SettingsService,
+    private requestMessageService: RequestMessageService,
+    ) {}
 
   ngOnInit(): void {
     this.createCustomizationForm();
+
+    this.getCustomizationData();
   }
 
   createCustomizationForm(): void {
     this.form = this.fb.group({
-      logo: [null],
       backgroundImage: [null],
-      color: this.fb.group({
-        background: ['#d9d9d9'],
-        button: ['#000'],
-      }),
+      backgroundColor: [null],
+      buttonColor: [null],
+      logo: [null],
+      logoExtension: [null],
+      wallpaper: [null],
       url: [null],
+    });
+  }
+
+  getCustomizationData(): void {
+    this.settingsService.getCustomizations().subscribe({
+      next: (res) => {
+        this.customizationData = res.data;
+        this.form.patchValue({
+          ...this.customizationData
+        })
+        //this.logoPreviewImage = res.data.logo; ERRO
+        this.updateButtonPreviewColor(res.data.buttonColor);
+        this.updateBackgroundPreviewColor(res.data.backgroundColor);
+      },
+      error: (err) => {
+      }
     });
   }
 
@@ -115,6 +141,21 @@ export class CustomizationComponent implements OnInit {
   }
 
   submitForm(): void {
-    alert('submit form');
+    const body = this.form.getRawValue();
+
+    this.settingsService.updateCustomizations(body).subscribe({
+      next: () => {
+        this.requestMessageService.show(
+          `Dados da empresa salvos com sucesso.`,
+          'success'
+        );
+      },
+      error: (err) => {
+        this.requestMessageService.show(
+          `Ocorreu um erro: ${err}`,
+          'error'
+        );
+      },
+    });
   }
 }

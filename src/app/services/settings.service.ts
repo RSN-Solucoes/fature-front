@@ -37,4 +37,12 @@ export class SettingsService extends BaseHttpService {
     );
   }
 
+  getCustomizations(): Observable<any> {
+    return this.get(`${this.API_BASE}/customization`) ;
+  }
+
+  updateCustomizations(body: any): Observable<any> {
+    return this.patch(`${this.API_BASE}/customization`, body);
+  }
+
 }
