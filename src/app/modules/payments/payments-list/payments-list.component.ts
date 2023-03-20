@@ -2,11 +2,11 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-payments-data',
-  templateUrl: './payments-data.component.html',
-  styleUrls: ['./payments-data.component.scss']
+  selector: 'app-payments-list',
+  templateUrl: './payments-list.component.html',
+  styleUrls: ['./payments-list.component.scss']
 })
-export class PaymentsDataComponent implements OnInit {
+export class PaymentsListComponent implements OnInit {
 
   public billingData: any[] = [
     {

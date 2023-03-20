@@ -1,5 +1,5 @@
-import { CheckPaymentsModule } from './check-payments/check-payments.module';
-import { CheckoutModule } from './checkout/checkout.module';
+import { CheckPaymentsModule } from './payments/payments-form/payments-form.module';
+import { CheckoutModule } from './payments/checkout/checkout.module';
 import { ProductsServicesFormModule } from './products-services/products-services-form/products-services-form.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';

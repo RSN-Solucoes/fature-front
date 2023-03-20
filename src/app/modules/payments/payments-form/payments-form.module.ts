@@ -1,18 +1,19 @@
 import { NgxMaskModule } from 'ngx-mask';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CheckPaymentsComponent } from './check-payments.component';
+import { PaymentsFormComponent } from './payments-form.component';
 
 //PrimeNG
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
-import { PaymentsDataComponent } from './payments-data/payments-data.component';
+
 import { NavbarModule } from 'src/app/shared/components/navbar/navbar.module';
+import { PaymentsListComponent } from '../payments-list/payments-list.component';
 
 @NgModule({
   declarations: [
-    CheckPaymentsComponent,
-    PaymentsDataComponent,
+    PaymentsFormComponent,
+    PaymentsListComponent,
   ],
   imports: [
     CommonModule,
@@ -22,7 +23,7 @@ import { NavbarModule } from 'src/app/shared/components/navbar/navbar.module';
     NavbarModule,
   ],
   exports: [
-    CheckPaymentsComponent,
+    PaymentsFormComponent,
   ]
 })
 export class CheckPaymentsModule { }

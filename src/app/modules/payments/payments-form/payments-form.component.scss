@@ -1,4 +1,4 @@
-.check-payment {
+.payments-form {
     height: 100%;
     background-color: #6b7b94;
     display: flex;
@@ -33,7 +33,7 @@
             margin-right: none;
         }
     }
-    .check-payment--section {
+    .payments-form--section {
         display: flex;
         flex-direction: column;
         background-color: #fff;
@@ -41,7 +41,7 @@
         border-radius: 10px;
         width: 500px;
         min-height: 400px;
-        .check-payment--section__title {
+        .payments-form--section__title {
             display: flex;
             align-items: center;
             img {

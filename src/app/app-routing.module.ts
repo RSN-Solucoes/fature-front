@@ -1,6 +1,3 @@
-import { PaymentsDataComponent } from './modules/check-payments/payments-data/payments-data.component';
-import { CheckPaymentsComponent } from './modules/check-payments/check-payments.component';
-import { CheckoutComponent } from './modules/checkout/checkout.component';
 import { PlansFormComponent } from './modules/plans-subscriptions/plans/plans-form/plans-form.component';
 import { PlansSubscriptionsListComponent } from './modules/plans-subscriptions/plans-subscriptions-list/plans-subscriptions-list.component';
 import { TransfersListComponent } from './modules/transfers/transfers-list/transfers-list.component';
@@ -18,12 +15,15 @@ import { TransfersComponent } from './modules/transfers/transfers.component';
 import { EmployeesFormComponent } from './modules/settings/employees/employees-form/employees-form.component';
 import { ClientsCreateComponent } from './modules/clients/clients-form/clients-create/clients-create.component';
 import { SubscriptionsViewComponent } from './modules/plans-subscriptions/subscriptions/subscriptions-view/subscriptions-view.component';
+import { CheckoutComponent } from './modules/payments/checkout/checkout.component';
+import { SubscriptionsFormComponent } from './modules/plans-subscriptions/subscriptions/subscriptions-form/subscriptions-form.component';
 
 import { AuthGuardService } from './core/guards/auth-guard.service';
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SubscriptionsFormComponent } from './modules/plans-subscriptions/subscriptions/subscriptions-form/subscriptions-form.component';
+import { PaymentsListComponent } from './modules/payments/payments-list/payments-list.component';
+import { PaymentsFormComponent } from './modules/payments/payments-form/payments-form.component';
 
 const routes: Routes = [
   {
@@ -41,11 +41,11 @@ const routes: Routes = [
   },
   {
     path: 'consultar',
-    component: CheckPaymentsComponent,
+    component: PaymentsFormComponent,
   },
   {
     path: 'consultar/dados',
-    component: PaymentsDataComponent,
+    component: PaymentsListComponent,
   },
   {
     path: 'painel/dashboard',

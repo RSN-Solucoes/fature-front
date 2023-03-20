@@ -1,7 +1,7 @@
-<div class="check-payment">
-    <div class="check-payment--section grid">
+<div class="payments-form">
+    <div class="payments-form--section grid">
         <div class="col-12 pb-6">
-            <div class="check-payment--section__title">
+            <div class="payments-form--section__title">
                 <img src="../../../assets/img/profile_photo.png" alt="logo">
 
                 <p>Consultar faturas</p>
@@ -76,7 +76,7 @@
         <div class=" check-button py-4">
             <button 
                 type="button"
-                (click)="emailSubmitted ? navigateToPaymentsData() : emailSubmitted = true"
+                (click)="emailSubmitted ? navigateToPaymentsList() : emailSubmitted = true"
                 >
                 Entrar
             </button>
