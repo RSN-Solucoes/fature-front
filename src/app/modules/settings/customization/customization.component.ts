@@ -2,6 +2,7 @@ import { CUSTOMIZATION_BACKGROUNDS } from './customization.const';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FileUpload } from 'primeng/fileupload';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @Component({
   selector: 'app-customization',
@@ -30,7 +31,10 @@ export class CustomizationComponent implements OnInit {
 
   public buttonPreviewStyle!: string;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private imageCompress: NgxImageCompressService
+  ) {}
 
   ngOnInit(): void {
     this.createCustomizationForm();
@@ -69,6 +73,7 @@ export class CustomizationComponent implements OnInit {
       read.onload = (loadedArchive: any) => {
         this.imageLogoSource = loadedArchive.target.result;
       };
+
       read.readAsDataURL(loadImage);
     }
   }
@@ -91,9 +96,13 @@ export class CustomizationComponent implements OnInit {
   }
 
   saveCroppedLogo(): void {
-    this.form.get('logo')?.setValue(this.logoPreviewImage);
+    this.imageCompress
+      .compressFile(this.logoPreviewImage, 0, 50, 50)
+      .then((res) => {
+        this.form.get('logo')?.setValue(res);
 
-    this.displayCropDialog = false;
+        this.displayCropDialog = false;
+      });
   }
 
   selectBackground(index: any): void {

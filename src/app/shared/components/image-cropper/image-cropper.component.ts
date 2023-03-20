@@ -43,7 +43,22 @@ export class ImageCropperComponent implements OnInit, AfterViewInit {
       scalable: false,
       aspectRatio: 1,
 
-      crop: () => {
+      data: {
+        width: (0 + 200) / 2,
+        height: (0 + 200) / 2,
+      },
+
+      crop: (event) => {
+        const width = event.detail.width;
+        const height = event.detail.height;
+
+        if (width < 50 || height < 50 || width > 200 || height > 200) {
+          this.cropper.setData({
+            width: Math.max(50, Math.min(200, width)),
+            height: Math.max(50, Math.min(200, height)),
+          });
+        }
+
         const canvas = this.cropper.getCroppedCanvas();
 
         this.imageDestination = canvas.toDataURL();

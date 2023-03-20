@@ -1,7 +1,8 @@
 import { PaymentsDataComponent } from './modules/check-payments/payments-data/payments-data.component';
 import { CheckPaymentsComponent } from './modules/check-payments/check-payments.component';
-import { SubscriptionsFormComponent } from './modules/recurrence/recurrence-list/subscriptions-form/subscriptions-form.component';
-import { PlansFormComponent } from './modules/recurrence/recurrence-list/plans-form/plans-form.component';
+import { CheckoutComponent } from './modules/checkout/checkout.component';
+import { PlansFormComponent } from './modules/plans-subscriptions/plans/plans-form/plans-form.component';
+import { PlansSubscriptionsListComponent } from './modules/plans-subscriptions/plans-subscriptions-list/plans-subscriptions-list.component';
 import { TransfersListComponent } from './modules/transfers/transfers-list/transfers-list.component';
 import { EditTemplateComponent } from './modules/settings/emails-template/edit-template/edit-template.component';
 import { SettingsComponent } from './modules/settings/settings.component';
@@ -11,18 +12,18 @@ import { InvoicesListComponent } from './modules/invoices/invoices-list/invoices
 import { ClientsFormComponent } from './modules/clients/clients-form/clients-form.component';
 import { ClientsListComponent } from './modules/clients/clients-list/clients-list.component';
 import { ProductsServicesListComponent } from './modules/products-services/products-services-list/products-services-list.component';
-import { RecurrenceListComponent } from './modules/recurrence/recurrence-list/recurrence-list.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { LoginComponent } from './modules/login/login.component';
 import { TransfersComponent } from './modules/transfers/transfers.component';
 import { EmployeesFormComponent } from './modules/settings/employees/employees-form/employees-form.component';
 import { ClientsCreateComponent } from './modules/clients/clients-form/clients-create/clients-create.component';
+import { SubscriptionsViewComponent } from './modules/plans-subscriptions/subscriptions/subscriptions-view/subscriptions-view.component';
 
 import { AuthGuardService } from './core/guards/auth-guard.service';
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
+import { SubscriptionsFormComponent } from './modules/plans-subscriptions/subscriptions/subscriptions-form/subscriptions-form.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'pagar',
+    component: CheckoutComponent,
   },
   {
     path: 'consultar',
@@ -79,7 +84,7 @@ const routes: Routes = [
   },
   {
     path: 'painel/recorrencias',
-    component: RecurrenceListComponent,
+    component: PlansSubscriptionsListComponent,
     canActivate: [AuthGuardService],
   },
   {
@@ -130,6 +135,11 @@ const routes: Routes = [
   {
     path: 'painel/recorrencias/assinaturas/novo',
     component: SubscriptionsFormComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'painel/recorrencias/visualizar',
+    component: SubscriptionsViewComponent,
     canActivate: [AuthGuardService],
   },
   

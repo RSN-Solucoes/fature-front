@@ -1,0 +1,24 @@
+<app-navbar>
+    <div class="plans-subscriptions-list-navbar">
+        <span class="plans-subscriptions-list-navbar--title">
+        Recorrências
+        </span>
+
+        <div class="plans-subscriptions-list-navbar--buttons">
+        <a (click)="navigateToForm()"><i class="pi pi-plus"></i></a>
+
+        <a><i class="pi pi-sliders-h"></i></a>
+        </div>
+    </div>
+</app-navbar>
+
+<div class="content">
+    <p-tabView (onChange)="changeIndex($event)">
+        <p-tabPanel header="Planos">
+            <app-plans-list></app-plans-list>
+        </p-tabPanel>
+        <p-tabPanel header="Assinaturas">
+            <app-subscriptions-list></app-subscriptions-list>
+        </p-tabPanel>
+    </p-tabView>
+</div>
