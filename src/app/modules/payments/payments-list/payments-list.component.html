@@ -1,0 +1,157 @@
+<app-navbar>
+    <div class="payments-list-navbar">
+        <span>Meus pagamentos</span>
+
+        <a (click)="signOut()"><i class="pi pi-sign-out"></i></a>
+    </div>
+</app-navbar>
+
+<div class="content">
+    <div class="payments-client-data grid">
+      <div class="title col-12">
+        <p>Dados do cliente</p>
+      </div>
+
+      <div class="col-12 my-3">
+        <div class="payments-client-data--item grid">
+          <div class="col-12 lg:col-3">
+              <div class="payments-client-data--item__info">
+                  <p>Cliente</p>
+
+                  <span>Mara Antônia Lucato</span>
+              </div>
+          </div>
+          <div class="col-12 lg:col-3">
+              <div class="payments-client-data--item__info">
+                  <p>Razão social</p>
+
+                  <span>Mara Lucato Óculos</span>
+              </div>
+          </div>
+          <div class="col-12 lg:col-3">
+              <div class="payments-client-data--item__info">
+                  <p>E-mail</p>
+
+                  <span>atendimento@lucatto.com.br</span>
+              </div>
+          </div>
+          <div class="col-12 lg:col-3">
+              <div class="payments-client-data--item__info">
+                  <p>Contato</p>
+
+                  <span>+55 11 3326-63695</span>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="payments-client-data--item grid">
+            <div class="col-fixed" style="width: 14.2%;">
+              <div class="payments-client-data--item__info">
+                  <p>CEP</p>
+
+                  <span>01415-006</span>
+              </div>
+            </div>
+            <div class="col-fixed" style="width: 14.2%;">
+              <div class="payments-client-data--item__info">
+                  <p>Logradouro</p>
+
+                  <span>Rua Bela Cintra</span>
+              </div>
+            </div>
+            <div class="col-fixed" style="width: 14.2%;">
+              <div class="payments-client-data--item__info">
+                  <p>Número</p>
+
+                  <span>1566</span>
+              </div>
+            </div>
+            <div class="col-fixed" style="width: 14.2%;">
+              <div class="payments-client-data--item__info">
+                  <p>Complemento</p>
+
+                  <span>Torre B - Sala 982</span>
+              </div>
+            </div>
+            <div class="col-fixed" style="width: 14.2%;">
+              <div class="payments-client-data--item__info">
+                  <p>Bairro</p>
+
+                  <span>Jardim Paulista</span>
+              </div>
+            </div>
+            <div class="col-fixed" style="width: 14.2%;">
+              <div class="payments-client-data--item__info">
+                  <p>Estado</p>
+
+                  <span>SP</span>
+              </div>
+            </div>
+            <div class="col-fixed" style="width: 14.2%;">
+              <div class="payments-client-data--item__info">
+                  <p>Cidade</p>
+
+                  <span>São Paulo</span>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="payments-billing-info mt-4 grid">
+        <div class="title col-12 mb-4">
+          <p>Informações da cobrança</p>
+        </div>
+
+        <div class="col-12 table">
+          <table class="billing-data-table">
+              <tbody>
+                <tr *ngFor="let data of billingData; let i = index">
+                    <td>
+                        <div class="table-items">
+                          <p>{{ data.installmentTitle }}</p>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="table-items">
+                          <p>Parcela</p>
+                          <span>{{ data.value | currency: 'BRL' }}</span>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="table-items">
+                          <p>Vencimento</p>
+                          <span>{{ data.dueDate }}</span>
+                        </div>
+                    </td>
+        
+                    <td>
+                        <div class="table-items">
+                          <a>
+                            <span>Imprimir</span>
+                          </a>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="table-items">
+                          <a *ngIf="data.status === 'Aberto'"
+                            class="pending-charge-link">
+                            <span>
+                              Aberto
+                            </span>
+                          </a>
+                          <span *ngIf="data.status === 'Pago'">
+                            Pago
+                          </span>
+                        </div>
+                    </td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+    </div>
+</div>

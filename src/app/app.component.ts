@@ -33,8 +33,7 @@ export class AppComponent implements OnInit {
 
     if (
       String(url).includes('pagar') ||
-      String(url).includes('assinatura') ||
-      String(url).includes('faturas')
+      String(url).includes('consultar')
     ) {
       this.token = null;
 
