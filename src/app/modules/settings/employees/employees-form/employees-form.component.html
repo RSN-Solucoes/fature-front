@@ -84,6 +84,7 @@
                   id="name"
                   pInputText
                   placeholder="Nome completo"
+                  formControlName="fullName"
                 />
             </div>
             <div class="field col-12 md:col-4">
@@ -94,6 +95,7 @@
                   pInputText
                   placeholder="Telefone"
                   mask="(00) 0 0000-0000||(00) 0000-0000"
+                  formControlName="phone"
                 />
             </div>
             <div class="field col-12 md:col-8">
@@ -103,6 +105,7 @@
                   id="email"
                   pInputText
                   placeholder="Email para envio"
+                  formControlName="email"
                 />
             </div>
             <div class="field col-11 md:col-3">
@@ -110,8 +113,8 @@
                 <input
                   type="email"
                   id="email"
-                  formControlName="password"
                   pInputText
+                  formControlName="password"
                 />
             </div>
             <div class="field col-1 generate-password">
@@ -127,6 +130,7 @@
                     pInputTextarea
                     placeholder="Escreva alguma observação"
                     [autoResize]="true"
+                    formControlName="comments"
                 ></textarea>
             </div>
 
@@ -232,15 +236,16 @@
             <button 
               type="button" 
               class="secondary-form-button"
+              (click)="clearForm()"
               >
-              Limpar
+                Limpar
             </button>
             <button 
               type="button" 
               class="primary-form-button ml-5"
-              
+              (click)="submitForm()"
               >
-              ALterar dados
+                {{ employeeId ? 'Alterar' : 'Salvar' }} dados
             </button>
           </div>
     </div>

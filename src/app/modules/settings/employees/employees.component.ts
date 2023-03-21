@@ -1,3 +1,4 @@
+import { SettingsService } from './../../../services/settings.service';
 import { Component, OnInit } from '@angular/core';
 import { EMPLOYEES_COLUMNS, EMPLOYEES_FIELDS, EMPLOYEES_PIPES } from './employees.const';
 
@@ -23,66 +24,76 @@ export class EmployeesComponent implements OnInit {
       label: 'Editar',
       icon: 'pi-pencil',
       action: (row: any) => {
-        alert("Editar")
+        this.router.navigate([`painel/configuracoes/colaboradores/editar/${row.id}`]);
       },
     },
     {
       label: 'Excluir',
       icon: 'pi-trash',
       action: (row: any, event: Event) => {
-        alert('Excluir')
+        this.deleteEmployee(row, event);
       },
     },
   ];
 
   public pageIndex = 1;
   public pageLimit = 10;
-  public totalRecords = 10;
+  public totalRecords = 0;
 
   constructor(
     private router: Router,
     private requestMessageService: RequestMessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private settingsService: SettingsService,
   ) { }
 
   ngOnInit(): void {
-    this.employees = [
-      {
-        name: 'André Luiz Pedro da Silva',
-        email: 'andre@raipp.com.br',
-        phone: '+55 11988756644',
-        permissions: 'Total'
+    this.getEmployees(this.pageIndex, this.pageLimit);
+  }
+
+  getEmployees(pageIndex: number, pageLimit: number) {
+    const pagination = `page=${pageIndex}&limit=${pageLimit}`;
+
+    this.settingsService.getEmployees(pagination).subscribe({
+      next: (res) => {
+        this.employees = res.data;
+        //this.totalRecords = res.pagination.totalItems;
       },
-      {
-        name: 'André Luiz Pedro da Silva',
-        email: 'andre@raipp.com.br',
-        phone: '+55 11988756644',
-        permissions: 'Total'
+      error: (err) => {
+      }
+    });
+  }
+
+  deleteEmployee(row: any, event: Event) {
+    this.confirmationService.confirm({
+      target: event.target ? event.target : undefined,
+      message: 'Deseja excluir o colaborador?',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      accept: () => {
+        this.settingsService.deleteEmployee(row.id).subscribe({
+          next: (res) => {
+            this.requestMessageService.show(
+              `Colaborador excluído com sucesso`,
+              'success'
+            );
+            
+            location.reload();
+          },
+          error: (err) => {
+            this.requestMessageService.show(
+              `Houve um erro`,
+              'error'
+            );
+          },
+        });
       },
-      {
-        name: 'André Luiz Pedro da Silva',
-        email: 'andre@raipp.com.br',
-        phone: '+55 11988756644',
-        permissions: 'Total'
-      },
-      {
-        name: 'André Luiz Pedro da Silva',
-        email: 'andre@raipp.com.br',
-        phone: '+55 11988756644',
-        permissions: 'Total'
-      },
-    ];
+    });
   }
 
   loadMoreItems(pageLimit: number) {
-    this.employees.push(
-      {
-        name: 'André Luiz Pedro da Silva',
-        email: 'andre@raipp.com.br',
-        phone: '+55 11988756644',
-        permissions: 'Total'
-      },
-    );
+    this.getEmployees(this.pageIndex, pageLimit);
   }
 
 }

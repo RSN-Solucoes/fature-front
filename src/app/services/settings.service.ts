@@ -45,4 +45,24 @@ export class SettingsService extends BaseHttpService {
     return this.patch(`${this.API_BASE}/customization`, body);
   }
 
+  getEmployees(pagination: string): Observable<any> {
+    return this.get(`${this.API_BASE}/employees?${pagination}`);
+  }
+
+  getEmployeeById(id: string): Observable<any> {
+    return this.get(`${this.API_BASE}/employees/${id}`);
+  }
+
+  createEmployee(body: any): Observable<any> {
+    return this.post(`${this.API_BASE}/employees`, body);
+  }
+
+  updateEmployee(id: string, body: any): Observable<any> {
+    return this.patch(`${this.API_BASE}/employees/${id}`, body);
+  }
+
+  deleteEmployee(id: string): Observable<any> {
+    return this.delete(`${this.API_BASE}/employees/${id}`)
+  }
+
 }

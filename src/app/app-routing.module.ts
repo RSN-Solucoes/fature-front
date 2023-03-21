@@ -118,6 +118,11 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
+    path: 'painel/configuracoes/colaboradores/editar/:id',
+    component: EmployeesFormComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
     path: 'painel/configuracoes/edit-template',
     component: EditTemplateComponent,
     canActivate: [AuthGuardService],
