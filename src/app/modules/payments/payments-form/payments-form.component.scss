@@ -1,0 +1,74 @@
+.payments-form {
+    height: 100%;
+    background-color: #6b7b94;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .field {
+        label {
+            font-weight: 400;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        input {
+            font-size: 1.2rem;
+        }
+
+    }
+    .field-title {
+        p {
+            font-size: 1.4rem;
+        }
+    }
+    .inputs {
+        input {
+            font-size: 2.5rem;
+            font-weight: 700;
+            width: 20%;
+            height: 60px !important;
+            margin-right: 5%;
+            text-align: center;
+        }
+        input:last-of-type {
+            margin-right: none;
+        }
+    }
+    .payments-form--section {
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        padding: 3rem 6rem;
+        border-radius: 10px;
+        width: 500px;
+        min-height: 400px;
+        .payments-form--section__title {
+            display: flex;
+            align-items: center;
+            img {
+                height: 50px;
+                width: 50px;
+                object-fit: cover;
+                border-radius: 50%;
+                margin-right: 3rem;
+            }
+            p {
+                font-size: 1.8rem;
+                font-weight: 500;
+            }
+        }
+        .check-button {
+            width: 100%;
+            button {
+                height: 42px;
+                background: var(--black);
+                border: solid 1px var(--black);
+                color: #fff;
+                font-weight: 200;
+                border-radius: 3px;
+                width: 100%;
+                font-size: 1.2rem;
+                cursor: pointer;
+            }
+        }
+    }
+}

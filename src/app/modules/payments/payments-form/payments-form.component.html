@@ -1,0 +1,85 @@
+<div class="payments-form">
+    <div class="payments-form--section grid">
+        <div class="col-12 pb-6">
+            <div class="payments-form--section__title">
+                <img src="../../../assets/img/profile_photo.png" alt="logo">
+
+                <p>Consultar faturas</p>
+            </div>
+        </div>
+
+        <div *ngIf="!emailSubmitted" class="field col-12">
+            <label for="document">CPF/CNPJ</label>
+            <input
+              type="text"
+              id="document"
+              name="document"
+              pInputText
+              placeholder="Digite seu CPF ou CNPJ"
+              mask="000.000.000-00 || 00.000.000/0000-00"
+            />
+        </div>
+        <div *ngIf="!emailSubmitted" class="field col-12">
+            <label for="document">E-mail</label>
+            <input
+              type="text"
+              id="document"
+              name="document"
+              pInputText
+              placeholder="Digite seu e-mail"
+            />
+        </div>
+
+        <div *ngIf="emailSubmitted"
+            class="field-title col-12">
+            <p>Enviamos um token de 4 dígitos para o seu e-mail</p>
+        </div>
+
+        <div *ngIf="emailSubmitted"
+            class="col-12 py-6">
+            <div class="inputs grid">
+                <input 
+                    pInputText
+                    class="col-3"
+                    type="text" 
+                    maxlength="1" 
+                    (input)="handleInput($event)"
+                    mask="0"
+                >
+                <input 
+                    pInputText
+                    class="col-3"
+                    type="text" 
+                    maxlength="1" 
+                    (input)="handleInput($event)"
+                    mask="0"
+                >
+                <input 
+                    pInputText
+                    class="col-3"
+                    type="text" 
+                    maxlength="1" 
+                    (input)="handleInput($event)"
+                    mask="0"
+                >
+                <input 
+                    pInputText
+                    class="col-3"
+                    type="text" 
+                    maxlength="1" 
+                    (input)="handleInput($event)"
+                    mask="0"
+                >
+            </div>
+        </div>
+
+        <div class=" check-button py-4">
+            <button 
+                type="button"
+                (click)="emailSubmitted ? navigateToPaymentsList() : emailSubmitted = true"
+                >
+                Entrar
+            </button>
+        </div>
+    </div>
+</div>

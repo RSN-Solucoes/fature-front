@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PAYMENT_METHODS_SELECT_LIST } from '../invoices/invoice-form/invoice-form.const';
+import { PAYMENT_METHODS_SELECT_LIST } from '../../invoices/invoice-form/invoice-form.const';
 
 @Component({
   selector: 'app-checkout',
