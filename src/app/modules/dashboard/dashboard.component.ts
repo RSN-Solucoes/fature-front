@@ -143,16 +143,16 @@ export class DashboardComponent implements OnInit {
             label: 'Novos assinantes',
             data: this.generateSubscriptionDataValue(value),
             fill: false,
-            borderColor: '#6feaa7',
-            backgroundColor: '#6feaa7'
+            borderColor: '#02b69c',
+            backgroundColor: '#02b69c'
         }
     } else {
         return {
             label: 'Assinaturas ativas',
             data: this.generateSubscriptionDataValue(value),
             fill: false,
-            borderColor: '#F38BE8',
-            backgroundColor: '#F38BE8'
+            borderColor: '#6feaa7',
+            backgroundColor: '#6feaa7'
         };
     };
   }
