@@ -1,4 +1,9 @@
-import { BANKS_SELECT_LIST, BANK_ACCOUNT_TYPE_SELECT_LIST, BANK_FREQUENCY_SELECT_LIST } from './../settings.const';
+import { 
+  BANKS_SELECT_LIST, 
+  BANK_ACCOUNT_TYPE_SELECT_LIST, 
+  BANK_FREQUENCY_SELECT_LIST,
+  WEEK_DAYS_SELECT_LIST
+} from './../settings.const';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SettingsService } from './../../../services/settings.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,6 +19,7 @@ export class BankDataComponent implements OnInit {
   public banksSelectItems: any[] = BANKS_SELECT_LIST;
   public accountTypeSelectItems: any[] = BANK_ACCOUNT_TYPE_SELECT_LIST;
   public frequencySelectItems: any[] = BANK_FREQUENCY_SELECT_LIST;
+  public weekDaysSelectItems: any[] = WEEK_DAYS_SELECT_LIST;
 
   public bankData!: any;
   public bankDataForm!: FormGroup;
@@ -54,10 +60,6 @@ export class BankDataComponent implements OnInit {
       error: (err) => {
       }
     });
-  }
-
-  clearForm() {
-    this.bankDataForm.reset();
   }
 
   submitForm() {

@@ -36,18 +36,16 @@ export class CompanyDataComponent implements OnInit {
 
   createCompanyDataForm(): void {
     this.companyDataForm = this.fb.group({
-      name: [null],
-      fantasyName: [null],
-      cnpj: [null],
+      name: [{value: null, disabled: true}],
+      fantasyName: [{value: null, disabled: true}],
+      cnpj: [{value: null, disabled: true}],
       companyPhone: [null],
-      companyEmail: [null],
+      companyEmail: [{value: null, disabled: true}],
       responsible: this.fb.group({
-        name: [null],
-        cpf: [null],
+        name: [{value: null, disabled: true}],
+        cpf: [{value: null, disabled: true}],
         phone: [null],
-        email: [null],
-        uf: [null],
-        city: [null],
+        email: [{value: null, disabled: true}],
       }),
       address: this.fb.group({
         cep: [null],
@@ -130,10 +128,6 @@ export class CompanyDataComponent implements OnInit {
         city: el
       }
     });
-  }
-
-  clearForm() {
-    this.companyDataForm.reset();
   }
 
   submitForm() {

@@ -57,7 +57,8 @@ export class EmployeesComponent implements OnInit {
     this.settingsService.getEmployees(pagination).subscribe({
       next: (res) => {
         this.employees = res.data;
-        //this.totalRecords = res.pagination.totalItems;
+        this.totalRecords = res.pagination.totalItems;
+        console.log(res) 
       },
       error: (err) => {
       }

@@ -4,4 +4,7 @@
     [pipes]="subscriptionsPipes"
     [actions]="subscriptionsActions"
     [value]="subscriptions"
+    [totalRecords]="totalRecords"
+    [pageLimit]="pageLimit"
+    (loadMoreItems)="loadMoreItems($event)"
 ></app-table>

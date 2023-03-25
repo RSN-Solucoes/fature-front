@@ -112,47 +112,6 @@
                 formControlName="email"
             />
         </div>
-        <div class="field col-12 md:col-4" formGroupName="responsible">
-            <label for="neighborhood">Bairro</label>
-            <input
-                type="text"
-                id="neighborhood"
-                pInputText
-                placeholder="Bairro"
-            />
-        </div>
-        <div class="field col-12 md:col-4" formGroupName="responsible">
-            <label for="responsibleUf">Estado</label>
-            <p-dropdown
-                id="responsibleUf"
-                name="responsibleUf"
-                [options]="ufList"
-                optionLabel="name"
-                optionValue="uf"
-                value=""
-                placeholder="Estado"
-                formControlName="uf"
-                (onChange)="setUf('responsible')"
-            >
-            </p-dropdown>
-        </div>
-        <div class="field col-12 md:col-4" formGroupName="responsible">
-            <label for="responsibleCity">Cidade</label>
-            <p-dropdown
-                id="responsibleCity"
-                name="responsibleCity"
-                [options]="responsibleCityList"
-                optionLabel="city"
-                optionValue="city"
-                placeholder="Cidade"
-                formControlName="city"
-                [virtualScroll]="true"
-                [virtualScrollItemSize]="30"
-                filterBy="city"
-                [filter]="true"
-            >
-            </p-dropdown>
-        </div>
     </form>
 
     <div class="company-data--header pt-6">
@@ -213,6 +172,8 @@
                 optionValue="uf"
                 placeholder="Estado"
                 formControlName="uf"
+                filterBy="name"
+                [filter]="true"
                 (onChange)="setUf('address')"
             >
             </p-dropdown>
@@ -238,13 +199,6 @@
     </form>
 
     <div class="company-data--footer pt-6">
-        <button 
-            type="button" 
-            class="secondary-form-button"
-            (click)="clearForm()"
-            >
-            Limpar
-        </button>
         <button 
             type="button" 
             class="primary-form-button ml-5"

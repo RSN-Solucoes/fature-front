@@ -4,4 +4,7 @@
     [pipes]="plansPipes"
     [actions]="plansActions"
     [value]="plans"
+    [totalRecords]="totalRecords"
+    [pageLimit]="pageLimit"
+    (loadMoreItems)="loadMoreItems($event)"
 ></app-table>

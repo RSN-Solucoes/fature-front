@@ -43,7 +43,11 @@ export class EmployeesFormComponent implements OnInit {
   ngOnInit(): void {
     this.createEmployeesForm();
 
-    this.employeeId ? this.getEmployee() : this.generatePassword();
+    if(this.employeeId) {
+      this.getEmployee();
+      
+      this.form.get('password')?.disable();
+    } else this.generatePassword();
   }
 
   createEmployeesForm(): void {

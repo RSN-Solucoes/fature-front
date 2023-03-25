@@ -243,6 +243,10 @@ export const BANK_ACCOUNT_TYPE_SELECT_LIST = [
 
 export const BANK_FREQUENCY_SELECT_LIST = [
     {
+      title: 'Diário',
+      value: 'diary'
+    },
+    {
       title: 'Semanal',
       value: 'weekly'
     },
@@ -250,8 +254,27 @@ export const BANK_FREQUENCY_SELECT_LIST = [
       title: 'Mensal',
       value: 'monthly'
     },
-    {
-      title: 'Anual',
-      value: 'yearly'
-    },
-  ];
+];
+
+export const WEEK_DAYS_SELECT_LIST = [
+  {
+    title: 'Segunda-feira',
+    value: 2
+  },
+  {
+    title: 'Terça-feira',
+    value: 3
+  },
+  {
+    title: 'Quarta-feira',
+    value: 4
+  },
+  {
+    title: 'Quinta-feira',
+    value: 5
+  },
+  {
+    title: 'Sexta-feira',
+    value: 6
+  },
+];

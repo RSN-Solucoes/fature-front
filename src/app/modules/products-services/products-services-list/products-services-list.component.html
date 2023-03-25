@@ -21,6 +21,9 @@
     [pipes]="productsServicesPipes"
     [actions]="productsServicesActions"
     [value]="productsServices"
+    [totalRecords]="totalRecords"
+    [pageLimit]="pageLimit"
+    (loadMoreItems)="loadMoreItems($event)"
   ></app-table>
 
   <p-dialog 

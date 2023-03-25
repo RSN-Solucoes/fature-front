@@ -90,18 +90,36 @@
                 name="paymentFrequency"
                 [options]="frequencySelectItems"
                 optionLabel="title"
+                optionValue="value"
                 placeholder="Mensal"
                 formControlName="paymentFrequency"
             >
             </p-dropdown>
         </div>
-        <div class="field col-12 md:col-2">
+        <div *ngIf="bankDataForm.get('paymentFrequency')?.value === 'weekly'"
+            class="field col-12 md:col-2">
+            <label for="paymentWeekDay">Dia</label>
+            <p-dropdown
+                id="paymentWeekDay"
+                name="paymentWeekDay"
+                [options]="weekDaysSelectItems"
+                optionLabel="title"
+                optionValue="value"
+                placeholder="Selecione"
+                formControlName="paymentDay"
+            >
+            </p-dropdown>
+        </div>
+        <div *ngIf="bankDataForm.get('paymentFrequency')?.value === 'monthly'"
+            class="field col-12 md:col-2">
             <label for="paymentDay">Dia</label>
             <p-inputNumber
                 id="paymentDay"
                 name="paymentDay"
                 [useGrouping]="false"
                 placeholder="1"
+                [max]="31"
+                [min]="1"
                 formControlName="paymentDay"
             > 
             </p-inputNumber>
@@ -109,13 +127,6 @@
     </form>
 
     <div class="bank-data--footer">
-        <button 
-            type="button" 
-            class="secondary-form-button"
-            (click)="clearForm()"
-            >
-            Limpar
-        </button>
         <button 
             type="button" 
             class="primary-form-button ml-5"
