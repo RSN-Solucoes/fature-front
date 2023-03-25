@@ -12,18 +12,24 @@ export class DynamicPipe implements PipeTransform {
 
   tel(value: string) {
     const data = value;
-    let finalValue = ''
+    let finalValue = '';
 
     data.length > 10
-      ? finalValue = `(${data.slice(0,2)}) ${data.slice(2,7)}-${data.slice(7,12)}`
-      : finalValue = `(${data.slice(0,2)}) ${data.slice(2,6)}-${data.slice(6,10)}`;
+      ? (finalValue = `(${data.slice(0, 2)}) ${data.slice(2, 7)}-${data.slice(
+          7,
+          12
+        )}`)
+      : (finalValue = `(${data.slice(0, 2)}) ${data.slice(2, 6)}-${data.slice(
+          6,
+          10
+        )}`);
 
     return finalValue;
   }
 
   cep(value: string) {
     const data = value;
-    let finalCep = `${data.slice(0,5)}-${data.slice(5,8)}`;
+    let finalCep = `${data.slice(0, 5)}-${data.slice(5, 8)}`;
 
     return finalCep;
   }
@@ -32,8 +38,8 @@ export class DynamicPipe implements PipeTransform {
     let valueTransform = '';
 
     value === 'product'
-      ? valueTransform = 'Produto'
-      : valueTransform = 'Serviço';
+      ? (valueTransform = 'Produto')
+      : (valueTransform = 'Serviço');
 
     return valueTransform;
   }
@@ -41,14 +47,18 @@ export class DynamicPipe implements PipeTransform {
   price(value: string) {
     const price = Number(value);
 
-    return price.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'});
+    return price.toLocaleString('pt-br', {
+      style: 'currency',
+      currency: 'BRL',
+    });
   }
 
   date(value: string) {
     return new Date(value).toLocaleDateString();
   }
 
-  paid(value: boolean) {
-    return value == true ? "Pago" : "Não pago";
+  paid(value: string) {
+    if (value === 'true') return 'Pago';
+    else return 'Não pago';
   }
 }
