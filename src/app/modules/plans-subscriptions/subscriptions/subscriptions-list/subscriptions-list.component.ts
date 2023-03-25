@@ -37,6 +37,10 @@ export class SubscriptionsListComponent implements OnInit {
     },
   ];
 
+  public pageIndex = 1;
+  public pageLimit = 10;
+  public totalRecords = 0;
+
   constructor(
     private router: Router,
   ) { }
@@ -46,6 +50,10 @@ export class SubscriptionsListComponent implements OnInit {
 
   navigateToSubscriptionView(): void {
     this.router.navigate(['painel/recorrencias/visualizar']);
+  }
+
+  loadMoreItems(pageLimit: number) {
+    //function
   }
 
 }

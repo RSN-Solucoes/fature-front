@@ -129,6 +129,8 @@ export class InvoicesListComponent implements OnInit {
               `Fatura cancelada com sucesso`,
               'success'
             );
+
+            location.reload();
           },
           error: (err) => {},
         });

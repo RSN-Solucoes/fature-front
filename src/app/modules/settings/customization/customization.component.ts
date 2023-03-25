@@ -1,7 +1,9 @@
+import { SettingsService } from './../../../services/settings.service';
 import { CUSTOMIZATION_BACKGROUNDS } from './customization.const';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FileUpload } from 'primeng/fileupload';
+import { RequestMessageService } from 'src/app/shared/components/request-message/request-message.service';
 import { NgxImageCompressService } from 'ngx-image-compress';
 
 @Component({
@@ -31,24 +33,49 @@ export class CustomizationComponent implements OnInit {
 
   public buttonPreviewStyle!: string;
 
+  public customizationData!: any[];
+
   constructor(
     private fb: FormBuilder,
+    private settingsService: SettingsService,
+    private requestMessageService: RequestMessageService,
     private imageCompress: NgxImageCompressService
   ) {}
 
   ngOnInit(): void {
     this.createCustomizationForm();
+
+    this.getCustomizationData();
   }
 
   createCustomizationForm(): void {
     this.form = this.fb.group({
-      logo: [null],
       backgroundImage: [null],
-      color: this.fb.group({
-        background: ['#d9d9d9'],
-        button: ['#000'],
-      }),
+      backgroundColor: [null],
+      buttonColor: [null],
+      logo: [null],
+      logoExtension: [null],
+      wallpaper: [null],
       url: [null],
+    });
+  }
+
+  getCustomizationData(): void {
+    this.settingsService.getCustomizations().subscribe({
+      next: (res) => {
+        this.customizationData = res.data;
+        this.form.patchValue({
+          ...this.customizationData,
+        });
+        this.logoPreviewImage = `data:image/${res.data.logoExtension};base64,${res.data.logo}`;
+
+        this.selectBackground(res.data.wallpaper);
+        this.chooseBackgroundImage();
+
+        this.updateButtonPreviewColor(res.data.buttonColor);
+        this.updateBackgroundPreviewColor(res.data.backgroundColor);
+      },
+      error: (err) => {},
     });
   }
 
@@ -91,21 +118,31 @@ export class CustomizationComponent implements OnInit {
 
     this.logoPreviewImage = 'assets/img/profile_photo.png';
     this.imageLogoSource = '';
-
-    this.logoUploader.clear();
   }
 
   saveCroppedLogo(): void {
     this.imageCompress
       .compressFile(this.logoPreviewImage, 0, 50, 50)
-      .then((res) => {
-        this.form.get('logo')?.setValue(res);
+      .then((res: any) => {
+        let logoText = '';
 
+        if (res.substring(0, 20).includes('jpeg')) {
+          this.form.get('logoExtension')?.setValue('jpeg');
+
+          logoText = res.replace('data:image/jpeg;base64,', '');
+        } else {
+          this.form.get('logoExtension')?.setValue('png');
+
+          logoText = res.replace('data:image/png;base64,', '');
+        }
+
+        this.form.get('logo')?.setValue(logoText);
         this.displayCropDialog = false;
       });
   }
 
   selectBackground(index: any): void {
+    this.form.get('wallpaper')?.setValue(`${index}`);
     this.selectedBackgroundImage = this.customizationBackgrounds[index];
   }
 
@@ -117,13 +154,19 @@ export class CustomizationComponent implements OnInit {
     this.displayBackgroundImageDialog = false;
   }
 
-  clearForm(): void {
-    this.form.reset();
-
-    this.removeLogo();
-  }
-
   submitForm(): void {
-    alert('submit form');
+    const body = this.form.getRawValue();
+
+    this.settingsService.updateCustomizations(body).subscribe({
+      next: () => {
+        this.requestMessageService.show(
+          `Dados da empresa salvos com sucesso.`,
+          'success'
+        );
+      },
+      error: (err) => {
+        this.requestMessageService.show(`Ocorreu um erro: ${err}`, 'error');
+      },
+    });
   }
 }

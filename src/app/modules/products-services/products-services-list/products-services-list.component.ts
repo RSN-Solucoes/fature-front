@@ -39,8 +39,9 @@ export class ProductsServicesListComponent implements OnInit {
     },
   ];
 
-  private pageIndex = 1;
-  private pageLimit = 10;
+  public pageIndex = 1;
+  public pageLimit = 10;
+  public totalRecords = 0;
 
   constructor(
     private router: Router,
@@ -48,11 +49,11 @@ export class ProductsServicesListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getProductsServices();
+    this.getProductsServices(this.pageIndex, this.pageLimit);
   }
 
-  getProductsServices() {
-    const pagination = `page=${this.pageIndex}&limit=${this.pageLimit}`;
+  getProductsServices(pageIndex: number, pageLimit: number) {
+    const pagination = `page=${pageIndex}&limit=${pageLimit}`;
     this.productsServicesService.getProductsServices(pagination).subscribe({
       next: (res) => {
         this.productsServices = res.data;
@@ -82,5 +83,9 @@ export class ProductsServicesListComponent implements OnInit {
       error: (err) => {
       }
     });
+  }
+
+  loadMoreItems(pageLimit: number) {
+    this.getProductsServices(this.pageIndex, pageLimit);
   }
 }
