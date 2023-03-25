@@ -1,209 +1,217 @@
 <div class="company-data form mt-6">
-    <div class="company-data--header">
-        <p>Dados principais</p>
+  <div class="company-data--header">
+    <p>Dados principais</p>
+  </div>
+  <form class="company-data--form pt-6 grid" [formGroup]="companyDataForm">
+    <div class="field col-12 md:col-6">
+      <label for="companyName">Nome da empresa</label>
+      <input
+        type="text"
+        id="companyName"
+        name="companyName"
+        pInputText
+        placeholder="Nome da empresa"
+        formControlName="name"
+      />
     </div>
-    <form class="company-data--form pt-6 grid">
-        <div class="field col-12 md:col-6">
-            <label for="companyName">Nome da empresa</label>
-            <input
-                type="text"
-                id="companyName"
-                pInputText
-                placeholder="Nome da empresa"
-            />
-        </div>
-        <div class="field col-12 md:col-6">
-            <label for="fantasyName">Nome fantasia</label>
-            <input
-                type="text"
-                id="fantasyName"
-                pInputText
-                placeholder="Nome fantasia"
-            />
-        </div>
-        <div class="field col-12 md:col-4">
-            <label for="cnpj">CNPJ</label>
-            <input
-                type="text"
-                id="cnpj"
-                pInputText
-                placeholder="00.000.000/0000-00"
-                mask="00.000.000/0000-00"
-            />
-        </div>
-        <div class="field col-12 md:col-4">
-            <label for="tel">Contato</label>
-            <input
-                type="text"
-                id="tel"
-                pInputText
-                placeholder="Telefone ou celular"
-                mask="(00) 0 0000-0000||(00) 0000-0000"
-            />
-        </div>
-        <div class="field col-12 md:col-4">
-            <label for="email">E-mail</label>
-            <input
-                type="text"
-                id="email"
-                pInputText
-                placeholder="E-mail principal"
-            />
-        </div>
-    </form>
+    <div class="field col-12 md:col-6">
+      <label for="fantasyName">Nome fantasia</label>
+      <input
+        type="text"
+        id="fantasyName"
+        name="fantasyName"
+        pInputText
+        placeholder="Nome fantasia"
+        formControlName="fantasyName"
+      />
+    </div>
+    <div class="field col-12 md:col-4">
+      <label for="cnpj">CNPJ</label>
+      <input
+        type="text"
+        id="cnpj"
+        name="cnpj"
+        pInputText
+        placeholder="00.000.000/0000-00"
+        mask="00.000.000/0000-00"
+        formControlName="cnpj"
+      />
+    </div>
+    <div class="field col-12 md:col-4">
+      <label for="companyPhone">Contato</label>
+      <input
+        type="text"
+        id="companyPhone"
+        name="companyPhone"
+        pInputText
+        placeholder="Telefone ou celular"
+        mask="(00) 0 0000-0000||(00) 0000-0000"
+        formControlName="companyPhone"
+      />
+    </div>
+    <div class="field col-12 md:col-4">
+      <label for="companyEmail">E-mail</label>
+      <input
+        type="text"
+        id="companyEmail"
+        name="companyEmail"
+        pInputText
+        placeholder="E-mail principal"
+        formControlName="companyEmail"
+      />
+    </div>
+  </form>
 
-    <div class="company-data--header pt-6">
-        <p>Dados do responsável</p>
+  <div class="company-data--header pt-6">
+    <p>Dados do responsável</p>
+  </div>
+
+  <form class="company-data--form pt-6 grid" [formGroup]="companyDataForm">
+    <div class="field col-12 md:col-3" formGroupName="responsible">
+      <label for="name">Nome</label>
+      <input
+        type="text"
+        id="name"
+        pInputText
+        placeholder="Nome completo"
+        formControlName="name"
+      />
+    </div>
+    <div class="field col-12 md:col-3" formGroupName="responsible">
+      <label for="cpf">CPF</label>
+      <input
+        type="text"
+        id="cpf"
+        name="cpf"
+        pInputText
+        placeholder="Número do CPF"
+        mask="000.000.000-00"
+        formControlName="cpf"
+      />
+    </div>
+    <div class="field col-12 md:col-3" formGroupName="responsible">
+      <label for="responsiblePhone">Contato</label>
+      <input
+        type="text"
+        id="responsiblePhone"
+        name="responsiblePhone"
+        pInputText
+        placeholder="Telefone ou celular"
+        mask="(00) 0 0000-0000||(00) 0000-0000"
+        formControlName="phone"
+      />
+    </div>
+    <div class="field col-12 md:col-3" formGroupName="responsible">
+      <label for="responsibleEmail">E-mail</label>
+      <input
+        type="text"
+        id="responsibleEmail"
+        name="responsibleEmail"
+        pInputText
+        placeholder="E-mail do responsável"
+        formControlName="email"
+      />
+    </div>
+  </form>
+
+  <div class="company-data--header pt-6">
+    <p>Endereço</p>
+  </div>
+  <form class="company-data--form pt-6 grid" [formGroup]="companyDataForm">
+    <div class="field col-9 md:col-3" formGroupName="address">
+      <label for="cep">CEP <span>*</span></label>
+      <input
+        type="text"
+        id="cep"
+        formControlName="cep"
+        pInputText
+        placeholder="Digite o CEP de envio"
+        mask="00000-000"
+        (change)="getClientAddressData()"
+      />
     </div>
 
-    <form class="company-data--form pt-6 grid">
-        <div class="field col-12 md:col-3">
-            <label for="name">Nome</label>
-            <input
-                type="text"
-                id="name"
-                pInputText
-                placeholder="Nome completo"
-            />
-        </div>
-        <div class="field col-12 md:col-3">
-            <label for="cpf">CPF</label>
-            <input
-                type="text"
-                id="cpf"
-                pInputText
-                placeholder="Número do CPF"
-                mask="000.000.000-00"
-            />
-        </div>
-        <div class="field col-12 md:col-3">
-            <label for="responsibleContact">Contato</label>
-            <input
-                type="text"
-                id="responsibleContact"
-                pInputText
-                placeholder="Telefone ou celular"
-                mask="(00) 0 0000-0000||(00) 0000-0000"
-            />
-        </div>
-        <div class="field col-12 md:col-3">
-            <label for="responsibleEmail">E-mail</label>
-            <input
-                type="text"
-                id="responsibleEmail"
-                pInputText
-                placeholder="E-mail do responsável"
-            />
-        </div>
-        <div class="field col-12 md:col-4">
-            <label for="neighborhood">Bairro</label>
-            <input
-                type="text"
-                id="neighborhood"
-                pInputText
-                placeholder="Bairro"
-            />
-        </div>
-        <div class="field col-12 md:col-4">
-            <label for="uf">Estado</label>
-            <p-dropdown
-                id="uf"
-                [options]="ufList"
-                optionLabel="name"
-                optionValue="value"
-                placeholder="Estado"
-            >
-            </p-dropdown>
-        </div>
-        <div class="field col-12 md:col-4">
-            <label for="city">Cidade</label>
-            <p-dropdown
-                id="city"
-                [options]="cityList"
-                optionLabel="name"
-                placeholder="Cidade"
-            >
-            </p-dropdown>
-        </div>
-    </form>
-
-    <div class="company-data--header pt-6">
-        <p>Endereço</p>
+    <div class="field col-9 md:col-7" formGroupName="address">
+      <label for="street">Logradouro</label>
+      <input
+        type="text"
+        id="street"
+        name="street"
+        pInputText
+        placeholder="Rua, avenida"
+        formControlName="street"
+      />
     </div>
-    <form class="company-data--form pt-6 grid">
-        <div class="field col-9 md:col-6">
-            <label for="address">Logradouro</label>
-            <input
-                type="text"
-                id="address"
-                pInputText
-                placeholder="Rua, avenida"
-            />
-        </div>
-        <div class="field col-3 md:col-3">
-            <label for="addressNumber">Número</label>
-            <p-inputNumber
-                id="addressNumber"
-                placeholder="Número"
-                [useGrouping]="false"
-            >
-            </p-inputNumber>
-          </div>
-          <div class="field col-12 md:col-3">
-            <label for="addressComplement">Complemento</label>
-            <input
-                type="text"
-                id="addressComplement"
-                pInputText
-                placeholder="Apartamento, bloco"
-            />
-        </div>
-        <div class="field col-12 md:col-4">
-            <label for="companyNeighborhood">Bairro</label>
-            <input
-                type="text"
-                id="companyNeighborhood"
-                pInputText
-                placeholder="Bairro"
-            />
-        </div>
-        <div class="field col-12 md:col-4">
-            <label for="companyUf">Estado</label>
-            <p-dropdown
-                id="companyUf"
-                [options]="ufList"
-                optionLabel="name"
-                optionValue="value"
-                placeholder="Estado"
-            >
-            </p-dropdown>
-        </div>
-        <div class="field col-12 md:col-4">
-            <label for="companyCity">Cidade</label>
-            <p-dropdown
-                id="companyCity"
-                [options]="cityList"
-                optionLabel="name"
-                placeholder="Cidade"
-            >
-            </p-dropdown>
-        </div>
-    </form>
 
-    <div class="company-data--footer pt-6">
-        <button 
-            type="button" 
-            class="secondary-form-button"
-            (click)="clearForm()"
-            >
-            Limpar
-        </button>
-        <button 
-            type="button" 
-            class="primary-form-button ml-5"
-            (click)="submitForm()"
-            >
-            Salvar
-        </button>
+    <div class="field col-3 md:col-2" formGroupName="address">
+      <label for="addressNumber">Número</label>
+      <p-inputNumber
+        id="addressNumber"
+        name="addressNumber"
+        placeholder="Número"
+        [useGrouping]="false"
+        formControlName="number"
+      >
+      </p-inputNumber>
     </div>
+
+    <div class="field col-12 md:col-3" formGroupName="address">
+      <label for="addressComplement">Complemento</label>
+      <input
+        type="text"
+        id="addressComplement"
+        name="addressComplement"
+        pInputText
+        placeholder="Apartamento, bloco"
+        formControlName="complement"
+      />
+    </div>
+
+    <div class="field col-12 md:col-3" formGroupName="address">
+      <label for="companyDistrict">Bairro</label>
+      <input
+        type="text"
+        id="companyDistrict"
+        name="companyDistrict"
+        pInputText
+        placeholder="Bairro"
+        formControlName="district"
+      />
+    </div>
+
+    <div class="field col-12 md:col-3" formGroupName="address">
+      <label for="companyUf">Estado</label>
+      <input
+        type="text"
+        id="companyUf"
+        name="companyUf"
+        pInputText
+        placeholder="Estado"
+        formControlName="uf"
+      />
+    </div>
+
+    <div class="field col-12 md:col-3" formGroupName="address">
+      <label for="companyCity">Cidade</label>
+
+      <input
+        type="text"
+        id="companyCity"
+        name="companyCity"
+        pInputText
+        placeholder="Cidade"
+        formControlName="city"
+      />
+    </div>
+  </form>
+
+  <div class="company-data--footer pt-6">
+    <button
+      type="button"
+      class="primary-form-button ml-5"
+      (click)="submitForm()"
+    >
+      Salvar
+    </button>
+  </div>
 </div>

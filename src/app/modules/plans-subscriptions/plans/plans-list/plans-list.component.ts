@@ -35,9 +35,17 @@ export class PlansListComponent implements OnInit {
     },
   ];
 
+  public pageIndex = 1;
+  public pageLimit = 10;
+  public totalRecords = 0;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  loadMoreItems(pageLimit: number) {
+    //function
   }
 
 }

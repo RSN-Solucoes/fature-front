@@ -13,12 +13,12 @@
 </app-navbar>
   
 <div class="content">
-    <div class="grid card">
+    <div *ngIf="dashboardData" class="grid card">
         <div class="col-2 card_info">
             <div class="card_info--item">
                 <p>Total Pago</p>
         
-                <span>R$ 6.000</span>
+                <span>{{ dashboardData.total | currency:'BRL' }}</span>
             </div>
         </div>
 
@@ -26,7 +26,7 @@
             <div class="card_info--item">
                 <p>A Receber</p>
         
-                <span>R$ 2.350</span>
+                <span>{{ dashboardData.toReceive | currency:'BRL' }}</span>
             </div>
         </div>
 
@@ -34,7 +34,7 @@
             <div class="card_info--item">
                 <p>Recebido</p>
         
-                <span>R$ 1.000</span>
+                <span>{{ dashboardData.received | currency:'BRL' }}</span>
             </div>
         </div>
 
@@ -42,7 +42,7 @@
             <div class="card_info--item">
                 <p>Em Aberto</p>
         
-                <span>R$ 8.500</span>
+                <span>{{ dashboardData.open | currency:'BRL' }}</span>
             </div>
         </div>
 
@@ -50,7 +50,7 @@
             <div class="card_info--item">
                 <p>Atrasado</p>
         
-                <span>R$ 5.000</span>
+                <span>{{ dashboardData.delayed | currency:'BRL' }}</span>
             </div>
         </div>
 
@@ -58,52 +58,23 @@
             <div class="card_info--item">
                 <p>Cancelados</p>
         
-                <span>0</span>
+                <span>{{ dashboardData.canceled }}</span>
             </div>
         </div>
     </div>
     <div class="grid graphics pt-6">
-        <div class="col-6 graphics_card">
+        <div *ngIf="dashboardData" class="col-6 graphics_card">
             <div class="graphics_card--panel">
                 <p>Assinaturas</p>
                 <p-chart type="line" [data]="basicData" [options]="basicOptions"></p-chart>
             </div>
         </div>
-        <div class="col-3 graphics_card">
+        <div *ngIf="dashboardData" class="col-6 graphics_card">
             <div class="graphics_card--panel graphics_card--doughnut">
                 <p>Pagamentos mais utilizados</p>
                 <div class="graphics_card--most-used-payments">
                     <p></p>
                     <p-chart type="doughnut" [data]="data" [options]="chartOptions"></p-chart>
-                </div>
-            </div>
-        </div>
-        <div class="col-3 graphics_card">
-            <div class="graphics_card--panel">
-                <p>Produtos mais vendidos</p>
-
-                <div class="graphics_card-product--items">
-                    <p>Caixa surpresa Skin Care</p>
-                    <div class="graphics_card-products--info">
-                        <span>Quantidade: <strong>335</strong></span>
-                        <span>Valor: <strong>R$ 100,00</strong></span>
-                    </div>
-                </div>
-
-                <div class="graphics_card-product--items">
-                    <p>Caixa surpresa Skin Care</p>
-                    <div class="graphics_card-products--info">
-                        <span>Quantidade: <strong>224</strong></span>
-                        <span>Valor: <strong>R$ 155,00</strong></span>
-                    </div>
-                </div>
-
-                <div class="graphics_card-product--items">
-                    <p>Caixa surpresa Skin Care</p>
-                    <div class="graphics_card-products--info">
-                        <span>Quantidade: <strong>199</strong></span>
-                        <span>Valor: <strong>R$ 300,00</strong></span>
-                    </div>
                 </div>
             </div>
         </div>

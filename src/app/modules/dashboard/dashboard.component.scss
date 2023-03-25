@@ -64,27 +64,6 @@
                     font-size: 1.6rem;
                     padding-bottom: 2rem;
                 }
-                .graphics_card-product--items {
-                    border: solid 4px var(--line);
-                    border-radius: 15px;
-                    display: flex;
-                    flex-direction: column;
-                    padding: 2rem;
-                    margin-bottom: 2rem;
-                    height: 100px;
-                    justify-content: center;
-                    p {
-                        font-size: 1.2rem;
-                        font-weight: 600;
-                    }
-                    span, strong{
-                        font-size: 1.2rem;
-                    }
-                    .graphics_card-products--info {
-                        display: flex;
-                        justify-content: space-between;
-                    }
-                }
             }
             .graphics_card--doughnut {
                 display: flex;

@@ -11,5 +11,8 @@
         [fields]="transfersListFields"
         [pipes]="transfersListTablePipes"
         [value]="transfersListValue"
+        [totalRecords]="totalRecords"
+        [pageLimit]="pageLimit"
+        (loadMoreItems)="loadMoreItems($event)"
     ></app-table>
 </div>

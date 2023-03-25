@@ -1,4 +1,13 @@
+import { 
+  BANKS_SELECT_LIST, 
+  BANK_ACCOUNT_TYPE_SELECT_LIST, 
+  BANK_FREQUENCY_SELECT_LIST,
+  WEEK_DAYS_SELECT_LIST
+} from './../settings.const';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { SettingsService } from './../../../services/settings.service';
 import { Component, OnInit } from '@angular/core';
+import { RequestMessageService } from 'src/app/shared/components/request-message/request-message.service';
 
 @Component({
   selector: 'app-bank-data',
@@ -7,53 +16,68 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BankDataComponent implements OnInit {
 
-  public agencyOptions!: any[];
-  public accountType!: any[];
-  public frequency!: any[];
+  public banksSelectItems: any[] = BANKS_SELECT_LIST;
+  public accountTypeSelectItems: any[] = BANK_ACCOUNT_TYPE_SELECT_LIST;
+  public frequencySelectItems: any[] = BANK_FREQUENCY_SELECT_LIST;
+  public weekDaysSelectItems: any[] = WEEK_DAYS_SELECT_LIST;
 
-  constructor() { }
+  public bankData!: any;
+  public bankDataForm!: FormGroup;
+
+  constructor(
+    private settingsService: SettingsService,
+    private fb: FormBuilder,
+    private requestMessageService: RequestMessageService,
+  ) { }
 
   ngOnInit(): void {
-    this.agencyOptions = [
-      {
-        name: 'Agência 1'
-      },
-      {
-        name: 'Agência 2'
-      },
-      {
-        name: 'Agência 3'
-      },
-    ];
+    this.createBankDataForm();
 
-    this.accountType = [
-      {
-        name: 'Conta corrente',
-        sigla: 'CC',
-      },
-    ];
-
-    this.frequency = [
-      {
-        title: 'Semanal',
-        value: 'weekly'
-      },
-      {
-        title: 'Mensal',
-        value: 'monthly'
-      },
-      {
-        title: 'Anual',
-        value: 'yearly'
-      },
-    ];
+    this.getBankData();
   }
 
-  clearForm() {
-    alert('clear form');
+  createBankDataForm(): void {
+    this.bankDataForm = this.fb.group({
+      account: [null],
+      accountDigit: [null, Validators.required],
+      accountType: [null],
+      agency: [null],
+      agencyDigit: [null],
+      bankCode: [null],
+      paymentDay: [null],
+      paymentFrequency: [null],
+    });
+  }
+
+  getBankData() {
+    this.settingsService.getBankData().subscribe({
+      next: (res) => {
+        this.bankData = res.data;
+        this.bankDataForm.patchValue({
+          ...this.bankData,
+        });
+      },
+      error: (err) => {
+      }
+    });
   }
 
   submitForm() {
-    alert('submit form');
+    const body = this.bankDataForm.getRawValue();
+
+    this.settingsService.updateBankData(body).subscribe({
+      next: () => {
+        this.requestMessageService.show(
+          `Dados salvos com sucesso.`,
+          'success'
+        );
+      },
+      error: (err) => {
+        this.requestMessageService.show(
+          `Ocorreu um erro: ${err}`,
+          'error'
+        );
+      }
+    });
   }
 }

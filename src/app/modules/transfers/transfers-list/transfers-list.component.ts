@@ -44,6 +44,10 @@ export class TransfersListComponent implements OnInit {
     },
   ];
 
+  public pageIndex = 1;
+  public pageLimit = 10;
+  public totalRecords = 0;
+
   constructor(
     private router: Router,
   ) { }
@@ -51,6 +55,9 @@ export class TransfersListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  loadMoreItems(pageLimit: number) {
+    //function
+  }
 
   cancel(): void {
     this.router.navigate(['painel/transferencias']);
