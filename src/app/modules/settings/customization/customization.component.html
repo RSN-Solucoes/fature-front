@@ -7,7 +7,7 @@
     </div>
 
     <form class="customization--form pt-6 grid" [formGroup]="form">
-      <div class="field col-3 mr-4">
+      <div class="field col-2 mr-4">
         <label for="logo">Logo</label>
         <p-fileUpload
           *ngIf="logoPreviewImage === 'assets/img/profile_photo.png'"
@@ -73,7 +73,7 @@
         </p-dialog>
       </div>
 
-      <div class="field col-3 mr-4">
+      <div class="field col-3">
         <label for="imageBackground">Papel de parede</label>
         <div
           *ngIf="!backgroundInputStyle"
@@ -91,7 +91,7 @@
           [style]="backgroundInputStyle"
           (click)="displayBackgroundImageDialog = true"
         >
-            <i class="pi pi-pencil"></i>
+          <i class="pi pi-pencil"></i>
         </div>
 
         <p-dialog
@@ -141,6 +141,8 @@
         </p-dialog>
       </div>
 
+      <div class="col-1"></div>
+
       <div class="field col-6">
         <label for="imageBackground">Cores</label>
         <div class="color-picker--choose">
@@ -183,9 +185,6 @@
     </form>
 
     <div class="customization--footer">
-      <button type="button" class="secondary-form-button" (click)="clearForm()">
-        Limpar tudo
-      </button>
       <button
         type="button"
         class="primary-form-button ml-5"
@@ -195,6 +194,7 @@
       </button>
     </div>
   </div>
+
   <div class="col-6 col-offset-1 customization-page">
     <a class="customization-page--link">
       <span>Visualize a URL da página</span>
@@ -235,6 +235,7 @@
             ></p-skeleton>
           </div>
         </div>
+
         <div class="page-content--footer grid pb-5">
           <div class="col-12 button" [style]="buttonPreviewStyle">
             <span>Pagar</span>

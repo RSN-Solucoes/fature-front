@@ -5,13 +5,12 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SettingsService extends BaseHttpService {
-
   private API_BASE = environment.API_BASE;
 
-  constructor(http: HttpClient) { 
+  constructor(http: HttpClient) {
     super(http);
   }
 
@@ -24,21 +23,15 @@ export class SettingsService extends BaseHttpService {
   }
 
   getCompanyData(): Observable<any> {
-    return this.get(`${this.API_BASE}/client`) ;
+    return this.get(`${this.API_BASE}/client`);
   }
 
   updateCompanyData(body: any): Observable<any> {
     return this.patch(`${this.API_BASE}/client`, body);
   }
 
-  getStatesAndCities(): Observable<any> {
-    return this.get(
-      'https://gist.githubusercontent.com/djalmaaraujo/3013866/raw/ca994a43520c0cb67baf007b1e66e925bef1bf5a/brazil-cities-states-en.json'
-    );
-  }
-
   getCustomizations(): Observable<any> {
-    return this.get(`${this.API_BASE}/customization`) ;
+    return this.get(`${this.API_BASE}/customization`);
   }
 
   updateCustomizations(body: any): Observable<any> {
@@ -62,7 +55,6 @@ export class SettingsService extends BaseHttpService {
   }
 
   deleteEmployee(id: string): Observable<any> {
-    return this.delete(`${this.API_BASE}/employees/${id}`)
+    return this.delete(`${this.API_BASE}/employees/${id}`);
   }
-
 }

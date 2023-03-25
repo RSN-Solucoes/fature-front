@@ -1,5 +1,10 @@
 import { SettingsService } from './../../../../services/settings.service';
-import { BILLING_MANAGEMENT_SELECT_LIST, PLATFORM_MANAGEMENT_SELECT_LIST, CLIENT_MANAGEMENT_SELECT_LIST, SERVICES_AND_PRODUCTS_MANAGEMENT_SELECT_LIST } from './employees-form.const';
+import {
+  BILLING_MANAGEMENT_SELECT_LIST,
+  PLATFORM_MANAGEMENT_SELECT_LIST,
+  CLIENT_MANAGEMENT_SELECT_LIST,
+  SERVICES_AND_PRODUCTS_MANAGEMENT_SELECT_LIST,
+} from './employees-form.const';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
@@ -8,11 +13,11 @@ import { RequestMessageService } from 'src/app/shared/components/request-message
 @Component({
   selector: 'app-employees-form',
   templateUrl: './employees-form.component.html',
-  styleUrls: ['./employees-form.component.scss']
+  styleUrls: ['./employees-form.component.scss'],
 })
 export class EmployeesFormComponent implements OnInit {
   public displayCropDialog: boolean = false;
-  
+
   @ViewChild('profilePhoto', { static: false })
   public profilePhotoUploader!: ElementRef;
 
@@ -25,27 +30,27 @@ export class EmployeesFormComponent implements OnInit {
   public employee!: any;
   public employeeId = this.activatedRoute.snapshot.paramMap.get('id') || '';
 
-
   // Permissions
   public platformManagementSelectItems: any[] = PLATFORM_MANAGEMENT_SELECT_LIST;
   public billingManagementSelectItems: any[] = BILLING_MANAGEMENT_SELECT_LIST;
   public clientManagementSelectItems: any[] = CLIENT_MANAGEMENT_SELECT_LIST;
-  public servicesAndProductsManagementSelectItems: any[] = SERVICES_AND_PRODUCTS_MANAGEMENT_SELECT_LIST;
+  public servicesAndProductsManagementSelectItems: any[] =
+    SERVICES_AND_PRODUCTS_MANAGEMENT_SELECT_LIST;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private settingsService: SettingsService,
-    private requestMessageService: RequestMessageService,
-  ) { }
+    private requestMessageService: RequestMessageService
+  ) {}
 
   ngOnInit(): void {
     this.createEmployeesForm();
 
-    if(this.employeeId) {
+    if (this.employeeId) {
       this.getEmployee();
-      
+
       this.form.get('password')?.disable();
     } else this.generatePassword();
   }
@@ -58,8 +63,6 @@ export class EmployeesFormComponent implements OnInit {
       phone: [null],
       roles: this.fb.array([]),
       photo: [null],
-      comments: [null],
-      logo: [null],
     });
   }
 
@@ -73,8 +76,7 @@ export class EmployeesFormComponent implements OnInit {
 
         this.finalProfilePhoto = res.data.photo;
       },
-      error: (err) => {
-      }
+      error: (err) => {},
     });
   }
 
@@ -92,13 +94,13 @@ export class EmployeesFormComponent implements OnInit {
         this.profilePhotoSource = loadedArchive.target.result;
       };
       read.readAsDataURL(loadImage);
-    };
+    }
   }
 
   cancelPhotoSelection(): void {
     if (this.displayCropDialog == true) {
       this.displayCropDialog = false;
-    };
+    }
 
     this.profilePhotoSource = '';
     this.finalProfilePhoto = this.finalProfilePhoto;
@@ -111,7 +113,7 @@ export class EmployeesFormComponent implements OnInit {
     this.finalProfilePhoto = this.profilePhotoPreviewImage;
 
     this.form.get('photo')?.setValue(this.finalProfilePhoto);
-    
+
     this.form.get('logo')?.reset();
     this.displayCropDialog = false;
   }
@@ -124,24 +126,18 @@ export class EmployeesFormComponent implements OnInit {
 
   generatePassword(): void {
     const chars =
-    '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const passwordLength = 8;
     let password = '';
-    
+
     for (let i = 0; i <= passwordLength; i++) {
       const randomNumber = Math.floor(Math.random() * chars.length);
       password += chars.substring(randomNumber, randomNumber + 1);
     }
-    
+
     this.form.patchValue({
       password,
     });
-  }
-
-  clearForm(): void {
-    this.form.reset();
-
-    this.removeProfilePhoto();
   }
 
   submitForm(): void {
@@ -155,9 +151,9 @@ export class EmployeesFormComponent implements OnInit {
       comments: this.form.get('comments')?.value,
     };
 
-    const request = this.employeeId ? 
-      this.settingsService.updateEmployee(this.employeeId, body) :
-      this.settingsService.createEmployee(body);
+    const request = this.employeeId
+      ? this.settingsService.updateEmployee(this.employeeId, body)
+      : this.settingsService.createEmployee(body);
 
     request.subscribe({
       next: (res) => {
@@ -174,17 +170,16 @@ export class EmployeesFormComponent implements OnInit {
       },
       error: (err) => {
         this.requestMessageService.show(
-          `Houve um erro ao 
+          `Houve um erro ao
           ${this.employeeId ? 'atualizar' : 'criar'}
            colaborador`,
           'error'
         );
-      }
+      },
     });
   }
 
   cancel(): void {
     this.router.navigate(['painel/configuracoes']);
   }
-
 }

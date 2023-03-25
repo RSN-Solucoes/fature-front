@@ -1,252 +1,222 @@
 <app-navbar>
-    <div class="employees-form-navbar">
-        <a (click)="cancel()"><i class="pi pi-angle-left"></i></a>
-        <span>Novo colaborador</span>
-    </div>
+  <div class="employees-form-navbar">
+    <a (click)="cancel()"><i class="pi pi-angle-left"></i></a>
+    <span>Novo colaborador</span>
+  </div>
 </app-navbar>
 
 <div class="content">
-    <div class="employees-form">
-        <form class="employees-form--section grid" [formGroup]="form">
-            <div class="employees-form--header">
-                <p>Dados do colaborador</p>
-            </div>
+  <div class="employees-form">
+    <form class="employees-form--section grid" [formGroup]="form">
+      <div class="employees-form--header">
+        <p>Dados do colaborador</p>
+      </div>
 
-            <div class="col-12 profile_photo py-6">
-                <div class="profile">
-                    <img [src]="finalProfilePhoto" alt="profilePhoto">
-                </div>
-                <div class="profile_photo--tools ml-6">
-                    <div class="profile_photo--buttons">
-                        <label for="photo" class="photo-input-uploader">Adicionar foto</label>
-                        <input 
-                            type="file"
-                            (input)="selectProfilePhoto()"
-                            id="photo"
-                            name="profile_photo"
-                            accept="image/*"
-                            formControlName="logo"
-                            #profilePhoto>
-                        <button
-                            type="button" 
-                            class="secondary-form-button"
-                            (click)="removeProfilePhoto()"
-                        >
-                            Limpar
-                        </button>
-                    </div>
-                    <span>JPG ou PNG. Tamanho máximo 500KB</span>
-
-                    <p-dialog
-                        [(visible)]="displayCropDialog"
-                        [draggable]="false"
-                        [resizable]="false"
-                        [closable]="false"
-                        [modal]="true"
-                    >
-                        <div class="cropper--content">
-                        <div class="cropper--header">
-                            <p>Cortar imagem</p>
-                        </div>
-            
-                        <div class="cropper--main py-6">
-                            <app-image-cropper
-                            *ngIf="profilePhotoSource && displayCropDialog"
-                            [src]="profilePhotoSource"
-                            (croppedImage)="profilePhotoPreviewImage = $event"
-                            ></app-image-cropper>
-                        </div>
-            
-                        <div class="cropper--footer">
-                            <button
-                                type="button"
-                                class="secondary-form-button"
-                                (click)="cancelPhotoSelection()"
-                                >
-                                Cancelar
-                            </button>
-                            <button
-                                type="button"
-                                class="primary-form-button ml-5"
-                                (click)="saveCroppedProfilePhoto()"
-                                >
-                                Salvar
-                            </button>
-                        </div>
-                        </div>
-                    </p-dialog>
-                </div>
-            </div>
-            <div class="field col-12 md:col-8">
-                <label for="name">Nome do colaborador</label>
-                <input
-                  type="text"
-                  id="name"
-                  pInputText
-                  placeholder="Nome completo"
-                  formControlName="fullName"
-                />
-            </div>
-            <div class="field col-12 md:col-4">
-                <label for="phone">Telefone</label>
-                <input
-                  type="text"
-                  id="phone"
-                  pInputText
-                  placeholder="Telefone"
-                  mask="(00) 0 0000-0000||(00) 0000-0000"
-                  formControlName="phone"
-                />
-            </div>
-            <div class="field col-12 md:col-8">
-                <label for="email">E-mail</label>
-                <input
-                  type="email"
-                  id="email"
-                  pInputText
-                  placeholder="Email para envio"
-                  formControlName="email"
-                />
-            </div>
-            <div class="field col-11 md:col-3">
-                <label for="email">Senha</label>
-                <input
-                  type="email"
-                  id="email"
-                  pInputText
-                  formControlName="password"
-                />
-            </div>
-            <div class="field col-1 generate-password">
-                <label>'</label>
-                <a (click)="generatePassword()"><i class="pi pi-refresh"></i></a>
-            </div>
-
-            <div class="field col-12">
-                <label for="obs">Observações</label>
-                <textarea 
-                    [rows]="3" 
-                    [cols]="30" 
-                    pInputTextarea
-                    placeholder="Escreva alguma observação"
-                    [autoResize]="true"
-                    formControlName="comments"
-                ></textarea>
-            </div>
-
-            <div class="employees-form--header py-6 col-12">
-                <p>Permissões</p>
-            </div>
-
-            <div class="employees-form--permissions col-12 grid">
-                <div class="col-11 accordion">
-                    <p-accordion [multiple]="true">
-                        <p-accordionTab
-                            header="Gestão da plataforma"
-                        >
-                            <div class="permissions">
-                                <div *ngFor="let permissions of platformManagementSelectItems"
-                                    class="permission-field">
-                                    <span>{{ permissions.title }}</span>
-                                    <p-checkbox 
-                                        [binary]="true"
-                                        inputId="binary"
-                                    ></p-checkbox>
-                                </div>
-                            </div>
-                        </p-accordionTab>
-                    </p-accordion>
-                </div>
-                <div class="col-1 switch-button">
-                    <p-inputSwitch>
-                    </p-inputSwitch>
-                </div>
-
-                <div class="col-11 accordion">
-                    <p-accordion [multiple]="true">
-                        <p-accordionTab
-                            header="Gestão de cobranças"
-                        >
-                            <div class="permissions">
-                                <div *ngFor="let permissions of billingManagementSelectItems"
-                                    class="permission-field">
-                                    <span>{{ permissions.title }}</span>
-                                    <p-checkbox 
-                                        [binary]="true"
-                                        inputId="binary"
-                                    ></p-checkbox>
-                                </div>
-                            </div>
-                        </p-accordionTab>
-                    </p-accordion>
-                </div>
-                <div class="col-1 switch-button">
-                    <p-inputSwitch>
-                    </p-inputSwitch>
-                </div>
-
-                <div class="col-11 accordion">
-                    <p-accordion [multiple]="true">
-                        <p-accordionTab
-                            header="Gestão do cliente"
-                        >
-                            <div class="permissions">
-                                <div *ngFor="let permissions of clientManagementSelectItems"
-                                    class="permission-field">
-                                    <span>{{ permissions.title }}</span>
-                                    <p-checkbox 
-                                        [binary]="true"
-                                        inputId="binary"
-                                    ></p-checkbox>
-                                </div>
-                            </div>
-                        </p-accordionTab>
-                    </p-accordion>
-                </div>
-                <div class="col-1 switch-button">
-                    <p-inputSwitch>
-                    </p-inputSwitch>
-                </div>
-
-                <div class="col-11 accordion">
-                    <p-accordion [multiple]="true">
-                        <p-accordionTab
-                            header="Gestão de produtos e serviços"
-                        >
-                            <div class="permissions">
-                                <div *ngFor="let permissions of servicesAndProductsManagementSelectItems"
-                                    class="permission-field">
-                                    <span>{{ permissions.title }}</span>
-                                    <p-checkbox 
-                                        [binary]="true"
-                                        inputId="binary"
-                                    ></p-checkbox>
-                                </div>
-                            </div>
-                        </p-accordionTab>
-                    </p-accordion>
-                </div>
-                <div class="col-1 switch-button">
-                    <p-inputSwitch>
-                    </p-inputSwitch>
-                </div>
-            </div>
-        </form>
-        <div class="employees-form--footer pt-6">
-            <button 
-              type="button" 
+      <div class="col-12 profile_photo py-6">
+        <div class="profile">
+          <img [src]="finalProfilePhoto" alt="profilePhoto" />
+        </div>
+        <div class="profile_photo--tools ml-6">
+          <div class="profile_photo--buttons">
+            <label for="photo" class="photo-input-uploader"
+              >Adicionar foto</label
+            >
+            <input
+              type="file"
+              (input)="selectProfilePhoto()"
+              id="photo"
+              name="profile_photo"
+              accept="image/*"
+              formControlName="logo"
+              #profilePhoto
+            />
+            <button
+              type="button"
               class="secondary-form-button"
-              (click)="clearForm()"
-              >
-                Limpar
-            </button>
-            <button 
-              type="button" 
-              class="primary-form-button ml-5"
-              (click)="submitForm()"
-              >
-                {{ employeeId ? 'Alterar' : 'Salvar' }} dados
+              (click)="removeProfilePhoto()"
+            >
+              Limpar
             </button>
           </div>
+          <span>JPG ou PNG. Tamanho máximo 500KB</span>
+
+          <p-dialog
+            [(visible)]="displayCropDialog"
+            [draggable]="false"
+            [resizable]="false"
+            [closable]="false"
+            [modal]="true"
+          >
+            <div class="cropper--content">
+              <div class="cropper--header">
+                <p>Cortar imagem</p>
+              </div>
+
+              <div class="cropper--main py-6">
+                <app-image-cropper
+                  *ngIf="profilePhotoSource && displayCropDialog"
+                  [src]="profilePhotoSource"
+                  (croppedImage)="profilePhotoPreviewImage = $event"
+                ></app-image-cropper>
+              </div>
+
+              <div class="cropper--footer">
+                <button
+                  type="button"
+                  class="secondary-form-button"
+                  (click)="cancelPhotoSelection()"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="button"
+                  class="primary-form-button ml-5"
+                  (click)="saveCroppedProfilePhoto()"
+                >
+                  Salvar
+                </button>
+              </div>
+            </div>
+          </p-dialog>
+        </div>
+      </div>
+
+      <div class="field col-12 md:col-8">
+        <label for="name">Nome do colaborador</label>
+        <input
+          type="text"
+          id="name"
+          pInputText
+          placeholder="Nome completo"
+          formControlName="fullName"
+        />
+      </div>
+
+      <div class="field col-12 md:col-4">
+        <label for="phone">Telefone</label>
+        <input
+          type="text"
+          id="phone"
+          pInputText
+          placeholder="Telefone"
+          mask="(00) 0 0000-0000||(00) 0000-0000"
+          formControlName="phone"
+        />
+      </div>
+
+      <div class="field col-12 md:col-8">
+        <label for="email">E-mail</label>
+        <input
+          type="email"
+          id="email"
+          pInputText
+          placeholder="Email para envio"
+          formControlName="email"
+        />
+      </div>
+
+      <div class="field col-11 md:col-3">
+        <label for="email">Senha</label>
+        <input type="email" id="email" pInputText formControlName="password" />
+      </div>
+
+      <div class="field col-1 generate-password">
+        <label>'</label>
+        <a (click)="generatePassword()"><i class="pi pi-refresh"></i></a>
+      </div>
+
+      <div class="employees-form--header py-6 col-12">
+        <p>Permissões</p>
+      </div>
+
+      <div class="employees-form--permissions col-12 grid">
+        <div class="col-11 accordion">
+          <p-accordion [multiple]="true">
+            <p-accordionTab header="Gestão da plataforma">
+              <div class="permissions">
+                <div
+                  *ngFor="let permissions of platformManagementSelectItems"
+                  class="permission-field"
+                >
+                  <span>{{ permissions.title }}</span>
+                  <p-checkbox [binary]="true" inputId="binary"></p-checkbox>
+                </div>
+              </div>
+            </p-accordionTab>
+          </p-accordion>
+        </div>
+        <div class="col-1 switch-button">
+          <p-inputSwitch> </p-inputSwitch>
+        </div>
+
+        <div class="col-11 accordion">
+          <p-accordion [multiple]="true">
+            <p-accordionTab header="Gestão de cobranças">
+              <div class="permissions">
+                <div
+                  *ngFor="let permissions of billingManagementSelectItems"
+                  class="permission-field"
+                >
+                  <span>{{ permissions.title }}</span>
+                  <p-checkbox [binary]="true" inputId="binary"></p-checkbox>
+                </div>
+              </div>
+            </p-accordionTab>
+          </p-accordion>
+        </div>
+        <div class="col-1 switch-button">
+          <p-inputSwitch> </p-inputSwitch>
+        </div>
+
+        <div class="col-11 accordion">
+          <p-accordion [multiple]="true">
+            <p-accordionTab header="Gestão do cliente">
+              <div class="permissions">
+                <div
+                  *ngFor="let permissions of clientManagementSelectItems"
+                  class="permission-field"
+                >
+                  <span>{{ permissions.title }}</span>
+                  <p-checkbox [binary]="true" inputId="binary"></p-checkbox>
+                </div>
+              </div>
+            </p-accordionTab>
+          </p-accordion>
+        </div>
+        <div class="col-1 switch-button">
+          <p-inputSwitch> </p-inputSwitch>
+        </div>
+
+        <div class="col-11 accordion">
+          <p-accordion [multiple]="true">
+            <p-accordionTab header="Gestão de produtos e serviços">
+              <div class="permissions">
+                <div
+                  *ngFor="
+                    let permissions of servicesAndProductsManagementSelectItems
+                  "
+                  class="permission-field"
+                >
+                  <span>{{ permissions.title }}</span>
+                  <p-checkbox [binary]="true" inputId="binary"></p-checkbox>
+                </div>
+              </div>
+            </p-accordionTab>
+          </p-accordion>
+        </div>
+        <div class="col-1 switch-button">
+          <p-inputSwitch> </p-inputSwitch>
+        </div>
+      </div>
+    </form>
+    <div class="employees-form--footer pt-6">
+      <button
+        type="button"
+        class="primary-form-button ml-5"
+        (click)="submitForm()"
+      >
+        {{ employeeId ? "Alterar" : "Salvar" }} dados
+      </button>
     </div>
+  </div>
 </div>

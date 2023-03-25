@@ -40,7 +40,7 @@ export class CustomizationComponent implements OnInit {
     private settingsService: SettingsService,
     private requestMessageService: RequestMessageService,
     private imageCompress: NgxImageCompressService
-    ) {}
+  ) {}
 
   ngOnInit(): void {
     this.createCustomizationForm();
@@ -75,8 +75,7 @@ export class CustomizationComponent implements OnInit {
         this.updateButtonPreviewColor(res.data.buttonColor);
         this.updateBackgroundPreviewColor(res.data.backgroundColor);
       },
-      error: (err) => {
-      }
+      error: (err) => {},
     });
   }
 
@@ -125,10 +124,9 @@ export class CustomizationComponent implements OnInit {
     this.imageCompress
       .compressFile(this.logoPreviewImage, 0, 50, 50)
       .then((res: any) => {
+        let logoText = '';
 
-        let logoText = ''
-
-        if(res.substring(0,20).includes('jpeg')) {
+        if (res.substring(0, 20).includes('jpeg')) {
           this.form.get('logoExtension')?.setValue('jpeg');
 
           logoText = res.replace('data:image/jpeg;base64,', '');
@@ -136,7 +134,7 @@ export class CustomizationComponent implements OnInit {
           this.form.get('logoExtension')?.setValue('png');
 
           logoText = res.replace('data:image/png;base64,', '');
-        };
+        }
 
         this.form.get('logo')?.setValue(logoText);
         this.displayCropDialog = false;
@@ -156,12 +154,6 @@ export class CustomizationComponent implements OnInit {
     this.displayBackgroundImageDialog = false;
   }
 
-  clearForm(): void {
-    this.form.reset();
-
-    this.removeLogo();
-  }
-
   submitForm(): void {
     const body = this.form.getRawValue();
 
@@ -173,10 +165,7 @@ export class CustomizationComponent implements OnInit {
         );
       },
       error: (err) => {
-        this.requestMessageService.show(
-          `Ocorreu um erro: ${err}`,
-          'error'
-        );
+        this.requestMessageService.show(`Ocorreu um erro: ${err}`, 'error');
       },
     });
   }
