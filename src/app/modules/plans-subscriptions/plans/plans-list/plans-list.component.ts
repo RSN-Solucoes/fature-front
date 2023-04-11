@@ -1,6 +1,6 @@
+import { PlansService } from './../../../../services/plans.service';
 import { Component, OnInit } from '@angular/core';
 import { 
-  PLANS_VALUE_SELECT_LIST,
   PLANS_COLUMNS,
   PLANS_FIELDS,
   PLANS_PIPES,
@@ -16,7 +16,7 @@ export class PlansListComponent implements OnInit {
   public plansFields = PLANS_FIELDS;
   public plansPipes = PLANS_PIPES;
 
-  public plans = PLANS_VALUE_SELECT_LIST;
+  public plans: any[] = [];
 
   public plansActions = [
     {
@@ -39,13 +39,36 @@ export class PlansListComponent implements OnInit {
   public pageLimit = 10;
   public totalRecords = 0;
 
-  constructor() { }
+  constructor(
+    private plansService: PlansService,
+  ) { }
 
   ngOnInit(): void {
+    this.getPlans(this.pageIndex, this.pageLimit);
+  }
+
+  getPlans(pageIndex: number, pageLimit: number): void {
+    const pagination = `page=${pageIndex}&limit=${pageLimit}`;
+
+    this.plansService.getPlans(pagination).subscribe({
+      next: (res) => {
+        this.totalRecords = res.pagination.totalItems;
+        res.data.forEach((el: any) => {
+          this.plans.push({
+            planName: el.plan.name,
+            description: el.plan.description,
+            chargeDay: el.billing.chargeDate,
+            value: el.billing.amount,
+          });
+          console.log(res)
+        });
+      },
+      error: (err) => {
+      }
+    })
   }
 
   loadMoreItems(pageLimit: number) {
-    //function
+    this.getPlans(this.pageIndex, pageLimit);
   }
-
 }

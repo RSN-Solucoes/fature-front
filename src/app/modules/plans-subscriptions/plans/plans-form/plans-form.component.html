@@ -12,27 +12,28 @@
         </div>
 
         <form class="plans--form my-6 grid" [formGroup]="plansForm">
-          <div class="field col-8">
+          <div class="field col-8" formGroupName="plan">
               <label for="name">Nome</label>
               <input
                 type="text"
                 id="name"
                 pInputText
                 placeholder="Nome do plano"
+                formControlName="name"
               />
           </div>
-          <div class="field col-4 term-switch">
+          <div class="field col-4 term-switch" formGroupName="plan">
             <label>'</label>
             <div class="term-switch--item ml-3">
               <p-inputSwitch
-                formControlName="enableSubscriptionTerm"
+                formControlName="enableCycle"
               ></p-inputSwitch>
 
               <span>Habilitar prazo na assinatura</span>
             </div>
           </div>
 
-          <div *ngIf="plansForm.get('enableSubscriptionTerm')?.value == true"
+          <div *ngIf="plansForm.get('plan.enableCycle')?.value == true"
             class="field col-3">
               <label for="subscriptionTerm">Qual o prazo da assinatura</label>
               <input
@@ -43,7 +44,7 @@
               />
           </div>
 
-          <div *ngIf="plansForm.get('enableSubscriptionTerm')?.value == true"
+          <div *ngIf="plansForm.get('plan.enableCycle')?.value == true"
             class="field col-3">
               <label for="limit">Limite de adesão</label>
               <input
@@ -54,7 +55,7 @@
               />
           </div>
 
-          <div class="field col-11">
+          <div class="field col-11" formGroupName="plan">
               <label for="description">Descrição</label>
               <input
                 type="text"
@@ -77,7 +78,7 @@
             <p>Cobrança</p>
           </div>
 
-          <div class="field col-6 md:col-3">
+          <div class="field col-6 md:col-3" formGroupName="billing">
               <label for="value">Valor</label>
               <p-inputNumber
                   placeholder="R$"
@@ -85,9 +86,10 @@
                   mode="decimal"
                   id="value"
                   [minFractionDigits]="2"
+                  formControlName="amount"
               ></p-inputNumber>
           </div>
-          <div class="field col-6 md:col-3">
+          <div class="field col-6 md:col-3" formGroupName="billing">
               <label for="subTax">Taxa de adesão </label>
               <p-inputNumber
                   placeholder="R$"
@@ -95,9 +97,10 @@
                   id="subTax"
                   mode="decimal"
                   [minFractionDigits]="2"
+                  formControlName="subTax"
               ></p-inputNumber>
           </div>
-          <div class="field col-6 md:col-3">
+          <div class="field col-6 md:col-3" formGroupName="billing">
               <label for="frequency">Frequencia</label>
               <p-dropdown
                   [options]="frequencySelectItems"
@@ -105,10 +108,12 @@
                   optionLabel="name"
                   optionValue="value"
                   formControlName="frequency"
+                  (onChange)="plansForm.get('billing.chargeDate')?.reset()"
               ></p-dropdown>
           </div>
-          <div *ngIf="plansForm.get('frequency')?.value === 'monthly'" 
-              class="field col-6 md:col-3">
+          <div *ngIf="plansForm.get('billing.frequency')?.value === 'monthly'" 
+              class="field col-6 md:col-3"
+              formGroupName="billing">
               <label for="chargeDate">Dia da cobrança</label>
               <p-inputNumber
                 [useGrouping]="false"
@@ -116,10 +121,12 @@
                 id="chargeDate"
                 [max]="31"
                 [min]="1"
+                formControlName="chargeDate"
               ></p-inputNumber>
           </div>
-          <div *ngIf="plansForm.get('frequency')?.value === 'weekly'" 
-              class="field col-6 md:col-3">
+          <div *ngIf="plansForm.get('billing.frequency')?.value === 'weekly'" 
+              class="field col-6 md:col-3"
+              formGroupName="billing">
               <label for="chargeDateDropdown">Dia da cobrança</label>
               <p-dropdown
                 id="chargeDateDropdown"
@@ -127,27 +134,30 @@
                 optionLabel="name"
                 optionValue="value"
                 [options]="weeklyDaysSelectItems"
+                formControlName="chargeDate"
               >
               </p-dropdown>
           </div>
 
-          <div class="field col-6 md:col-3">
+          <div class="field col-6 md:col-3" formGroupName="billing">
               <label for="chargeNow">Cobrar imediatamente</label>
               <p-dropdown
                 [options]="options"
                 id="chargeNow"
                 optionLabel="name"
                 optionValue="value"
+                formControlName="chargeNow"
               ></p-dropdown>
           </div>
 
-          <div class="field col-6 md:col-3">
+          <div class="field col-6 md:col-3" formGroupName="billing">
               <label for="proporcionalAmount">Cobrar proporcionalmente</label>
               <p-dropdown
                 [options]="options"
                 id="proporcionalAmount"
                 optionLabel="name"
                 optionValue="value"
+                formControlName="proporcionalAmount"
               ></p-dropdown>
           </div>
         </form>
@@ -162,7 +172,7 @@
           </button>
           <button 
             type="button" 
-            class="primary-form-button ml-5"
+            [class]="!formSubmited ? 'primary-form-button' : 'disabled-form-button'"
             (click)="submitForm()"
             >
             Criar plano

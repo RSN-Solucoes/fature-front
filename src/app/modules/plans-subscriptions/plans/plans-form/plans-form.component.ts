@@ -1,7 +1,9 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FREQUENCY_SELECT_LIST, WEEKLY_DAYS_SELECT_LIST } from '../plans.const';
+import { RequestMessageService } from 'src/app/shared/components/request-message/request-message.service';
+import { PlansService } from 'src/app/services/plans.service';
 
 @Component({
   selector: 'app-plans-form',
@@ -9,7 +11,7 @@ import { FREQUENCY_SELECT_LIST, WEEKLY_DAYS_SELECT_LIST } from '../plans.const';
   styleUrls: ['./plans-form.component.scss']
 })
 export class PlansFormComponent implements OnInit {
-
+  public formSubmited: boolean = false;
   public plansForm!: FormGroup;
 
   public descriptionLength: number = 0;
@@ -24,11 +26,17 @@ export class PlansFormComponent implements OnInit {
       name: 'Não',
       value: false
     }
-  ]
+  ];
+
+
+  public plan: any;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
+    private plansService: PlansService,
+    private requestMessageService: RequestMessageService,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -37,15 +45,26 @@ export class PlansFormComponent implements OnInit {
   
   createPlansForm(): void {
     this.plansForm = this.fb.group({
-      name: [null],
-      description: [null],
-      frequency: ['monthly'],
-      enableSubscriptionTerm: [null],
+      plan: this.fb.group({
+        name: [null],
+        description: [null],
+        enableCycle: [false],
+        cycle: [1],
+      }),
+      billing: this.fb.group({
+        amount: [null],
+        frequency: ['monthly'],
+        dueDate: [null],
+        chargeNow: [true],
+        proporcionalAmount: [true],
+        chargeDate: [null],
+        subTax: [null],
+      }),
     });
   }
 
   updateDescriptionLength(): void {
-    this.descriptionLength = this.plansForm.get('description')?.value.length;
+    this.descriptionLength = this.plansForm.get('plan.description')?.value.length;
   }
 
   clearForm(): void {
@@ -53,7 +72,34 @@ export class PlansFormComponent implements OnInit {
   }
 
   submitForm(): void {
-    alert('plano criado');
+    const body = this.plansForm.getRawValue();
+
+    this.formSubmited = this.plansForm.valid;
+    
+    if(!this.plansForm.valid) {
+      this.requestMessageService.show(
+        `Preencha todos os campos obrigatórios`,
+        'error'
+      )
+      return;
+    };
+
+    this.plansService.createPlan(body).subscribe({
+      next: (res) => {
+        this.requestMessageService.show(
+          `Plano criado com sucesso.`,
+          'success'
+        );
+
+        setTimeout(() => {
+          this.router.navigate([`painel/recorrencias/novo`]);
+        }, 1500);
+      },
+      error: (err) => {
+      }
+    });
+    
+    console.log(body)
   }
 
   cancel(): void {
