@@ -5,6 +5,8 @@ import {
   PLANS_FIELDS,
   PLANS_PIPES,
  } from '../plans.const';
+ import { ConfirmationService } from 'primeng/api';
+import { RequestMessageService } from 'src/app/shared/components/request-message/request-message.service';
 
 @Component({
   selector: 'app-plans-list',
@@ -29,8 +31,8 @@ export class PlansListComponent implements OnInit {
     {
       label: 'Deletar',
       icon: 'pi-trash',
-      action: () => {
-        alert('Deletar');
+      action: (row: any, event: Event) => {
+        this.deletePlan(row, event);
       },
     },
   ];
@@ -41,6 +43,8 @@ export class PlansListComponent implements OnInit {
 
   constructor(
     private plansService: PlansService,
+    private confirmationService: ConfirmationService,
+    private requestMessageService: RequestMessageService,
   ) { }
 
   ngOnInit(): void {
@@ -59,13 +63,35 @@ export class PlansListComponent implements OnInit {
             description: el.plan.description,
             chargeDay: el.billing.chargeDate,
             value: el.billing.amount,
+            id: el.id
           });
-          console.log(res)
         });
       },
       error: (err) => {
       }
     })
+  }
+
+  deletePlan(row: any, event: Event) {
+    this.confirmationService.confirm({
+      target: event.target ? event.target : undefined,
+      message: 'Deseja excluir o plano?',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      accept: () => {
+        this.plansService.deletePlan(row.id).subscribe({
+          next: (res) => {
+            this.requestMessageService.show(
+              `Plano excluido com sucesso`,
+              'success'
+            );
+            location.reload();
+          },
+          error: (err) => {},
+        });
+      },
+    });
   }
 
   loadMoreItems(pageLimit: number) {

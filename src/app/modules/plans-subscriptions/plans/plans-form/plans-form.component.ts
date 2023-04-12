@@ -36,7 +36,6 @@ export class PlansFormComponent implements OnInit {
     private fb: FormBuilder,
     private plansService: PlansService,
     private requestMessageService: RequestMessageService,
-    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -98,8 +97,6 @@ export class PlansFormComponent implements OnInit {
       error: (err) => {
       }
     });
-    
-    console.log(body)
   }
 
   cancel(): void {
