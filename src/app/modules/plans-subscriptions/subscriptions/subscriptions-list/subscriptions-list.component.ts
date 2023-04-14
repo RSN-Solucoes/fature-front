@@ -28,7 +28,7 @@ export class SubscriptionsListComponent implements OnInit {
       label: 'Visualizar',
       icon: 'pi-eye',
       action: (row: any) => {
-        this.navigateToSubscriptionView();
+        this.navigateToSubscriptionView(row.id);
       },
     },
     {
@@ -58,8 +58,8 @@ export class SubscriptionsListComponent implements OnInit {
     this.getSubscriptionsList(this.pageIndex, this.pageLimit);
   }
 
-  navigateToSubscriptionView(): void {
-    this.router.navigate(['painel/recorrencias/visualizar']);
+  navigateToSubscriptionView(id: string): void {
+    this.router.navigate([`painel/recorrencias/visualizar/${id}`]);
   }
 
   getSubscriptionsList(pageIndex: number, pageLimit: number): void {
@@ -75,7 +75,7 @@ export class SubscriptionsListComponent implements OnInit {
                 description: res.data.plan.description,
                 chargeDay: res.data.billing.amount,
                 value: res.data.billing.amount,
-                id: res.data.id,
+                id: el.id,
               });
             },
           })
