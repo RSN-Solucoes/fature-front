@@ -128,7 +128,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
-    path: 'painel/transferencias/listagem',
+    path: 'painel/transferencias/listagem/:date',
     component: TransfersListComponent,
     canActivate: [AuthGuardService],
   },

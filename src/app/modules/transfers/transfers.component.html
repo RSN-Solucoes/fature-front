@@ -26,5 +26,5 @@
 </app-navbar>
 
 <div class="content">
-    <full-calendar *ngIf="events.length != 0" [options]="calendarOptions" #calendar></full-calendar>
+    <full-calendar *ngIf="events.length > 0" [options]="calendarOptions" #calendar></full-calendar>
 </div>

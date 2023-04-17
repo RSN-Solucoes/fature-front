@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular';
 
 import ptbrLocale from '@fullcalendar/core/locales/pt-br';
+import { TransfersService } from 'src/app/services/transfers.service';
 
 @Component({
   selector: 'app-transfers',
@@ -14,23 +15,9 @@ export class TransfersComponent implements OnInit, AfterViewInit {
   public actualDate = new Date();
   public calendarDate: any = this.actualDate.toISOString().substring(0, 10);
 
-  public events: any[] = [
-    {
-      title: 'Event 1',
-      date: '2023-03-12',
-      color: '#55a1ff',
-    },
-    {
-      title: 'Pago',
-      date: '2023-03-12',
-      color: '#02b69c',
-    },
-    {
-      title: 'Event 2',
-      date: '2023-03-01',
-      color: '#55a1ff',
-    },
-  ];
+  public transfers!: any;
+
+  public events: any[] = [];
 
   calendarOptions: CalendarOptions = {
     headerToolbar: false,
@@ -48,22 +35,49 @@ export class TransfersComponent implements OnInit, AfterViewInit {
 
   constructor(
     private router: Router,
+    private transfersService: TransfersService,
   ) {}
 
   ngOnInit(): void {
     this.setDateTitle(this.actualDate);
+
+    this.getTransfers();
+  }
+
+  getTransfers(): void {
+    const month = this.actualDate.getMonth() + 1;
+    const year = this.actualDate.getFullYear();
+
+    this.transfersService.getMonthTransfers(month, year).subscribe({
+      next: (res) => {
+        this.transfers = res.data;
+        
+        res.data.deposits.forEach((el: any) => {
+          this.events.push({
+            title: el.message,
+            date: el.date,
+            color: '#02b69c',
+          });
+        });
+      },
+      error: (err) => {
+      }
+    });
   }
 
   ngAfterViewInit() {
-    this.setCalendarLocale();
+    if(this.events.length > 0) {
+      this.setCalendarLocale();
+    }
   }
 
   handleDateClick(arg: any): void {
     const calendarApi = this.calendarComponent.getApi();
 
     if(calendarApi.getDate().getMonth() === arg.date.getMonth()) {
+      console.log(arg)
 
-      this.router.navigate(['painel/transferencias/listagem']);
+      this.router.navigate([`painel/transferencias/listagem/${arg.dateStr}`]);
     };
   }
 
