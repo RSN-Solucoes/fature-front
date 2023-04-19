@@ -1,0 +1,110 @@
+.subscriptions-payment {
+    height: 100%;
+    background-color: #6b7b94;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    .field {
+        label {
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+        .noLabel {
+            color: #fff;
+        }
+    }
+    .subscriptions-payment--billing-info {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        min-height: 580px;
+        width: 600px;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 3rem 4rem;
+        margin-right: 3rem;
+        margin-top: 4rem;
+        .line {
+            display: flex;
+            align-items: center;
+        }
+        .billing-info--title {
+            img {
+                height: 50px;
+                width: 50px;
+                object-fit: cover;
+                border-radius: 50%;
+                margin-right: 3rem;
+            }
+            p {
+                font-size: 2rem;
+                font-weight: 500;
+            }
+        }
+    }
+    .subscriptions-payment--purchase {
+        height: auto;
+        min-height: 580px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 350px;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 3rem 4rem;
+        margin-top: 4rem;
+        span {
+            font-size: 1.4rem;
+        }
+        .bottom-line {
+            border-bottom: solid 2px var(--line);
+        }
+        .purchase--header {
+            .header--title {
+                p {
+                    font-size: 2rem;
+                    font-weight: 500;
+                }
+            }
+            .header--info {
+                .header--info_product {
+                    padding-bottom: 5rem;
+                }
+                .header--info_description {
+                    padding: 2rem 0 18rem 0;
+                }
+            }
+        }
+        .purchase--total {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 0;
+            p {
+                font-size: 1.4rem;
+            }
+            span {
+                font-size: 2rem;
+                font-weight: 500;
+            }
+        }
+        .purchase--button {
+            width: 100%;
+            button {
+                height: 42px;
+                background: var(--black);
+                border: solid 1px var(--black);
+                color: #fff;
+                font-weight: 200;
+                border-radius: 3px;
+                width: 100%;
+                font-size: 1.2rem;
+                cursor: pointer;
+            }
+            button:hover {
+                background: darken($color: #1b1b1b, $amount: 5);
+                transition: .3s;
+            }
+        }
+    }
+}

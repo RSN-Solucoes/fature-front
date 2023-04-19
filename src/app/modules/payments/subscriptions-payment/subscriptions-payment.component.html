@@ -1,0 +1,109 @@
+<div class="subscriptions-payment">
+    <div class="subscriptions-payment--billing-info grid">
+        <div class="line col-12 billing-info--title">
+            <img src="../../../assets/img/profile_photo.png" alt="logo">
+
+            <p>Informações da cobrança</p>
+        </div>
+
+        <div class="col-12 grid my-7">
+            <div class="field col-12">
+                <label for="cardName">Nome do titular do cartão</label>
+                <input
+                type="text"
+                id="cardName"
+                name="cardName"
+                pInputText
+                placeholder="Nome igual ao cartão"
+                />
+            </div>
+    
+            <div class="field col-9">
+                <label for="cardNumber">Número do cartão</label>
+                <input
+                type="text"
+                id="cardNumber"
+                name="cardNumber"
+                pInputText
+                placeholder="0000-0000-0000-0000"
+                mask="0000-0000-0000-0000"
+                />
+            </div>
+    
+            <div class="col-3"></div>
+    
+            <div class="field col-3">
+                <label for="cardDueDateDay">Validade</label>
+                <p-dropdown
+                    [options]="days"
+                    optionLabel="day"
+                    id="cardDueDateDay"
+                    name="cardDueDateDay"
+                    placeholder="Dia"
+                >
+                </p-dropdown>
+            </div>
+    
+            <div class="field col-3">
+                <label class="noLabel" for="cardDueDateYear">'</label>
+                <p-dropdown
+                    [options]="days"
+                    optionLabel="day"
+                    id="cardDueDateYear"
+                    name="cardDueDateYear"
+                    placeholder="Ano"
+                >
+                </p-dropdown>
+            </div>
+    
+            <div class="field col-3">
+                <label for="cardCvv">CVV</label>
+                <input
+                    type="text"
+                    id="cardCvv"
+                    name="cardCvv"
+                    pInputText
+                    placeholder="000"
+                    mask="000"
+                />
+            </div>
+        </div>
+    </div>
+
+    <div class="subscriptions-payment--purchase grid">
+        <div class="purchase--header">
+            <div class="col-12 header--title">
+                <p>Sua assinatura</p>
+            </div>
+
+            <div class="col-12 header--info">
+                <div class="bottom-line header--info_product">
+                    <span>CAIXA SURPRESA MENSAL SKIN CARE</span>
+                </div>
+    
+                <div class="bottom-line header--info_description">
+                    <span>
+                        Todo mês uma surpresa diferente! Produtos selecionados conforme o valor da assinatura.
+                    </span>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="">
+
+        </div>
+        <div class="col-12 purchase--total">
+            <p>Total:</p>
+            
+            <span>R$ 200,00</span>
+        </div>
+        <div class="purchase--button">
+            <button type="button">
+                Pagar
+            </button>
+        </div>
+    </div>
+</div>

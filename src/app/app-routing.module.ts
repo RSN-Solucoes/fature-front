@@ -24,6 +24,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PaymentsListComponent } from './modules/payments/payments-list/payments-list.component';
 import { PaymentsFormComponent } from './modules/payments/payments-form/payments-form.component';
+import { SubscriptionsPaymentComponent } from './modules/payments/subscriptions-payment/subscriptions-payment.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
   {
     path: 'pagar',
     component: CheckoutComponent,
+  },
+  {
+    path: 'pagar/assinatura',
+    component: SubscriptionsPaymentComponent,
   },
   {
     path: 'consultar',

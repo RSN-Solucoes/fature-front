@@ -20,6 +20,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { SettingsModule } from './settings/settings.module';
 import { InvoiceFormModule } from './invoices/invoice-form/invoice-form.module';
 import { PlansSubscriptionsModule } from './plans-subscriptions/plans-subscriptions.module';
+import { SubscriptionsPaymentModule } from './payments/subscriptions-payment/subscriptions-payment.module';
 
 @NgModule({
   declarations: [],
@@ -39,6 +40,7 @@ import { PlansSubscriptionsModule } from './plans-subscriptions/plans-subscripti
     InvoiceFormModule,
     CheckPaymentsModule,
     CheckoutModule,
+    SubscriptionsPaymentModule,
   ],
   exports: [],
   providers: [
