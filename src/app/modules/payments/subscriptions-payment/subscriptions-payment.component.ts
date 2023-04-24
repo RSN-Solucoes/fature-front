@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PAYMENT_METHODS_SELECT_LIST } from '../../invoices/invoice-form/invoice-form.const';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { PaymentService } from 'src/app/services/payment.service';
+import { RequestMessageService } from 'src/app/shared/components/request-message/request-message.service';
 
 @Component({
   selector: 'app-subscriptions-payment',
@@ -7,9 +9,6 @@ import { PAYMENT_METHODS_SELECT_LIST } from '../../invoices/invoice-form/invoice
   styleUrls: ['./subscriptions-payment.component.scss']
 })
 export class SubscriptionsPaymentComponent implements OnInit {
-  public paymentMethods: any = PAYMENT_METHODS_SELECT_LIST;
-  public showCarnetInstallments: boolean = false;
-  public displayForm: string = 'carnet';
 
   public days: any[] = [
     {
@@ -20,58 +19,57 @@ export class SubscriptionsPaymentComponent implements OnInit {
     },
   ];
 
-  public installmentsData: any[] = [
-    {
-      installmentTitle: 'Parcela 1',
-      value: 2173,
-      dueDate: '20/11/2022',
-      status: 'Aberto',
-      barCode: '00190.00009 02996.786105 00006.182174 6 92950000008800'
-    },
-    {
-      installmentTitle: 'Parcela 2',
-      value: 2173,
-      dueDate: '20/12/2022',
-      status: 'Pago',
-      barCode: '00190.00009 02996.786105 00006.182174 6 92950000008800'
-    },
-    {
-      installmentTitle: 'Parcela 3',
-      value: 2173,
-      dueDate: '20/01/2023',
-      status: 'Pago',
-      barCode: '00190.00009 02996.786105 00006.182174 6 92950000008800'
-    },
-    {
-      installmentTitle: 'Parcela 3',
-      value: 2173,
-      dueDate: '20/01/2023',
-      status: 'Pago',
-      barCode: '00190.00009 02996.786105 00006.182174 6 92950000008800'
-    },
-  ];
+  public form!: FormGroup;
 
-  public installments: any[] = [
-    {
-      title: '2x R$ 165,00 (R$ 330,00)'
-    },
-    {
-      title: '3x R$ 110,00 (R$ 330,00)'
-    },
-  ];
-
-  constructor() { }
+  constructor(
+    private fb: FormBuilder,
+    private paymentService: PaymentService,
+    private requestMessageService: RequestMessageService,
+  ) { }
 
   ngOnInit(): void {
+    this.createForm();
   }
 
-  showMethodForm(paymentMethod: string): void {
-    if(this.displayForm == paymentMethod) {
-      this.displayForm = '';
-      return;
-    };
+  createForm(): void {
+    this.form = this.fb.group({
+      subscription: [null],
+      card: this.fb.group({
+        holder: [null],
+        cardNumber: [null],
+        expirationDate: [null],
+        securityCode: [null],
+      }),
+      day: [null],
+      year: [null]
+    });
+  }
 
-    this.displayForm = paymentMethod;
+  setExpirationDate(): void {
+    const expirationDate = `${this.form.get('day')?.value}/${this.form.get('year')?.value}`
+
+    this.form.get('card.expirationDate')?.setValue(expirationDate);
+  }
+
+  paySubscription(): void {
+    const body = this.form.getRawValue();
+
+    delete body.day;
+    delete body.year;
+
+    console.log(body)
+
+    // this.paymentService.paySubscription(body).subscribe({
+    //   next: (res) => {
+    //     this.requestMessageService.show(
+    //       `Assinatura paga com sucesso!`,
+    //       'success'
+    //     );
+    //     console.log(res)
+    //   },
+    //   error: (err) => {
+    //   }
+    // });
   }
 
 }

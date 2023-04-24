@@ -6,8 +6,8 @@
             <p>Informações da cobrança</p>
         </div>
 
-        <div class="col-12 grid my-7">
-            <div class="field col-12">
+        <form class="col-12 grid my-7" [formGroup]="form">
+            <div class="field col-12" formGroupName="card">
                 <label for="cardName">Nome do titular do cartão</label>
                 <input
                 type="text"
@@ -15,10 +15,11 @@
                 name="cardName"
                 pInputText
                 placeholder="Nome igual ao cartão"
+                formControlName="holder"
                 />
             </div>
     
-            <div class="field col-9">
+            <div class="field col-9" formGroupName="card">
                 <label for="cardNumber">Número do cartão</label>
                 <input
                 type="text"
@@ -27,6 +28,7 @@
                 pInputText
                 placeholder="0000-0000-0000-0000"
                 mask="0000-0000-0000-0000"
+                formControlName="cardNumber"
                 />
             </div>
     
@@ -37,9 +39,12 @@
                 <p-dropdown
                     [options]="days"
                     optionLabel="day"
+                    optionValue="day"
                     id="cardDueDateDay"
                     name="cardDueDateDay"
                     placeholder="Dia"
+                    formControlName="day"
+                    (onChange)="setExpirationDate()"
                 >
                 </p-dropdown>
             </div>
@@ -49,14 +54,17 @@
                 <p-dropdown
                     [options]="days"
                     optionLabel="day"
+                    optionValue="day"
                     id="cardDueDateYear"
                     name="cardDueDateYear"
                     placeholder="Ano"
+                    formControlName="year"
+                    (onChange)="setExpirationDate()"
                 >
                 </p-dropdown>
             </div>
     
-            <div class="field col-3">
+            <div class="field col-3" formGroupName="card">
                 <label for="cardCvv">CVV</label>
                 <input
                     type="text"
@@ -65,9 +73,10 @@
                     pInputText
                     placeholder="000"
                     mask="000"
+                    formControlName="securityCode"
                 />
             </div>
-        </div>
+        </form>
     </div>
 
     <div class="subscriptions-payment--purchase grid">
@@ -89,19 +98,13 @@
             </div>
         </div>
 
-
-
-
-        <div class="">
-
-        </div>
         <div class="col-12 purchase--total">
             <p>Total:</p>
             
             <span>R$ 200,00</span>
         </div>
         <div class="purchase--button">
-            <button type="button">
+            <button type="button" (click)="paySubscription()">
                 Pagar
             </button>
         </div>
