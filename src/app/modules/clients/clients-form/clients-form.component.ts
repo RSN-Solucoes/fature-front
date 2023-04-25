@@ -12,6 +12,7 @@ import {
   SENT_EMAILS_FIELDS, 
   SENT_EMAILS_PIPES 
   } from './clients-form.const';
+import { InvoiceService } from 'src/app/services/invoice.service';
 
 @Component({
   selector: 'app-clients-form',
@@ -30,23 +31,26 @@ export class ClientsFormComponent implements OnInit {
   public sentEmailsColumns = SENT_EMAILS_COLUMNS;
   public sentEmailsFields = SENT_EMAILS_FIELDS;
   public sentEmailsPipes = SENT_EMAILS_PIPES;
-  public sentEmails!: any[];
+  public totalPaymentRecords = 0;
+  public sentEmails: any[] = [];
 
   public paymentsColumns = PAYMENTS_COLUMNS;
   public paymentsFields = PAYMENTS_FIELDS;
   public paymentsPipes = PAYMENTS_PIPES;
-  public payments!: any[];
+  public totalSentEmailsRecords = 0;
+  public payments: any[] = [];
 
   public pageIndex = 1;
   public pageLimit = 10;
-  public totalRecords = 10;
+  public order = "desc";
 
   constructor(
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private clientsService: ClientsService,
-    private requestMessageService: RequestMessageService
+    private requestMessageService: RequestMessageService,
+    private invoiceService: InvoiceService,
   ) {}
 
   ngOnInit(): void {
@@ -54,47 +58,12 @@ export class ClientsFormComponent implements OnInit {
 
     if (this.clientId) {
       this.getClient();
+      this.getClientInvoices(this.pageIndex, this.pageLimit);
+      this.getClientSentEmails();
 
       this.editForm = false;
       this.clientsForm.disable();
     };
-
-    this.payments = [
-      {
-        referringDate: '01/10/2022',
-        dueDate: '31/10/2022',
-        paymentMethod: 'Boleto',
-        status: 'Autorizado',
-        paid: 'Sim',
-        value: 200
-      },
-      {
-        referringDate: '01/10/2022',
-        dueDate: '31/10/2022',
-        paymentMethod: 'Boleto',
-        status: 'Autorizado',
-        paid: 'Sim',
-        value: 200
-      },
-    ];
-
-    this.sentEmails = [
-      {
-        title: 'Pagamento pendente',
-        destination: 'Luiz@gmail.com',
-        date: '08/11/2022',
-      },
-      {
-        title: 'Pagamento pendente',
-        destination: 'Luiz@gmail.com',
-        date: '08/11/2022',
-      },
-      {
-        title: 'Pagamento pendente',
-        destination: 'Luiz@gmail.com',
-        date: '08/11/2022',
-      },
-    ];
   }
 
   createClientsForm() {
@@ -111,6 +80,41 @@ export class ClientsFormComponent implements OnInit {
       city: [{ value: null, disabled: true }, Validators.required],
       uf: [{ value: null, disabled: true }, Validators.required],
       codeIbge: [null],
+    });
+  }
+
+  getClientInvoices(pageIndex: number, pageLimit: number): void {
+    const pagination = `page=${pageIndex}&limit=${pageLimit}&order=${this.order}&user.id=${this.clientId}`;
+
+    this.invoiceService.getInvoices(pagination).subscribe({
+      next: (res) => {
+        res.data.forEach((el: any) => {
+          this.payments.push({
+            referringDate: el.billing.referringDate,
+            dueDate: el.billing.dueDate,
+            paymentMethod: this.transformPaymentMethods(el),
+            status: el.status,
+            paid: el.payment.paid,
+            value: el.billing.amount,
+          });
+        });
+
+        this.totalPaymentRecords = res.pagination.totalItems;
+      },
+      error: (err) => {
+      }
+    });
+  }
+
+  getClientSentEmails(): void {
+    this.clientsService.getClientSentEmails(this.clientId).subscribe({
+      next: (res) => {
+        console.log(res);
+
+        this.totalPaymentRecords = res.pagination.totalItems;
+      },
+      error: (err) => {
+      }
     });
   }
 
@@ -160,6 +164,28 @@ export class ClientsFormComponent implements OnInit {
     });
   }
 
+  transformPaymentMethods(invoice: any): string {
+    const methods: string[] = [];
+
+    if (invoice.billing.bankSlip) {
+      methods.push('Boleto');
+    }
+    if (invoice.billing.carnet) {
+      methods.push('Carnê');
+    }
+    if (invoice.billing.creditCard) {
+      methods.push('Cartão de crédito');
+    }
+    if (invoice.billing.debitCard) {
+      methods.push('Cartão de débito');
+    }
+    if (invoice.billing.pix) {
+      methods.push('Pix');
+    }
+
+    return methods.join(' / ');
+  }
+
   clearForm() {
     this.clientsForm.reset();
   }
@@ -191,16 +217,7 @@ export class ClientsFormComponent implements OnInit {
   }
 
   loadMorePaymentItems(pageLimit: number): void {
-    this.payments.push(
-      {
-        referringDate: '01/10/2022',
-        dueDate: '31/10/2022',
-        paymentMethod: 'Boleto',
-        status: 'Autorizado',
-        paid: 'Sim',
-        value: 200
-      }
-    );
+    this.getClientInvoices(this.pageIndex, pageLimit);
   }
 
   loadMoreSentEmailsItems(pageLimit: number): void {

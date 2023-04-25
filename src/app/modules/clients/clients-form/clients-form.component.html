@@ -165,7 +165,7 @@
           [fields]="sentEmailsFields"
           [pipes]="sentEmailsPipes"
           [value]="sentEmails"
-          [totalRecords]="totalRecords"
+          [totalRecords]="totalSentEmailsRecords"
           [pageLimit]="pageLimit"
           (loadMoreItems)="loadMoreSentEmailsItems($event)"
         ></app-table>
@@ -176,7 +176,7 @@
           [fields]="paymentsFields"
           [pipes]="paymentsPipes"
           [value]="payments"
-          [totalRecords]="totalRecords"
+          [totalRecords]="totalPaymentRecords"
           [pageLimit]="pageLimit"
           (loadMoreItems)="loadMorePaymentItems($event)"
         ></app-table>

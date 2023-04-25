@@ -39,4 +39,8 @@ export class ClientsService extends BaseHttpService {
   getUserCEP(cep: string): Observable<any> {
     return this.get(`https://viacep.com.br/ws/${cep}/json/`);
   }
+
+  getClientSentEmails(userId: string): Observable<any> {
+    return this.get(`${this.API_BASE}/emails?userId=${userId}`);
+  }
 }

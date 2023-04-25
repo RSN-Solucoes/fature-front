@@ -30,5 +30,5 @@ export const PAYMENTS_FIELDS = [
     'value',
     ];
 
-export const PAYMENTS_PIPES = ['', '', '', '', '', 'price'];
+export const PAYMENTS_PIPES = ['date', 'date', '', '', 'paid', 'price'];
   
