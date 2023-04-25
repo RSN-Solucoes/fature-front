@@ -103,8 +103,6 @@ export class CompanyDataComponent implements OnInit {
   submitForm() {
     const body = this.companyDataForm.getRawValue();
 
-    console.log(body);
-
     this.settingsService.updateCompanyData(body).subscribe({
       next: () => {
         this.requestMessageService.show(

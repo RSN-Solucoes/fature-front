@@ -58,7 +58,6 @@ export class EmployeesComponent implements OnInit {
       next: (res) => {
         this.employees = res.data;
         this.totalRecords = res.pagination.totalItems;
-        console.log(res) 
       },
       error: (err) => {
       }
