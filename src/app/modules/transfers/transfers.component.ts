@@ -41,17 +41,19 @@ export class TransfersComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.setDateTitle(this.actualDate);
 
-    this.getTransfers();
+    this.getTransfers(this.actualDate);
   }
 
-  getTransfers(): void {
-    const month = this.actualDate.getMonth() + 1;
-    const year = this.actualDate.getFullYear();
+  getTransfers(date: Date): void {
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    console.log(date)
 
     this.transfersService.getMonthTransfers(month, year).subscribe({
       next: (res) => {
-        this.transfers = res.data;
-        
+        this.transfers = res.data;    
+      
         res.data.deposits.forEach((el: any) => {
           this.events.push({
             title: el.message,
@@ -59,6 +61,7 @@ export class TransfersComponent implements OnInit, AfterViewInit {
             color: '#02b69c',
           });
         });
+        console.log(this.events)
       },
       error: (err) => {
       }
@@ -68,6 +71,7 @@ export class TransfersComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     if(this.events.length > 0) {
       this.setCalendarLocale();
+
     }
   }
 
@@ -112,7 +116,14 @@ export class TransfersComponent implements OnInit, AfterViewInit {
 
     calendarApi.next();
 
+    if(this.events.length != 0) {
+      this.events = [];
+    };
+
     const currentDate = calendarApi.getDate();
+
+    console.log(currentDate);
+    this.getTransfers(currentDate);
     this.setDateTitle(currentDate);
   }
 
@@ -121,7 +132,14 @@ export class TransfersComponent implements OnInit, AfterViewInit {
 
     calendarApi.prev();
 
+    if(this.events.length != 0) {
+      this.events = [];
+    };
+
     const currentDate = calendarApi.getDate();
+
+    console.log(currentDate);
+    this.getTransfers(currentDate);
     this.setDateTitle(currentDate);
   }
 }
