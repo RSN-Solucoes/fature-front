@@ -33,7 +33,7 @@ export const PLANS_VALUE_SELECT_LIST = [
     },
 ];
 
-export const PLANS_PIPES = ['', '', '', ''];
+export const PLANS_PIPES = ['', '', '', 'price'];
 
 export const FREQUENCY_SELECT_LIST = [
     {

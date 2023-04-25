@@ -12,22 +12,22 @@
                 <p>Assinante</p>
             </div>
 
-            <div class="subscriptions-view_subscription p-6">
+            <div class="subscriptions-view_subscription p-6" *ngIf="subscriptionViewData">
                 <div class="subscription__items">
                     <div class="subscription--content--item">
                         <p>Nome</p>
     
-                        <span>Maria Antônia Lucatto</span>
+                        <span>{{ subscriptionViewData.user.name }}</span>
                     </div>
                     <div class="subscription--content--item">
                         <p>CPF/CNPJ</p>
     
-                        <span>33662455896</span>
+                        <span>{{ subscriptionViewData.user.document | dynamic: 'document' }}</span>
                     </div>
                     <div class="subscription--content--item">
                         <p>E-mail</p>
     
-                        <span>atendimento@lucatto.com.br</span>
+                        <span>{{ subscriptionViewData.user.email }}</span>
                     </div>
                     <div class="subscription--content--item">
                         <p>Contato</p>
@@ -41,22 +41,22 @@
                 <p>Assinatura</p>
             </div>
 
-            <div class="subscriptions-view_subscription p-6">
+            <div class="subscriptions-view_subscription p-6" *ngIf="planSubscriptionData">
                 <div class="subscription__items">
                     <div class="subscription--content--item">
                         <p>Plano</p>
     
-                        <span>Caixa surpresa</span>
+                        <span>{{ planSubscriptionData.plan.name }}</span>
                     </div>
                     <div class="subscription--content--item">
                         <p>Valor</p>
     
-                        <span>R$ 299,00</span>
+                        <span>{{ planSubscriptionData.billing.amount | currency: 'BRL' }}</span>
                     </div>
                     <div class="subscription--content--item">
                         <p>Status</p>
     
-                        <span>Ativo</span>
+                        <span>{{ planSubscriptionData.enabled ? 'Ativo' : 'Não ativo' }}</span>
                     </div>
                 </div>
 

@@ -15,6 +15,6 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 @NgModule({
   declarations: [TableComponent, DynamicPipe],
   imports: [CommonModule, PrimeTableModule, CheckboxModule, FormsModule, TooltipModule, ConfirmPopupModule],
-  exports: [TableComponent],
+  exports: [TableComponent, DynamicPipe],
 })
 export class TableModule {}

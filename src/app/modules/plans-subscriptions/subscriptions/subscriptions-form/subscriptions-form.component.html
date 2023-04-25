@@ -12,25 +12,27 @@
         </div>
 
         <form class="subscriptions--form my-6 grid" [formGroup]="subscriptionsForm">
-            <div class="field col-12 md:col-6">
+            <div class="field col-12 md:col-6" formGroupName="user">
                 <label for="client">Cliente</label>
                 <p-dropdown        
                     placeholder="Nome"
                     [options]="clientsList"
                     optionLabel="name"
+                    optionValue="id"
                     name="client"
-                    formControlName="name"
+                    formControlName="id"
                 ></p-dropdown>
             </div>
 
-            <div class="field col-12 md:col-6">
+            <div class="field col-12 md:col-6" formGroupName="plan">
                 <label for="plans">Plano</label>
                 <p-dropdown        
                     placeholder="Escolha o plano"
                     [options]="plansList"
-                    optionLabel="title"
+                    optionLabel="name"
+                    optionValue="id"
                     name="plans"
-                    formControlName="plan"
+                    formControlName="id"
                 ></p-dropdown>
             </div>
 

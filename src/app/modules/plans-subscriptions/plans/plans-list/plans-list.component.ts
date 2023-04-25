@@ -1,10 +1,12 @@
+import { PlansService } from './../../../../services/plans.service';
 import { Component, OnInit } from '@angular/core';
 import { 
-  PLANS_VALUE_SELECT_LIST,
   PLANS_COLUMNS,
   PLANS_FIELDS,
   PLANS_PIPES,
  } from '../plans.const';
+ import { ConfirmationService } from 'primeng/api';
+import { RequestMessageService } from 'src/app/shared/components/request-message/request-message.service';
 
 @Component({
   selector: 'app-plans-list',
@@ -16,7 +18,7 @@ export class PlansListComponent implements OnInit {
   public plansFields = PLANS_FIELDS;
   public plansPipes = PLANS_PIPES;
 
-  public plans = PLANS_VALUE_SELECT_LIST;
+  public plans: any[] = [];
 
   public plansActions = [
     {
@@ -29,8 +31,8 @@ export class PlansListComponent implements OnInit {
     {
       label: 'Deletar',
       icon: 'pi-trash',
-      action: () => {
-        alert('Deletar');
+      action: (row: any, event: Event) => {
+        this.deletePlan(row, event);
       },
     },
   ];
@@ -39,13 +41,60 @@ export class PlansListComponent implements OnInit {
   public pageLimit = 10;
   public totalRecords = 0;
 
-  constructor() { }
+  constructor(
+    private plansService: PlansService,
+    private confirmationService: ConfirmationService,
+    private requestMessageService: RequestMessageService,
+  ) { }
 
   ngOnInit(): void {
+    this.getPlans(this.pageIndex, this.pageLimit);
+  }
+
+  getPlans(pageIndex: number, pageLimit: number): void {
+    const pagination = `page=${pageIndex}&limit=${pageLimit}`;
+
+    this.plansService.getPlans(pagination).subscribe({
+      next: (res) => {
+        this.totalRecords = res.pagination.totalItems;
+        res.data.forEach((el: any) => {
+          this.plans.push({
+            planName: el.plan.name,
+            description: el.plan.description,
+            chargeDay: el.billing.chargeDate,
+            value: el.billing.amount,
+            id: el.id
+          });
+        });
+      },
+      error: (err) => {
+      }
+    })
+  }
+
+  deletePlan(row: any, event: Event) {
+    this.confirmationService.confirm({
+      target: event.target ? event.target : undefined,
+      message: 'Deseja excluir o plano?',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      accept: () => {
+        this.plansService.deletePlan(row.id).subscribe({
+          next: (res) => {
+            this.requestMessageService.show(
+              `Plano excluido com sucesso`,
+              'success'
+            );
+            location.reload();
+          },
+          error: (err) => {},
+        });
+      },
+    });
   }
 
   loadMoreItems(pageLimit: number) {
-    //function
+    this.getPlans(this.pageIndex, pageLimit);
   }
-
 }

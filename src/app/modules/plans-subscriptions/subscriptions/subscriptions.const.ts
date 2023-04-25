@@ -33,4 +33,4 @@ export const SUBSCRIPTIONS_VALUE_SELECT_LIST = [
     },
 ];
 
-export const SUBSCRIPTIONS_PIPES = ['', '', '', ''];
+export const SUBSCRIPTIONS_PIPES = ['', '', '', 'price'];

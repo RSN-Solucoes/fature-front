@@ -5,7 +5,7 @@ import {
   INVOICES_COLUMNS,
   INVOICES_FIELDS,
   INVOICES_PIPES,
-} from './invoices-lis.const';
+} from './invoices-list.const';
 import { RequestMessageService } from 'src/app/shared/components/request-message/request-message.service';
 import { ConfirmationService } from 'primeng/api';
 
