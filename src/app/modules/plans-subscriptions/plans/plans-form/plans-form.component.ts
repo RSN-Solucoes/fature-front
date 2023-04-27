@@ -1,4 +1,4 @@
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FREQUENCY_SELECT_LIST, WEEKLY_DAYS_SELECT_LIST } from '../plans.const';
@@ -11,6 +11,9 @@ import { PlansService } from 'src/app/services/plans.service';
   styleUrls: ['./plans-form.component.scss']
 })
 export class PlansFormComponent implements OnInit {
+  public planId = this.activatedRoute.snapshot.paramMap.get('id') || '';
+  public plan!: any;
+
   public formSubmited: boolean = false;
   public plansForm!: FormGroup;
 
@@ -28,18 +31,20 @@ export class PlansFormComponent implements OnInit {
     }
   ];
 
-
-  public plan: any;
-
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private plansService: PlansService,
     private requestMessageService: RequestMessageService,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
     this.createPlansForm();
+
+    if(this.planId) {
+      this.getPlanData();
+    };
   }
   
   createPlansForm(): void {
@@ -48,7 +53,8 @@ export class PlansFormComponent implements OnInit {
         name: [null],
         description: [null],
         enableCycle: [false],
-        cycle: [1],
+        cycle: [null],
+        subLimit: [null],
       }),
       billing: this.fb.group({
         amount: [null],
@@ -62,8 +68,31 @@ export class PlansFormComponent implements OnInit {
     });
   }
 
+  getPlanData(): void {
+    this.plansService.getPlan(this.planId).subscribe({
+      next: (res: any)  => {
+        this.plan = res.data;
+        this.plansForm.patchValue({
+          ...this.plan,
+        });
+
+        this.checkCycleValue();
+      },
+      error: (err) => {
+      }
+    });
+  }
+
   updateDescriptionLength(): void {
     this.descriptionLength = this.plansForm.get('plan.description')?.value.length;
+  }
+
+  checkCycleValue(): void {
+    if(this.plansForm.get('plan.cycle')?.value !== 0) {
+      this.plansForm.get('plan.subLimit')?.addValidators(Validators.required);
+    } else {
+      this.plansForm.get('plan.subLimit')?.removeValidators(Validators.required);
+    }
   }
 
   clearForm(): void {

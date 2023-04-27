@@ -21,3 +21,9 @@ main {
   overflow-y: scroll;
   grid-area: content;
 }
+
+label {
+  span {
+    color: red;
+  }
+}

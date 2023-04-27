@@ -7,6 +7,7 @@ import {
  } from '../plans.const';
  import { ConfirmationService } from 'primeng/api';
 import { RequestMessageService } from 'src/app/shared/components/request-message/request-message.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-plans-list',
@@ -22,10 +23,10 @@ export class PlansListComponent implements OnInit {
 
   public plansActions = [
     {
-      label: 'Visualizar',
-      icon: 'pi-eye',
-      action: () => {
-        alert('Visualizar');
+      label: 'Editar',
+      icon: 'pi-pencil',
+      action: (row: any) => {
+        this.editPlan(row);
       },
     },
     {
@@ -45,6 +46,7 @@ export class PlansListComponent implements OnInit {
     private plansService: PlansService,
     private confirmationService: ConfirmationService,
     private requestMessageService: RequestMessageService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -88,10 +90,19 @@ export class PlansListComponent implements OnInit {
             );
             location.reload();
           },
-          error: (err) => {},
+          error: (err) => {
+            this.requestMessageService.show(
+              `Erro ao excluir plano`,
+              'error'
+            );
+          },
         });
       },
     });
+  }
+
+  editPlan(row: any) {
+    this.router.navigate([`painel/recorrencias/planos/editar/${row.id}`]);
   }
 
   loadMoreItems(pageLimit: number) {

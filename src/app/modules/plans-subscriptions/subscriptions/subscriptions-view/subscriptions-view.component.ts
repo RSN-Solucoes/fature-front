@@ -43,6 +43,7 @@ export class SubscriptionsViewComponent implements OnInit {
   getSubscription() {
     this.subscriptionsService.getSubscription(this.subscriptionId).subscribe({
       next: (res) => {
+        console.log(res)
         this.plansService.getPlan(res.data.plan).subscribe({
           next: (el) => {
             this.subscriptionViewData = res.data;

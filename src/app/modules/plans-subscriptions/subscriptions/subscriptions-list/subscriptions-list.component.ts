@@ -1,10 +1,8 @@
-import { BankDataComponent } from './../../../settings/bank-data/bank-data.component';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {
   SUBSCRIPTIONS_COLUMNS,
   SUBSCRIPTIONS_FIELDS,
-  SUBSCRIPTIONS_VALUE_SELECT_LIST,
   SUBSCRIPTIONS_PIPES,
 } from '../subscriptions.const';
 import { SubscriptionsService } from 'src/app/services/subscriptions.service';
@@ -32,8 +30,8 @@ export class SubscriptionsListComponent implements OnInit {
       },
     },
     {
-      label: 'Deletar',
-      icon: 'pi-trash',
+      label: 'Cancelar',
+      icon: 'pi-ban',
       action: (row: any, event: Event) => {
         this.deleteSubscription(row, event)
       },
@@ -59,7 +57,7 @@ export class SubscriptionsListComponent implements OnInit {
   }
 
   navigateToSubscriptionView(id: string): void {
-    this.router.navigate([`painel/recorrencias/visualizar/${id}`]);
+    this.router.navigate([`painel/recorrencias/assinaturas/visualizar/${id}`]);
   }
 
   getSubscriptionsList(pageIndex: number, pageLimit: number): void {
@@ -90,7 +88,7 @@ export class SubscriptionsListComponent implements OnInit {
   deleteSubscription(row: any, event: Event) {
     this.confirmationService.confirm({
       target: event.target ? event.target : undefined,
-      message: 'Deseja excluir a assinatura?',
+      message: 'Deseja cancelar a assinatura?',
       icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'Sim',
       rejectLabel: 'Não',
@@ -98,12 +96,17 @@ export class SubscriptionsListComponent implements OnInit {
         this.subscriptionsService.deleteSubscription(row.id).subscribe({
           next: (res) => {
             this.requestMessageService.show(
-              `Assinatura excluida com sucesso`,
+              `Assinatura cancelada com sucesso`,
               'success'
             );
             location.reload();
           },
-          error: (err) => {},
+          error: (err) => {
+            this.requestMessageService.show(
+              `Não foi possível cancelar a assinatura`,
+              'error'
+            );
+          },
         });
       },
     });

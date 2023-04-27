@@ -84,6 +84,9 @@
     .plans--footer {
         display: flex;
         justify-content: flex-end;
+        button:nth-child(2) {
+            margin-left: 2rem;
+        }
     }
 }
 

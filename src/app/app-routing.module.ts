@@ -138,12 +138,17 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
+    path: 'painel/recorrencias/planos/editar/:id',
+    component: PlansFormComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
     path: 'painel/recorrencias/assinaturas/novo',
     component: SubscriptionsFormComponent,
     canActivate: [AuthGuardService],
   },
   {
-    path: 'painel/recorrencias/visualizar/:id',
+    path: 'painel/recorrencias/assinaturas/visualizar/:id',
     component: SubscriptionsViewComponent,
     canActivate: [AuthGuardService],
   },

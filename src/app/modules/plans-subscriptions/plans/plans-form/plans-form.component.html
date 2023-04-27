@@ -34,24 +34,26 @@
           </div>
 
           <div *ngIf="plansForm.get('plan.enableCycle')?.value == true"
-            class="field col-3">
+            class="field col-3" formGroupName="plan">
               <label for="subscriptionTerm">Qual o prazo da assinatura</label>
-              <input
-                type="text"
-                id="subscriptionTerm"
-                pInputText
+              <p-inputNumber
                 placeholder="Caso não tenha deixar em branco"
-              />
+                [useGrouping]="false"
+                id="subscriptionTerm"
+                formControlName="cycle"
+                (change)="checkCycleValue()"
+              ></p-inputNumber>
           </div>
 
           <div *ngIf="plansForm.get('plan.enableCycle')?.value == true"
-            class="field col-3">
-              <label for="limit">Limite de adesão</label>
+            class="field col-3" formGroupName="plan">
+              <label for="limit">Limite de adesão <span *ngIf="plansForm.get('plan.cycle')?.value !== 0">*</span></label>
               <input
                 type="text"
                 id="limit"
                 pInputText
                 placeholder="Qual o limite"
+                formControlName="subLimit"
               />
           </div>
 
