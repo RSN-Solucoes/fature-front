@@ -14,6 +14,7 @@ export class TransfersComponent implements OnInit, AfterViewInit {
   public title!: string;
   public actualDate = new Date();
   public calendarDate: any = this.actualDate.toISOString().substring(0, 10);
+  public showCalendarComponent: boolean = false;
 
   public transfers!: any;
 
@@ -48,11 +49,9 @@ export class TransfersComponent implements OnInit, AfterViewInit {
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
 
-    console.log(date)
-
     this.transfersService.getMonthTransfers(month, year).subscribe({
       next: (res) => {
-        this.transfers = res.data;    
+        this.transfers = res.data;
       
         res.data.deposits.forEach((el: any) => {
           this.events.push({
@@ -61,7 +60,8 @@ export class TransfersComponent implements OnInit, AfterViewInit {
             color: '#02b69c',
           });
         });
-        console.log(this.events)
+
+        this.showCalendarComponent = true;
       },
       error: (err) => {
       }
@@ -71,7 +71,6 @@ export class TransfersComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     if(this.events.length > 0) {
       this.setCalendarLocale();
-
     }
   }
 
@@ -113,33 +112,35 @@ export class TransfersComponent implements OnInit, AfterViewInit {
 
   nextMonth() {
     const calendarApi = this.calendarComponent.getApi();
-
-    calendarApi.next();
-
+    const currentDate = calendarApi.getDate();
+    
+    calendarApi.next();    
+    
+    this.setDateTitle(currentDate);
+    
     if(this.events.length != 0) {
       this.events = [];
     };
+    
+    this.showCalendarComponent = false;
 
-    const currentDate = calendarApi.getDate();
-
-    console.log(currentDate);
     this.getTransfers(currentDate);
-    this.setDateTitle(currentDate);
   }
 
   previousMonth() {
     const calendarApi = this.calendarComponent.getApi();
+    const currentDate = calendarApi.getDate();
 
     calendarApi.prev();
+
+    this.setDateTitle(currentDate);
 
     if(this.events.length != 0) {
       this.events = [];
     };
 
-    const currentDate = calendarApi.getDate();
-
-    console.log(currentDate);
+    this.showCalendarComponent = false;
+    
     this.getTransfers(currentDate);
-    this.setDateTitle(currentDate);
   }
 }
