@@ -6,10 +6,10 @@ export const TRANSFERS_LIST_COLUMNS = [
   ];
   
   export const TRANSFERS_LIST_FIELDS = [
-    'client',
-    'methods',
+    'clientName',
+    'method',
     'product',
-    'value',
+    'amount',
   ];
   
   export const CLIENT_VALUE_SELECT_LIST = [

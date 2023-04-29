@@ -19,32 +19,7 @@ export class TransfersListComponent implements OnInit {
   public transfersListFields = TRANSFERS_LIST_FIELDS;
   public transfersListTablePipes = TRANSFERS_LIST_TABLE_PIPES;
 
-  public transfersListValue: any = [
-    {
-      client: 'Luiz André Bragança Santos',
-      methods: 'Crédito',
-      product: 'Caixa Surpresa 01',
-      value: '200',
-    },
-    {
-      client: 'Lisia Maria da Silva',
-      methods: 'Débito',
-      product: 'Caixa Surpresa 03',
-      value: '200',
-    },
-    {
-      client: 'Marcio Adolfo Guimarães',
-      methods: 'Boleto',
-      product: 'Caixa Surpresa',
-      value: '100',
-    },
-    {
-      client: 'Pedro Alberto Maciel',
-      methods: 'Pix',
-      product: 'Produto exemplo',
-      value: '150',
-    },
-  ];
+  public transfersListValue!: any;
 
   public pageIndex = 1;
   public pageLimit = 10;
@@ -66,7 +41,7 @@ export class TransfersListComponent implements OnInit {
     const pagination = `day=${date[2].replace('0','')}&month=${date[1].replace('0','')}&year=${date[0]}&page=${pageIndex}&limit=${pageLimit}`;
     this.transfersService.getDailyTransfers(pagination).subscribe({
       next: (res) => {
-        console.log(res)
+        this.transfersListValue = res.data.payments;
       },
       error: (err) => {
       }
