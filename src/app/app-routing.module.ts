@@ -41,7 +41,7 @@ const routes: Routes = [
     component: CheckoutComponent,
   },
   {
-    path: 'pagar/assinatura/:planId/:userId',
+    path: 'pagar/assinatura/:subscriptionId',
     component: SubscriptionsPaymentComponent,
   },
   {

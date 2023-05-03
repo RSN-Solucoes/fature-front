@@ -33,35 +33,18 @@
             </div>
     
             <div class="col-3"></div>
-    
-            <div class="field col-3">
-                <label for="cardDueDateDay">Validade</label>
-                <p-dropdown
-                    [options]="days"
-                    optionLabel="day"
-                    optionValue="day"
-                    id="cardDueDateDay"
-                    name="cardDueDateDay"
-                    placeholder="Dia"
-                    formControlName="day"
-                    (onChange)="setExpirationDate()"
-                >
-                </p-dropdown>
-            </div>
-    
-            <div class="field col-3">
-                <label class="noLabel" for="cardDueDateYear">'</label>
-                <p-dropdown
-                    [options]="days"
-                    optionLabel="day"
-                    optionValue="day"
-                    id="cardDueDateYear"
-                    name="cardDueDateYear"
-                    placeholder="Ano"
-                    formControlName="year"
-                    (onChange)="setExpirationDate()"
-                >
-                </p-dropdown>
+
+            <div class="field col-3" formGroupName="card">
+                <label for="expirationDate">Validade</label>
+                <input
+                type="text"
+                id="expirationDate"
+                name="expirationDate"
+                pInputText
+                placeholder="dd/aaaa"
+                mask="00/0000"
+                formControlName="expirationDate"
+                />
             </div>
     
             <div class="field col-3" formGroupName="card">

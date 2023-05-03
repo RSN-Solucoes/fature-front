@@ -11,8 +11,7 @@ import { RequestMessageService } from 'src/app/shared/components/request-message
 })
 export class SubscriptionsPaymentComponent implements OnInit {
 
-  public planId = this.activatedRoute.snapshot.paramMap.get('planId') || '';
-  public userId = this.activatedRoute.snapshot.paramMap.get('userId') || '';
+  public subscriptionId = this.activatedRoute.snapshot.paramMap.get('subscriptionId') || '';
 
   public days: any[] = [
     {
@@ -33,7 +32,7 @@ export class SubscriptionsPaymentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (!this.planId) alert("Plano não encontrado");
+    if (!this.subscriptionId) alert("Assinatura não encontrado");
 
     this.createForm();
   }
@@ -47,22 +46,14 @@ export class SubscriptionsPaymentComponent implements OnInit {
         expirationDate: [null],
         securityCode: [null],
       }),
-      day: [null],
-      year: [null]
     });
   }
 
-  setExpirationDate(): void {
-    const expirationDate = `${this.form.get('day')?.value}/${this.form.get('year')?.value}`
-
-    this.form.get('card.expirationDate')?.setValue(expirationDate);
-  }
-
   paySubscription(): void {
+    this.form.get('subscription')?.setValue(this.subscriptionId);
     const body = this.form.getRawValue();
 
-    delete body.day;
-    delete body.year;
+    console.log(body)
 
     this.paymentService.paySubscription(body).subscribe({
       next: (res) => {
@@ -70,9 +61,14 @@ export class SubscriptionsPaymentComponent implements OnInit {
           `Assinatura paga com sucesso!`,
           'success'
         );
-        console.log(res)
+        console.log(res);
       },
       error: (err) => {
+        this.requestMessageService.show(
+          `Erro ao pagar assinatura!`,
+          'error'
+        );
+        console.log(err);
       }
     });
   }
